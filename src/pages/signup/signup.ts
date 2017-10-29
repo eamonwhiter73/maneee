@@ -119,9 +119,8 @@ export class SignUpPage implements OnDestroy {
             const result = await this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
           }
           //console.log(result);
-          if(this.user1.username == null) {
-            this.user1.username = this.username;      
-          }
+          
+          this.user1.username = this.username;      
 
           this.user1.email = this.email;
           this.user1.password = this.password;

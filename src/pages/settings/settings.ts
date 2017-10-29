@@ -77,6 +77,7 @@ export class SettingsPage implements OnDestroy {
   instagramURL;
   facebookProf;
   linked = "Link Profile";
+  isTypeNull;
 
 
   constructor(public facebook: Facebook, public af: AngularFireDatabase, private afAuth: AngularFireAuth, public storage: Storage, public camera: Camera, public cameraService: CameraServiceProfile, public myrenderer: Renderer, public loadingController: LoadingController, public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public navParams: NavParams, public keyboard:Keyboard) {
@@ -232,8 +233,12 @@ export class SettingsPage implements OnDestroy {
             this.items.update({[this.username] : {'username': this.username, 'password': this.password, 'email': this.email,
                                   'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
                                   'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL}});
-
-            this.navCtrl.push(StylistProfile);
+            if(this.isTypeNull == null) {
+              this.navCtrl.push(StylistProfile);
+            }
+            else {
+              this.navCtrl.setRoot(FeedStylist);
+            }
           }
           else {
             this.af.object('/profiles/stylists/'+this.oldUser).remove().then(_ => console.log('item deleted!'));
@@ -242,7 +247,12 @@ export class SettingsPage implements OnDestroy {
                               'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
                               'rating': {'one':0, 'two':0, 'three':0, 'four':0, 'five':0}}});
           
-            this.navCtrl.push(StylistProfile);
+            if(this.isTypeNull == null) {
+              this.navCtrl.push(StylistProfile);
+            }
+            else {
+              this.navCtrl.setRoot(FeedStylist);
+            }
           }
         }
 
@@ -258,7 +268,12 @@ export class SettingsPage implements OnDestroy {
             this.items.update({[this.username] : {'username': this.username, 'password': this.password, 'email': this.email,
                                   'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL}});
 
-            this.navCtrl.push(UserViewProfile);
+            if(this.isTypeNull == null) {
+              this.navCtrl.push(UserViewProfile);
+            }
+            else {
+              this.navCtrl.setRoot(FeedUser);
+            }
           }
           else {
             this.af.object('/profiles/users/'+this.oldUser).remove().then(_ => console.log('item deleted!'));
@@ -266,7 +281,12 @@ export class SettingsPage implements OnDestroy {
                                'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
                                'rating': {'one':0, 'two':0, 'three':0, 'four':0, 'five':0}}});
 
-            this.navCtrl.push(UserViewProfile);
+            if(this.isTypeNull == null) {
+              this.navCtrl.push(UserViewProfile);
+            }
+            else {
+              this.navCtrl.setRoot(FeedUser);
+            }
           }
         }
       };
@@ -335,6 +355,8 @@ export class SettingsPage implements OnDestroy {
             }
           }
         })
+
+        this.isTypeNull = this.navParams.get('type');
         
         setTimeout(() => {
           console.log('ionViewDidLoad SettingsPage');

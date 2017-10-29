@@ -28,7 +28,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = FeedUser;
+  rootPage:any = SignUpPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, cache: CacheService, private screenOrientation: ScreenOrientation) {
 
