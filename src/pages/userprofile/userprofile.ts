@@ -368,9 +368,15 @@ export class UserProfile implements OnDestroy {
   presentImage(squarez) {
     this.square = squarez;
     let itemArrayTwo = this.profComponents.toArray();
-    console.log(JSON.stringify(itemArrayTwo[this.square-1]));
-    const imageViewer = this.imageViewerCtrl.create(itemArrayTwo[this.square - 1].nativeElement);
-    imageViewer.present();
+    let itemArrayfour = this.formulaBars.toArray();
+    
+    if(itemArrayfour[this.square - 1].nativeElement.style.display == 'none') {
+      console.log(JSON.stringify(itemArrayTwo[this.square-1]));
+      const imageViewer = this.imageViewerCtrl.create(itemArrayTwo[this.square - 1].nativeElement);
+      imageViewer.present();
+    }
+
+    
   }
 
   showSquare() {

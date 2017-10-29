@@ -155,31 +155,6 @@ export class FeedUser implements OnDestroy {
      
   }
 
-  /*getAds() {
-    console.log("in get addddssss ******");
-    this.objj = this.af.object('/adcounter/count');
-
-    this.subscription9 = this.objj.subscribe(item => { 
-      console.log(JSON.stringify(item) + "in adddd subscribe()()()()()()");
-      console.log(typeof item);
-      this.totalAdCount = item.$value;
-        for(let x = 1; x < item.$value + 1; x++) {
-
-          let storageRef = firebase.storage().ref().child('/ads/ad' + x + '.png');
-          storageRef.getDownloadURL().then(url => {
-            console.log(url);
-            this.ads.push(url);
-          }).catch(e => {
-            //
-          });
-        }
-       
-    })
-    
-  }*/
-
-
-
   getAds() {
     let promises_array:Array<any> = [];
     let cacheKey = 'ads';
@@ -551,11 +526,10 @@ export class FeedUser implements OnDestroy {
       let results;
       let array = [];
 
-      this.cache.getItem(cacheKey).catch(() => {
+      //this.cache.getItem(cacheKey).catch(() => {
 
         this.ratingslist = this.af.list('/profiles/stylists');
         this.subscription7 = this.ratingslist.subscribe(items => {
-          try {
             mapped = items.map((item) => {
               return new Promise(resolve => {
                 if(!item.picURL) {
@@ -578,64 +552,37 @@ export class FeedUser implements OnDestroy {
 
             })
 
-         } catch(e) {
-           console.log(e + "try catch try v98989980");
-        }   
+            Promise.all(mapped).then(() => {
+          //return this.cache.saveItem(cacheKey, array);
+              console.log("resolved ***&&&^^^%%%$$$$$$$");
+              resolve(array);
+            })
          
         }) 
         
 
-        results = Promise.all(mapped);
-        results.then(() => {
-          return this.cache.saveItem(cacheKey, array);
-
-        })
-
         
-      }).then((data) => {
+        
 
-          console.log("resolved ***&&&^^^%%%$$$$$$$");
-          resolve(data);
-      })
     });
   }
+     
 
   ionViewDidLoad() {
 
-    this.loadPromotions();
-    this.getAds();
-    this.loadPrices();
     
-    //this.getInitialImages();
+
     this.loadAvailabilities().then(() => {
-      setTimeout(() => {
-        console.log("in load availabilities ......... ")
-        console.log(JSON.stringify(this.availabilities));
-
-        this.availabilities.sort(function(a,b) {
-          return Date.parse('01/01/2013 '+a.time) - Date.parse('01/01/2013 '+b.time);
-        });
-
-        console.log('*****previous******');
-        console.log(JSON.stringify(this.availabilities));
-        console.log('*****sorted********');
-        
-        for(let i of this.availabilities) {
-          console.log(i.time + "          this is itime");
-          let date = new Date('01/01/2013 ' + i.time);
-          console.log(date + "          this is date in idate");
-          let str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
-          console.log(str);
-          i.time = str;
-        }
-
-      console.log("In load availabilities then thing aijosfeijofdsjoifadsjio");
-      
-      let ratings;
-      let totalPotential;
       
       
-      this.loadRatings().then((array) =>{
+
+    })
+
+    
+    let ratings;
+    let totalPotential;
+
+    this.loadRatings().then(array =>{
 
           console.log(array + '    ararrya &&*&&*&^^&%^%^');
 
@@ -697,13 +644,35 @@ export class FeedUser implements OnDestroy {
             }
 
           });
-       }).then(() => {
-         this.loadDistances().then(() => {
-           
+
+          this.loadDistances().then(() => {
+           console.log("in load availabilities ......... ")
+            console.log(JSON.stringify(this.availabilities));
+
+            this.availabilities.sort(function(a,b) {
+              return Date.parse('01/01/2013 '+a.time) - Date.parse('01/01/2013 '+b.time);
+            });
+
+            console.log('*****previous******');
+            console.log(JSON.stringify(this.availabilities));
+            console.log('*****sorted********');
+            
+            for(let i of this.availabilities) {
+              console.log(i.time + "          this is itime");
+              let date = new Date('01/01/2013 ' + i.time);
+              console.log(date + "          this is date in idate");
+              let str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
+              console.log(str);
+              i.time = str;
+            }
+
+            this.loadPromotions();        /////////// START NEW GIT ////45//54/54555555''''''''''''''''''''
+            this.getAds();
+            this.loadPrices();
          });
-       })
-      }, 1500);
-    })
+
+         
+       });   
 
       
               
@@ -979,6 +948,7 @@ export class FeedUser implements OnDestroy {
 
               
             }
+
           }));
 
           
