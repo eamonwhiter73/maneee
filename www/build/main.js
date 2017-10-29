@@ -4743,6 +4743,9 @@ var FeedUser = (function () {
                     var results = Promise.all(mapped);
                     results.then(function () {
                         console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
+                        arr.sort(function (a, b) {
+                            return a.distance - b.distance;
+                        });
                         _this.distances = arr.slice();
                         console.log(JSON.stringify(_this.distances) + " ^^^^&&&&&&&********88889999000000000");
                         resolve();

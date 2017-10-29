@@ -414,8 +414,12 @@ export class FeedUser implements OnDestroy {
               results.then(() => {
                 console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
                 
+                arr.sort(function(a,b) {
+                  return a.distance - b.distance;
+                });
 
                 this.distances = arr.slice();
+
                 console.log(JSON.stringify(this.distances) + " ^^^^&&&&&&&********88889999000000000");
 
                 resolve();
