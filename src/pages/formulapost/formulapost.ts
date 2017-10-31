@@ -36,6 +36,7 @@ export class FormulapostPage implements OnDestroy {
   list: FirebaseListObservable<any>
   private subscription: ISubscription;
   private subscription2: ISubscription;
+  private subscription3: ISubscription;
 
   constructor(public af: AngularFireDatabase, public viewCtrl: ViewController, public storage: Storage, public keyboard: Keyboard, private datePicker: DatePicker, public myrenderer: Renderer, public navCtrl: NavController, public navParams: NavParams) {
 
@@ -44,6 +45,7 @@ export class FormulapostPage implements OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.subscription2.unsubscribe();
+    this.subscription3.unsubscribe();
   }
 
   ionViewDidLoad() {
@@ -51,7 +53,6 @@ export class FormulapostPage implements OnDestroy {
     
     this.imageHolder = this.navParams.get("path");
     this.myrenderer.setElementAttribute(this.image.nativeElement, 'src', this.imageHolder);
-
     
     this.subscription = this.keyboard.onKeyboardShow().subscribe(()=>{
       this.myrenderer.setElementStyle(this.share.getNativeElement(), 'bottom', '-150px');
@@ -83,28 +84,68 @@ export class FormulapostPage implements OnDestroy {
   }
 
   isFormula() {
-    let metadata = {
-      customMetadata: {
+      console.log()
+       let metadata = {
         'formula': this.item.caption,
         'price': '3',
         'username': this.username,
         'url': this.imageHolder,
         'postdate': Date.now(),
+        'square':this.square
        }
-     }
+
+       let self = this;
+
+       let database = firebase.database();
+       let bool = false;
+       let reff = firebase.database().ref('/formulas').orderByChild('username').equalTo(this.username).on("value", function(snapshot) {
+          snapshot.forEach(snapshot => {
+              // key
+              var key = snapshot.key;
+              console.log("key: " + key);
+              // value, could be object
+              var childData = snapshot.val();
+              console.log("data: " + JSON.stringify(childData));
+              // Do what you want with these key/values here
+
+              if(self.square == childData.square) {
+                var updates = {};
+                updates['/formulas/' + key] = metadata;
+
+                firebase.database().ref().update(updates);
+                bool = true;
+
+              }
               
+              return true;
+          });
+
+          if(!bool) {
+             firebase.database().ref('/formulas').push(metadata);
+          }
+      });
+
+
+     /*this.af.list('/formulas', {query:{orderByChild:'username', equalTo:this.username}}).subscribe(items => items.forEach(item => {
+
+         console.log("in subscription nowwwwww");
+        
+       })).unsubscribe();*/
+
+       //this.navCtrl.pop();
+
             
-     this.list = this.af.list('/formulas');
-     this.list.push(metadata);
+     
+
+     //this.list.push(metadata); 
+     
+
   }
 
   shareItem() {
     console.log(this.item.title);
     console.log(this.item.caption);
-    console.log(this.item.price);
-    console.log(this.item.date);
     console.log(this.imageHolder + "                    **************************** src ****************");
-    console.log("****&*&&*&*&*&*&*          " + this.item.typeofselect);
 
     if(this.item.caption == '' || this.imageHolder == null) {
       alert("You need to fill in all of the information");

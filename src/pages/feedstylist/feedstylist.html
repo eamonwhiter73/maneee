@@ -64,6 +64,7 @@
       <div class="feedtoptextcontainertwo" #feedtoptwo (tap)='contractItem(i)'>
         <div class="postprofilelink">
           <div class="book">{{j.title}}</div>
+          <div class="book price" *ngIf="j.title == null">${{j.price}}</div>
         </div>
       </div>
       <img class="imageposttwo" #imagepost src="{{j.url}}">
@@ -178,7 +179,7 @@
           <img class="postprofilepic" src="{{j.profilepic}}">
         </div>-->
         <div class="usernamecontainer">
-          <h4 class="postusername">@{{j.username}}</h4><br>
+          <!--<h4 class="postusername">@{{j.username}}</h4><br>-->
           <!--<h4 class="poststudio">Ed's Studio</h4>-->
         </div>
         <!--<div class="descholder">

@@ -20,6 +20,7 @@ import { Rate } from '../../modals/rate/rate';
 
 import { Storage } from '@ionic/storage';
 import { InAppBrowser } from 'ionic-native';
+import { FormulaBuy } from '../../modals/formulabuy/formulabuy';
 
 
 
@@ -88,6 +89,7 @@ export class UserProfile implements OnDestroy {
   totalRatings;
   titleYear;
   stars;
+  type;
 
 
   _imageViewerCtrl: ImageViewerController;
@@ -194,6 +196,11 @@ export class UserProfile implements OnDestroy {
     this.storage.get('username').then((val) => {
       this.userusername = val;
     })
+
+    this.storage.get('type').then((val) => {
+      this.type = val;
+    })
+
     console.log(this.username + "         this is item @@#2332dfdffdfd23");
     this.item2 = this.af.object('/profiles/stylists/' + this.username + '/followers');
     this.item2.subscribe(item => {
@@ -370,13 +377,17 @@ export class UserProfile implements OnDestroy {
     let itemArrayTwo = this.profComponents.toArray();
     let itemArrayfour = this.formulaBars.toArray();
     
-    if(itemArrayfour[this.square - 1].nativeElement.style.display == 'none') {
+
+    if(itemArrayfour[this.square - 1].nativeElement.style.display != 'none') {
+      console.log("inside formula box");
+      let profileModal = this.modalCtrl.create(FormulaBuy, { username: this.username, square: this.square });
+      profileModal.present();
+    }
+    else {
       console.log(JSON.stringify(itemArrayTwo[this.square-1]));
       const imageViewer = this.imageViewerCtrl.create(itemArrayTwo[this.square - 1].nativeElement);
       imageViewer.present();
     }
-
-    
   }
 
   showSquare() {
@@ -478,7 +489,7 @@ export class UserProfile implements OnDestroy {
       this.navCtrl.push(FeedUser);
     }*/
     //else {
-      this.navCtrl.push(FeedUser,{},{animate:true,animation:'transition',duration:500,direction:'back'})
+      this.navCtrl.popToRoot({animate:true,animation:'transition',duration:500,direction:'back'})
       //this.navCtrl.push(FeedStylist);
     //}
   }

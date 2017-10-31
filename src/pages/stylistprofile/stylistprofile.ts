@@ -111,7 +111,7 @@ export class StylistProfile implements OnDestroy {
         sourceType: this.camera.PictureSourceType.CAMERA,
         mediaType: this.camera.MediaType.PICTURE,
         destinationType: this.camera.DestinationType.FILE_URI,
-        saveToPhotoAlbum: true
+        //saveToPhotoAlbum: true
   }
 
   ionViewDidEnter() {
@@ -357,7 +357,7 @@ export class StylistProfile implements OnDestroy {
     let itemArrayTwo = this.profComponents.toArray();
     console.log(JSON.stringify(itemArrayTwo[this.square-1]));
     if(itemArrayTwo[this.square-1].nativeElement.classList.contains('formula')) {
-      //
+      
     }
     else {
       const imageViewer = this.imageViewerCtrl.create(itemArrayTwo[this.square - 1].nativeElement);
@@ -407,7 +407,7 @@ export class StylistProfile implements OnDestroy {
           handler: () => {
             let itemArrayTwo = this.profComponents.toArray();
 
-            this.cameraService.getMedia(this.optionsGetMedia, this.square).then(() => {
+            this.cameraService.getMedia(this.optionsGetCamera, this.square).then(() => {
                 return new Promise((resolve, reject) => {
                   let storageRef = firebase.storage().ref().child('/profile/' + this.username + '/profile_' + this.username + '_' + this.square + '.png');
                   let loading = this.loadingController.create({content : "Loading..."});
@@ -480,7 +480,7 @@ export class StylistProfile implements OnDestroy {
             let itemArrayTwo = this.profComponents.toArray();
             let itemArrayFour = this.formulaBars.toArray();
             
-            this.cameraService.getMediaFormulas(this.optionsGetMedia, this.square).then((url) => {
+            this.cameraService.getMediaFormulas(this.optionsGetCamera, this.square).then((url) => {
                 console.log(url + " url url url url")
                 actionSheet.dismiss();
                 this.storage.set("formula"+this.square, url);

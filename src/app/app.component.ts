@@ -28,7 +28,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = SignUpPage;
+  rootPage:any = FeedStylist;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, cache: CacheService, private screenOrientation: ScreenOrientation) {
 
@@ -41,7 +41,7 @@ export class MyApp {
       statusBar.overlaysWebView(false);
       statusBar.isVisible;
       splashScreen.hide();
-      cache.setDefaultTTL(60 * 60); //set default cache TTL for 1 hour
+      cache.setDefaultTTL(60 * 5); //set default cache TTL for 1 hour
     });
   }
 }

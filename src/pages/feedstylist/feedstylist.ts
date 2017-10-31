@@ -963,20 +963,20 @@ export class FeedStylist implements OnDestroy {
         this.formulas = this.af.list('/formulas');
         this.subscription8 = this.formulas.subscribe(items => {
           mapped = items.map((item) => {
+            console.log(JSON.stringify(item) + "       item being mapped")
             return new Promise((resolve,reject) => {
-              console.log(JSON.stringify(item.customMetadata) + ":   this is the customdata (((()()()()()");
 
-              let storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
-              console.log("postdate *** post : " + item.customMetadata.postdate);
+              let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+              console.log("postdate *** post : " + item.postdate);
               storageRef.getDownloadURL().then(url => {
                 console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                item.customMetadata.profilepic = url;
-                store.push(item.customMetadata);
+                item.profilepic = url;
+                store.push(item);
                 resolve();
               }).catch((e) => {
                 console.log("in caught url !!!!!!!$$$$$$$!!");
-                item.customMetadata.profilepic = 'assets/blankprof.png';
-                store.push(item.customMetadata);
+                item.profilepic = 'assets/blankprof.png';
+                store.push(item);
                 resolve();
               });
               //this.startAtKey = item.$key;

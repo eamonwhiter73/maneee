@@ -179,9 +179,7 @@ export class PostpagePage implements OnDestroy {
     
     this.imageHolder = this.navParams.get("path");
     console.log(this.imageHolder + " imageholder imagehodl a pefsj'aes");
-    if(this.imageHolder != null) {
-      this.myrenderer.setElementAttribute(this.image.nativeElement, 'src', this.imageHolder);
-    }
+    this.myrenderer.setElementAttribute(this.image.nativeElement, 'src', this.imageHolder);
 
     
     this.subscription = this.keyboard.onKeyboardShow().subscribe(()=>{
@@ -382,7 +380,7 @@ export class PostpagePage implements OnDestroy {
                 'title': this.item.title,
                 'caption': this.item.caption,
                 'price': this.item.price,
-                'date': this.item.date,
+                //'date': this.item.date,
                 'typeofselect': this.item.typeofselect,
                 'username': this.username,
                 'url': url,
@@ -401,53 +399,22 @@ export class PostpagePage implements OnDestroy {
   }
 
   isFormula() {
-    /*let image       : string  = 'product_' + this.username + '_' + new Date() + '.png',
-      storageRef  : any,
-      parseUpload : any;
+     let metadata = {
+      'formula': this.item.caption,
+      'price': '3',
+      'username': this.username,
+      'url': this.image.nativeElement.src,
+      'postdate': Date.now(),
+      'square' : '0'
+     }
 
-    return new Promise((resolve, reject) => {
-      
-      storageRef       = firebase.storage().ref('/products/' + image);
-      parseUpload      = storageRef.putString(this.imageHolder, 'data_url');
+     let self = this;
 
-      
+     let database = firebase.database();
+     let bool = false;
 
-      parseUpload.on('state_changed', (_snapshot) => {
-          // We could log the progress here IF necessary
-          console.log('snapshot progess ' + _snapshot);
-        },
-        (_err) => {
-           reject(_err);
-           console.log(_err.messsage);
-        },
-        (success) => {
-           resolve(parseUpload.snapshot); 
-        })
-      }).then(value => {
-
-        storageRef.getDownloadURL()
-          .then(url => {
-            let metadata = {
-              customMetadata: {
-                'title': this.item.title,
-                'caption': this.item.caption,
-                'price': this.item.price,
-                'date': this.item.date,
-                'typeofselect': this.item.typeofselect,
-                'username': this.username,
-                'url': url,
-                'postdate': Date.now()
-              }
-            }
-            this.list = this.af.list('/products');
-            this.list.push(metadata);
-
-            
-          })
-        
-      }).catch(function(error) {
-        console.log(error.message);
-      });*/
+     firebase.database().ref('/formulas').push(metadata);
+       
   }
 
   shareItem() {
