@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, trigger, state, style, transition, animate, ViewChildren, ViewChild, Renderer, ElementRef, QueryList } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { FeedUser } from '../feeduser/feeduser';
 import { BookingPage } from '../booking/booking';
 import { PostpagePage } from '../postpage/postpage';
 import { SettingsPage } from '../settings/settings';
@@ -76,6 +75,9 @@ var UserViewProfile = /** @class */ (function () {
             { 'time': '11:30 AM', 'selected': false }, { 'time': '3:30 PM', 'selected': false }, { 'time': '7:30 PM', 'selected': false }
         ];
     }
+    UserViewProfile.prototype.ionViewWillUnload = function () {
+        this.navCtrl.pop();
+    };
     UserViewProfile.prototype.ionViewDidEnter = function () {
         //let loading = this.loadingController.create({content : "Loading..."});
         //loading.present();
@@ -93,6 +95,8 @@ var UserViewProfile = /** @class */ (function () {
                 var newResult = JSON.parse(JSON.stringify(result));
                 _this.thoroughfare = newResult.thoroughfare;
                 _this.locality = newResult.locality;
+                _this.storage.set('locality', _this.locality);
+                _this.storage.set('thoroughfare', _this.thoroughfare);
                 console.log(JSON.stringify(_this.locationListed) + "     thisislocaitonlistedste    3223i32ip 3ij223");
                 _this.myrenderer.setElementStyle(_this.locationListed.nativeElement, 'display', 'block');
                 _this.item1 = _this.af.object('/profiles/users/' + _this.username);
@@ -109,6 +113,12 @@ var UserViewProfile = /** @class */ (function () {
         var _this = this;
         this.storage.get('bio').then(function (val) {
             _this.bio = val;
+        });
+        this.storage.get('locality').then(function (val) {
+            _this.locality = val;
+            _this.storage.get('thoroughfare').then(function (val) {
+                _this.thoroughfare = val;
+            });
         });
         this.storage.get('location').then(function (val) {
             if (val == true) {
@@ -337,15 +347,6 @@ var UserViewProfile = /** @class */ (function () {
     UserViewProfile.prototype.goToSettings = function () {
         this.navCtrl.push(SettingsPage);
     };
-    UserViewProfile.prototype.backToFeed = function () {
-        /*if(this.navParams.get('param1') == 'user') {
-          this.navCtrl.push(FeedUser);
-        }*/
-        //else {
-        this.navCtrl.push(FeedUser, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
-        //this.navCtrl.push(FeedStylist);
-        //}
-    };
     UserViewProfile.prototype.backToCal = function () {
         //if(this.navParams.get('param1') == 'user') {
         this.navCtrl.push(BookingPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
@@ -374,7 +375,6 @@ var UserViewProfile = /** @class */ (function () {
                     this.backToCal();
                 }
                 else {
-                    this.backToFeed();
                 }
                 //Do whatever you want with swipe
             }
@@ -384,7 +384,7 @@ var UserViewProfile = /** @class */ (function () {
         this.backToCal();
     };
     UserViewProfile.prototype.swipeRight = function () {
-        this.backToFeed();
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 500, direction: 'back' });
     };
     UserViewProfile.prototype.downloadImages = function () {
         var self = this;

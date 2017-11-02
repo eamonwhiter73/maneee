@@ -1,14 +1,14 @@
 webpackJsonp([5],{
 
-/***/ 815:
+/***/ 817:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormulapostPageModule", function() { return FormulapostPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormulasPageModule", function() { return FormulasPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__formulapost__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__formulas__ = __webpack_require__(185);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,26 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var FormulapostPageModule = (function () {
-    function FormulapostPageModule() {
+var FormulasPageModule = (function () {
+    function FormulasPageModule() {
     }
-    return FormulapostPageModule;
+    return FormulasPageModule;
 }());
-FormulapostPageModule = __decorate([
+FormulasPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__formulapost__["a" /* FormulapostPage */],
+            __WEBPACK_IMPORTED_MODULE_2__formulas__["a" /* FormulasPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__formulapost__["a" /* FormulapostPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__formulas__["a" /* FormulasPage */]),
         ],
-        exports: [
-            __WEBPACK_IMPORTED_MODULE_2__formulapost__["a" /* FormulapostPage */]
-        ]
     })
-], FormulapostPageModule);
+], FormulasPageModule);
 
-//# sourceMappingURL=formulapost.module.js.map
+//# sourceMappingURL=formulas.module.js.map
 
 /***/ })
 

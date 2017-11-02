@@ -24,6 +24,7 @@ import { UserBooking } from '../pages/userbooking/userbooking';
 import { UserViewProfile } from '../pages/userviewprofile/userviewprofile';
 import { FollowersPage } from '../pages/followers/followers';
 import { FormulapostPage } from '../pages/formulapost/formulapost';
+import { FormulasPage } from '../pages/formulas/formulas';
 import { UserviewuserprofilePage } from '../pages/userviewuserprofile/userviewuserprofile';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { FullfeedPage } from '../pages/fullfeed/fullfeed';
@@ -48,6 +49,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { PopUp } from '../modals/popup/popup';
 import { PopUpOther } from '../modals/popupother/popupother';
+import { FormulaBuy } from '../modals/formulabuy/formulabuy';
 import { Rate } from '../modals/rate/rate';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { DatePicker } from '@ionic-native/date-picker';
@@ -60,6 +62,7 @@ import { SMS } from '@ionic-native/sms';
 import { MapPage } from '../pages/map/map';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { CacheModule } from "ionic-cache";
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import * as firebase from 'firebase';
 //import { Ng2ImgMaxModule } from 'ng2-img-max'; // <-- import the module
 export var firebaseConfig = {
@@ -93,6 +96,7 @@ var AppModule = /** @class */ (function () {
                 UserBooking,
                 PopUp,
                 PopUpOther,
+                FormulaBuy,
                 SettingsPage,
                 UserProfile,
                 Rate,
@@ -101,7 +105,8 @@ var AppModule = /** @class */ (function () {
                 UserviewuserprofilePage,
                 MapPage,
                 FullfeedPage,
-                FormulapostPage
+                FormulapostPage,
+                FormulasPage
             ],
             imports: [
                 BrowserModule,
@@ -132,6 +137,7 @@ var AppModule = /** @class */ (function () {
                 BookingPage,
                 PopUp,
                 PopUpOther,
+                FormulaBuy,
                 Rate,
                 SettingsPage,
                 UserProfile,
@@ -141,7 +147,8 @@ var AppModule = /** @class */ (function () {
                 UserviewuserprofilePage,
                 MapPage,
                 FullfeedPage,
-                FormulapostPage
+                FormulapostPage,
+                FormulasPage
             ],
             providers: [
                 StatusBar,
@@ -165,7 +172,8 @@ var AppModule = /** @class */ (function () {
                 LocationAccuracy,
                 CallNumber,
                 SMS,
-                GoogleMaps
+                GoogleMaps,
+                ScreenOrientation
             ]
         })
     ], AppModule);

@@ -2,10 +2,15 @@ import { App, NavParams, ViewController, NavController } from 'ionic-angular';
 import { Component, Renderer, OnDestroy } from '@angular/core';
 import { Http } from '@angular/http';
 import { UserProfile } from '../../pages/userprofile/userprofile';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { FormulasPage } from '../../pages/formulas/formulas';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { ISubscription } from "rxjs/Subscription";
 import firebase from 'firebase';
-import braintree from 'braintree-web'
+import * as braintree from 'braintree-web';
+import dropin from 'braintree-web-drop-in';
+import { HttpParams } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
+
 
 
 
@@ -19,14 +24,18 @@ export class FormulaBuy implements OnDestroy {
   //@ViewChild('salon') salon: ElementRef;
   //@ViewChild('time') time: ElementRef;
   username;
+  usernameowner;
   square;
   formulas;
   subscription: ISubscription;
   data = {};
+  keyy;
+  body;
+  list: FirebaseListObservable<any>;
 
 
 
- constructor(public http: Http, public af: AngularFireDatabase, public appCtrl: App, public navCtrl: NavController, public params: NavParams, public viewCtrl:ViewController, public renderer: Renderer) {
+ constructor(public storage: Storage, public http: Http, public af: AngularFireDatabase, public appCtrl: App, public navCtrl: NavController, public params: NavParams, public viewCtrl:ViewController, public renderer: Renderer) {
    
  }
 
@@ -34,15 +43,9 @@ export class FormulaBuy implements OnDestroy {
    this.username = this.params.get('username');
    this.square = this.params.get('square');
 
-   this.http.request('http://192.168.1.131:8888/generatetoken.php')
-    .subscribe(res => { 
-      braintree.client.create({ 
-      authorization: res.text()},
-      (err, client) => {
-            // Do stuff here
-            console.log(client + "    clieeeennntt");
-            console.log(err + "   errrrrrrrr");
-      });}, err => { console.log(err + "   where is string?")})
+   this.storage.get('username').then((val) => {
+     this.usernameowner = val;
+   })
 
    
 
@@ -69,12 +72,16 @@ export class FormulaBuy implements OnDestroy {
       });
   });
 
- 	//this.renderer.setText(this.salon.nativeElement, "@"+this.params.get('salon'));
- 	//this.renderer.setText(this.time.nativeElement, this.params.get('time'));
+  //this.buy();
+
+ 	//this.renderer.appendText(this.salon.nativeElement, "@"+this.params.get('salon'));
+ 	//this.renderer.appendText(this.time.nativeElement, this.params.get('time'));
  }
 
  buy() {
-
+   this.list = this.af.list('/formulasowned/'+ this.usernameowner);
+   this.list.push(this.data);
+   this.dismiss();
  }
 
  dismiss() {

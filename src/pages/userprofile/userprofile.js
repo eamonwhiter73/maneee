@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, trigger, state, style, transition, animate, ViewChildren, ViewChild, ElementRef, Renderer, QueryList } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { FeedUser } from '../feeduser/feeduser';
 import { BookingPage } from '../booking/booking';
 import { PostpagePage } from '../postpage/postpage';
 import { UserBooking } from '../userbooking/userbooking';
@@ -24,6 +23,7 @@ import { ImageViewerController } from 'ionic-img-viewer';
 import { Rate } from '../../modals/rate/rate';
 import { Storage } from '@ionic/storage';
 import { InAppBrowser } from 'ionic-native';
+import { FormulaBuy } from '../../modals/formulabuy/formulabuy';
 //import { IonicApp, IonicModule } from 'ionic-angular';
 //import { MyApp } from './app/app.component';
 var UserProfile = /** @class */ (function () {
@@ -84,13 +84,27 @@ var UserProfile = /** @class */ (function () {
         ];
     }
     UserProfile.prototype.ngOnDestroy = function () {
-        this.subscription6.unsubscribe();
-        this.subscription2.unsubscribe();
-        this.subscription3.unsubscribe();
-        this.subscription4.unsubscribe();
-        this.subscription.unsubscribe();
-        this.subscription7.unsubscribe();
-        this.subscription9.unsubscribe();
+        if (this.subscription2 != null) {
+            this.subscription2.unsubscribe();
+        }
+        if (this.subscription3 != null) {
+            this.subscription3.unsubscribe();
+        }
+        if (this.subscription4 != null) {
+            this.subscription4.unsubscribe();
+        }
+        if (this.subscription != null) {
+            this.subscription.unsubscribe();
+        }
+        if (this.subscription6 != null) {
+            this.subscription6.unsubscribe();
+        }
+        if (this.subscription7 != null) {
+            this.subscription7.unsubscribe();
+        }
+        if (this.subscription9 != null) {
+            this.subscription9.unsubscribe();
+        }
     };
     UserProfile.prototype.instagramOpen = function () {
         var url;
@@ -149,6 +163,9 @@ var UserProfile = /** @class */ (function () {
         this.storage.get('username').then(function (val) {
             _this.userusername = val;
         });
+        this.storage.get('type').then(function (val) {
+            _this.type = val;
+        });
         console.log(this.username + "         this is item @@#2332dfdffdfd23");
         this.item2 = this.af.object('/profiles/stylists/' + this.username + '/followers');
         this.item2.subscribe(function (item) {
@@ -173,6 +190,12 @@ var UserProfile = /** @class */ (function () {
             console.log("in caught url !!!!!!!$$$$$$$!!");
             _this.profilePic = 'assets/blankprof.png';
         });
+        this.username = this.navParams.get("username");
+        this.downloadImages().then(function () {
+            _this.getProfileInfo();
+            _this.downloadImagesFormula().then(function () {
+            });
+        });
         this.item9 = this.af.object('/profiles/stylists/' + this.username);
         this.subscription9 = this.item9.subscribe(function (item) {
             console.log(JSON.stringify(item) + "      rating number 989898222229889");
@@ -183,6 +206,28 @@ var UserProfile = /** @class */ (function () {
             //this.facebook.nativeElement.src = item.facebookURL;
             //this.instagram.nativeElement.src = item.instagramURL;
             _this.totalRatings = total;
+            var totalPotential = item.rating.one * 5 + item.rating.two * 5 + item.rating.three * 5 + item.rating.four * 5 + item.rating.five * 5;
+            var ratings = item.rating.one + item.rating.two * 2 + item.rating.three * 3 + item.rating.four * 4 + item.rating.five * 5;
+            console.log(ratings + "   ratings          total potential:    " + totalPotential);
+            if (ratings == 0 && totalPotential == 0) {
+                _this.stars = '\u2606\u2606\u2606\u2606\u2606';
+            }
+            var i = (ratings / totalPotential) * 100;
+            if (Math.round(i) <= 20) {
+                _this.stars = '\u2605\u2606\u2606\u2606\u2606';
+            }
+            if (Math.round(i) > 20 && Math.round(i) <= 40) {
+                _this.stars = '\u2605\u2605\u2606\u2606\u2606';
+            }
+            if (Math.round(i) > 40 && Math.round(i) <= 60) {
+                _this.stars = '\u2605\u2605\u2605\u2606\u2606';
+            }
+            if (Math.round(i) > 60 && Math.round(i) <= 80) {
+                _this.stars = '\u2605\u2605\u2605\u2605\u2606';
+            }
+            if (Math.round(i) > 80) {
+                _this.stars = '\u2605\u2605\u2605\u2605\u2605';
+            }
         });
         this.tds = this.elRef.nativeElement.querySelectorAll('td[tappable]');
         this.username = this.navParams.get('username');
@@ -244,9 +289,17 @@ var UserProfile = /** @class */ (function () {
     UserProfile.prototype.presentImage = function (squarez) {
         this.square = squarez;
         var itemArrayTwo = this.profComponents.toArray();
-        console.log(JSON.stringify(itemArrayTwo[this.square - 1]));
-        var imageViewer = this.imageViewerCtrl.create(itemArrayTwo[this.square - 1].nativeElement);
-        imageViewer.present();
+        var itemArrayfour = this.formulaBars.toArray();
+        if (itemArrayfour[this.square - 1].nativeElement.style.display != 'none') {
+            console.log("inside formula box");
+            var profileModal = this.modalCtrl.create(FormulaBuy, { username: this.username, square: this.square });
+            profileModal.present();
+        }
+        else {
+            console.log(JSON.stringify(itemArrayTwo[this.square - 1]));
+            var imageViewer = this.imageViewerCtrl.create(itemArrayTwo[this.square - 1].nativeElement);
+            imageViewer.present();
+        }
     };
     UserProfile.prototype.showSquare = function () {
         var itemArray = this.components.toArray();
@@ -322,7 +375,7 @@ var UserProfile = /** @class */ (function () {
         // optional data can also be passed to the pushed page.
         //this.navCtrl.push(SignUpPage);
     };
-    UserProfile.prototype.presentProfileModal = function () {
+    UserProfile.prototype.presentRateModal = function () {
         var profileModal = this.modalCtrl.create(Rate, { "user": this.username });
         profileModal.present();
     };
@@ -337,7 +390,7 @@ var UserProfile = /** @class */ (function () {
           this.navCtrl.push(FeedUser);
         }*/
         //else {
-        this.navCtrl.push(FeedUser, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 500, direction: 'back' });
         //this.navCtrl.push(FeedStylist);
         //}
     };
@@ -384,11 +437,38 @@ var UserProfile = /** @class */ (function () {
     UserProfile.prototype.openCal = function () {
         this.navCtrl.push(UserBooking, { username: this.username });
     };
+    UserProfile.prototype.downloadImagesFormula = function () {
+        console.log("IN DOWNLOAD IMAGES FORMULS __@_@_+_+@_@+_+@_+@");
+        var self = this;
+        var promises_array = [];
+        var itemArrayTwo = this.profComponents.toArray();
+        var itemArrayfour = this.formulaBars.toArray();
+        var _loop_1 = function (z) {
+            promises_array.push(new Promise(function (resolve, reject) {
+                var storageRef = firebase.storage().ref().child('/formulas/' + self.username + '/formula_' + self.username + '_' + z + '.png');
+                storageRef.getDownloadURL().then(function (url) {
+                    self.myrenderer.setElementAttribute(itemArrayTwo[z - 1].nativeElement, 'src', url);
+                    self.myrenderer.setElementStyle(itemArrayTwo[z - 1].nativeElement, 'display', 'block');
+                    self.myrenderer.setElementStyle(itemArrayfour[z - 1].nativeElement, 'display', 'block');
+                    //self.myrenderer.setElementStyle(itemArray[z - 1].nativeElement, 'display', 'none');
+                    console.log(z);
+                    resolve();
+                }).catch(function (error) {
+                    resolve();
+                    console.log(error.message);
+                });
+            }));
+        };
+        for (var z = 1; z < 10; z++) {
+            _loop_1(z);
+        }
+        return Promise.all(promises_array);
+    };
     UserProfile.prototype.downloadImages = function () {
         var self = this;
         var promises_array = [];
         var itemArrayTwo = this.profComponents.toArray();
-        var _loop_1 = function (z) {
+        var _loop_2 = function (z) {
             promises_array.push(new Promise(function (resolve, reject) {
                 var storageRef = firebase.storage().ref().child('/profile/' + self.username + '/profile_' + self.username + '_' + z + '.png');
                 storageRef.getDownloadURL().then(function (url) {
@@ -404,21 +484,11 @@ var UserProfile = /** @class */ (function () {
             }));
         };
         for (var z = 1; z < 10; z++) {
-            _loop_1(z);
+            _loop_2(z);
         }
         return Promise.all(promises_array);
     };
-    UserProfile.prototype.ionViewWillEnter = function () {
-        this.loadings = this.loadingController.create({ content: "Loading..." });
-        this.loadings.present();
-    };
     UserProfile.prototype.ionViewDidEnter = function () {
-        var _this = this;
-        this.username = this.navParams.get("username");
-        this.downloadImages().then(function () {
-            _this.getProfileInfo();
-            _this.loadings.dismiss();
-        });
     };
     UserProfile.prototype.moveCover = function () {
         if (this.set == false) {
@@ -571,6 +641,10 @@ var UserProfile = /** @class */ (function () {
         ViewChild('facebook'),
         __metadata("design:type", ElementRef)
     ], UserProfile.prototype, "facebook", void 0);
+    __decorate([
+        ViewChildren('formulabar'),
+        __metadata("design:type", QueryList)
+    ], UserProfile.prototype, "formulaBars", void 0);
     UserProfile = __decorate([
         Component({
             selector: 'page-user-profile',

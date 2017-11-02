@@ -43,7 +43,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { SignUpPage } from '../signup/signup';
 import { FeedUser } from '../feeduser/feeduser';
 import { FeedStylist } from '../feedstylist/feedstylist';
@@ -51,14 +51,20 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Storage } from '@ionic/storage';
 var SignInPage = /** @class */ (function () {
-    function SignInPage(storage, afAuth, keyboard, navCtrl) {
+    function SignInPage(loadingCtrl, storage, afAuth, keyboard, navCtrl) {
+        this.loadingCtrl = loadingCtrl;
         this.storage = storage;
         this.afAuth = afAuth;
         this.keyboard = keyboard;
         this.navCtrl = navCtrl;
         this.user = {};
     }
+    SignInPage.prototype.ionViewWillUnload = function () {
+        //this.navCtrl.pop();
+    };
     SignInPage.prototype.ionViewDidLoad = function () {
+        //let loading = this.loadingCtrl.create({content : "Loading..."});
+        //loading.present();
         var _this = this;
         this.storage.get('email').then(function (val) {
             _this.email = val;
@@ -68,6 +74,23 @@ var SignInPage = /** @class */ (function () {
         });
         this.storage.get('type').then(function (val) {
             _this.type = val;
+        });
+        this.storage.get('loggedin').then(function (val) {
+            console.log(val + " logged innnnnnnn");
+            if (val == true) {
+                console.log(_this.type + " logged typeeeeee");
+                if (_this.type == 'user/stylist/user' || _this.type == 'user') {
+                    //loading.dismiss();
+                    _this.navCtrl.setRoot(FeedUser);
+                }
+                else if (_this.type == 'user/stylist/stylist' || _this.type == 'stylist') {
+                    //loading.dismiss();
+                    _this.navCtrl.setRoot(FeedStylist);
+                }
+            }
+            else {
+                //loading.dismiss();
+            }
         });
     };
     SignInPage.prototype.selectOneStylist = function () {
@@ -89,7 +112,6 @@ var SignInPage = /** @class */ (function () {
     SignInPage.prototype.login = function (userx) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var result;
             return __generator(this, function (_a) {
                 // push another page on to the navigation stack
                 // causing the nav controller to transition to the new page
@@ -108,21 +130,21 @@ var SignInPage = /** @class */ (function () {
                     alert('You need to select "Hair Stylist" or "User"');
                 }
                 else {
-                    result = this.afAuth.auth.signInWithEmailAndPassword(userx.email, userx.password).then(function (data) {
+                    this.afAuth.auth.signInWithEmailAndPassword(userx.email, userx.password).then(function (data) {
                         console.log(data);
                         if (data.email && data.uid) {
                             if (_this.stylist) {
                                 _this.storage.set('type', 'user/stylist/stylist');
+                                _this.storage.set('loggedin', true);
                                 _this.navCtrl.setRoot(FeedStylist);
                             }
                             else {
                                 _this.storage.set('type', 'user/stylist/user');
+                                _this.storage.set('loggedin', true);
                                 _this.navCtrl.setRoot(FeedUser);
                             }
                         }
-                    }).catch(function (e) {
-                        "The username or password is incorrect";
-                    });
+                    }).catch(function (e) { alert("The username or password is incorrect"); });
                 }
                 return [2 /*return*/];
             });
@@ -144,7 +166,7 @@ var SignInPage = /** @class */ (function () {
             selector: 'page-sign-in',
             templateUrl: 'signin.html'
         }),
-        __metadata("design:paramtypes", [Storage, AngularFireAuth, Keyboard, NavController])
+        __metadata("design:paramtypes", [LoadingController, Storage, AngularFireAuth, Keyboard, NavController])
     ], SignInPage);
     return SignInPage;
 }());

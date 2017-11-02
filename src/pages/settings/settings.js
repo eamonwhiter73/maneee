@@ -72,15 +72,28 @@ var SettingsPage = /** @class */ (function () {
     SettingsPage.prototype.linkProfile = function () {
         var _this = this;
         if (this.linked == "Link Profile") {
-            this.facebook.login(['email', 'public_profile']).then(function (response) {
-                _this.facebook.api('me?fields=id', []).then(function (profile) {
-                    console.log(JSON.stringify(profile));
-                    _this.facebookURL = "http://www.facebook.com/" + profile['id'];
-                    _this.storage.set('fblinked', true);
-                    _this.linked = "Linked";
-                    //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
+            if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
+                this.facebook.login(['email', 'public_profile']).then(function (response) {
+                    _this.facebook.api('me?fields=id', []).then(function (profile) {
+                        console.log(JSON.stringify(profile));
+                        _this.facebookURL = "http://www.facebook.com/" + profile['id'];
+                        _this.storage.set('fblinkedstylist', true);
+                        _this.linked = "Linked";
+                        //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
+                    });
                 });
-            });
+            }
+            else if (this.type == 'user' || this.type == 'user/stylist/user') {
+                this.facebook.login(['email', 'public_profile']).then(function (response) {
+                    _this.facebook.api('me?fields=id', []).then(function (profile) {
+                        console.log(JSON.stringify(profile));
+                        _this.facebookURL = "http://www.facebook.com/" + profile['id'];
+                        _this.storage.set('fblinkeduser', true);
+                        _this.linked = "Linked";
+                        //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
+                    });
+                });
+            }
         }
         ;
     };
@@ -108,11 +121,12 @@ var SettingsPage = /** @class */ (function () {
     };
     SettingsPage.prototype.logForm = function () {
         console.log("        ADDDDREESSSSS77777777:  " + this.address); //moved up here!
-        if (this.type == 'user' || this.type == 'user/stylist/user') {
-            if (this.username == null || this.password == null || this.email == null || this.bio == null) {
-                alert("You need to fill out all of the information");
-            }
-        }
+        /*if(this.type == 'user' || this.type == 'user/stylist/user') {
+     
+           if(this.username == null || this.password == null || this.email == null || this.bio == null) {
+             alert("You need to fill out all of the information");
+           }
+         }*/
         console.log(this.authUser + '      authuser       998877');
         this.x = 0;
         console.log(this.passwordIfChanged + "  passwordifchanged                  this.password: " + this.password);
@@ -143,7 +157,7 @@ var SettingsPage = /** @class */ (function () {
         }
         //this.storage.get('type').then((val) => {
         if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-            if (this.username == null || this.password == null || this.email == null || this.bio == null || this.address == null || this.price == null || this.phone == null) {
+            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '' || this.phone == '') {
                 alert("You need to fill out all of the information");
             }
             else {
@@ -169,7 +183,12 @@ var SettingsPage = /** @class */ (function () {
                     this.items.update((_a = {}, _a[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
                         'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
                         'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL }, _a));
-                    this.navCtrl.setRoot(FeedStylist);
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(StylistProfile);
+                    }
+                    else {
+                        this.navCtrl.setRoot(FeedStylist);
+                    }
                 }
                 else {
                     this.af.object('/profiles/stylists/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
@@ -177,12 +196,17 @@ var SettingsPage = /** @class */ (function () {
                         'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
                         'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
                         'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } }, _b));
-                    this.navCtrl.setRoot(FeedStylist);
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(StylistProfile);
+                    }
+                    else {
+                        this.navCtrl.setRoot(FeedStylist);
+                    }
                 }
             }
         }
         if (this.type == 'user' || this.type == 'user/stylist/user') {
-            if (this.username == null || this.password == null || this.email == null || this.bio == null || this.phone == null) {
+            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.phone == '') {
                 alert("You need to fill out all of the information");
             }
             else {
@@ -190,14 +214,24 @@ var SettingsPage = /** @class */ (function () {
                 if (this.username == this.oldUser) {
                     this.items.update((_c = {}, _c[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
                         'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL }, _c));
-                    this.navCtrl.setRoot(FeedUser);
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(UserViewProfile);
+                    }
+                    else {
+                        this.navCtrl.setRoot(FeedUser);
+                    }
                 }
                 else {
                     this.af.object('/profiles/users/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
                     this.items.update((_d = {}, _d[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
                         'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
                         'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } }, _d));
-                    this.navCtrl.setRoot(FeedUser);
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(UserViewProfile);
+                    }
+                    else {
+                        this.navCtrl.setRoot(FeedUser);
+                    }
                 }
             }
         }
@@ -209,33 +243,18 @@ var SettingsPage = /** @class */ (function () {
         if (this.loggedIn) {
             console.log("being logged out ()()()()ER()EW()RWE()()REW()");
             this.afAuth.auth.signOut();
+            this.storage.set('loggedin', false);
         }
-        this.navCtrl.setRoot(SignInPage);
+        else {
+            this.storage.set('loggedin', false);
+        }
+        this.navCtrl.push(SignInPage);
     };
     SettingsPage.prototype.ngOnDestroy = function () {
         this.subscription3.unsubscribe();
     };
     SettingsPage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        this.storage.get('fblinked').then(function (val) {
-            if (val == true) {
-                _this.linked = "Linked";
-            }
-            else {
-                _this.linked = "Link Profile";
-            }
-        });
-        this.storage.get('location').then(function (val) {
-            _this.locationtoggle = val;
-            if (val == true) {
-                _this.locationtoggle = false;
-            }
-            else {
-                _this.locationtoggle = true;
-            }
-            console.log(_this.locationtoggle + "     in view did load locationtoggle");
-        });
-        this.typeparam = this.navParams.get('type');
         this.storage.get('type').then(function (val) {
             _this.type = val;
             console.log(_this.typeparam + '       this.typeparam       ');
@@ -270,6 +289,7 @@ var SettingsPage = /** @class */ (function () {
                     }
                 }
             });
+            _this.isTypeNull = _this.navParams.get('type');
             setTimeout(function () {
                 console.log('ionViewDidLoad SettingsPage');
                 _this.storage.get('username').then(function (val) { _this.username = val; _this.getProfilePic(); console.log(val + "        getting username          3333222222"); });
@@ -284,7 +304,40 @@ var SettingsPage = /** @class */ (function () {
                     _this.storage.get('price').then(function (val) { _this.price = val; });
                 }
             }, 1000);
+            if (_this.type == 'user' || _this.type == 'user/stylist/user') {
+                _this.storage.get('fblinkeduser').then(function (val) {
+                    console.log(val + " val vlal v avlal v allavl val ");
+                    console.log(_this.type + " tyope aosefi; fai; sefeji a'aj '' ");
+                    if (val) {
+                        _this.linked = "Linked";
+                    }
+                    else {
+                        _this.linked = "Link Profile";
+                    }
+                });
+            }
+            else if (_this.type == 'stylist' || _this.type == 'user/stylist/stylist') {
+                _this.storage.get('fblinkedstylist').then(function (val) {
+                    if (val) {
+                        _this.linked = "Linked";
+                    }
+                    else {
+                        _this.linked = "Link Profile";
+                    }
+                });
+            }
         });
+        this.storage.get('location').then(function (val) {
+            _this.locationtoggle = val;
+            if (val == true) {
+                _this.locationtoggle = false;
+            }
+            else {
+                _this.locationtoggle = true;
+            }
+            console.log(_this.locationtoggle + "     in view did load locationtoggle");
+        });
+        this.typeparam = this.navParams.get('type');
     };
     SettingsPage.prototype.getProfilePic = function () {
         var _this = this;

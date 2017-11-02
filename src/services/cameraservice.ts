@@ -261,7 +261,7 @@ export class CameraService {
         // op Image, on android this returns something like, '/storage/emulated/0/Android/...'
         // Only giving an android example as ionic-native camera has built in cropping ability
         if (this.platform.is('ios')) {
-          console.log("in getmediaformulasios")
+          console.log("in getmediaformulasios");
           return this.crop.crop(fileUri, { quality: 2 });
         } else if (this.platform.is('android')) {
           // Modify fileUri format, may not always be necessary

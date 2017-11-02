@@ -32272,6 +32272,29 @@ page-formulapost .backk {
   padding: 0 15px 0 15px;
 }
 
+page-formulas .formula {
+  height: 0;
+  width: 32%;
+  padding-bottom: 32%;
+  margin: 2px 2px 0 2px;
+  display: inline-block;
+  border-radius: 15px;
+}
+
+page-formulas .formula img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+page-formulas .formula .label-ios {
+  margin: 0 0 0 0;
+}
+
+page-formulas .item-ios.item-block .item-inner {
+  padding-right: 0;
+}
+
 page-fullfeed {
   /*.marginstatus {
 		margin-top: 20px;

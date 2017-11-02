@@ -70,6 +70,9 @@ var SignUpPage = /** @class */ (function () {
         this.bool = false;
         this.boool = false;
     }
+    SignUpPage.prototype.ionViewWillUnload = function () {
+        this.navCtrl.pop();
+    };
     SignUpPage.prototype.register = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
@@ -148,9 +151,7 @@ var SignUpPage = /** @class */ (function () {
                         _a.label = 3;
                     case 3:
                         //console.log(result);
-                        if (this.user1.username == null) {
-                            this.user1.username = this.username;
-                        }
+                        this.user1.username = this.username;
                         this.user1.email = this.email;
                         this.user1.password = this.password;
                         this.setUserStylist(this.user1);

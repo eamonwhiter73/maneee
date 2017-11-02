@@ -10,9 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
-import { FeedUser } from '../feeduser/feeduser';
 import { AngularFireDatabase } from 'angularfire2/database';
 import firebase from 'firebase';
+import { CacheService } from 'ionic-cache';
 /**
  * Generated class for the FullfeedPage page.
  *
@@ -20,41 +20,65 @@ import firebase from 'firebase';
  * on Ionic pages and navigation.
  */
 var FullfeedPage = /** @class */ (function () {
-    function FullfeedPage(af, navCtrl, navParams) {
+    function FullfeedPage(cache, af, navCtrl, navParams) {
+        this.cache = cache;
         this.af = af;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.items = [];
+        this.show = true;
     }
     FullfeedPage.prototype.swipeLeft = function () {
-        this.navCtrl.push(FeedUser, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+    };
+    FullfeedPage.prototype.ionViewWillUnload = function () {
+        //this.navCtrl.pop();
     };
     FullfeedPage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        this.list2 = this.af.list('/promos', {
-            query: {
-                limitToLast: 10
-            }
-        });
-        var x = 0;
-        this.subscription4 = this.list2.subscribe(function (items) {
-            items.forEach(function (item) {
-                var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
-                storageRef.getDownloadURL().then(function (url) {
-                    console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                    item.customMetadata.picURL = url;
-                }).catch(function (e) {
-                    console.log("in caught url !!!!!!!$$$$$$$!!");
-                    item.customMetadata.picURL = 'assets/blankprof.png';
-                });
-                _this.items.push(item.customMetadata);
-                if (x == 0) {
-                    _this.startAtKey = item.$key;
-                    _this.lastKey = _this.startAtKey;
+        var cacheKey = 'promos';
+        var promises_array = [];
+        var mapped;
+        this.cache.removeItem(cacheKey);
+        this.cache.getItem(cacheKey).catch(function () {
+            var store = [];
+            _this.list2 = _this.af.list('/promos', {
+                query: {
+                    limitToLast: 10
                 }
-                x++;
             });
-            _this.items.reverse();
+            _this.subscription4 = _this.list2.subscribe(function (items) {
+                mapped = items.map(function (item) {
+                    return new Promise(function (resolve, reject) {
+                        var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                        storageRef.getDownloadURL().then(function (url) {
+                            console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                            item.customMetadata.picURL = url;
+                            store.push(item.customMetadata);
+                            resolve();
+                        }).catch(function (e) {
+                            console.log("in caught url !!!!!!!$$$$$$$!!");
+                            item.customMetadata.picURL = 'assets/blankprof.png';
+                            store.push(item.customMetadata);
+                            resolve();
+                        });
+                    });
+                });
+                console.log(JSON.stringify(mapped) + "    mappped things");
+                _this.startAtKey = items[0].$key;
+                _this.lastKey = _this.startAtKey;
+                var results = Promise.all(mapped);
+                results.then(function () {
+                    //setTimeout(() => {
+                    _this.items = store.reverse();
+                    //this.classesListArray.reverse();   
+                    console.log(JSON.stringify(_this.items) + " value value vlaue items");
+                    return _this.cache.saveItem(cacheKey, _this.items);
+                    //}, 3000);
+                });
+            });
+        }).then(function (data) {
+            _this.items = data;
         });
     };
     FullfeedPage.prototype.gotoProfile = function () {
@@ -62,16 +86,16 @@ var FullfeedPage = /** @class */ (function () {
     };
     FullfeedPage.prototype.doInfinite = function (infiniteScroll) {
         var _this = this;
-        console.log('Begin async operation');
-        console.log(this.content.directionY + "        upupupupupupu********");
-        if (this.content.directionY == 'up') {
-            this.show = false;
-        }
-        else {
-            this.show = true;
-        }
         //return new Promise((resolve, reject) => {
         setTimeout(function () {
+            console.log('Begin async operation');
+            console.log(_this.content.directionY + "        upupupupupupu********");
+            if (_this.content.directionY == 'up') {
+                _this.show = false;
+            }
+            else {
+                _this.show = true;
+            }
             console.log(_this.startAtKey + "     before %%^&^&^% start at");
             _this.list = _this.af.list('/promos', {
                 query: {
@@ -80,7 +104,7 @@ var FullfeedPage = /** @class */ (function () {
                     limitToLast: 11
                 }
             });
-            _this.list.subscribe(function (items) {
+            _this.subscription3 = _this.list.subscribe(function (items) {
                 var x = 0;
                 _this.lastKey = _this.startAtKey;
                 items.forEach(function (item) {
@@ -115,7 +139,7 @@ var FullfeedPage = /** @class */ (function () {
             selector: 'page-fullfeed',
             templateUrl: 'fullfeed.html',
         }),
-        __metadata("design:paramtypes", [AngularFireDatabase, NavController, NavParams])
+        __metadata("design:paramtypes", [CacheService, AngularFireDatabase, NavController, NavParams])
     ], FullfeedPage);
     return FullfeedPage;
 }());

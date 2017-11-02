@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { DatePicker } from '@ionic-native/date-picker';
-import { FeedStylist } from '../feedstylist/feedstylist';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
@@ -37,7 +36,7 @@ var PostpagePage = /** @class */ (function () {
         this.myrenderer = myrenderer;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.item = { 'date': null, 'title': 'asdfasdf', 'price': '44', 'caption': 'asdfasdfasdfasdf', 'typeofselect': 'Promo' };
+        this.item = { 'date': null, 'title': 'asdfasdf', 'price': '44', 'caption': 'asdfasdfasdfasdf', 'typeofselect': 'Post' };
         this.optionsGetMedia = {
             allowEdit: false,
             quality: 2,
@@ -59,6 +58,39 @@ var PostpagePage = /** @class */ (function () {
             saveToPhotoAlbum: true
         };
     }
+    PostpagePage.prototype.typeChanged = function (event) {
+        console.log(event + "   event event event");
+        if (this.item.typeofselect == "Class") {
+            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
+        }
+        else if (this.item.typeofselect == "Product") {
+            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
+        }
+        else if (this.item.typeofselect == "Post") {
+            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
+        }
+        else if (this.item.typeofselect == "Promo") {
+            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
+        }
+        else if (this.item.typeofselect == "Formula") {
+            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'none');
+        }
+    };
     PostpagePage.prototype.presentActionSheet = function () {
         var _this = this;
         var actionSheet = this.actionSheetCtrl.create({
@@ -69,6 +101,7 @@ var PostpagePage = /** @class */ (function () {
                     handler: function () {
                         //let itemArrayTwo = this.profComponents.toArray();
                         _this.cameraServicePost.getMedia(_this.optionsGetCamera).then(function (data) {
+                            _this.image.nativeElement.src = data;
                             /*let storageRef = firebase.storage().ref().child('/profile/' + this.username + '/profile_' + this.username + '_' + this.square + '.png');
                             let loading = this.loadingController.create({content : "Loading..."});
                             loading.present();
@@ -124,7 +157,12 @@ var PostpagePage = /** @class */ (function () {
     };
     PostpagePage.prototype.ionViewDidLoad = function () {
         var _this = this;
+        this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
+        this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
+        this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
+        this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
         this.imageHolder = this.navParams.get("path");
+        console.log(this.imageHolder + " imageholder imagehodl a pefsj'aes");
         this.myrenderer.setElementAttribute(this.image.nativeElement, 'src', this.imageHolder);
         this.subscription = this.keyboard.onKeyboardShow().subscribe(function () {
             _this.myrenderer.setElementStyle(_this.share.getNativeElement(), 'bottom', '-150px');
@@ -156,11 +194,26 @@ var PostpagePage = /** @class */ (function () {
         return [day, month, year].join('-');
     };
     PostpagePage.prototype.isPromo = function () {
+        var metadata = {
+            customMetadata: {
+                'title': this.item.title,
+                'caption': this.item.caption,
+                //'price': this.item.price,
+                //'date': this.item.date,
+                'typeofselect': this.item.typeofselect,
+                'username': this.username,
+                'postdate': Date.now()
+            }
+        };
+        this.list = this.af.list('/promotions');
+        this.list.push(metadata);
+    };
+    PostpagePage.prototype.isPost = function () {
         var _this = this;
         var image = 'promo_' + this.username + '_' + new Date() + '.png', storageRef, parseUpload;
         return new Promise(function (resolve, reject) {
             storageRef = firebase.storage().ref('/promos/' + image);
-            parseUpload = storageRef.putString(_this.imageHolder, 'data_url');
+            parseUpload = storageRef.putString(_this.image.nativeElement.src, 'data_url');
             parseUpload.on('state_changed', function (_snapshot) {
                 // We could log the progress here IF necessary
                 console.log('snapshot progess ' + _snapshot);
@@ -171,14 +224,15 @@ var PostpagePage = /** @class */ (function () {
                 resolve(parseUpload.snapshot);
             });
         }).then(function (value) {
+            console.log("storing post post post &&&&&&&");
             storageRef.getDownloadURL()
                 .then(function (url) {
                 var metadata = {
                     customMetadata: {
                         'title': _this.item.title,
                         'caption': _this.item.caption,
-                        'price': _this.item.price,
-                        'date': _this.item.date,
+                        //'price': this.item.price,
+                        //'date': this.item.date,
                         'typeofselect': _this.item.typeofselect,
                         'username': _this.username,
                         'url': url,
@@ -201,7 +255,7 @@ var PostpagePage = /** @class */ (function () {
             var image_1 = 'class_' + this.username + '_' + new Date() + '.png', storageRef_1, parseUpload_1;
             return new Promise(function (resolve, reject) {
                 storageRef_1 = firebase.storage().ref('/classes/' + image_1);
-                parseUpload_1 = storageRef_1.putString(_this.imageHolder, 'data_url');
+                parseUpload_1 = storageRef_1.putString(_this.image.nativeElement.src, 'data_url');
                 parseUpload_1.on('state_changed', function (_snapshot) {
                     // We could log the progress here IF necessary
                     console.log('snapshot progess ' + _snapshot);
@@ -218,8 +272,8 @@ var PostpagePage = /** @class */ (function () {
                         customMetadata: {
                             'title': _this.item.title,
                             'caption': _this.item.caption,
-                            'price': _this.item.price,
-                            'date': _this.formatDate(_this.item.date),
+                            //'price': this.item.price,
+                            //'date': this.formatDate(this.item.date),
                             'typeofselect': _this.item.typeofselect,
                             'username': _this.username,
                             'url': url,
@@ -257,7 +311,7 @@ var PostpagePage = /** @class */ (function () {
                         'title': _this.item.title,
                         'caption': _this.item.caption,
                         'price': _this.item.price,
-                        'date': _this.item.date,
+                        //'date': this.item.date,
                         'typeofselect': _this.item.typeofselect,
                         'username': _this.username,
                         'url': url,
@@ -271,6 +325,20 @@ var PostpagePage = /** @class */ (function () {
             console.log(error.message);
         });
     };
+    PostpagePage.prototype.isFormula = function () {
+        var metadata = {
+            'formula': this.item.caption,
+            'price': '3',
+            'username': this.username,
+            'url': this.image.nativeElement.src,
+            'postdate': Date.now(),
+            'square': '0'
+        };
+        var self = this;
+        var database = firebase.database();
+        var bool = false;
+        firebase.database().ref('/formulas').push(metadata);
+    };
     PostpagePage.prototype.shareItem = function () {
         console.log(this.item.title);
         console.log(this.item.caption);
@@ -278,20 +346,50 @@ var PostpagePage = /** @class */ (function () {
         console.log(this.item.date);
         console.log(this.imageHolder + "                    **************************** src ****************");
         console.log("****&*&&*&*&*&*&*          " + this.item.typeofselect);
-        if (this.item.title == '' || this.item.caption == '' || this.item.price == '' || this.imageHolder == null) {
-            alert("You need to fill in all of the information");
+        if (this.item.typeofselect == "Post") {
+            if (this.item.title == '' || this.item.caption == '' || this.image.nativeElement.src == null) {
+                alert("You need to fill in all of the information");
+            }
+            else {
+                this.isPost();
+                this.navCtrl.popToRoot();
+            }
         }
-        if (this.item.typeofselect == 'Promo') {
-            this.isPromo();
-            this.navCtrl.push(FeedStylist);
+        else if (this.item.typeofselect == 'Formula') {
+            if (this.item.caption == '' || this.image.nativeElement.src == null) {
+                alert("You need to fill in all of the information");
+            }
+            else {
+                this.isFormula();
+                this.navCtrl.popToRoot();
+            }
         }
-        if (this.item.typeofselect == 'Class') {
-            this.isClass();
-            this.navCtrl.push(FeedStylist);
+        else if (this.item.typeofselect == 'Class') {
+            if (this.item.title == '' || this.item.caption == '' || this.image.nativeElement.src == null || this.item.date == '') {
+                alert("You need to fill in all of the information");
+            }
+            else {
+                this.isClass();
+                this.navCtrl.popToRoot();
+            }
         }
-        if (this.item.typeofselect == 'Product') {
-            this.isProduct();
-            this.navCtrl.push(FeedStylist);
+        else if (this.item.typeofselect == 'Product') {
+            if (this.item.title == '' || this.item.caption == '' || this.image.nativeElement.src == null || this.item.price == '') {
+                alert("You need to fill in all of the information");
+            }
+            else {
+                this.isProduct();
+                this.navCtrl.popToRoot();
+            }
+        }
+        else if (this.item.typeofselect == 'Promo') {
+            if (this.item.title == '' || this.item.caption == '') {
+                alert("You need to fill in all of the information");
+            }
+            else {
+                this.isPromo();
+                this.navCtrl.popToRoot();
+            }
         }
         /*var dataURL = data;
     
@@ -330,6 +428,22 @@ var PostpagePage = /** @class */ (function () {
         ViewChild('imagey'),
         __metadata("design:type", ElementRef)
     ], PostpagePage.prototype, "image", void 0);
+    __decorate([
+        ViewChild('price'),
+        __metadata("design:type", ElementRef)
+    ], PostpagePage.prototype, "price", void 0);
+    __decorate([
+        ViewChild('date'),
+        __metadata("design:type", ElementRef)
+    ], PostpagePage.prototype, "date", void 0);
+    __decorate([
+        ViewChild('imageholder'),
+        __metadata("design:type", ElementRef)
+    ], PostpagePage.prototype, "imagesquare", void 0);
+    __decorate([
+        ViewChild('title'),
+        __metadata("design:type", ElementRef)
+    ], PostpagePage.prototype, "title", void 0);
     __decorate([
         ViewChild('sharer'),
         __metadata("design:type", Object)

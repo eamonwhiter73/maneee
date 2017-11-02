@@ -17,6 +17,7 @@ import { FollowersPage } from '../pages/followers/followers';
 import { SettingsPage } from '../pages/settings/settings';
 import { FullfeedPage } from '../pages/fullfeed/fullfeed';
 import { FormulapostPage } from '../pages/formulapost/formulapost';
+import { FormulasPage } from '../pages/formulas/formulas';
 import { CacheService } from "ionic-cache";
 
 import { MapPage } from '../pages/map/map';

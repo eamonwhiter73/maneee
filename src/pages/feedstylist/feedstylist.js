@@ -21,8 +21,11 @@ import { CameraServicePost } from '../../services/cameraservicepost';
 import { Camera } from '@ionic-native/camera';
 import { AngularFireDatabase } from 'angularfire2/database';
 import firebase from 'firebase';
+import { CacheService } from "ionic-cache";
+import 'rxjs/add/operator/share';
 var FeedStylist = /** @class */ (function () {
-    function FeedStylist(datePicker, storage, platform, af, element, camera, app, cameraServicePost, actionSheetCtrl, myrenderer, loadingController, navCtrl) {
+    function FeedStylist(cache, datePicker, storage, platform, af, element, camera, app, cameraServicePost, actionSheetCtrl, myrenderer, loadingController, navCtrl) {
+        this.cache = cache;
         this.datePicker = datePicker;
         this.storage = storage;
         this.platform = platform;
@@ -69,6 +72,9 @@ var FeedStylist = /** @class */ (function () {
         };
         this.nav = this.app.getActiveNav();
     }
+    FeedStylist.prototype.ionViewWillUnload = function () {
+        //this.navCtrl.pop();
+    };
     FeedStylist.prototype.modelChanged = function (newObj) {
         var _this = this;
         console.log(typeof newObj + "  nnnnnneeeeeewwww     jo boboobbooooooob");
@@ -133,21 +139,44 @@ var FeedStylist = /** @class */ (function () {
     };
     FeedStylist.prototype.getAds = function () {
         var _this = this;
-        console.log("in get addddssss ******");
-        this.objj = this.af.object('/adcounter/count');
-        this.subscription6 = this.objj.subscribe(function (item) {
-            console.log(JSON.stringify(item) + "in adddd subscribe()()()()()()");
-            console.log(typeof item);
-            _this.totalAdCount = item.$value;
-            for (var x = 1; x < item.$value + 1; x++) {
-                var storageRef = firebase.storage().ref().child('/ads/ad' + x + '.png');
-                storageRef.getDownloadURL().then(function (url) {
-                    console.log(url);
-                    _this.ads.push(url);
-                }).catch(function (e) {
-                    //
+        var promises_array = [];
+        var cacheKey = 'ads';
+        this.cache.getItem(cacheKey).catch(function () {
+            var store = [];
+            console.log("in get addddssss ******");
+            _this.objj = _this.af.object('/adcounter/count');
+            _this.subscription6 = _this.objj.subscribe(function (item) {
+                console.log(JSON.stringify(item) + "in adddd subscribe()()()()()()");
+                console.log(typeof item);
+                _this.totalAdCount = item.$value;
+                var _loop_1 = function (x) {
+                    console.log("in promise gafdfsfads");
+                    promises_array.push(new Promise(function (resolve, reject) {
+                        var storageRef = firebase.storage().ref().child('/ads/ad' + x + '.png');
+                        storageRef.getDownloadURL().then(function (url) {
+                            console.log(url);
+                            store.push(url);
+                            console.log("reigh before resolve");
+                            resolve();
+                        }).catch(function (e) {
+                            resolve();
+                        });
+                    }));
+                };
+                for (var x = 1; x < item.$value + 1; x++) {
+                    _loop_1(x);
+                }
+                var results = Promise.all(promises_array);
+                results.then(function (value) {
+                    _this.ads = store;
+                    console.log(JSON.stringify(_this.ads) + " value value vlaue");
+                    console.log("in list all");
+                    return _this.cache.saveItem(cacheKey, _this.ads);
                 });
-            }
+            });
+        }).then(function (data) {
+            console.log("Saved data: ", data);
+            _this.ads = data;
         });
     };
     FeedStylist.prototype.goSeeProfile = function (item) {
@@ -188,16 +217,13 @@ var FeedStylist = /** @class */ (function () {
         this.toProfile();
     };
     FeedStylist.prototype.swipeRight = function () {
-        this.toFollowers();
+        this.navCtrl.push(FollowersPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
     };
     FeedStylist.prototype.switchView = function () {
         this.navCtrl.push(FeedUser);
     };
     FeedStylist.prototype.toProfile = function () {
         this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
-    };
-    FeedStylist.prototype.toFollowers = function () {
-        this.navCtrl.push(FollowersPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
     };
     FeedStylist.prototype.loadPost = function () {
         this.presentActionSheet();
@@ -384,25 +410,17 @@ var FeedStylist = /** @class */ (function () {
     };
     FeedStylist.prototype.ionViewDidLoad = function () {
         var _this = this;
-        this.listClasses().then(function () {
-            _this.listProducts().then(function () {
-                _this.listAll();
-                _this.getAds();
+        this.listProducts().then(function () {
+            _this.listFormulas().then(function () {
+                _this.listClasses().then(function () {
+                    console.log(_this.productListArray + "    proddy proddy product");
+                    console.log(_this.classesListArray + "    proddy proddy classes");
+                    console.log(_this.formulaListArray + "    proddy proddy formula");
+                    _this.listAll();
+                });
             });
         });
-        this.formulas = this.af.list('/formulas');
-        this.subscription8 = this.formulas.subscribe(function (items) { return items.forEach(function (item) {
-            var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
-            storageRef.getDownloadURL().then(function (url) {
-                console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                item.customMetadata.profilepic = url;
-            }).catch(function (e) {
-                console.log("in caught url !!!!!!!$$$$$$$!!");
-                item.customMetadata.profilepic = 'assets/blankprof.png';
-            });
-            console.log("item item ----- " + JSON.stringify(item));
-            _this.formulaListArray.push(item.customMetadata);
-        }); });
+        this.getAds();
         this.myrenderer.setElementStyle(this.classeslist.nativeElement, 'display', 'none');
         this.myrenderer.setElementStyle(this.contentOne.nativeElement, 'display', 'block');
         this.myrenderer.setElementStyle(this.productslist.nativeElement, 'display', 'none');
@@ -599,66 +617,218 @@ var FeedStylist = /** @class */ (function () {
     };
     FeedStylist.prototype.listClasses = function () {
         var _this = this;
+        var cacheKey = 'classes';
+        var promises_array = [];
+        //this.cache.removeItem(cacheKey);
         return new Promise(function (resolve, reject) {
+            var mapped;
+            //this.cache.getItem(cacheKey).catch(() => {
+            var store = [];
             _this.list = _this.af.list('/classes');
             _this.subscription4 = _this.list.subscribe(function (items) {
-                items.forEach(function (item) {
-                    console.log(JSON.stringify(item.customMetadata) + ":   this is the customdata (((()()()()()");
-                    var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
-                    storageRef.getDownloadURL().then(function (url) {
-                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                        item.customMetadata.profilepic = url;
-                    }).catch(function (e) {
-                        console.log("in caught url !!!!!!!$$$$$$$!!");
-                        item.customMetadata.profilepic = 'assets/blankprof.png';
+                mapped = items.map(function (item) {
+                    return new Promise(function (resolve, reject) {
+                        console.log(JSON.stringify(item.customMetadata) + ":   this is the customdata (((()()()()()");
+                        var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                        storageRef.getDownloadURL().then(function (url) {
+                            console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                            item.customMetadata.profilepic = url;
+                            console.log(JSON.stringify(item.customMetadata) + "     listclasses item undefined");
+                            store.push(item.customMetadata);
+                            resolve();
+                        }).catch(function (e) {
+                            console.log("in caught url !!!!!!!$$$$$$$!!");
+                            item.customMetadata.profilepic = 'assets/blankprof.png';
+                            console.log(JSON.stringify(item.customMetadata) + "     listclasses item undefined profilepic not found");
+                            store.push(item.customMetadata);
+                            resolve();
+                        });
+                        //this.startAtKey = item.$key;
                     });
-                    //this.startAtKey = item.$key;
-                    _this.classesListArray.push(item.customMetadata);
                 });
-                console.log(JSON.stringify(_this.classesListArray) + " ***** CLASSESL IST ARRAY");
-                _this.classesListArray.reverse();
-                resolve();
+                var results = Promise.all(mapped);
+                results.then(function () {
+                    //setTimeout(() => {
+                    console.log(JSON.stringify(_this.classesListArray) + " value value vlaue classsses");
+                    _this.classesListArray = store.reverse();
+                    //this.classesListArray.reverse();   
+                    console.log(JSON.stringify(_this.classesListArray) + " value value vlaue classsses");
+                    //return this.cache.saveItem(cacheKey, this.classesListArray);
+                    //}, 3000);
+                    resolve();
+                });
             });
+            /*}).then(data => {
+              console.log("Saved data: ", data);
+              this.classesListArray = data;
+              resolve();
+            })*/
         });
     };
     FeedStylist.prototype.listProducts = function () {
         var _this = this;
+        var cacheKey = 'products';
+        var promises_array = [];
         return new Promise(function (resolve, reject) {
-            _this.list = _this.af.list('/products');
-            _this.subscription5 = _this.list.subscribe(function (items) {
-                items.forEach(function (item) {
-                    console.log(JSON.stringify(item.customMetadata) + ":   this is the customdata (((()()()()()");
-                    var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
-                    storageRef.getDownloadURL().then(function (url) {
-                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                        item.customMetadata.profilepic = url;
-                    }).catch(function (e) {
-                        console.log("in caught url !!!!!!!$$$$$$$!!");
-                        item.customMetadata.profilepic = 'assets/blankprof.png';
+            var mapped;
+            //this.cache.getItem(cacheKey).catch(() => {
+            var store = [];
+            _this.list1 = _this.af.list('/products');
+            _this.subscription5 = _this.list1.subscribe(function (items) {
+                mapped = items.map(function (item) {
+                    return new Promise(function (resolve, reject) {
+                        console.log(JSON.stringify(item.customMetadata) + ":   this is the customdata (((()()()()()");
+                        var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                        storageRef.getDownloadURL().then(function (url) {
+                            console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                            item.customMetadata.profilepic = url;
+                            store.push(item.customMetadata);
+                            resolve();
+                        }).catch(function (e) {
+                            console.log("in caught url !!!!!!!$$$$$$$!!");
+                            item.customMetadata.profilepic = 'assets/blankprof.png';
+                            store.push(item.customMetadata);
+                            resolve();
+                        });
+                        //this.startAtKey = item.$key;
                     });
-                    //this.startAtKey = item.$key;
-                    _this.productListArray.push(item.customMetadata);
                 });
-                console.log(JSON.stringify(_this.classesListArray) + " ***** CLASSESL IST ARRAY");
-                _this.productListArray.reverse();
-                resolve();
+                var results = Promise.all(mapped);
+                results.then(function () {
+                    //setTimeout(() => {
+                    console.log(JSON.stringify(_this.productListArray) + " value value vlaue productlistarray");
+                    _this.productListArray = store.reverse();
+                    resolve();
+                    //return this.cache.saveItem(cacheKey, this.productListArray);
+                    //}, 3000);
+                });
             });
+            /*}).then(data => {
+              console.log("Saved data: ", data);
+              this.productListArray = data;
+              resolve();
+            })*/
         });
     };
+    FeedStylist.prototype.listFormulas = function () {
+        var _this = this;
+        var cacheKey = 'formulas';
+        var promises_array = [];
+        return new Promise(function (resolve, reject) {
+            var mapped;
+            //this.cache.getItem(cacheKey).catch(() => {
+            var store = [];
+            _this.formulas = _this.af.list('/formulas');
+            _this.subscription8 = _this.formulas.subscribe(function (items) {
+                mapped = items.map(function (item) {
+                    console.log(JSON.stringify(item) + "       item being mapped");
+                    return new Promise(function (resolve, reject) {
+                        var storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                        console.log("postdate *** post : " + item.postdate);
+                        storageRef.getDownloadURL().then(function (url) {
+                            console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                            item.profilepic = url;
+                            store.push(item);
+                            resolve();
+                        }).catch(function (e) {
+                            console.log("in caught url !!!!!!!$$$$$$$!!");
+                            item.profilepic = 'assets/blankprof.png';
+                            store.push(item);
+                            resolve();
+                        });
+                        //this.startAtKey = item.$key;
+                    });
+                });
+                var results = Promise.all(mapped);
+                results.then(function () {
+                    //setTimeout(() => {
+                    _this.formulaListArray = store.reverse();
+                    console.log(JSON.stringify(_this.formulaListArray) + " value value vlaue productlistarray");
+                    //return this.cache.saveItem(cacheKey, this.formulaListArray);
+                    resolve();
+                    //}, 3000);
+                });
+            });
+            /*}).then(data => {
+              console.log("Saved data: ", data);
+              this.formulaListArray = data;
+              resolve();
+            })*/
+        });
+    };
+    /*listFormulas(): Promise<any> {
+      let cacheKey = 'formulas';
+      this.cache.removeItem(cacheKey);
+      let promises_array:Array<any> = [];
+  
+      return new Promise((resolve, reject) => {
+        let mapped;
+  
+        this.cache.getItem(cacheKey).catch(() => {
+          
+          this.formulas = this.af.list('/formulas');
+  
+          this.subscription8 = this.formulas.subscribe(items => {
+            mapped = items.map((item) => {
+              return new Promise((resolve,reject) => {
+                let storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                    
+                storageRef.getDownloadURL().then(url => {
+                  console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                  item.customMetadata.profilepic = url;
+                }).catch((e) => {
+                  console.log("in caught url !!!!!!!$$$$$$$!!");
+                  item.customMetadata.profilepic = 'assets/blankprof.png';
+                });
+  
+                console.log("item item ----- " + JSON.stringify(item));
+                this.formulaListArray.push(item.customMetadata);
+              })
+            });
+           })
+          let results = Promise.all(mapped);
+          results.then(() => {
+          //setTimeout(() => {
+            console.log(JSON.stringify(this.formulaListArray) + " value value vlaue productlistarray");
+            this.formulaListArray.reverse();
+            return this.cache.saveItem(cacheKey, this.formulaListArray);
+          //}, 3000);
+        
+          })
+        }).then(data => {
+          console.log("Saved data: ", data);
+          resolve();
+        })
+      })
+    }*/
     FeedStylist.prototype.listAll = function () {
+        console.log("in listall");
+        this.items.push.apply(this.items, this.formulaListArray);
         this.items.push.apply(this.items, this.productListArray);
         this.items.push.apply(this.items, this.classesListArray);
         this.items.sort(function (a, b) {
             return b.postdate - a.postdate;
         });
+        console.log(JSON.stringify(this.items) + " this.items.sort after 999999");
     };
     FeedStylist.prototype.ngOnDestroy = function () {
         //this.subscription.unsubscribe();
         //this.subscription2.unsubscribe();
-        this.subscription4.unsubscribe();
-        this.subscription5.unsubscribe();
-        this.subscription6.unsubscribe();
-        this.subscription7.unsubscribe();
+        if (this.subscription4 != null) {
+            this.subscription4.unsubscribe();
+        }
+        if (this.subscription5 != null) {
+            this.subscription5.unsubscribe();
+        }
+        if (this.subscription6 != null) {
+            this.subscription6.unsubscribe();
+        }
+        if (this.subscription7 != null) {
+            this.subscription7.unsubscribe();
+        }
+        if (this.subscription8 != null) {
+            this.subscription8.unsubscribe();
+        }
     };
     FeedStylist.prototype.doInfinite = function () {
         console.log('Begin async operation');
@@ -922,7 +1092,7 @@ var FeedStylist = /** @class */ (function () {
                 ]),
             ]
         }),
-        __metadata("design:paramtypes", [DatePicker, Storage, Platform, AngularFireDatabase, ElementRef, Camera, App, CameraServicePost, ActionSheetController, Renderer, LoadingController, NavController])
+        __metadata("design:paramtypes", [CacheService, DatePicker, Storage, Platform, AngularFireDatabase, ElementRef, Camera, App, CameraServicePost, ActionSheetController, Renderer, LoadingController, NavController])
     ], FeedStylist);
     return FeedStylist;
 }());

@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component, trigger, state, style, transition, animate, ViewChildren, Renderer, Renderer2, ElementRef, QueryList } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { FeedStylist } from '../feedstylist/feedstylist';
 import { BookingPage } from '../booking/booking';
 import { PostpagePage } from '../postpage/postpage';
 import { FormulapostPage } from '../formulapost/formulapost';
@@ -63,7 +62,6 @@ var StylistProfile = /** @class */ (function () {
             sourceType: this.camera.PictureSourceType.CAMERA,
             mediaType: this.camera.MediaType.PICTURE,
             destinationType: this.camera.DestinationType.FILE_URI,
-            saveToPhotoAlbum: true
         };
         this.times = [{ 'time': '8:00 AM', 'selected': false }, { 'time': '12:00 PM', 'selected': false }, { 'time': '4:00 PM', 'selected': false },
             { 'time': '8:30 AM', 'selected': false }, { 'time': '12:30 PM', 'selected': false }, { 'time': '4:30 PM', 'selected': false },
@@ -123,6 +121,9 @@ var StylistProfile = /** @class */ (function () {
             _loop_1(z);
         }
         //return Promise.all(promises_array);
+    };
+    StylistProfile.prototype.ionViewDidUnload = function () {
+        this.navCtrl.pop();
     };
     StylistProfile.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -265,7 +266,6 @@ var StylistProfile = /** @class */ (function () {
         var itemArrayTwo = this.profComponents.toArray();
         console.log(JSON.stringify(itemArrayTwo[this.square - 1]));
         if (itemArrayTwo[this.square - 1].nativeElement.classList.contains('formula')) {
-            //
         }
         else {
             var imageViewer = this.imageViewerCtrl.create(itemArrayTwo[this.square - 1].nativeElement);
@@ -312,7 +312,7 @@ var StylistProfile = /** @class */ (function () {
                     text: 'Photo Library',
                     handler: function () {
                         var itemArrayTwo = _this.profComponents.toArray();
-                        _this.cameraService.getMedia(_this.optionsGetMedia, _this.square).then(function () {
+                        _this.cameraService.getMedia(_this.optionsGetCamera, _this.square).then(function () {
                             return new Promise(function (resolve, reject) {
                                 var storageRef = firebase.storage().ref().child('/profile/' + _this.username + '/profile_' + _this.username + '_' + _this.square + '.png');
                                 var loading = _this.loadingController.create({ content: "Loading..." });
@@ -381,7 +381,7 @@ var StylistProfile = /** @class */ (function () {
                     handler: function () {
                         var itemArrayTwo = _this.profComponents.toArray();
                         var itemArrayFour = _this.formulaBars.toArray();
-                        _this.cameraService.getMediaFormulas(_this.optionsGetMedia, _this.square).then(function (url) {
+                        _this.cameraService.getMediaFormulas(_this.optionsGetCamera, _this.square).then(function (url) {
                             console.log(url + " url url url url");
                             actionSheet.dismiss();
                             _this.storage.set("formula" + _this.square, url);
@@ -440,15 +440,6 @@ var StylistProfile = /** @class */ (function () {
     StylistProfile.prototype.goToSettings = function () {
         this.navCtrl.push(SettingsPage);
     };
-    StylistProfile.prototype.backToFeed = function () {
-        /*if(this.navParams.get('param1') == 'user') {
-          this.navCtrl.push(FeedUser);
-        }*/
-        //else {
-        this.navCtrl.push(FeedStylist, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
-        //this.navCtrl.push(FeedStylist);
-        //}
-    };
     StylistProfile.prototype.backToCal = function () {
         //if(this.navParams.get('param1') == 'user') {
         this.navCtrl.push(BookingPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
@@ -458,31 +449,6 @@ var StylistProfile = /** @class */ (function () {
         //this.navCtrl.push(FeedStylist);
         //}
     };
-    StylistProfile.prototype.swipe = function (e, when) {
-        var coord = [e.changedTouches[0].pageX, e.changedTouches[0].pageY];
-        var time = new Date().getTime();
-        if (when === 'start') {
-            this.swipeCoord = coord;
-            this.swipeTime = time;
-        }
-        else if (when === 'end') {
-            var direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]];
-            var duration = time - this.swipeTime;
-            if (duration < 1000 //Short enough
-                && Math.abs(direction[1]) < Math.abs(direction[0]) //Horizontal enough
-                && Math.abs(direction[0]) > 30) {
-                var swipe = direction[0] < 0 ? 'next' : 'previous';
-                console.log(swipe);
-                if (swipe == 'next') {
-                    this.backToCal();
-                }
-                else {
-                    this.backToFeed();
-                }
-                //Do whatever you want with swipe
-            }
-        }
-    };
     StylistProfile.prototype.swipeLeft = function () {
         this.backToCal();
     };
@@ -490,7 +456,7 @@ var StylistProfile = /** @class */ (function () {
         this.backToCal();
     };
     StylistProfile.prototype.swipeRight = function () {
-        this.backToFeed();
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 500, direction: 'back' });
     };
     //changed this***
     StylistProfile.prototype.moveCover = function () {

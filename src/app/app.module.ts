@@ -19,6 +19,8 @@ import { UserBooking } from '../pages/userbooking/userbooking';
 import { UserViewProfile } from '../pages/userviewprofile/userviewprofile';
 import { FollowersPage } from '../pages/followers/followers';
 import { FormulapostPage } from '../pages/formulapost/formulapost';
+import { FormulasPage } from '../pages/formulas/formulas';
+
 
 import { UserviewuserprofilePage } from '../pages/userviewuserprofile/userviewuserprofile';
 
@@ -131,7 +133,8 @@ firebase.initializeApp(firebaseConfig);
     UserviewuserprofilePage,
     MapPage,
     FullfeedPage,
-    FormulapostPage
+    FormulapostPage,
+    FormulasPage
   ],
   imports: [
     BrowserModule,
@@ -172,7 +175,8 @@ firebase.initializeApp(firebaseConfig);
     UserviewuserprofilePage,
     MapPage,
     FullfeedPage,
-    FormulapostPage
+    FormulapostPage,
+    FormulasPage
   ],
   providers: [
     StatusBar,

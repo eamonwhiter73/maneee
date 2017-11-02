@@ -14,7 +14,6 @@ import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { CallNumber } from '@ionic-native/call-number';
 import { UserviewuserprofilePage } from '../userviewuserprofile/userviewuserprofile';
-import { FeedStylist } from '../feedstylist/feedstylist';
 /**
  * Generated class for the FollowersPage page.
  *
@@ -32,6 +31,9 @@ var FollowersPage = /** @class */ (function () {
         this.followers = [];
         this.followersList = [];
     }
+    FollowersPage.prototype.ionViewDidUnload = function () {
+        //this.navCtrl.pop()
+    };
     FollowersPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         console.log('ionViewDidLoad FollowersPage');
@@ -91,7 +93,7 @@ var FollowersPage = /** @class */ (function () {
         }
     };
     FollowersPage.prototype.swipeLeft = function () {
-        this.navCtrl.push(FeedStylist, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 500, direction: 'forward' });
     };
     FollowersPage.prototype.makePhoneCall = function (userPhone) {
         this.userPhone = userPhone;

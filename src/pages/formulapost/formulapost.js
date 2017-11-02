@@ -13,6 +13,7 @@ import { DatePicker } from '@ionic-native/date-picker';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
+import firebase from 'firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 /**
  * Generated class for the PostpagePage page.
@@ -35,6 +36,7 @@ var FormulapostPage = /** @class */ (function () {
     FormulapostPage.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
         this.subscription2.unsubscribe();
+        this.subscription3.unsubscribe();
     };
     FormulapostPage.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -63,28 +65,52 @@ var FormulapostPage = /** @class */ (function () {
         return [day, month, year].join('-');
     };
     FormulapostPage.prototype.isFormula = function () {
+        console.log();
         var metadata = {
-            customMetadata: {
-                'title': this.item.title,
-                'formula': this.item.caption,
-                'description': this.item.description,
-                'price': this.item.price,
-                'username': this.username,
-                'url': this.imageHolder,
-                'postdate': Date.now(),
-            }
+            'formula': this.item.caption,
+            'price': '3',
+            'username': this.username,
+            'url': this.imageHolder,
+            'postdate': Date.now(),
+            'square': this.square
         };
-        this.list = this.af.list('/formulas');
-        this.list.push(metadata);
+        var self = this;
+        var database = firebase.database();
+        var bool = false;
+        var reff = firebase.database().ref('/formulas').orderByChild('username').equalTo(this.username).on("value", function (snapshot) {
+            snapshot.forEach(function (snapshot) {
+                // key
+                var key = snapshot.key;
+                console.log("key: " + key);
+                // value, could be object
+                var childData = snapshot.val();
+                console.log("data: " + JSON.stringify(childData));
+                // Do what you want with these key/values here
+                if (self.square == childData.square) {
+                    var updates = {};
+                    updates['/formulas/' + key] = metadata;
+                    firebase.database().ref().update(updates);
+                    bool = true;
+                }
+                return true;
+            });
+            if (!bool) {
+                firebase.database().ref('/formulas').push(metadata);
+            }
+        });
+        /*this.af.list('/formulas', {query:{orderByChild:'username', equalTo:this.username}}).subscribe(items => items.forEach(item => {
+   
+            console.log("in subscription nowwwwww");
+           
+          })).unsubscribe();*/
+        //this.navCtrl.pop();
+        //this.list.push(metadata); 
     };
     FormulapostPage.prototype.shareItem = function () {
         console.log(this.item.title);
         console.log(this.item.caption);
-        console.log(this.item.price);
-        console.log(this.item.date);
         console.log(this.imageHolder + "                    **************************** src ****************");
-        console.log("****&*&&*&*&*&*&*          " + this.item.typeofselect);
-        if (this.item.title == '' || this.item.caption == '' || this.item.price == '' || this.imageHolder == null) {
+        if (this.item.caption == '' || this.imageHolder == null) {
             alert("You need to fill in all of the information");
         }
         else {

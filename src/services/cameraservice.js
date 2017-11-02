@@ -215,6 +215,7 @@ var CameraService = /** @class */ (function () {
             // op Image, on android this returns something like, '/storage/emulated/0/Android/...'
             // Only giving an android example as ionic-native camera has built in cropping ability
             if (_this.platform.is('ios')) {
+                console.log("in getmediaformulasios");
                 return _this.crop.crop(fileUri, { quality: 2 });
             }
             else if (_this.platform.is('android')) {
@@ -237,7 +238,7 @@ var CameraService = /** @class */ (function () {
                     //let file
                     //this.getFileEntryRead(this.file.tempDirectory + '/image.jpg', square);
                     var dataURL = data;
-                    var image = 'formula_' + _this.username + '_' + new Date() + '.png', storageRef, parseUpload, thisUrl;
+                    var image = 'formula_' + _this.username + '_' + square + '.png', storageRef, parseUpload, thisUrl;
                     return new Promise(function (resolve, reject) {
                         storageRef = firebase.storage().ref('/formulas/' + _this.username + '/' + image);
                         parseUpload = storageRef.putString(dataURL, 'data_url');

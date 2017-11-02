@@ -51,6 +51,7 @@
     "angularfire2": "^4.0.0-rc.0",
     "blueimp-canvas-to-blob": "^3.9.0",
     "braintree-web": "^3.25.0",
+    "braintree-web-drop-in": "^1.8.0",
     "call-number": "~0.0.2",
     "canvas-compress": "^1.1.5",
     "cordova-android": "^6.2.3",
@@ -72,6 +73,7 @@
     "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git",
     "cordova-plugin-googleplus": "^5.1.1",
     "cordova-plugin-inappbrowser": "^1.7.1",
+    "cordova-plugin-ionic-webview": "^1.1.16",
     "cordova-plugin-nativegeocoder": "^2.0.2",
     "cordova-plugin-nativestorage": "^2.2.2",
     "cordova-plugin-request-location-accuracy": "^2.2.2",
@@ -177,7 +179,8 @@
       },
       "cordova-sms-plugin": {},
       "cordova-plugin-screen-orientation": {},
-      "mx.ferreyra.callnumber": {}
+      "mx.ferreyra.callnumber": {},
+      "cordova-plugin-ionic-webview": {}
     },
     "platforms": [
       "android",

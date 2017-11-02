@@ -11,26 +11,31 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { FeedStylist } from '../pages/feedstylist/feedstylist';
+import { Formulas } from '../pages/formulas/formulas';
 import { CacheService } from "ionic-cache";
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 var MyApp = /** @class */ (function () {
-    function MyApp(platform, statusBar, splashScreen, cache) {
-        this.rootPage = FeedStylist;
+    function MyApp(platform, statusBar, splashScreen, cache, screenOrientation) {
+        var _this = this;
+        this.screenOrientation = screenOrientation;
+        this.rootPage = Formulas;
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
+            _this.screenOrientation.lock(_this.screenOrientation.ORIENTATIONS.PORTRAIT);
             statusBar.styleBlackOpaque();
             statusBar.backgroundColorByName('black');
             statusBar.overlaysWebView(false);
             statusBar.isVisible;
             splashScreen.hide();
+            cache.setDefaultTTL(60 * 5); //set default cache TTL for 1 hour
         });
     }
     MyApp = __decorate([
         Component({
             templateUrl: 'app.html'
         }),
-        __metadata("design:paramtypes", [Platform, StatusBar, SplashScreen, CacheService])
+        __metadata("design:paramtypes", [Platform, StatusBar, SplashScreen, CacheService, ScreenOrientation])
     ], MyApp);
     return MyApp;
 }());
