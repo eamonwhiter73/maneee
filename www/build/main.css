@@ -32970,7 +32970,7 @@ page-sign-in ion-content .logo {
   -webkit-text-stroke-color: black;
 }
 
-page-sign-in ion-content ion-input {
+page-sign-in ion-content input {
   position: relative;
   width: 220px;
   border: 0;
