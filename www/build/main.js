@@ -101,24 +101,23 @@ var SignInPage = (function () {
         this.storage.get('type').then(function (val) {
             _this.type = val;
         });
-        //*************************************************************************PUT BACK INNNNNNN
-        /*this.storage.get('loggedin').then((val) => {
-          console.log(val + " logged innnnnnnn");
-          if(val == true) {
-            console.log(this.type + " logged typeeeeee");
-            if(this.type == 'user/stylist/user' || this.type == 'user') {
-              //loading.dismiss();
-              this.navCtrl.setRoot(FeedUser);
+        this.storage.get('loggedin').then(function (val) {
+            console.log(val + " logged innnnnnnn");
+            if (val == true) {
+                console.log(_this.type + " logged typeeeeee");
+                if (_this.type == 'user/stylist/user' || _this.type == 'user') {
+                    //loading.dismiss();
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__["a" /* FeedUser */]);
+                }
+                else if (_this.type == 'user/stylist/stylist' || _this.type == 'stylist') {
+                    //loading.dismiss();
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__["a" /* FeedStylist */]);
+                }
             }
-            else if(this.type == 'user/stylist/stylist' || this.type == 'stylist') {
-              //loading.dismiss();
-              this.navCtrl.setRoot(FeedStylist);
+            else {
+                console.log("Val == false......");
             }
-          }
-          else {
-            //loading.dismiss();
-          }
-        });*/
+        });
     };
     SignInPage.prototype.selectOneStylist = function () {
         console.log("in select one stylist");
@@ -238,9 +237,10 @@ SignInPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'page-sign-in',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/signin/signin.html"*/'<ion-content padding>\n  <h1 class="logo">Mane Emergency</h1>\n  <form (ngSubmit)="logForm()">\n  	<input [(ngModel)]="user.email" class="inputone" (keypress)="goButton($event.keyCode)" type="text" name="username" placeholder="Email"> <!--[(ngModel)]="user.username"-->\n  	<input type="text" [(ngModel)]="user.password" (keypress)="goButton($event.keyCode)" name="password" placeholder="Password"> <!--[(ngModel)]="user.username" name="password"-->\n  	<!--<div class=\'circle circone\'></div>\n  	<div class=\'circle circtwo\'></div>-->\n  	<ion-checkbox [(ngModel)]="stylist" name="stylist" class="circone" (tap)="selectOneStylist()"></ion-checkbox>\n  	<ion-checkbox [(ngModel)]="users" name="user" class="circtwo" (tap)="selectOneUser()"></ion-checkbox>\n  	<h2 class=\'hairstylist\'>Hair Stylist</h2>\n  	<h2 class=\'user\'>User</h2>\n  	<div class="signincontainer" style="text-align: center;">\n  		<button ion-button round color="primary" (tap)="login(user)">Sign In</button>\n  	</div>\n  </form>\n  <div class="account">\n    <p>Don\'t have an account? <a (click)="pushPage()">Sign Up</a></p>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/signin/signin.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_7_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_keyboard__["a" /* Keyboard */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_keyboard__["a" /* Keyboard */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_keyboard__["a" /* Keyboard */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _f || Object])
 ], SignInPage);
 
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=signin.js.map
 
 /***/ }),
@@ -3107,6 +3107,7 @@ var FormulaBuy = (function () {
         this.viewCtrl = viewCtrl;
         this.renderer = renderer;
         this.data = {};
+        this.items = [];
     }
     FormulaBuy.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -3138,9 +3139,20 @@ var FormulaBuy = (function () {
         //this.renderer.appendText(this.time.nativeElement, this.params.get('time'));
     };
     FormulaBuy.prototype.buy = function () {
-        this.list = this.af.list('/formulasowned/' + this.usernameowner);
-        this.list.push(this.data);
-        this.dismiss();
+        if (this.folder1 == '' && this.folder2 == '') {
+            alert("You must select or create a folder for the formula.");
+        }
+        else {
+            if (this.folder1 != '' && this.folder2 == '') {
+                this.list = this.af.list('/formulasowned/' + this.usernameowner + '/' + this.folder1);
+            }
+            else {
+                this.list = this.af.list('/formulasowned/' + this.usernameowner + '/' + this.folder2);
+            }
+            this.list.push(this.data);
+            alert("You bought a formula! Check the settings page to view it.");
+            this.dismiss();
+        }
     };
     FormulaBuy.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
@@ -3151,11 +3163,12 @@ var FormulaBuy = (function () {
 }());
 FormulaBuy = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
-        selector: 'formula-buy',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/modals/formulabuy/formulabuy.html"*/'<ion-content class="main-view">\n	<div class="overlay" (tap)="dismiss()"></div>\n  <div class="modal_content">\n    <button ion-button (tap)="buy()" block>Buy</button>\n  </div>\n</ion-content>'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/modals/formulabuy/formulabuy.html"*/
+        selector: 'formula-buy',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/modals/formulabuy/formulabuy.html"*/'<ion-content class="main-view">\n	<div class="overlay" (tap)="dismiss()"></div>\n  <div class="modal_content">\n    <ion-item>\n        <ion-label>Pick a folder:</ion-label>\n        <ion-select [(ngModel)]="folder1">\n            <ion-option *ngFor="let j of items ; let i = index">{{j}}</ion-option>\n        </ion-select>\n    </ion-item>\n    <ion-item>\n        <ion-label>Create a folder:</ion-label>\n        <ion-input [(ngModel)]="folder2" type="text" name="foldercreate"></ion-input>\n    </ion-item>\n    <button ion-button (tap)="buy()" block>Buy</button>\n  </div>\n</ion-content>'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/modals/formulabuy/formulabuy.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["q" /* NavController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["x" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer"]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* App */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["q" /* NavController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* NavParams */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["x" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["x" /* ViewController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer"]) === "function" && _h || Object])
 ], FormulaBuy);
 
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=formulabuy.js.map
 
 /***/ }),

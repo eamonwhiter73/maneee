@@ -57,8 +57,7 @@ export class SignInPage implements OnDestroy {
       this.type = val;
     })
 
-    //*************************************************************************PUT BACK INNNNNNN
-    /*this.storage.get('loggedin').then((val) => {
+    this.storage.get('loggedin').then((val) => {
       console.log(val + " logged innnnnnnn");
       if(val == true) {
         console.log(this.type + " logged typeeeeee");
@@ -72,9 +71,9 @@ export class SignInPage implements OnDestroy {
         }
       }
       else {
-        //loading.dismiss();
+        console.log("Val == false......");
       }
-    });*/
+    });
   }
 
   selectOneStylist() {

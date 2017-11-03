@@ -1,6 +1,16 @@
 <ion-content class="main-view">
 	<div class="overlay" (tap)="dismiss()"></div>
   <div class="modal_content">
+    <ion-item>
+        <ion-label>Pick a folder:</ion-label>
+        <ion-select [(ngModel)]="folder1">
+            <ion-option *ngFor="let j of items ; let i = index">{{j}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>Create a folder:</ion-label>
+        <ion-input [(ngModel)]="folder2" type="text" name="foldercreate"></ion-input>
+    </ion-item>
     <button ion-button (tap)="buy()" block>Buy</button>
   </div>
 </ion-content>

@@ -31,7 +31,10 @@ export class FormulaBuy implements OnDestroy {
   data = {};
   keyy;
   body;
+  folder1;
+  folder2;
   list: FirebaseListObservable<any>;
+  items = [];
 
 
 
@@ -46,6 +49,8 @@ export class FormulaBuy implements OnDestroy {
    this.storage.get('username').then((val) => {
      this.usernameowner = val;
    })
+
+
 
    
 
@@ -79,9 +84,20 @@ export class FormulaBuy implements OnDestroy {
  }
 
  buy() {
-   this.list = this.af.list('/formulasowned/'+ this.usernameowner);
-   this.list.push(this.data);
-   this.dismiss();
+   if(this.folder1 == '' && this.folder2 == '') {
+     alert("You must select or create a folder for the formula.")
+   }
+   else {
+     if(this.folder1 != '' && this.folder2 == '') {
+       this.list = this.af.list('/formulasowned/'+ this.usernameowner + '/'+ this.folder1);
+     }
+     else {
+       this.list = this.af.list('/formulasowned/'+ this.usernameowner + '/'+ this.folder2);
+     }
+     this.list.push(this.data);
+     alert("You bought a formula! Check the settings page to view it.");
+     this.dismiss();
+   }
  }
 
  dismiss() {
