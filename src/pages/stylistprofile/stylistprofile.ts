@@ -407,7 +407,7 @@ export class StylistProfile implements OnDestroy {
           handler: () => {
             let itemArrayTwo = this.profComponents.toArray();
 
-            this.cameraService.getMedia(this.optionsGetCamera, this.square).then(() => {
+            this.cameraService.getMedia(this.optionsGetMedia, this.square).then(() => {
                 return new Promise((resolve, reject) => {
                   let storageRef = firebase.storage().ref().child('/profile/' + this.username + '/profile_' + this.username + '_' + this.square + '.png');
                   let loading = this.loadingController.create({content : "Loading..."});
@@ -566,7 +566,7 @@ export class StylistProfile implements OnDestroy {
   }
 
   swipeRight() {
-    this.navCtrl.popToRoot({animate:true,animation:'transition',duration:500,direction:'back'});
+    this.navCtrl.popToRoot({animate:true,animation:'ios-transition',duration:500,direction:'back'});
   }
 
   

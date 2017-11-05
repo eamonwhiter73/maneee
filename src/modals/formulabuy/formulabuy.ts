@@ -1,15 +1,15 @@
 import { App, NavParams, ViewController, NavController } from 'ionic-angular';
 import { Component, Renderer, OnDestroy } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions } from '@angular/http';
 import { UserProfile } from '../../pages/userprofile/userprofile';
 import { FormulasPage } from '../../pages/formulas/formulas';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { ISubscription } from "rxjs/Subscription";
 import firebase from 'firebase';
-import * as braintree from 'braintree-web';
 import dropin from 'braintree-web-drop-in';
 import { HttpParams } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
+import * as braintree from 'braintree-web';
 
 
 
@@ -28,13 +28,15 @@ export class FormulaBuy implements OnDestroy {
   square;
   formulas;
   subscription: ISubscription;
-  data = {};
+  data = {'color':''};
   keyy;
   body;
   folder1;
   folder2;
   list: FirebaseListObservable<any>;
+  list2: FirebaseObjectObservable<any>;
   items = [];
+  payload;
 
 
 
@@ -45,13 +47,23 @@ export class FormulaBuy implements OnDestroy {
  ionViewDidLoad() {
    this.username = this.params.get('username');
    this.square = this.params.get('square');
+   this.payload = this.params.get('payload');
 
    this.storage.get('username').then((val) => {
      this.usernameowner = val;
+
+      this.list2 = this.af.object('/formulasowned/' + this.usernameowner);
+      this.subscription = this.list2.subscribe(item => {
+        console.log(JSON.stringify(item) + "     objh objjo   obono oonnono ");
+        for(let z in item) {
+          console.log(z + " zzzzzzzzzzzzzzzzz");
+          this.items.push(z);
+        }
+      })
    })
 
-
-
+  
+   
    
 
    let database = firebase.database();
@@ -59,7 +71,7 @@ export class FormulaBuy implements OnDestroy {
 
    let self = this;
 
-   let reff = firebase.database().ref('/formulas').orderByChild('username').equalTo(this.username).on("value", function(snapshot) {
+   let reff = firebase.database().ref('/formulas').orderByChild('username').equalTo(this.username).on("value", (snapshot) => {
       snapshot.forEach(snapshot => {
           // key
           let key = snapshot.key;
@@ -88,15 +100,42 @@ export class FormulaBuy implements OnDestroy {
      alert("You must select or create a folder for the formula.")
    }
    else {
-     if(this.folder1 != '' && this.folder2 == '') {
+     if(this.folder1 != null && this.folder2 == null) {
        this.list = this.af.list('/formulasowned/'+ this.usernameowner + '/'+ this.folder1);
+        this.data.color = this.folder1;
      }
      else {
        this.list = this.af.list('/formulasowned/'+ this.usernameowner + '/'+ this.folder2);
+       this.data.color = this.folder2;
      }
-     this.list.push(this.data);
-     alert("You bought a formula! Check the settings page to view it.");
-     this.dismiss();
+     
+     console.log(this.payload + '          paaaaayyyyyylllllooooooaaaaaddddd');
+      let params = new URLSearchParams();
+      params.set('payout', 'payyyyyy');
+
+      let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+      let options = new RequestOptions({
+        headers: headers,
+        params: params
+      });
+      // TODO: Encode the values using encodeURIComponent().
+      let body = JSON.stringify(this.payload);
+     //INSERT CALL TO BACKEND
+     this.http.post('http://192.168.1.131:8888/api/buyformula.php', body, options)  
+     .subscribe(res => {
+       console.log(res + "response from formula buy");
+       console.log(JSON.stringify(this.data) + "     data dat d dat add  dat");
+       this.list.push(this.data).catch(e => { console.log(e) + "this is conosle e" });
+
+       alert("You bought a formula! Check the settings page to view it.");
+       this.dismiss();
+     }, err => {
+       console.log(JSON.stringify(err))
+     });
+
+     
    }
  }
 
@@ -105,7 +144,9 @@ export class FormulaBuy implements OnDestroy {
  }
 
  ngOnDestroy() {
-   
+   if(this.subscription != null) {
+     this.subscription.unsubscribe();
+   }
  }
 
 }

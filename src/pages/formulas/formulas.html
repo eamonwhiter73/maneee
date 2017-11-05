@@ -7,14 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>formulas</ion-title>
+    <ion-title>Formulas</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-	<div class="formula" *ngFor="let j of items ; let i = index" id='{{i}}' no-lines no-padding>
-	  	<img src="{{j.url}}">
+	<div class="formula" *ngFor="let j of items ; let i = index" id='{{i}}' (tap)="loadFolder(j.color)" no-lines no-padding>
+		<ion-grid>
+		  <ion-row>
+		    <ion-col>
+	  			<img src="{{j.url}}">
+	  			<div class="formulabar" #formulabar>{{j.color}}</div>
+	  		</ion-col>
+	  	 </ion-row>
+	  </ion-grid>
     </div>
 </ion-content>

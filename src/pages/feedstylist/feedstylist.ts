@@ -369,7 +369,7 @@ export class FeedStylist implements OnDestroy {
   }
 
   swipeRight() {
-    this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:500,direction:'back'});
+    this.navCtrl.push(FollowersPage,{},{animate:true,animation:'ios-transition',duration:100,direction:'back'});
   }
 
   switchView() {
@@ -377,7 +377,7 @@ export class FeedStylist implements OnDestroy {
   }
 
   toProfile() {
-    this.navCtrl.push(StylistProfile,{},{animate:true,animation:'transition',duration:500,direction:'forward'});
+    this.navCtrl.push(StylistProfile,{},{animate:true,animation:'ios-transition',duration:100,direction:'forward'});
   }
 
   loadPost() {

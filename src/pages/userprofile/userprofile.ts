@@ -1,9 +1,10 @@
 import { OnDestroy, Component, trigger, state, style, transition, animate, ViewChildren, ViewChild, ElementRef, Renderer, QueryList } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, App } from 'ionic-angular';
 import { FeedUser } from '../feeduser/feeduser';
 import { BookingPage } from '../booking/booking';
 import { PostpagePage } from '../postpage/postpage';
 import { UserBooking } from '../userbooking/userbooking';
+import { DropinPage } from '../dropin/dropin';
 
 
 
@@ -99,7 +100,7 @@ export class UserProfile implements OnDestroy {
 
   
 
-  constructor(public afAuth: AngularFireAuth, public elRef: ElementRef, public params: NavParams,public modalCtrl: ModalController, public storage: Storage, public imageViewerCtrl: ImageViewerController, public loadingController: LoadingController, public myrenderer: Renderer, public af: AngularFireDatabase, public actionSheetCtrl: ActionSheetController, public camera: Camera, public navCtrl: NavController, private navParams: NavParams, public cameraService: CameraService) {
+  constructor(public app: App, public afAuth: AngularFireAuth, public elRef: ElementRef, public params: NavParams,public modalCtrl: ModalController, public storage: Storage, public imageViewerCtrl: ImageViewerController, public loadingController: LoadingController, public myrenderer: Renderer, public af: AngularFireDatabase, public actionSheetCtrl: ActionSheetController, public camera: Camera, public navCtrl: NavController, private navParams: NavParams, public cameraService: CameraService) {
     this.times = [{'time':'8:00 AM', 'selected': false}, {'time':'12:00 PM', 'selected': false}, {'time':'4:00 PM', 'selected': false},
                   {'time':'8:30 AM', 'selected': false}, {'time':'12:30 PM', 'selected': false}, {'time':'4:30 PM', 'selected': false},
                   {'time':'9:00 AM', 'selected': false}, {'time':'1:00 PM', 'selected': false}, {'time':'5:00 PM', 'selected': false},
@@ -380,8 +381,9 @@ export class UserProfile implements OnDestroy {
 
     if(itemArrayfour[this.square - 1].nativeElement.style.display != 'none') {
       console.log("inside formula box");
-      let profileModal = this.modalCtrl.create(FormulaBuy, { username: this.username, square: this.square });
-      profileModal.present();
+      /*let profileModal = this.modalCtrl.create(FormulaBuy, { username: this.username, square: this.square });
+      profileModal.present();*/
+      this.navCtrl.push(DropinPage, { username: this.username, square: this.square });
     }
     else {
       console.log(JSON.stringify(itemArrayTwo[this.square-1]));

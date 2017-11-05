@@ -25,6 +25,8 @@ import { UserViewProfile } from '../pages/userviewprofile/userviewprofile';
 import { FollowersPage } from '../pages/followers/followers';
 import { FormulapostPage } from '../pages/formulapost/formulapost';
 import { FormulasPage } from '../pages/formulas/formulas';
+import { DropinPage } from '../pages/dropin/dropin';
+
 import { UserviewuserprofilePage } from '../pages/userviewuserprofile/userviewuserprofile';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { FullfeedPage } from '../pages/fullfeed/fullfeed';
@@ -106,7 +108,8 @@ var AppModule = /** @class */ (function () {
                 MapPage,
                 FullfeedPage,
                 FormulapostPage,
-                FormulasPage
+                FormulasPage,
+                DropinPage
             ],
             imports: [
                 BrowserModule,
@@ -148,7 +151,8 @@ var AppModule = /** @class */ (function () {
                 MapPage,
                 FullfeedPage,
                 FormulapostPage,
-                FormulasPage
+                FormulasPage,
+                DropinPage
             ],
             providers: [
                 StatusBar,

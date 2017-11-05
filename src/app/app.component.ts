@@ -18,6 +18,8 @@ import { SettingsPage } from '../pages/settings/settings';
 import { FullfeedPage } from '../pages/fullfeed/fullfeed';
 import { FormulapostPage } from '../pages/formulapost/formulapost';
 import { FormulasPage } from '../pages/formulas/formulas';
+import { DropinPage } from '../pages/dropin/dropin';
+
 import { CacheService } from "ionic-cache";
 
 import { MapPage } from '../pages/map/map';
@@ -29,7 +31,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = SignInPage;
+  rootPage:any = FeedStylist;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, cache: CacheService, private screenOrientation: ScreenOrientation) {
 
