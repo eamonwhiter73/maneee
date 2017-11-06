@@ -22809,7 +22809,7 @@ ion-navbar.toolbar {
   text-align: center;
   font-size: 1.7rem;
   font-weight: 600;
-  color: #000;
+  color: #e6c926;
   pointer-events: auto;
 }
 
@@ -32524,6 +32524,26 @@ page-formula .flex {
   /* Vertical center alignment */
 }
 
+page-formula ion-navbar {
+  height: 88px;
+}
+
+page-formula ion-navbar .toolbar-background {
+  background-color: black;
+}
+
+page-formula .toolbar-title {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  top: 12px;
+  position: absolute;
+  left: 0;
+  font-size: 50px;
+}
+
 page-formulapost .postimage {
   position: relative;
   margin: 5px;
@@ -32767,6 +32787,14 @@ page-formulas .formula .formulabar {
 
 page-formulas .item-ios.item-block .item-inner {
   padding-right: 0;
+}
+
+page-formulas ion-navbar {
+  color: #e6c926;
+}
+
+page-formulas ion-navbar .toolbar-background {
+  background-color: black;
 }
 
 page-fullfeed {

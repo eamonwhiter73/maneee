@@ -58,6 +58,8 @@ $colors: (
   $datetime-ios-padding-left:50%;
   $datetime-ios-padding-right:20%;
 
+  $toolbar-ios-title-text-color: map-get($colors, primary);
+
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here

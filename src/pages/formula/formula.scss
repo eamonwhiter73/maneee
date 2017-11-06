@@ -34,5 +34,22 @@ page-formula {
     	align-items: center; /* Vertical center alignment */
 	}
 
-	
+	ion-navbar {
+		height: 88px;
+		.toolbar-background {
+		  background-color: black;
+		}
+	}
+
+	.toolbar-title {
+	    display: block;
+	    overflow: hidden;
+	    width: 100%;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    top: 12px;
+	    position: absolute;
+	    left: 0;
+	    font-size: 50px;
+	}
 }

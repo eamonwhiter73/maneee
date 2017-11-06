@@ -15,6 +15,8 @@ import { FeedStylist } from '../feedstylist/feedstylist';
 import { FeedUser } from '../feeduser/feeduser';
 import { SignInPage } from '../signin/signin';
 import { UserViewProfile } from '../userviewprofile/userviewprofile';
+import { FormulasPage } from '../formulas/formulas';
+
 
 import { MapPage } from '../map/map';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
@@ -104,6 +106,10 @@ export class SettingsPage implements OnDestroy {
         mediaType: this.camera.MediaType.PICTURE,
         destinationType: this.camera.DestinationType.FILE_URI,
         saveToPhotoAlbum: true
+  }
+
+  formulas() {
+    this.navCtrl.push(FormulasPage);
   }
 
   linkProfile() {

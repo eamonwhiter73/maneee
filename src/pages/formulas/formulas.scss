@@ -38,5 +38,12 @@ page-formulas {
 	    padding-right: 0
 	}
 
+	ion-navbar {
+		color: map-get($colors, primary);
+		.toolbar-background {
+		  background-color: black;
+		}
+	}
+
 
 }
