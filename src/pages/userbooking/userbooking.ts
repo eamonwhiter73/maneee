@@ -195,13 +195,13 @@ export class UserBooking implements OnDestroy {
   }
 
   goToFeed() {
-    this.navCtrl.push(FeedUser,{},{animate:true,animation:'transition',duration:500,direction:'forward'})
+    this.navCtrl.push(FeedUser,{},{animate:true,animation:'transition',duration:100,direction:'forward'})
   }
 
   goToProfile() {
     //this.loading = this.loadingController.create({content : "Loading..."});
     //this.loading.present();
-    this.navCtrl.push(StylistProfile,{},{animate:true,animation:'transition',duration:500,direction:'back'})
+    this.navCtrl.push(StylistProfile,{},{animate:true,animation:'transition',duration:100,direction:'back'})
   }
 
   ionViewWillLeave() {

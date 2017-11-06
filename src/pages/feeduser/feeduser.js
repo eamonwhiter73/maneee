@@ -113,7 +113,7 @@ var FeedUser = /** @class */ (function () {
                 this.navCtrl.push(UserProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
             }
             else if (this.swiperIndex == 0) {
-                //this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:500,direction:'back'});
+                //this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:100,direction:'back'});
             }
         }
         else {
@@ -121,7 +121,7 @@ var FeedUser = /** @class */ (function () {
                 this.navCtrl.push(UserProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
             }
             else if (this.swiperIndex == 0) {
-                //this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:500,direction:'back'});
+                //this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:100,direction:'back'});
             }
         }
     };

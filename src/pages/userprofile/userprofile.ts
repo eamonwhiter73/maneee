@@ -91,6 +91,7 @@ export class UserProfile implements OnDestroy {
   titleYear;
   stars;
   type;
+  phone;
 
 
   _imageViewerCtrl: ImageViewerController;
@@ -168,13 +169,13 @@ export class UserProfile implements OnDestroy {
       this.subscription = this.item.subscribe(item => {
         if(item.$value == null) {
           let array = [];
-          array.push({[this.userusername]:this.uuid});
+          array.push({[this.userusername]:this.phone});
           this.followsty._elementRef.nativeElement.innerHTML = "FOLLOWING";
           this.item.update(array);
         }
         else {
           if(item.indexOf(this.userusername) == -1) {
-            item.push({[this.userusername]:this.uuid})
+            item.push({[this.userusername]:this.phone})
             this.item.update(item);
           }
           else {
@@ -186,6 +187,8 @@ export class UserProfile implements OnDestroy {
 
   ionViewDidLoad() {
     this.username = this.params.get('username');
+    this.storage.get('phone').then((val) => {this.phone = val; });
+
 
     this.subscription7 = this.afAuth.authState.subscribe(data => {
       if(data.email && data.uid) {
@@ -491,14 +494,14 @@ export class UserProfile implements OnDestroy {
       this.navCtrl.push(FeedUser);
     }*/
     //else {
-      this.navCtrl.popToRoot({animate:true,animation:'transition',duration:500,direction:'back'})
+      this.navCtrl.popToRoot({animate:true,animation:'transition',duration:100,direction:'back'})
       //this.navCtrl.push(FeedStylist);
     //}
   }
 
   backToCal() {
     //if(this.navParams.get('param1') == 'user') {
-      this.navCtrl.push(BookingPage,{},{animate:true,animation:'transition',duration:500,direction:'forward'})
+      this.navCtrl.push(BookingPage,{},{animate:true,animation:'transition',duration:100,direction:'forward'})
       //this.navCtrl.push(BookingPage);
     //}
     //else {

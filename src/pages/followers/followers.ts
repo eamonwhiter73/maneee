@@ -105,7 +105,7 @@ export class FollowersPage implements OnDestroy{
   }
 
   swipeLeft() {
-    this.navCtrl.popToRoot({animate:false,animation:'transition',duration:500,direction:'forward'});
+    this.navCtrl.popToRoot({animate:false,animation:'transition',duration:100,direction:'forward'});
   }
 
   makePhoneCall(userPhone) {

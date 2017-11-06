@@ -1,6 +1,6 @@
 import { App, NavParams, ViewController, NavController } from 'ionic-angular';
 import { Component, Renderer, OnDestroy } from '@angular/core';
-import { Http, RequestOptions } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { UserProfile } from '../../pages/userprofile/userprofile';
 import { FormulasPage } from '../../pages/formulas/formulas';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
@@ -117,13 +117,13 @@ export class FormulaBuy implements OnDestroy {
         'Content-Type': 'application/json'
       });
       let options = new RequestOptions({
-        headers: headers,
-        params: params
+        headers: headers
       });
       // TODO: Encode the values using encodeURIComponent().
       let body = JSON.stringify(this.payload);
+
      //INSERT CALL TO BACKEND
-     this.http.post('http://192.168.1.131:8888/api/buyformula.php', body, options)  
+     this.http.post('http://me.eamondev.com/api/buyformula.php', body)  
      .subscribe(res => {
        console.log(res + "response from formula buy");
        console.log(JSON.stringify(this.data) + "     data dat d dat add  dat");

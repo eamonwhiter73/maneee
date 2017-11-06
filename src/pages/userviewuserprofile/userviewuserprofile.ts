@@ -418,14 +418,14 @@ export class UserviewuserprofilePage {
       this.navCtrl.push(FeedUser);
     }*/
     //else {
-      this.navCtrl.push(FeedStylist,{},{animate:true,animation:'transition',duration:500,direction:'back'})
+      this.navCtrl.push(FeedStylist,{},{animate:true,animation:'transition',duration:100,direction:'back'})
       //this.navCtrl.push(FeedStylist);
     //}
   }
 
   backToCal() {
     //if(this.navParams.get('param1') == 'user') {
-      this.navCtrl.push(BookingPage,{},{animate:true,animation:'transition',duration:500,direction:'forward'})
+      this.navCtrl.push(BookingPage,{},{animate:true,animation:'transition',duration:100,direction:'forward'})
       //this.navCtrl.push(BookingPage);
     //}
     //else {

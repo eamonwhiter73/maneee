@@ -449,7 +449,7 @@ export class UserViewProfile implements OnDestroy {
 
   backToCal() {
     //if(this.navParams.get('param1') == 'user') {
-      this.navCtrl.push(BookingPage,{},{animate:true,animation:'transition',duration:500,direction:'forward'})
+      this.navCtrl.push(BookingPage,{},{animate:true,animation:'transition',duration:100,direction:'forward'})
       //this.navCtrl.push(BookingPage);
     //}
     //else {
@@ -491,7 +491,7 @@ export class UserViewProfile implements OnDestroy {
   }
 
   swipeRight() {
-    this.navCtrl.popToRoot({animate:true,animation:'transition',duration:500,direction:'back'});
+    this.navCtrl.popToRoot({animate:true,animation:'transition',duration:100,direction:'back'});
   }
 
   downloadImages() {

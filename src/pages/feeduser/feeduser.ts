@@ -214,18 +214,18 @@ export class FeedUser implements OnDestroy {
     console.log(this.swiperIndex);
     if(this.swiperSize == 'small' || 'begin') {
       if(this.totalAdCount - 4 == this.swiperIndex) {
-        this.navCtrl.push(UserProfile,{},{animate:true,animation:'transition',duration:500,direction:'forward'});
+        this.navCtrl.push(UserProfile,{},{animate:true,animation:'transition',duration:100,direction:'forward'});
       }
       else if(this.swiperIndex == 0) {
-        //this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:500,direction:'back'});
+        //this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:100,direction:'back'});
       }
     }
     else {
       if(this.totalAdCount - 1 == this.swiperIndex) {
-        this.navCtrl.push(UserProfile,{},{animate:true,animation:'transition',duration:500,direction:'forward'});
+        this.navCtrl.push(UserProfile,{},{animate:true,animation:'transition',duration:100,direction:'forward'});
       }
       else if(this.swiperIndex == 0) {
-        //this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:500,direction:'back'});
+        //this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:100,direction:'back'});
       }
     }
   }
@@ -233,7 +233,7 @@ export class FeedUser implements OnDestroy {
   swipeLeft() {
     this.navCtrl.push(UserViewProfile, {
       param1: 'user'
-    },{animate:true,animation:'transition',duration:500,direction:'forward'});
+    },{animate:true,animation:'transition',duration:100,direction:'forward'});
   }
 
   toUserBooking() {
@@ -241,17 +241,17 @@ export class FeedUser implements OnDestroy {
   }
 
   toProfile() {
-    this.navCtrl.push(StylistProfile,{},{animate:true,animation:'transition',duration:500,direction:'forward'});
+    this.navCtrl.push(StylistProfile,{},{animate:true,animation:'transition',duration:100,direction:'forward'});
   }
 
   toFull() {
-    this.navCtrl.push(FullfeedPage,{},{animate:true,animation:'transition',duration:500,direction:'back'});
+    this.navCtrl.push(FullfeedPage,{},{animate:true,animation:'transition',duration:100,direction:'back'});
   }
 
   toBooking() {
     this.navCtrl.push(UserBooking, {
       param1: 'user'
-    },{animate:true,animation:'transition',duration:500,direction:'back'});
+    },{animate:true,animation:'transition',duration:100,direction:'back'});
   }
 
   ngOnDestroy() {

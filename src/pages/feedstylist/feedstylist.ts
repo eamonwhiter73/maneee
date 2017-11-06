@@ -22,6 +22,8 @@ import firebase from 'firebase';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { CacheService } from "ionic-cache";
 import { Observable } from 'rxjs/Rx';
+import { SMS } from '@ionic-native/sms';
+
 import 'rxjs/add/operator/share';
 
 
@@ -137,6 +139,8 @@ export class FeedStylist implements OnDestroy {
   objj: FirebaseObjectObservable<any>;
   month: FirebaseListObservable<any>;
   formulas: FirebaseListObservable<any>;
+  follow: FirebaseListObservable<any>;
+  subscription: ISubscription;
   subscription4: ISubscription;
   subscription5: ISubscription;
   subscription6: ISubscription;
@@ -153,13 +157,14 @@ export class FeedStylist implements OnDestroy {
   username;
 
 
+
   
 
   private swipeCoord?: [number, number];
   private swipeTime?: number;
   private nav:NavController;
 
-  constructor(private cache: CacheService, public datePicker: DatePicker, public storage: Storage, public platform: Platform, public af: AngularFireDatabase, public element: ElementRef, public camera: Camera, private app:App, public cameraServicePost: CameraServicePost, public actionSheetCtrl: ActionSheetController, public myrenderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
+  constructor(public sms: SMS, private cache: CacheService, public datePicker: DatePicker, public storage: Storage, public platform: Platform, public af: AngularFireDatabase, public element: ElementRef, public camera: Camera, private app:App, public cameraServicePost: CameraServicePost, public actionSheetCtrl: ActionSheetController, public myrenderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
     this.nav = this.app.getActiveNav();
   }
 
@@ -206,6 +211,7 @@ export class FeedStylist implements OnDestroy {
        console.log(date.getFullYear() + "   date : getyear    " + holderDate.getFullYear());
 
        let boool = false;
+       let time;
 
        if(date.getDate() == holderDate.getDate() && date.getMonth() == holderDate.getMonth() &&  date.getFullYear() == holderDate.getFullYear()) {
          
@@ -232,7 +238,7 @@ export class FeedStylist implements OnDestroy {
              minUnder = date.getMinutes().toString();
            }
 
-           let time = forHold+":"+minUnder+" "+ampm;
+           time = forHold+":"+minUnder+" "+ampm;
 
            if(x.time == time) {
              x.selected = false;
@@ -250,6 +256,25 @@ export class FeedStylist implements OnDestroy {
 
        if(boool == true) {
          this.month.update(item.$key, {'reserved':{'appointment':item.reserved.appointment}});
+         let array;
+         console.log('ionViewDidLoad FollowersPage');
+          this.storage.get('username').then((val) => {
+            console.log('in storage');
+            this.follow = this.af.list('/profiles/stylists/' + val + "/followers");
+            this.subscription = this.follow.subscribe(items => items.forEach(item => {
+              let arr = Object.keys(item);
+              console.log(console.log(item[arr[0]]) + "    type followers");
+              array.push(item[arr[0]]);
+              
+              
+            }));
+
+            let month1 = date.getUTCMonth;
+            let date1 = date.getUTCDate;
+
+            this.sms.send(array, val + " just opened up a spot at " + time + " on " + month1 + " " + date1 + "!").catch(e => { console.log(JSON.stringify(e))});
+          })
+
          boool = false;
        }
     }));
@@ -325,7 +350,7 @@ export class FeedStylist implements OnDestroy {
   }
 
   goSeeProfile(item) {
-    this.navCtrl.push(UserProfile, {username:item.username});
+    this.navCtrl.push(UserProfile, {username:item.username}, {animate:true, animation:'ios-transition', duration:100});
   }
 
   tappedPost() {
@@ -348,18 +373,18 @@ export class FeedStylist implements OnDestroy {
     console.log(this.swiperIndex);
     if(this.swiperSize == 'small' || 'begin') {
       if(this.totalAdCount - 4 == this.swiperIndex) {
-        this.navCtrl.push(StylistProfile,{},{animate:true,animation:'transition',duration:500,direction:'forward'});
+        this.navCtrl.push(StylistProfile,{},{animate:true,animation:'transition',duration:100,direction:'forward'});
       }
       else if(this.swiperIndex == 0) {
-        this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:500,direction:'back'});
+        this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:100,direction:'back'});
       }
     }
     else {
       if(this.totalAdCount - 1 == this.swiperIndex) {
-        this.navCtrl.push(StylistProfile,{},{animate:true,animation:'transition',duration:500,direction:'forward'});
+        this.navCtrl.push(StylistProfile,{},{animate:true,animation:'transition',duration:100,direction:'forward'});
       }
       else if(this.swiperIndex == 0) {
-        this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:500,direction:'back'});
+        this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:100,direction:'back'});
       }
     }
   }

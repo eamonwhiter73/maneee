@@ -837,7 +837,7 @@ var FeedStylist = /** @class */ (function () {
             data.append('page', this.totalCount.toString());*/
             resolve();
             /*this.http
-              .post('http://192.168.1.131:8888/maneappback/more-items.php', data)
+              .post('http://me.eamondev.com/maneappback/more-items.php', data)
                 .subscribe(res => {
                   //console.log(JSON.stringify(res));
                   //let response = JSON.stringify(res);
@@ -879,7 +879,7 @@ var FeedStylist = /** @class */ (function () {
         console.log("constructed");
     
         this.http
-          .post('http://192.168.1.131:8888/maneappback/more-items-refresher.php', data)
+          .post('http://me.eamondev.com/maneappback/more-items-refresher.php', data)
             .subscribe(res => {
               console.log('getInitialImages completed ***********');
     

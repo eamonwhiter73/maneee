@@ -67,7 +67,7 @@ export class FormulapostPage implements OnDestroy {
   }
 
   goToProfile() {
-    this.navCtrl.push(StylistProfile,{ square: this.square },{animate:true,animation:'transition',duration:500,direction:'back'});
+    this.navCtrl.push(StylistProfile,{ square: this.square },{animate:true,animation:'transition',duration:100,direction:'back'});
   }
 
 

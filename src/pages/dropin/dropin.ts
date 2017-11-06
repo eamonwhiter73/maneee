@@ -30,7 +30,7 @@ export class DropinPage {
 
     var button = document.querySelector('#submit-button');
 
-    this.http.request('http://192.168.1.131:8888/api/generatetoken.php')
+    this.http.request('http://me.eamondev.com/api/generatetoken.php')
       .subscribe(res => { 
 
         dropin.create({
