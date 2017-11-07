@@ -1005,7 +1005,7 @@ export class FeedStylist implements OnDestroy {
         this.formulas = this.af.list('/formulas');
         this.subscription8 = this.formulas.subscribe(items => {
           mapped = items.map((item) => {
-            console.log(JSON.stringify(item) + "       item being mapped")
+            console.log(JSON.stringify(item) + "       item being mapped");
             return new Promise((resolve,reject) => {
 
               let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');

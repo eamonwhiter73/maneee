@@ -31,7 +31,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = FormulasPage;
+  rootPage:any = FeedStylist;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, cache: CacheService, private screenOrientation: ScreenOrientation) {
 

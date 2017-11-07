@@ -33,8 +33,8 @@ page-user-booking {
 
 	ion-slides {
 	    height: 44%;
-	    position: fixed;
-	    top: 0px;
+	    position: relative;
+	    top: 25px;
 	    z-index: 5;
 	    background-color: #25292c;
 	}
@@ -113,8 +113,8 @@ page-user-booking {
 
 	.arrowrightholder {
 	    display: inline-block;
-	    position: fixed;
-	    top: 5px;
+	    position: absolute;
+	    top: 8px;
 	    right: 20%;
 	    height: 32px;
 	    z-index: 14;
@@ -123,16 +123,17 @@ page-user-booking {
 
 	.arrowleftholder {
 	    display: inline-block;
-	    position: fixed;
-	    top: 5px;
+	    /* position: fixed; */
+	    top: 8px;
 	    left: 20%;
 	    width: 30px;
 	    z-index: 14;
 	    height: 32px;
+	    position: absolute;
 	}
 
 	.titleholder {
-	    position: fixed;
+	    position: absolute;
 	    left: 0;
 	    top: 1.5%;
 	    text-align: center;
@@ -225,21 +226,17 @@ page-user-booking {
 	    overflow: hidden;
 	    background-color: #fff;
 	    z-index: 4;
-	    width: 100%;
-	    margin-top: -95%;
-	    position: relative;
-	    bottom: -2%;
-	    height: 100%;
+
 	
 
 	}
 
 	.scrolling {
-		white-space: nowrap;
-	    overflow: hidden;
 	    background-color: #fff;
 	    z-index: 4;
 	    width: 100%;
+	    margin-top: -95%;
+	    height: 100%;
 	}
 
 	.slotcontainer {

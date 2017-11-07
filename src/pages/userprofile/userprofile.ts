@@ -294,47 +294,71 @@ export class UserProfile implements OnDestroy {
       console.log(this.username + "this.username");
       let bool = false;
       this.items2 = this.af.list('appointments/' + this.username + '/' + this.selectedDate.getMonth());
-      this.subscription2 = this.items2.subscribe(items => items.forEach(item => {
+      this.subscription2 = this.items2.subscribe(items => {
+        let mapped = items.map((item) =>{
+          return new Promise((resolve, reject) => {
+            console.log(item);
 
-        console.log(item);
+            let boool = false;
+            let da = new Date(item.date.day * 1000);
 
-        let da = new Date(item.date.day * 1000);
-        this.datesToSelect.push(da.getDate());
+            console.log(da + "da");
+            console.log(da.getDate() + "dagetdate");
+            console.log(this.selectedDate.getDate());
+            if(this.selectedDate.getDate() == da.getDate() && this.selectedDate.getMonth() == da.getMonth()) {
+              console.log("selected = item");
+              console.log(JSON.stringify(item.reserved) + "         item resesrved above");
+              //for(let m = 0; m < item.reserved.length; m++) {
+              //for(let r of item.reserved) {
+                //console.log(JSON.stringify(r));
+                for (let r of item.reserved.appointment) {
+                  if(r.selected == true) {
+                    this.timesOpen.push(r);
+                    console.log('hit appointment');
+                    bool = true;
+                  }
+                }
 
+                
 
-        console.log(da + "da");
-        console.log(da.getDate() + "dagetdate");
-        console.log(this.selectedDate.getDate());
-        if(this.selectedDate.getDate() == da.getDate() && this.selectedDate.getMonth() == da.getMonth()) {
-          console.log("selected = item");
-          console.log(JSON.stringify(item.reserved) + "         item resesrved above");
-          //for(let m = 0; m < item.reserved.length; m++) {
-          //for(let r of item.reserved) {
-            //console.log(JSON.stringify(r));
+            }
+
             for (let r of item.reserved.appointment) {
-              if(r.selected == true) {
-                this.timesOpen.push(r);
-                console.log('hit appointment');
-                bool = true;
+              console.log(" in r of item.reserved.appointment");
+              if (r.selected == true) {
+                boool = true;
               }
             }
-
-        }
-
-        for(let item of this.tds) {
-          if(!item.classList.contains('text-muted')) {
-            console.log(typeof item.innerText + "         innertext" + typeof this.datesToSelect[0]);
-            if(this.datesToSelect.indexOf(parseInt(item.innerText)) != -1) {
-              console.log("Inner text in      " + item.innerText);
-              this.myrenderer.setElementClass(item,"greencircle",true);            
+            if(boool) {
+              console.log("in bool twice in bool once");
+              this.datesToSelect.push(da.getDate());
+              resolve();
             }
             else {
-              //this.myrenderer.setElementClass(item,"monthview-selected",false);
+              resolve();
+            }
+            
+          })
+        })
+
+        Promise.all(mapped).then(() => {
+          for(let item of this.tds) {
+            if(!item.classList.contains('text-muted')) {
+              console.log(typeof item.innerText + "         innertext" + typeof this.datesToSelect[0]);
+              if(this.datesToSelect.indexOf(parseInt(item.innerText)) != -1) {
+                console.log("Inner text in      " + item.innerText);
+                this.myrenderer.setElementClass(item,"greencircle",true);            
+              }
+              else {
+                //this.myrenderer.setElementClass(item,"monthview-selected",false);
+              }
             }
           }
-        }
+        })
         
-      }));
+        
+        
+      });
         
         
         //loading.dismiss();

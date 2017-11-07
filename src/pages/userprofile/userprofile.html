@@ -45,7 +45,7 @@
 		<div class='arrowrightholder'>
 	    	<ion-icon class='forward' name="arrow-forward"></ion-icon>
 	    </div>
-		<calendar (tap)="openCal" class='cal' [eventSource]="eventSource"
+		<calendar (tap)="openCal()" class='cal' [eventSource]="eventSource"
 	      [calendarMode]="calendar.mode"
 	      [currentDate]="calendar.currentDate"
 	      (onCurrentDateChanged)="onCurrentDateChanged($event)"

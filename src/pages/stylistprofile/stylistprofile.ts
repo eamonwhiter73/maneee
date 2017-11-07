@@ -258,42 +258,67 @@ export class StylistProfile implements OnDestroy {
       setTimeout(()=>{
         this.selectedDate = this.viewDate;
         console.log(this.username + "this.username");
+
         this.items2 = this.af.list('appointments/' + this.username + '/' + this.selectedDate.getMonth());
-        this.subscription2 = this.items2.subscribe(items => items.forEach(item => {
+        this.subscription2 = this.items2.subscribe(items => {
 
-          console.log(item);
+          let mapped = items.map((item) => {
+            return new Promise((resolve, reject) =>{
+              //console.log(JSON.stringify(item));
+              //console.log(item.date.day);
+              
+              
+              let boool = false;
+              let da = new Date(item.date.day * 1000);
 
-          let da = new Date(item.date.day * 1000);
-          this.datesToSelect.push(da.getDate());
+              
+              console.log(da + "da");
+              console.log(da.getDate() + "dagetdate");
+              console.log(this.selectedDate.getDate());
+              if(this.selectedDate.getDate() == da.getDate() && this.selectedDate.getMonth() == da.getMonth()) {
+                console.log("selected = item");
+                console.log(JSON.stringify(item.reserved) + "         item resesrved above");
 
-
-          console.log(da + "da");
-          console.log(da.getDate() + "dagetdate");
-          console.log(this.selectedDate.getDate());
-          if(this.selectedDate.getDate() == da.getDate() && this.selectedDate.getMonth() == da.getMonth()) {
-            console.log("selected = item");
-            console.log(JSON.stringify(item.reserved) + "         item resesrved above");
-
-              this.times = item.reserved.appointment.slice(0);
-              console.log('hit appointment');
-
-          }
-
-
-          for(let item of this.tds) {
-            if(!item.classList.contains('text-muted')) {
-              console.log(typeof item.innerText + "         innertext" + typeof this.datesToSelect[0]);
-              if(this.datesToSelect.indexOf(parseInt(item.innerText)) != -1) {
-                console.log("Inner text in      " + item.innerText);
-                this.myrenderer.setElementClass(item,"greencircle",true);            
+                  this.times = item.reserved.appointment.slice(0);
+                  console.log('hit appointment');
+                  resolve();
               }
               else {
-                //this.myrenderer.setElementClass(item,"monthview-selected",false);
+                resolve();
+              }
+
+              for (let r of item.reserved.appointment) {
+                console.log(" in r of item.reserved.appointment");
+                if (r.selected == true) {
+                  boool = true;
+                }
+              }
+              if(boool) {
+                console.log("in bool twice in bool once");
+                this.datesToSelect.push(da.getDate());
+              }
+            })
+          })
+
+          Promise.all(mapped).then(() => {
+            for(let item of this.tds) {
+              if(!item.classList.contains('text-muted')) {
+                console.log(JSON.stringify(this.datesToSelect));
+                if(this.datesToSelect.indexOf(parseInt(item.innerText)) != -1) {
+                  console.log("Inner text in      " + item.innerText);
+                  this.myrenderer.setElementClass(item,"greencircle",true);            
+                }
+                else {
+                  //this.myrenderer.setElementClass(item,"monthview-selected",false);
+                }
               }
             }
-          }
+          })
+
+
           
-        }));
+          
+        });
         
         
         //loading.dismiss();
@@ -332,6 +357,14 @@ export class StylistProfile implements OnDestroy {
 
     this.storage.set("profile"+squarez, null);
     this.storage.set("formula"+squarez, null);
+
+    let image : string  = 'formula_' + this.username + '_' + squarez + '.png';
+    let storageRef = firebase.storage().ref('/formulas/' + this.username + '/' + image);
+    storageRef.delete().catch(e => {console.log(e)});
+
+    let image2 : string  = 'profile_' + this.username + '_' + squarez + '.png';
+    let storageRef2 = firebase.storage().ref('/formulas/' + this.username + '/' + image2);
+    storageRef2.delete().catch(e => {console.log(e)});
   }
 
   removePicFormula(squarez) {
@@ -347,6 +380,8 @@ export class StylistProfile implements OnDestroy {
     this.myrenderer.setElementStyle(itemArraythree[squarez - 1].nativeElement, 'display', 'none');
 
     this.storage.set("formula"+squarez, null);
+
+    
   }
     
 
@@ -652,42 +687,57 @@ export class StylistProfile implements OnDestroy {
     if($event.dontRunCode) {
     //console.log($event);
       this.items3 = this.af.list('appointments/' + this.username + '/' + this.selectedDate.getMonth());
-      this.subscription3 = this.items3.subscribe(items => items.forEach(item => {
-        //console.log(JSON.stringify(item));
-        //console.log(item.date.day);
-        console.log("dafirst    " + item.date.day )
-        let da = new Date(item.date.day * 1000);
-        this.datesToSelect = [];
-        this.datesToSelect.push(da.getDate());
-
-        console.log(da + "da");
-        console.log(da.getDate() + "dagetdate");
-        console.log(this.selectedDate.getDate());
-        if(this.selectedDate.getDate() == da.getDate() && this.selectedDate.getMonth() == da.getMonth()) {
-          console.log("selected = item");
-          console.log(JSON.stringify(item.reserved) + "         item resesrved");
-          //for(let r of item.reserved.appointment) {
-            //console.log(JSON.stringify(r));
-            /*let bool = lse;
-            for(let r in item.reserved.appointment) {
-              if(r['selected'] == "true") {
-                bool = true;
-              }
-            }*/
-            this.times = item.reserved.appointment.slice(0);
-            console.log('hit appointment');
-            console.log(JSON.stringify(this.times));
+      this.subscription3 = this.items3.subscribe(items => {
+        let mapped = items.map((item) => {
+          return new Promise((resolve, reject) =>{
+            //console.log(JSON.stringify(item));
+            //console.log(item.date.day);
             
-            /*for(let x of this.times) {
-              if(x.time == r) {
-                console.log('change selected');
-                x.selected = true;
+            this.datesToSelect = [];
+            let boool = false;
+            let da = new Date(item.date.day * 1000);
+            for (let r of item.reserved.appointment) {
+              if (r.selected == true) {
+                boool = true;
               }
-            }*/
-          //}
-        }
-        //console.log($event.runCode + "     dont run code!!!!!!");
-        //if($event.runCode == true) {
+            }
+            if(boool) {
+              console.log("in bool twice in bool once");
+              this.datesToSelect.push(da.getDate());
+            }
+            
+            console.log(da + "da");
+            console.log(da.getDate() + "dagetdate");
+            console.log(this.selectedDate.getDate());
+            if(this.selectedDate.getDate() == da.getDate() && this.selectedDate.getMonth() == da.getMonth()) {
+              console.log("selected = item");
+              console.log(JSON.stringify(item.reserved) + "         item resesrved");
+              for(let r of item.reserved.appointment) {
+                //console.log(JSON.stringify(r));
+                
+                /*for(let r in item.reserved.appointment) {
+                  if(r['selected'] == "true") {
+                    bool = true;
+                  }
+                }*/
+
+                this.times = item.reserved.appointment.slice(0);
+                console.log('hit appointment');
+                console.log(JSON.stringify(this.times));
+                
+                /*for(let x of this.times) {
+                  if(x.time == r) {
+                    console.log('change selected');
+                    x.selected = true;
+                  }
+                }*/
+              //}
+              }
+            }
+          })
+        })
+        
+        Promise.all(mapped).then(() => {
           for(let item of this.tds) {
             if(!item.classList.contains('text-muted')) {
               console.log(typeof item.innerText + "         innertext" + typeof this.datesToSelect[0]);
@@ -700,10 +750,16 @@ export class StylistProfile implements OnDestroy {
               }
             }
           }
+        })
+        //console.log($event.runCode + "     dont run code!!!!!!");
+        //if($event.runCode == true) {
+          
         //}
 
         
-      }));
+      });
+
+      
     }
   }
 }

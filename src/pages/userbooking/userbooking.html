@@ -30,7 +30,7 @@
 	  step="30">
 	</calendar>
 	<!--<form>-->
-	<div class="slots">
+	<!--<div class="slots">-->
 	  <ion-list class="scrolling">
 	     <ion-item *ngFor="let i of timesOpen ; let z = index" (press)="emergency(z)" #slot no-padding>
 	      	<ion-label>{{i.time}}</ion-label>
@@ -38,9 +38,6 @@
 	     </ion-item>
 	  </ion-list>
 	  <div class="noavail" #noavail>NO AVAILABILITIES</div>
-	</div>
-	<div id="savebutton">
-	  	<div class="save" (tap)='logForm()'>SAVE</div>
-	  </div>
+	<!--</div>-->
 	<!--</form>-->
 </ion-content>

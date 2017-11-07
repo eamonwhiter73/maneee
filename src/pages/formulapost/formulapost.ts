@@ -111,13 +111,14 @@ export class FormulapostPage implements OnDestroy {
               if(self.square == childData.square) {
                 var updates = {};
                 updates['/formulas/' + key] = metadata;
-
+                console.log("in self square childdata");
                 firebase.database().ref().update(updates);
                 bool = true;
 
+                return true;
               }
               
-              return true;
+              
           });
 
           if(!bool) {
