@@ -33121,6 +33121,13 @@ page-map #map {
   height: 100%;
 }
 
+page-postpage input {
+  border-width: 1px;
+  border-color: #efefef;
+  border-style: solid;
+  border-radius: 0;
+}
+
 page-postpage ion-select {
   border-style: solid;
   border-width: 1px;
@@ -33299,8 +33306,9 @@ page-postpage .back-button.show-back-button {
 page-postpage .postimagecontain {
   width: 35%;
   height: 89px;
-  background-color: white;
+  background-color: #efefef;
   float: right;
+  padding-right: 5px;
 }
 
 page-postpage .titleinput {

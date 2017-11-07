@@ -31,7 +31,7 @@
 				<ion-icon ios="ios-bookmarks" md="md-bookmarks" class="titleicon"></ion-icon>
 			</div>
 			<div class="inputtitle">
-				<ion-input name='title' [(ngModel)]="item.title" class="titleinput" type="text" placeholder="Write a title"></ion-input>
+				<input name='title' [(ngModel)]="item.title" class="titleinput" type="text" placeholder="Write a title">
 			</div>
 		</div>
 	</div>
@@ -41,7 +41,7 @@
 				<h1>...</h1>
 			</div>
 			<div class="inputcaption">
-				<ion-input name='caption' [(ngModel)]="item.caption" class="captioninput" type="text" placeholder="Write a caption"></ion-input>
+				<input name='caption' [(ngModel)]="item.caption" class="captioninput" type="text" placeholder="Write a caption">
 				<div class="postimagecontain" (tap)="presentActionSheet()" #imageholder>
 					<img class="postimage" #imagey src="assets/camera.png">
 				</div>
@@ -54,7 +54,7 @@
 				<ion-icon name="pricetags" class="titleicon"></ion-icon>
 			</div>
 			<div class="inputtitle">
-				<ion-input name='price' [(ngModel)]="item.price" class="titleinput" type="text" placeholder="Enter price"></ion-input>
+				<input name='price' [(ngModel)]="item.price" class="titleinput" type="text" placeholder="Enter price">
 			</div>
 		</div>
 	</div>
@@ -69,7 +69,7 @@
 				<img src="">
 			</div>
 			<div class="inputtitle">
-				<ion-input name='price' class="titleinput" type="text"></ion-input>
+				<input name='price' class="titleinput" type="text"></input>
 			</div>-->
 		</div>
 	</div>

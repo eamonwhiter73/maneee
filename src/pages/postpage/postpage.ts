@@ -36,7 +36,7 @@ export class PostpagePage implements OnDestroy {
 
   @ViewChild('sharer') share;
  	imageHolder;
-  item = {'date': null, 'title':'asdfasdf', 'price':'44', 'caption':'asdfasdfasdfasdf', 'typeofselect':'Post'};
+  item = {'date': null, 'title':'', 'price':'', 'caption':'', 'typeofselect':'Post'};
   selectVal;
   username;
   list: FirebaseListObservable<any>
@@ -179,7 +179,12 @@ export class PostpagePage implements OnDestroy {
     
     this.imageHolder = this.navParams.get("path");
     console.log(this.imageHolder + " imageholder imagehodl a pefsj'aes");
-    this.myrenderer.setElementAttribute(this.image.nativeElement, 'src', this.imageHolder);
+    if(this.imageHolder != null) {
+      this.myrenderer.setElementAttribute(this.image.nativeElement, 'src', this.imageHolder);
+    }
+    else {
+
+    }
 
     
     this.subscription = this.keyboard.onKeyboardShow().subscribe(()=>{
@@ -356,7 +361,7 @@ export class PostpagePage implements OnDestroy {
     return new Promise((resolve, reject) => {
       
       storageRef       = firebase.storage().ref('/products/' + image);
-      parseUpload      = storageRef.putString(this.imageHolder, 'data_url');
+      parseUpload      = storageRef.putString(this.image.nativeElement.src, 'data_url');
 
       
 
@@ -422,7 +427,7 @@ export class PostpagePage implements OnDestroy {
     console.log(this.item.caption);
     console.log(this.item.price);
     console.log(this.item.date);
-    console.log(this.imageHolder + "                    **************************** src ****************");
+    console.log(this.image.nativeElement.src + "                    **************************** src ****************");
     console.log("****&*&&*&*&*&*&*          " + this.item.typeofselect);
 
     if(this.item.typeofselect == "Post") {
