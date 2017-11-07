@@ -58,4 +58,18 @@ page-followers {
 		right: 0;
 		top: 0;
 	}
+
+	ion-header {
+
+		ion-navbar {
+			color: map-get($colors, primary);
+			.toolbar-background {
+			  background-color: black;
+			}
+
+			border-bottom: map-get($colors, primary);
+	    border-bottom-width: 2px;
+	    border-bottom-style: solid;
+		}
+	}
 }

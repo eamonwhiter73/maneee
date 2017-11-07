@@ -9,6 +9,7 @@ import { LoadingController } from 'ionic-angular';
 import { OnDestroy } from "@angular/core";
 import { ISubscription } from "rxjs/Subscription";
 import { NgCalendarModule } from 'ionic2-calendar';
+import { SMS } from '@ionic-native/sms';
 
 
 
@@ -38,17 +39,20 @@ export class BookingPage implements OnDestroy {
   items : FirebaseListObservable<any>;
   items2 : FirebaseListObservable<any>;
   items3 : FirebaseListObservable<any>;
+  follow : FirebaseListObservable<any>;
   isSomething : boolean;
   titleYear;
   datesToSelect = [];
   tds;
+
   private swipeCoord?: [number, number];
   private swipeTime?: number;
   private subscription: ISubscription;
   private subscription2: ISubscription;
   private subscription3: ISubscription;
+  private subscription4: ISubscription;
 
-  constructor(private elRef:ElementRef, public myrenderer: Renderer, public loadingController: LoadingController, public storage: Storage, public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
+  constructor(public sms: SMS, private elRef:ElementRef, public myrenderer: Renderer, public loadingController: LoadingController, public storage: Storage, public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
 
   }
 
@@ -57,11 +61,39 @@ export class BookingPage implements OnDestroy {
   }
 
   emergency(i) {
-    console.log(this.slots);
+    console.log(JSON.stringify(i) + " this is i in emergency");
     let slotsarray = this.slots.toArray();
-    this.myrenderer.setElementStyle(slotsarray[i]._elementRef.nativeElement, 'background-color', 'red');
+    this.myrenderer.setElementStyle(slotsarray[i].nativeElement, 'background-color', 'red');
     this.times[i].selected = true;
-    alert("Mane Emergency text sent to followers.")
+    
+    let string1 = '';
+    console.log('in emergency');
+    this.follow = this.af.list('/profiles/stylists/' + this.username + "/followers");
+    this.subscription4 = this.follow.subscribe(items => {
+      let mapped = items.map((item) => {
+        return new Promise((resolve, reject) => {
+          console.log(JSON.stringify(item) + " item item item");
+          let arr = Object.keys(item);
+          console.log(typeof item[arr[0]] + "    type followers");
+          string1 += (item[arr[0]]) + ", ";
+          console.log(string1 + " this is string 1");
+          resolve();
+        })
+      })
+      
+      Promise.all(mapped).then(() => {
+        //let month1 = date.getUTCMonth() + 1;
+        //let date1 = date.getUTCDate();
+
+
+          console.log(string1 + " this is string 1 2");
+          this.sms.send(string1, this.username + " just opened up a spot at " + this.times[i].time + " on " + this.viewTitle + " " + this.viewDate.getUTCDate() + "!").then(() => {
+            alert("Press SAVE to update your calendar with the new time.");
+          }).catch(e => { console.log(JSON.stringify(e))});
+        
+
+      })
+   });
   }
 
   swipe(e: TouchEvent, when: string): void {
@@ -385,6 +417,9 @@ export class BookingPage implements OnDestroy {
     }
     if(this.subscription3 != null) {
       this.subscription3.unsubscribe();
+    }
+    if(this.subscription4 != null) {
+      this.subscription4.unsubscribe();
     }
   } 
 

@@ -1,5 +1,22 @@
 page-user-profile {
 
+  ion-header {
+
+    ion-toolbar {
+      border-bottom: map-get($colors, primary);
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+      color: map-get($colors, primary);
+      .toolbar-background {
+        background-color: black;
+      }
+    }
+  }
+
+  .toolbar-title {
+    color: map-get($colors, primary);
+  }
+
   .formulabar {
     width: 100%;
     height: 20%;

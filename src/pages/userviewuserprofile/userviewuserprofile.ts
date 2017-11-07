@@ -418,7 +418,7 @@ export class UserviewuserprofilePage {
       this.navCtrl.push(FeedUser);
     }*/
     //else {
-      this.navCtrl.push(FeedStylist,{},{animate:true,animation:'transition',duration:100,direction:'back'})
+      this.navCtrl.popToRoot({animate:true,animation:'transition',duration:100,direction:'back'})
       //this.navCtrl.push(FeedStylist);
     //}
   }
@@ -463,9 +463,6 @@ export class UserviewuserprofilePage {
     }
   }
 
-  swipeLeft() {
-    this.backToCal();
-  }
 
   swipeRight() {
     this.backToFeed();

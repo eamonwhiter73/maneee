@@ -1,5 +1,22 @@
 page-userviewuserprofile {
 
+  ion-header {
+
+    ion-toolbar {
+      border-bottom: map-get($colors, primary);
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+      color: map-get($colors, primary);
+      .toolbar-background {
+        background-color: black;
+      }
+    }
+  }
+
+  .toolbar-title {
+    color: map-get($colors, primary);
+  }
+
   #customArrow {
   	font-size: 42px;
   	margin-left: 4%;

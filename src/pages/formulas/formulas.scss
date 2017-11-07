@@ -37,11 +37,17 @@ page-formulas {
 	.item-ios.item-block .item-inner {
 	    padding-right: 0
 	}
+	
+	ion-header {
 
-	ion-navbar {
-		color: map-get($colors, primary);
-		.toolbar-background {
-		  background-color: black;
+		ion-navbar {
+			border-bottom: map-get($colors, primary);
+	    border-bottom-width: 2px;
+	    border-bottom-style: solid;
+			color: map-get($colors, primary);
+			.toolbar-background {
+			  background-color: black;
+			}
 		}
 	}
 

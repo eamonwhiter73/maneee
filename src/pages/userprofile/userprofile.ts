@@ -72,6 +72,7 @@ export class UserProfile implements OnDestroy {
   item9: FirebaseObjectObservable<any>;
   items4: FirebaseListObservable<any>;
   items3: FirebaseListObservable<any>;
+  items5: FirebaseListObservable<any>;
   items2: FirebaseListObservable<any>;
   subscription2: ISubscription;
   subscription3: ISubscription;
@@ -80,6 +81,7 @@ export class UserProfile implements OnDestroy {
   subscription7: ISubscription;
   subscription6: ISubscription;
   subscription9: ISubscription;
+  subscription8: ISubscription;
   datesToSelect = [];
   times;
   timesOpen = [];
@@ -583,20 +585,38 @@ export class UserProfile implements OnDestroy {
     let itemArrayfour = this.formulaBars.toArray();
 
     for (let z = 1; z < 10; z++) {
-      promises_array.push(new Promise(function(resolve,reject) {
-        let storageRef = firebase.storage().ref().child('/formulas/'+ self.username + '/formula_' + self.username + '_' + z + '.png');
-        storageRef.getDownloadURL().then(url => {
-          self.myrenderer.setElementAttribute(itemArrayTwo[z - 1].nativeElement, 'src', url);
-          self.myrenderer.setElementStyle(itemArrayTwo[z - 1].nativeElement, 'display', 'block');
-          self.myrenderer.setElementStyle(itemArrayfour[z - 1].nativeElement, 'display', 'block');
-          //self.myrenderer.setElementStyle(itemArray[z - 1].nativeElement, 'display', 'none');
-          console.log(z);
-          resolve();
-        }).catch(error => {
-          resolve();
-          console.log(error.message);
-        });
-      }));
+      this.items5 = this.af.list('/formulas', { 
+        query: {
+          orderByChild: 'username',
+          equalTo: this.username
+        }
+      })
+
+      this.subscription8 = this.items5.subscribe(items => {
+        let mapped = items.map((item) => {
+          return new Promise((resolve, reject) => {
+            console.log(JSON.stringify(item) + "       getting an item");
+            if(item.visible == null && z == item.square) {
+              console.log(" in update update te update te update");
+              promises_array.push(new Promise((resolve,reject) => {
+                let storageRef = firebase.storage().ref().child('/formulas/'+ self.username + '/formula_' + self.username + '_' + z + '.png');
+                storageRef.getDownloadURL().then(url => {
+                  self.myrenderer.setElementAttribute(itemArrayTwo[z - 1].nativeElement, 'src', url);
+                  self.myrenderer.setElementStyle(itemArrayTwo[z - 1].nativeElement, 'display', 'block');
+                  self.myrenderer.setElementStyle(itemArrayfour[z - 1].nativeElement, 'display', 'block');
+                  //self.myrenderer.setElementStyle(itemArray[z - 1].nativeElement, 'display', 'none');
+                  console.log(z);
+                  resolve();
+                }).catch(error => {
+                  resolve();
+                  console.log(error.message);
+                });
+              }));
+            }
+          })
+        })
+      })
+      
     }
 
     return Promise.all(promises_array);

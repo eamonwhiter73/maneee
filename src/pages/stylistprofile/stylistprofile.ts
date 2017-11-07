@@ -55,10 +55,12 @@ export class StylistProfile implements OnDestroy {
   items4: FirebaseListObservable<any>;
   items3: FirebaseListObservable<any>;
   items2: FirebaseListObservable<any>;
+  items5: FirebaseListObservable<any>;
   subscription2: ISubscription;
   subscription3: ISubscription;
   subscription4: ISubscription;
   subscription5: ISubscription;
+  subscription6: ISubscription;
   subscription9: ISubscription;
   username;
   picURLS = [];
@@ -93,7 +95,7 @@ export class StylistProfile implements OnDestroy {
   }
 
   public optionsGetMedia: any = {
-        allowEdit: false,
+        //allowEdit: false,
         quality: 10,
         targetWidth: 600,
         targetHeight: 600,
@@ -172,7 +174,7 @@ export class StylistProfile implements OnDestroy {
   }
 
   ionViewDidUnload() {
-    this.navCtrl.pop()
+
   }
 
   ionViewDidLoad() {
@@ -358,13 +360,63 @@ export class StylistProfile implements OnDestroy {
     this.storage.set("profile"+squarez, null);
     this.storage.set("formula"+squarez, null);
 
-    let image : string  = 'formula_' + this.username + '_' + squarez + '.png';
+    let postdata = {
+      square: null
+    }
+
+    let arrr = [];
+
+    this.items5 = this.af.list('/formulas', { 
+      query: {
+        orderByChild: 'username',
+        equalTo: this.username
+      }
+    })
+
+    this.subscription6 = this.items5.subscribe(items => {
+      let mapped = items.map((item) => {
+        return new Promise((resolve, reject) => {
+          console.log(JSON.stringify(item) + "       getting an item");
+          if(item.square == squarez) {
+            console.log(" in update update te update te update");
+            this.items5.update(item.$key, postdata);  
+          }
+        })
+      })
+    })
+
+    /*let reff = firebase.database().ref('/formulas').orderByChild('username').equalTo(this.username).on("value", (snapshot) => {
+      snapshot.forEach(snapshot => {
+          // key
+          let key = snapshot.key;
+          console.log("key: " + key);
+          // value, could be object
+          let childData = snapshot.val();
+          console.log("data: " + JSON.stringify(childData));
+          // Do what you want with these key/values here
+          arrr.push({key: key, data: childData});
+          return true;
+      });
+    });
+
+    for(let x of arrr) {
+      console.log(typeof squarez + "        :      jjjjyjy      " + typeof x.data.square);
+      if(squarez == x.data.square) {
+        console.log("in squarez ---========---- childata.square");
+        let updates = {};
+        updates['/formulas/' + x.key] = postdata;
+
+        firebase.database().ref().update(updates);
+        
+      }
+    }*/
+    /*let image : string  = 'formula_' + this.username + '_' + squarez + '.png';
     let storageRef = firebase.storage().ref('/formulas/' + this.username + '/' + image);
     storageRef.delete().catch(e => {console.log(e)});
 
     let image2 : string  = 'profile_' + this.username + '_' + squarez + '.png';
-    let storageRef2 = firebase.storage().ref('/formulas/' + this.username + '/' + image2);
-    storageRef2.delete().catch(e => {console.log(e)});
+    let storageRef2 = firebase.storage().ref('/profiles/' + this.username + '/' + image2);
+    storageRef2.delete().catch(e => {console.log(e)});*/
   }
 
   removePicFormula(squarez) {

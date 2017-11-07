@@ -34,11 +34,20 @@ page-formula {
     	align-items: center; /* Vertical center alignment */
 	}
 
-	ion-navbar {
-		height: 88px;
-		.toolbar-background {
-		  background-color: black;
+
+	ion-header {
+
+		ion-navbar {
+			height: 88px;
+			.toolbar-background {
+			  background-color: black;
+			}
+			border-bottom: map-get($colors, primary);
+		    border-bottom-width: 2px;
+		    border-bottom-style: solid;
 		}
+
+
 	}
 
 	.toolbar-title {

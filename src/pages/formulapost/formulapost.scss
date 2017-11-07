@@ -161,6 +161,7 @@ page-formulapost {
 		bottom: 0;
 		height: 64px;
 		margin-bottom: -1px;
+		color: map-get($colors, primary);
 	}
 
 	.captioninput {
@@ -204,5 +205,18 @@ page-formulapost {
 		font-size: 36px;
 		//margin-left: 15px;
 		padding: 0 15px 0 15px;
+	}
+
+	ion-header {
+
+		ion-navbar {
+			border-bottom: map-get($colors, primary);
+	    border-bottom-width: 2px;
+	    border-bottom-style: solid;
+			color: map-get($colors, primary);
+			.toolbar-background {
+			  background-color: black;
+			}
+		}
 	}
 }

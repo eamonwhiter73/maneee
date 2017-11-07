@@ -4,4 +4,17 @@ page-dropin {
 		height: 44px;
 		background-color: map-get($colors, primary);
 	}
+
+	ion-header {
+
+		ion-navbar {
+			border-bottom: map-get($colors, primary);
+	    border-bottom-width: 2px;
+	    border-bottom-style: solid;
+			color: map-get($colors, primary);
+			.toolbar-background {
+			  background-color: black;
+			}
+		}
+	}
 }

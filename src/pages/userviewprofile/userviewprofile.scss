@@ -1,8 +1,27 @@
 user-view-profile {
 
+  ion-header {
+
+    ion-toolbar {
+      color: map-get($colors, primary);
+      .toolbar-background {
+        background-color: black;
+      }
+
+      border-bottom: map-get($colors, primary);
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    }
+  }
+
   ion-title {
      text-align: center;
      position: absolute;
+
+  }
+
+  .toolbar-title {
+    color: map-get($colors, primary);
   }
 
 	.postprofilepic {
@@ -14,6 +33,7 @@ user-view-profile {
 
   .settings {
     font-size: 36px;
+    color: map-get($colors, primary);
   }
 
   .settingscontainer {

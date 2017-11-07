@@ -1,4 +1,4 @@
-<ion-header> <!--(swiperight)="swipeRight()" (swipeleft)="swipeLeft()"-->
+<ion-header (swiperight)="swipeRight()"> <!--(swiperight)="swipeRight()" (swipeleft)="swipeLeft()"-->
   <ion-toolbar>
     <ion-title>@{{username}}</ion-title>
     <div class="gobackcontainer">
@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content no-padding>
-<div> <!-- (swiperight)="swipeRight()" (swipeleft)="swipeLeft()"-->
+<div (swiperight)="swipeRight()"> <!-- (swiperight)="swipeRight()" (swipeleft)="swipeLeft()"-->
 	<ion-item no-padding no-lines class="itemforprofile">
 		<div class="imageparent">
 		  <img class="postprofilepic" src="{{profilePic}}">
@@ -50,6 +50,7 @@
 	    </calendar>-->
 	</ion-item>
 	<ion-grid>
+	  <ion-item>Hair Goals</ion-item>
 	  <ion-row>
 	    <ion-col>
 	    	<div #pluscontain (tap)="openCamera(1)" class='pluscontainer'>
@@ -71,6 +72,7 @@
 	      <img  (tap)="presentImage(3)" class="imagesquare" #profsquare [src]="">
 	    </ion-col>
 	  </ion-row>
+	  <ion-item>Current Hair</ion-item>
 	  <ion-row>
 	    <ion-col>
 	    	<div #pluscontain (tap)="openCamera(4)" class='pluscontainer'>

@@ -263,7 +263,7 @@ export class FeedStylist implements OnDestroy {
             this.storage.get('username').then((val) => {
               console.log('in storage');
               this.follow = this.af.list('/profiles/stylists/' + val + "/followers");
-              this.subscription = this.follow.subscribe(items => items.forEach(item => {
+              this.subscription = this.follow.subscribe(items => {
                 let mapped = items.map((item) => {
                   return new Promise((resolve, reject) => {
                     console.log(JSON.stringify(item) + " item item item");
@@ -286,7 +286,7 @@ export class FeedStylist implements OnDestroy {
                   
 
                 })
-              }));
+              });
 
               
 
@@ -1026,8 +1026,7 @@ export class FeedStylist implements OnDestroy {
             });
 
           })
-          let results = Promise.all(mapped);
-          results.then(() => {
+          Promise.all(mapped).then(() => {
           //setTimeout(() => {
             this.formulaListArray = store.reverse();  
             console.log(JSON.stringify(this.formulaListArray) + " value value vlaue productlistarray"); 

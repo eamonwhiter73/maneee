@@ -31677,6 +31677,17 @@ page-dropin #submit-button {
   background-color: #e6c926;
 }
 
+page-dropin ion-header ion-navbar {
+  border-bottom: #e6c926;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  color: #e6c926;
+}
+
+page-dropin ion-header ion-navbar .toolbar-background {
+  background-color: black;
+}
+
 page-feed-stylist {
   /*.itemadspace {
 		z-index: 1;
@@ -31966,7 +31977,7 @@ page-feed-stylist .custom-icon {
   margin-top: 8px;
 }
 
-page-feed-stylist .swipecont {
+page-feed-stylist .swipecont, page-feed-stylist .swipecont2 {
   height: 100%;
 }
 
@@ -32482,6 +32493,17 @@ page-followers .clickforprofile {
   top: 0;
 }
 
+page-followers ion-header ion-navbar {
+  color: #e6c926;
+  border-bottom: #e6c926;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+
+page-followers ion-header ion-navbar .toolbar-background {
+  background-color: black;
+}
+
 page-formula .contentone {
   position: relative;
   width: 100%;
@@ -32524,11 +32546,14 @@ page-formula .flex {
   /* Vertical center alignment */
 }
 
-page-formula ion-navbar {
+page-formula ion-header ion-navbar {
   height: 88px;
+  border-bottom: #e6c926;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
 }
 
-page-formula ion-navbar .toolbar-background {
+page-formula ion-header ion-navbar .toolbar-background {
   background-color: black;
 }
 
@@ -32698,6 +32723,7 @@ page-formulapost .share {
   bottom: 0;
   height: 64px;
   margin-bottom: -1px;
+  color: #e6c926;
 }
 
 page-formulapost .captioninput {
@@ -32740,6 +32766,17 @@ page-formulapost .postnamecont {
 page-formulapost .backk {
   font-size: 36px;
   padding: 0 15px 0 15px;
+}
+
+page-formulapost ion-header ion-navbar {
+  border-bottom: #e6c926;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  color: #e6c926;
+}
+
+page-formulapost ion-header ion-navbar .toolbar-background {
+  background-color: black;
 }
 
 page-formulas .formula {
@@ -32789,11 +32826,14 @@ page-formulas .item-ios.item-block .item-inner {
   padding-right: 0;
 }
 
-page-formulas ion-navbar {
+page-formulas ion-header ion-navbar {
+  border-bottom: #e6c926;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
   color: #e6c926;
 }
 
-page-formulas ion-navbar .toolbar-background {
+page-formulas ion-header ion-navbar .toolbar-background {
   background-color: black;
 }
 
@@ -33085,6 +33125,17 @@ page-postpage ion-select {
   border-style: solid;
   border-width: 1px;
   border-color: #e6c926;
+}
+
+page-postpage ion-header ion-navbar {
+  border-bottom: #e6c926;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  color: #e6c926;
+}
+
+page-postpage ion-header ion-navbar .toolbar-background {
+  background-color: black;
 }
 
 page-postpage .label {
@@ -33697,6 +33748,21 @@ page-sign-up ion-content .stylistviewbutton {
   font-size: 12px;
 }
 
+page-stylist-profile ion-header ion-toolbar {
+  color: #e6c926;
+  border-bottom: #e6c926;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+
+page-stylist-profile ion-header ion-toolbar .toolbar-background {
+  background-color: black;
+}
+
+page-stylist-profile .toolbar-title {
+  color: #e6c926;
+}
+
 page-stylist-profile .formulabar {
   width: 100%;
   height: 20%;
@@ -33801,6 +33867,7 @@ page-stylist-profile .postprofilepic {
 
 page-stylist-profile .settings {
   font-size: 36px;
+  color: #e6c926;
 }
 
 page-stylist-profile .settingscontainer {
@@ -34943,6 +35010,21 @@ page-user-booking #savebutton {
   }
 }
 
+page-user-profile ion-header ion-toolbar {
+  border-bottom: #e6c926;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  color: #e6c926;
+}
+
+page-user-profile ion-header ion-toolbar .toolbar-background {
+  background-color: black;
+}
+
+page-user-profile .toolbar-title {
+  color: #e6c926;
+}
+
 page-user-profile .formulabar {
   width: 100%;
   height: 20%;
@@ -35750,9 +35832,24 @@ page-user-profile .insta {
   }
 }
 
+user-view-profile ion-header ion-toolbar {
+  color: #e6c926;
+  border-bottom: #e6c926;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+
+user-view-profile ion-header ion-toolbar .toolbar-background {
+  background-color: black;
+}
+
 user-view-profile ion-title {
   text-align: center;
   position: absolute;
+}
+
+user-view-profile .toolbar-title {
+  color: #e6c926;
 }
 
 user-view-profile .postprofilepic {
@@ -35764,6 +35861,7 @@ user-view-profile .postprofilepic {
 
 user-view-profile .settings {
   font-size: 36px;
+  color: #e6c926;
 }
 
 user-view-profile .settingscontainer {
@@ -36388,6 +36486,21 @@ page-userviewuserprofile {
   /*.back-button.show-back-button {
     display: none;
   }*/
+}
+
+page-userviewuserprofile ion-header ion-toolbar {
+  border-bottom: #e6c926;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  color: #e6c926;
+}
+
+page-userviewuserprofile ion-header ion-toolbar .toolbar-background {
+  background-color: black;
+}
+
+page-userviewuserprofile .toolbar-title {
+  color: #e6c926;
 }
 
 page-userviewuserprofile #customArrow {
