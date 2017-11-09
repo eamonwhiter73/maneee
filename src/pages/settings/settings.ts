@@ -61,7 +61,7 @@ export class SettingsPage implements OnDestroy {
   subscription: ISubscription;
   subscription2: ISubscription;
   subscription3: ISubscription;
-  items: FirebaseObjectObservable<any>;
+  items: FirebaseListObservable<any>;
   items2: FirebaseListObservable<any>;
   oldUser: string;
   picURL: string;
@@ -121,6 +121,7 @@ export class SettingsPage implements OnDestroy {
             this.facebookURL = "http://www.facebook.com/" + profile['id'];
             this.storage.set('fblinkedstylist', true);
             this.linked = "Linked";
+            alert("You must press SAVE to finalize the link.")
             //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
           });
         });
@@ -132,6 +133,7 @@ export class SettingsPage implements OnDestroy {
             this.facebookURL = "http://www.facebook.com/" + profile['id'];
             this.storage.set('fblinkeduser', true);
             this.linked = "Linked";
+            alert("You must press SAVE to finalize the link.")
             //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
           });
         });
@@ -176,6 +178,16 @@ export class SettingsPage implements OnDestroy {
         alert("You need to fill out all of the information");
       }
     }*/
+    this.subscription3 = this.afAuth.authState.subscribe(data => {
+      console.log(data + "    data from login")
+      if(data != null) {
+        if(data.email && data.uid) {
+          console.log("logged in");
+          this.authUser = data;
+          this.loggedIn = true;
+        }
+      }
+    })
 
     console.log(this.authUser + '      authuser       998877');
     this.x = 0;
@@ -183,7 +195,7 @@ export class SettingsPage implements OnDestroy {
     console.log(this.emailIfChanged + "  passwordifchanged                  this.password: " + this.email);
     this.storage.set('username', this.username);
     if(this.passwordIfChanged != this.password && this.authUser != null) {
-      this.authUser.updatePassword(this.password).then(() => {}).catch((e) => {alert("Password update failed.")});
+      this.authUser.updatePassword(this.password).then(() => {}).catch((e) => {alert(e)});
     }
     /*else {
       this.password = this.passwordIfChanged;
@@ -191,7 +203,7 @@ export class SettingsPage implements OnDestroy {
     }*/
     this.storage.set('password', this.password);
     if(this.emailIfChanged != this.email && this.authUser != null) {
-      this.authUser.updateEmail(this.email).then(() => {}).catch((e) => {alert("Email update failed.")});
+      this.authUser.updateEmail(this.email).then(() => {}).catch((e) => {alert(e)});
     }
     /*else {
       this.email = this.emailIfChanged;
@@ -207,11 +219,13 @@ export class SettingsPage implements OnDestroy {
       this.facebookURL = "";
     }
 
-
     //this.storage.get('type').then((val) => {
       if(this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-        if(this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '' || this.phone == '') {
+        if(this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '' ) {
           alert("You need to fill out all of the information");
+        }
+        else if(this.phone.match(/\d/g).length!==10) {
+          alert("Please enter a 10 digit phone number, only the digits.");
         }
         else {
           this.storage.set('address', this.address);
@@ -233,12 +247,12 @@ export class SettingsPage implements OnDestroy {
             this.price = "$$$$$";
           }
 
-          this.items = this.af.object('/profiles/stylists');
+          this.items = this.af.list('/profiles/stylists');
 
           if(this.username == this.oldUser) {
-            this.items.update({[this.username] : {'username': this.username, 'password': this.password, 'email': this.email,
+            this.items.update(this.username, {'username': this.username, 'password': this.password, 'email': this.email,
                                   'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
-                                  'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL}});
+                                  'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL});
             if(this.isTypeNull == null) {
               this.navCtrl.push(StylistProfile);
             }
@@ -248,10 +262,10 @@ export class SettingsPage implements OnDestroy {
           }
           else {
             this.af.object('/profiles/stylists/'+this.oldUser).remove().then(_ => console.log('item deleted!'));
-            this.items.update({[this.username] : {'username': this.username, 'password': this.password, 'email': this.email,
+            this.items.update(this.username, {'username': this.username, 'password': this.password, 'email': this.email,
                               'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
                               'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
-                              'rating': {'one':0, 'two':0, 'three':0, 'four':0, 'five':0}}});
+                              'rating': {'one':0, 'two':0, 'three':0, 'four':0, 'five':0}});
           
             if(this.isTypeNull == null) {
               this.navCtrl.push(StylistProfile);
@@ -264,15 +278,18 @@ export class SettingsPage implements OnDestroy {
 
       }
       if(this.type == 'user' || this.type == 'user/stylist/user') {
-        if(this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.phone == '') {
+        if(this.username == '' || this.password == '' || this.email == '' || this.bio == '') {
           alert("You need to fill out all of the information");
         }
+        else if(this.phone.match(/\d/g).length!==10) {
+          alert("Please enter a 10 digit phone number, only the digits.");
+        }
         else {
-          this.items = this.af.object('/profiles/users');
+          this.items = this.af.list('/profiles/users');
 
           if(this.username == this.oldUser) {
-            this.items.update({[this.username] : {'username': this.username, 'password': this.password, 'email': this.email,
-                                  'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL}});
+            this.items.update(this.username, {'username': this.username, 'password': this.password, 'email': this.email,
+                                  'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL});
 
             if(this.isTypeNull == null) {
               this.navCtrl.push(UserViewProfile);
@@ -283,9 +300,9 @@ export class SettingsPage implements OnDestroy {
           }
           else {
             this.af.object('/profiles/users/'+this.oldUser).remove().then(_ => console.log('item deleted!'));
-            this.items.update({[this.username] : {'username': this.username, 'password': this.password, 'email': this.email,
+            this.items.update(this.username, {'username': this.username, 'password': this.password, 'email': this.email,
                                'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
-                               'rating': {'one':0, 'two':0, 'three':0, 'four':0, 'five':0}}});
+                               'rating': {'one':0, 'two':0, 'three':0, 'four':0, 'five':0}});
 
             if(this.isTypeNull == null) {
               this.navCtrl.push(UserViewProfile);
@@ -320,7 +337,9 @@ export class SettingsPage implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription3.unsubscribe();
+    if(this.subscription3 != null) {
+      this.subscription3.unsubscribe();
+    }
   }
 
   ionViewDidLoad() {
@@ -352,15 +371,7 @@ export class SettingsPage implements OnDestroy {
 
         this.oldUser = this.username;
 
-        this.subscription3 = this.afAuth.authState.subscribe(data => {
-          if(data != null) {
-            if(data.email && data.uid) {
-              console.log("logged in");
-              this.authUser = data;
-              this.loggedIn = true;
-            }
-          }
-        })
+
 
         this.isTypeNull = this.navParams.get('type');
         
@@ -380,6 +391,12 @@ export class SettingsPage implements OnDestroy {
           if(this.type == 'stylist' || this.type == 'user/stylist/stylist') {
             this.storage.get('address').then((val) => {this.address = val; console.log(val + "        getting addressssssss")});
             this.storage.get('price').then((val) => {this.price = val; });
+
+            for(let x = 0; x < 5; x++) {
+              if(this.priceRanges[x] == this.price) {
+                document.getElementById(x+"").setAttribute('selected', null);
+              }
+            }
           }
           
           

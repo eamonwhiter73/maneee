@@ -361,7 +361,8 @@ export class StylistProfile implements OnDestroy {
     this.storage.set("formula"+squarez, null);
 
     let postdata = {
-      square: null
+      square: null,
+      visible: false
     }
 
     let arrr = [];

@@ -30445,6 +30445,540 @@ image-viewer.ion-page img {
   background-color: black;
 }
 
+deposit-page {
+  /*--------------------
+Shared Variables
+--------------------*/
+  /*--------------------
+General
+--------------------*/
+  /*--------------------
+Inputs 
+--------------------*/
+  /*--------------------
+Animations
+--------------------*/
+}
+
+deposit-page #submit-button {
+  width: 100%;
+  height: 44px;
+  background-color: blue;
+}
+
+deposit-page .text-input-ios {
+  margin: 0;
+}
+
+deposit-page input {
+  width: 100%;
+}
+
+deposit-page form {
+  height: 67%;
+}
+
+deposit-page html,
+deposit-page body {
+  font-size: 100%;
+  height: 100%;
+  color: #282c37;
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+deposit-page header {
+  z-index: 2;
+  -webkit-transform: translate(0, 5.5em);
+  transform: translate(0, 5.5em);
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+deposit-page header.header-slide {
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+deposit-page h1 {
+  font-weight: 100;
+  font-size: 1.4em;
+  display: block;
+  top: 20px;
+}
+
+deposit-page .form-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #EEE;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border: 1em solid #fff;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+}
+
+@media (max-width: 476px) {
+  deposit-page .form-container {
+    border: none;
+  }
+}
+
+deposit-page .cardinfo-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+deposit-page .bg-illustration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+
+deposit-page .bg-illustration svg {
+  width: 100%;
+}
+
+deposit-page .card-shape, deposit-page #my-sample-form.visa, deposit-page #my-sample-form.master-card, deposit-page #my-sample-form.maestro, deposit-page #my-sample-form.american-express, deposit-page #my-sample-form.discover, deposit-page #my-sample-form.unionpay, deposit-page #my-sample-form.jcb, deposit-page #my-sample-form.diners-club {
+  border-radius: 6px;
+  padding: 2em 2em 1em;
+}
+
+@media (max-width: 476px) {
+  deposit-page .card-shape, deposit-page #my-sample-form.visa, deposit-page #my-sample-form.master-card, deposit-page #my-sample-form.maestro, deposit-page #my-sample-form.american-express, deposit-page #my-sample-form.discover, deposit-page #my-sample-form.unionpay, deposit-page #my-sample-form.jcb, deposit-page #my-sample-form.diners-club {
+    padding: 2em 1.5em 1em;
+  }
+}
+
+deposit-page #my-sample-form {
+  margin-top: -15%;
+  background-color: #FFF;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  padding: 8em 3em 2em;
+  width: 20em;
+  margin-bottom: 2em;
+  -webkit-transition: all 600ms cubic-bezier(0.2, 1.3, 0.7, 1);
+  transition: all 600ms cubic-bezier(0.2, 1.3, 0.7, 1);
+  -webkit-animation: cardIntro 500ms cubic-bezier(0.2, 1.3, 0.7, 1);
+  animation: cardIntro 500ms cubic-bezier(0.2, 1.3, 0.7, 1);
+  z-index: 1;
+}
+
+deposit-page #my-sample-form:hover {
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 476px) {
+  deposit-page #my-sample-form {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 7em 2em 2em;
+    width: 100%;
+  }
+}
+
+deposit-page #my-sample-form.visa {
+  color: #fff;
+  background-color: #0D4AA2;
+}
+
+deposit-page #my-sample-form.master-card {
+  color: #fff;
+  background-color: #363636;
+  background: linear-gradient(115deg, #d82332, #d82332 50%, #f1ad3d 50%, #f1ad3d);
+}
+
+deposit-page #my-sample-form.maestro {
+  color: #fff;
+  background-color: #363636;
+  background: linear-gradient(115deg, #009ddd, #009ddd 50%, #ed1c2e 50%, #ed1c2e);
+}
+
+deposit-page #my-sample-form.american-express {
+  color: #fff;
+  background-color: #007CC3;
+}
+
+deposit-page #my-sample-form.discover {
+  color: #fff;
+  background-color: #ff6000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#d14310), to(#f7961e));
+  background: linear-gradient(#d14310, #f7961e);
+}
+
+deposit-page #my-sample-form.unionpay, deposit-page #my-sample-form.jcb, deposit-page #my-sample-form.diners-club {
+  color: #fff;
+  background-color: #363636;
+}
+
+deposit-page .cardinfo-label {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+}
+
+deposit-page .cardinfo-exp-date {
+  margin-right: 1em;
+  width: 100%;
+}
+
+deposit-page .cardinfo-cvv {
+  width: 100%;
+}
+
+deposit-page #button-pay {
+  cursor: pointer;
+  width: 16em;
+  font-size: 15px;
+  border: 0;
+  padding: 1.2em 1em;
+  color: #fff;
+  background: #282c37;
+  border-radius: 4px;
+  z-index: 0;
+  -webkit-transform: translateY(-100px);
+  transform: translateY(-100px);
+  -webkit-transition: all 500ms cubic-bezier(0.2, 1.3, 0.7, 1);
+  transition: all 500ms cubic-bezier(0.2, 1.3, 0.7, 1);
+  opacity: 0;
+  -webkit-appearance: none;
+}
+
+deposit-page #button-pay:hover {
+  background: #535b72;
+}
+
+deposit-page #button-pay:active {
+  -webkit-animation: cardIntro 200ms cubic-bezier(0.2, 1.3, 0.7, 1);
+  animation: cardIntro 200ms cubic-bezier(0.2, 1.3, 0.7, 1);
+}
+
+deposit-page #button-pay.show-button {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+deposit-page .cardinfo-card-number {
+  position: relative;
+  margin-top: -20%;
+}
+
+deposit-page #card-image {
+  position: absolute;
+  top: 2em;
+  right: 1em;
+  width: 44px;
+  height: 28px;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/346994/card_sprite.png);
+  background-size: 86px 458px;
+  border-radius: 4px;
+  background-position: -100px 0;
+  background-repeat: no-repeat;
+  margin-bottom: 1em;
+}
+
+deposit-page #card-image.visa {
+  background-position: 0 -398px;
+}
+
+deposit-page #card-image.master-card {
+  background-position: 0 -281px;
+}
+
+deposit-page #card-image.american-express {
+  background-position: 0 -370px;
+}
+
+deposit-page #card-image.discover {
+  background-position: 0 -163px;
+}
+
+deposit-page #card-image.maestro {
+  background-position: 0 -251px;
+}
+
+deposit-page #card-image.jcb {
+  background-position: 0 -221px;
+}
+
+deposit-page #card-image.diners-club {
+  background-position: 0 -133px;
+}
+
+deposit-page .input-wrapper {
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.86);
+  height: 2.75em;
+  border: 1px solid #eee;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  padding: 5px 10px;
+  margin-bottom: 1em;
+}
+
+deposit-page .cardinfo-card-number,
+deposit-page .cardinfo-exp-date,
+deposit-page .cardinfo-cvv {
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+deposit-page .braintree-hosted-fields-focused {
+  border-color: #5db6e8;
+}
+
+deposit-page .braintree-hosted-fields-invalid {
+  border-color: #E53A40;
+  -webkit-animation: shake 500ms cubic-bezier(0.2, 1.3, 0.7, 1) both;
+  animation: shake 500ms cubic-bezier(0.2, 1.3, 0.7, 1) both;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+@-webkit-keyframes cardIntro {
+  0% {
+    -webkit-transform: scale(0.8) translate(0, 0);
+    transform: scale(0.8) translate(0, 0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1) translate(0, 0);
+    transform: scale(1) translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes cardIntro {
+  0% {
+    -webkit-transform: scale(0.8) translate(0, 0);
+    transform: scale(0.8) translate(0, 0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1) translate(0, 0);
+    transform: scale(1) translate(0, 0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes shake {
+  10%,
+  90% {
+    -webkit-transform: translate3d(-1px, 0, 0);
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    -webkit-transform: translate3d(1px, 0, 0);
+    transform: translate3d(1px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translate3d(-3px, 0, 0);
+    transform: translate3d(-3px, 0, 0);
+  }
+  40%,
+  60% {
+    -webkit-transform: translate3d(3px, 0, 0);
+    transform: translate3d(3px, 0, 0);
+  }
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    -webkit-transform: translate3d(-1px, 0, 0);
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    -webkit-transform: translate3d(1px, 0, 0);
+    transform: translate3d(1px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translate3d(-3px, 0, 0);
+    transform: translate3d(-3px, 0, 0);
+  }
+  40%,
+  60% {
+    -webkit-transform: translate3d(3px, 0, 0);
+    transform: translate3d(3px, 0, 0);
+  }
+}
+
+deposit-page .inlineblock {
+  display: inline-block;
+  margin: 5px;
+}
+
+deposit-page ion-icon {
+  font-size: 40px;
+}
+
+deposit-page .icon-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #eb4359;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+deposit-page modal-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+deposit-page .main-view {
+  background: transparent;
+}
+
+deposit-page .overlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: .5;
+  background-color: #333;
+}
+
+deposit-page .modal_content {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 85%;
+  padding: 10px;
+  z-index: 100;
+  margin: 0 auto;
+  padding: 10px;
+  color: #333;
+  background: #e8e8e8;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e8e8e8));
+  background: linear-gradient(to bottom, #fff 0%, #e8e8e8 100%);
+  border-radius: 5px 5px 0px 0px;
+  -webkit-box-shadow: 0 2px 3px rgba(51, 51, 51, 0.35);
+  box-shadow: 0 2px 3px rgba(51, 51, 51, 0.35);
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  overflow: hidden;
+  border-style: solid;
+  border-width: 15px;
+  border-color: #f1f1f1;
+  text-align: center;
+}
+
+@media not all and (min-height: 600px) and (min-width: 768px) {
+  deposit-page ion-modal ion-backdrop {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (min-height: 0px) and (min-width: 0px) {
+  deposit-page .modal-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+deposit-page .salon, deposit-page .time {
+  font-weight: 700;
+  display: inline-block;
+}
+
+deposit-page .salon {
+  margin-right: 1px;
+}
+
+deposit-page h3 {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+deposit-page .innerbox {
+  position: relative;
+  margin: -9px;
+  height: 105%;
+  border-width: 15px;
+  border-color: #2c2c2c;
+  border-style: solid;
+  padding: 40px 15px 15px 15px;
+}
+
+deposit-page .buttoncont {
+  width: 100%;
+  margin-top: 15px;
+}
+
+deposit-page .reservebutton {
+  width: 60%;
+  background-color: #2c2c2c;
+  color: white;
+}
+
+deposit-page .viewprofile {
+  width: 85%;
+  background-color: #2c2c2c;
+  color: white;
+  height: 20px;
+  font-size: 12px;
+}
+
 formula-buy {
   /*--------------------
 Shared Variables
@@ -30767,19 +31301,6 @@ formula-buy .braintree-hosted-fields-invalid {
   perspective: 1000px;
 }
 
-@-webkit-keyframes cardIntro {
-  0% {
-    -webkit-transform: scale(0.8) translate(0, 0);
-    transform: scale(0.8) translate(0, 0);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: scale(1) translate(0, 0);
-    transform: scale(1) translate(0, 0);
-    opacity: 1;
-  }
-}
-
 @keyframes cardIntro {
   0% {
     -webkit-transform: scale(0.8) translate(0, 0);
@@ -30790,30 +31311,6 @@ formula-buy .braintree-hosted-fields-invalid {
     -webkit-transform: scale(1) translate(0, 0);
     transform: scale(1) translate(0, 0);
     opacity: 1;
-  }
-}
-
-@-webkit-keyframes shake {
-  10%,
-  90% {
-    -webkit-transform: translate3d(-1px, 0, 0);
-    transform: translate3d(-1px, 0, 0);
-  }
-  20%,
-  80% {
-    -webkit-transform: translate3d(1px, 0, 0);
-    transform: translate3d(1px, 0, 0);
-  }
-  30%,
-  50%,
-  70% {
-    -webkit-transform: translate3d(-3px, 0, 0);
-    transform: translate3d(-3px, 0, 0);
-  }
-  40%,
-  60% {
-    -webkit-transform: translate3d(3px, 0, 0);
-    transform: translate3d(3px, 0, 0);
   }
 }
 
@@ -35586,6 +36083,15 @@ page-user-profile .fb {
 
 page-user-profile .insta {
   width: 28px;
+}
+
+page-user-profile .deposit {
+  width: 38px;
+  position: relative;
+  display: block;
+  top: 20px;
+  right: 34px;
+  z-index: 10;
 }
 
 @media (max-width: 374px) and (min-width: 320px) {

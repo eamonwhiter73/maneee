@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import dropin from 'braintree-web-drop-in';
 import { Http } from '@angular/http';
 import { FormulaBuy } from '../../modals/formulabuy/formulabuy';
+import { DepositPage } from '../../modals/depositpage/depositpage';
+
 
 
 
@@ -27,10 +29,11 @@ export class DropinPage {
     console.log('ionViewDidLoad DropinPage');
     let square = this.navParams.get('square');
     let username = this.navParams.get('username');
+    let comingFrom = this.navParams.get('page');
 
     var button = document.querySelector('#submit-button');
 
-    this.http.request('http://me.eamondev.com/api/generatetoken.php')
+    this.http.request('http://192.168.1.131:8888/api/generatetoken.php')
       .subscribe(res => { 
 
         dropin.create({
@@ -45,9 +48,19 @@ export class DropinPage {
               console.log(JSON.stringify(payload) + "payload");
               // Submit payload.nonce to your server
               this.blurAll();
-              let profileModal = this.modalCtrl.create(FormulaBuy, { username: username, square: square, payload: payload});
-  			  profileModal.present();
-  			  this.navCtrl.pop();
+              if(comingFrom == 'userprofile') {
+              	let profileModal = this.modalCtrl.create(DepositPage, { payload: payload});
+	  			  profileModal.present();
+	  			  this.navCtrl.pop();
+              }
+              else if(comingFrom == null) {
+	              let profileModal = this.modalCtrl.create(FormulaBuy, { username: username, square: square, payload: payload});
+	  			  profileModal.present();
+	  			  this.navCtrl.pop();
+	  		  }
+	  		  else {
+	  		  	//Add product code here
+	  		  }
             });
           });
         });

@@ -165,6 +165,10 @@ export class UserProfile implements OnDestroy {
     }).unsubscribe();
   }
 
+  depositOpen() {
+    this.navCtrl.push(DropinPage, {page:'userprofile'});
+  }
+
 
   followStylist() {
       this.item = this.af.object('/profiles/stylists/' + this.username + '/followers');
@@ -188,6 +192,7 @@ export class UserProfile implements OnDestroy {
   }
 
   ionViewDidLoad() {
+    this.storage.set('fblinkedstylist', false);
     this.username = this.params.get('username');
     this.storage.get('phone').then((val) => {this.phone = val; });
 

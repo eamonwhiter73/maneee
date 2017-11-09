@@ -6,9 +6,9 @@ webpackJsonp([11],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FollowersPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_geolocation__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_call_number__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__userviewuserprofile_userviewuserprofile__ = __webpack_require__(203);
@@ -137,12 +137,12 @@ FollowersPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CameraServicePost; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_crop__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_transfer__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_firebase__);
@@ -363,11 +363,11 @@ CameraServicePost = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserBooking; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_feeduser_feeduser__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_feeduser_feeduser__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__stylistprofile_stylistprofile__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__stylistprofile_stylistprofile__ = __webpack_require__(55);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -805,17 +805,17 @@ UserBooking = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserViewProfile; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_settings__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_settings__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_cameraservice__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ionic_img_viewer__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ionic_img_viewer__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_native_geocoder__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(90);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -866,7 +866,7 @@ var UserViewProfile = (function () {
         this.square = 0;
         this.datesToSelect = [];
         this.optionsGetMedia = {
-            allowEdit: false,
+            //allowEdit: false,
             quality: 10,
             targetWidth: 600,
             targetHeight: 600,
@@ -883,7 +883,6 @@ var UserViewProfile = (function () {
             sourceType: this.camera.PictureSourceType.CAMERA,
             mediaType: this.camera.MediaType.PICTURE,
             destinationType: this.camera.DestinationType.FILE_URI,
-            saveToPhotoAlbum: true
         };
         this.times = [{ 'time': '8:00 AM', 'selected': false }, { 'time': '12:00 PM', 'selected': false }, { 'time': '4:00 PM', 'selected': false },
             { 'time': '8:30 AM', 'selected': false }, { 'time': '12:30 PM', 'selected': false }, { 'time': '4:30 PM', 'selected': false },
@@ -1274,14 +1273,14 @@ UserViewProfile = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignInPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(461);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_keyboard__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(462);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_keyboard__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1518,11 +1517,12 @@ SignInPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropinPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_braintree_web_drop_in__ = __webpack_require__(537);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_braintree_web_drop_in__ = __webpack_require__(538);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_braintree_web_drop_in___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_braintree_web_drop_in__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modals_formulabuy_formulabuy__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modals_depositpage_depositpage__ = __webpack_require__(291);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1532,6 +1532,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1555,8 +1556,9 @@ var DropinPage = (function () {
         console.log('ionViewDidLoad DropinPage');
         var square = this.navParams.get('square');
         var username = this.navParams.get('username');
+        var comingFrom = this.navParams.get('page');
         var button = document.querySelector('#submit-button');
-        this.http.request('http://me.eamondev.com/api/generatetoken.php')
+        this.http.request('http://192.168.1.131:8888/api/generatetoken.php')
             .subscribe(function (res) {
             __WEBPACK_IMPORTED_MODULE_2_braintree_web_drop_in___default.a.create({
                 authorization: res.text(),
@@ -1570,9 +1572,19 @@ var DropinPage = (function () {
                         console.log(JSON.stringify(payload) + "payload");
                         // Submit payload.nonce to your server
                         _this.blurAll();
-                        var profileModal = _this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__modals_formulabuy_formulabuy__["a" /* FormulaBuy */], { username: username, square: square, payload: payload });
-                        profileModal.present();
-                        _this.navCtrl.pop();
+                        if (comingFrom == 'userprofile') {
+                            var profileModal = _this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_5__modals_depositpage_depositpage__["a" /* DepositPage */], { payload: payload });
+                            profileModal.present();
+                            _this.navCtrl.pop();
+                        }
+                        else if (comingFrom == null) {
+                            var profileModal = _this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__modals_formulabuy_formulabuy__["a" /* FormulaBuy */], { username: username, square: square, payload: payload });
+                            profileModal.present();
+                            _this.navCtrl.pop();
+                        }
+                        else {
+                            //Add product code here
+                        }
                     });
                 });
             });
@@ -1604,19 +1616,19 @@ DropinPage = __decorate([
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserviewuserprofilePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__followers_followers__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cameraservice__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_img_viewer__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_img_viewer__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_geolocation__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_call_number__ = __webpack_require__(91);
@@ -2053,11 +2065,11 @@ UserviewuserprofilePage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormulapostPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_date_picker__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__stylistprofile_stylistprofile__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_keyboard__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__stylistprofile_stylistprofile__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_keyboard__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(13);
@@ -2241,8 +2253,8 @@ FormulapostPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FullfeedPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stylistprofile_stylistprofile__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stylistprofile_stylistprofile__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
@@ -2401,9 +2413,9 @@ FullfeedPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormulasPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__formula_formula__ = __webpack_require__(207);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2497,7 +2509,7 @@ FormulasPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormulaPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2572,9 +2584,9 @@ FormulaPage = __decorate([
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MapPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_google_maps__ = __webpack_require__(463);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_google_maps__ = __webpack_require__(464);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2679,35 +2691,35 @@ webpackEmptyAsyncContext.id = 218;
 
 var map = {
 	"../pages/booking/booking.module": [
-		953,
+		949,
 		10
 	],
 	"../pages/dropin/dropin.module": [
-		946,
+		947,
 		9
 	],
 	"../pages/followers/followers.module": [
-		947,
+		948,
 		8
 	],
 	"../pages/formula/formula.module": [
-		948,
+		950,
 		7
 	],
 	"../pages/formulapost/formulapost.module": [
-		950,
+		951,
 		6
 	],
 	"../pages/formulas/formulas.module": [
-		949,
+		952,
 		5
 	],
 	"../pages/fullfeed/fullfeed.module": [
-		951,
+		953,
 		4
 	],
 	"../pages/map/map.module": [
-		952,
+		954,
 		3
 	],
 	"../pages/postpage/postpage.module": [
@@ -2715,11 +2727,11 @@ var map = {
 		2
 	],
 	"../pages/settings/settings.module": [
-		954,
+		955,
 		1
 	],
 	"../pages/userviewuserprofile/userviewuserprofile.module": [
-		955,
+		957,
 		0
 	]
 };
@@ -2744,13 +2756,13 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormulaBuy; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2832,8 +2844,6 @@ var FormulaBuy = (function () {
                 this.data.color = this.folder2;
             }
             console.log(this.payload + '          paaaaayyyyyylllllooooooaaaaaddddd');
-            var params = new URLSearchParams();
-            params.set('payout', 'payyyyyy');
             var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({
                 'Content-Type': 'application/json'
             });
@@ -2843,7 +2853,7 @@ var FormulaBuy = (function () {
             // TODO: Encode the values using encodeURIComponent().
             var body = JSON.stringify(this.payload);
             //INSERT CALL TO BACKEND
-            this.http.post('http://me.eamondev.com/api/buyformula.php', body)
+            this.http.post('http://192.168.1.131:8888/api/buyformula.php', body)
                 .subscribe(function (res) {
                 console.log(res + "response from formula buy");
                 console.log(JSON.stringify(_this.data) + "     data dat d dat add  dat");
@@ -2876,21 +2886,113 @@ FormulaBuy = __decorate([
 
 /***/ }),
 
-/***/ 293:
+/***/ 291:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DepositPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(14);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var DepositPage = (function () {
+    function DepositPage(storage, http, af, appCtrl, navCtrl, params, viewCtrl, renderer) {
+        this.storage = storage;
+        this.http = http;
+        this.af = af;
+        this.appCtrl = appCtrl;
+        this.navCtrl = navCtrl;
+        this.params = params;
+        this.viewCtrl = viewCtrl;
+        this.renderer = renderer;
+        this.data = { 'color': '' };
+        this.items = [];
+    }
+    DepositPage.prototype.ionViewDidLoad = function () {
+        this.payload = this.params.get('payload');
+        //this.renderer.appendText(this.salon.nativeElement, "@"+this.params.get('salon'));
+        //this.renderer.appendText(this.time.nativeElement, this.params.get('time'));
+    };
+    DepositPage.prototype.buy = function () {
+        var _this = this;
+        if (this.deposit == '' || isNaN(parseInt(this.deposit))) {
+            alert("You must fill in an amount to deposit.");
+        }
+        else {
+            console.log(this.payload + '          paaaaayyyyyylllllooooooaaaaaddddd');
+            var params = new URLSearchParams();
+            params.set('deposit', this.deposit);
+            var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            });
+            var options = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["e" /* RequestOptions */]({
+                headers: headers,
+                params: params
+            });
+            // TODO: Encode the values using encodeURIComponent().
+            this.payload['deposit'] = this.deposit;
+            var body = JSON.stringify(this.payload);
+            //INSERT CALL TO BACKEND
+            this.http.post('http://192.168.1.131:8888/api/deposit.php', body)
+                .subscribe(function (res) {
+                alert("Your deposit was successful.");
+                _this.dismiss();
+            }, function (err) {
+                alert("Something went wrong.");
+            });
+        }
+    };
+    DepositPage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
+    };
+    DepositPage.prototype.ngOnDestroy = function () {
+        if (this.subscription != null) {
+            this.subscription.unsubscribe();
+        }
+    };
+    return DepositPage;
+}());
+DepositPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
+        selector: 'deposit-page',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/modals/depositpage/depositpage.html"*/'<ion-content class="main-view">\n	<div class="overlay" (tap)="dismiss()"></div>\n  <div class="modal_content">\n    <div>\n        <ion-label>Enter the deposit amount:</ion-label>\n        <ion-item>\n          <ion-input [(ngModel)]="deposit" type="text" name="deposit"></ion-input>\n        </ion-item>\n    </div>\n\n    <button ion-button (tap)="buy()" block>Deposit</button>\n\n      <!--<header>\n        <h1>Payment Method</h1>\n      </header>\n\n      <form id="my-sample-form" (ngSubmit)="submitForm()">\n        <div class="cardinfo-card-number">\n          <ion-label class="cardinfo-label" for="card-number">Card Number</ion-label>\n          <ion-input class=\'input-wrapper\' id="card-number" type="text"></ion-input>\n          <div id="card-image"></div>\n        </div>\n\n        <div class="cardinfo-wrapper">\n          <div class="cardinfo-exp-date">\n            <ion-label class="cardinfo-label" for="expiration-date">Valid Thru</ion-label>\n            <ion-input class=\'input-wrapper\' id="expiration-date" type=\'text\'></ion-input>\n          </div>\n\n          <div class="cardinfo-cvv">\n            <ion-label class="cardinfo-label" for="cvv">CVV</ion-label>\n            <ion-input class=\'input-wrapper\' id="cvv" type=\'text\'></ion-input>\n          </div>\n        </div>\n      </form>\n\n      <input id="button-pay" type="submit" value="Continue" />-->\n\n\n      <!--<h1>Payment Method</h1>\n\n      <form id="my-sample-form" class="scale-down">\n        <div class="cardinfo-card-number">\n          <label class="cardinfo-label" for="card-number">Card Number</label>\n          <input class=\'input-wrapper\' id="card-number">\n          <div id="card-image"></div>\n        </div>\n\n        <div class="cardinfo-wrapper">\n          <div class="cardinfo-exp-date">\n            <label class="cardinfo-label" for="expiration-date">Valid Thru</label>\n            <input class=\'input-wrapper\' id="expiration-date">\n          </div>\n\n          <div class="cardinfo-cvv">\n            <label class="cardinfo-label" for="cvv">CVV</label>\n            <input class=\'input-wrapper\' id="cvv">\n          </div>\n        </div>\n      </form>\n\n      <input id="button-pay" type="submit" value="Continue" />-->\n  </div>\n</ion-content>'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/modals/depositpage/depositpage.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["q" /* NavController */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["r" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0_ionic_angular__["x" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1__angular_core__["Renderer"]])
+], DepositPage);
+
+//# sourceMappingURL=depositpage.js.map
+
+/***/ }),
+
+/***/ 294:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CameraServiceProfile; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_crop__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3111,12 +3213,12 @@ CameraServiceProfile = __decorate([
 
 /***/ }),
 
-/***/ 295:
+/***/ 296:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PopUp; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_userprofile_userprofile__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(13);
@@ -3213,12 +3315,12 @@ PopUp = __decorate([
 
 /***/ }),
 
-/***/ 300:
+/***/ 301:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Rate; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3470,12 +3572,12 @@ Rate = __decorate([
 
 /***/ }),
 
-/***/ 458:
+/***/ 459:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PopUpOther; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_userprofile_userprofile__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(13);
@@ -3572,25 +3674,25 @@ PopUpOther = __decorate([
 
 /***/ }),
 
-/***/ 461:
+/***/ 462:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignUpPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signin_signin__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_keyboard__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_keyboard__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_facebook__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_google_plus__ = __webpack_require__(462);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_google_plus__ = __webpack_require__(463);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4005,15 +4107,15 @@ SignUpPage = __decorate([
 
 /***/ }),
 
-/***/ 511:
+/***/ 512:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(512);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_web_animations_js_web_animations_min__ = __webpack_require__(516);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(513);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_web_animations_js_web_animations_min__ = __webpack_require__(517);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_web_animations_js_web_animations_min___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_web_animations_js_web_animations_min__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_module__ = __webpack_require__(517);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_module__ = __webpack_require__(518);
 
 
 
@@ -4022,7 +4124,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 517:
+/***/ 518:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4030,19 +4132,19 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(504);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(505);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(935);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(936);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_signin_signin__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_signup_signup__ = __webpack_require__(461);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_feedstylist_feedstylist__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_feeduser_feeduser__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_postpage_postpage__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_platform_browser_animations__ = __webpack_require__(936);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_stylistprofile_stylistprofile__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_booking_booking__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_signup_signup__ = __webpack_require__(462);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_feedstylist_feedstylist__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_feeduser_feeduser__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_postpage_postpage__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_platform_browser_animations__ = __webpack_require__(937);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_stylistprofile_stylistprofile__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_booking_booking__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_userprofile_userprofile__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_userbooking_userbooking__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_userviewprofile_userviewprofile__ = __webpack_require__(176);
@@ -4052,44 +4154,45 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_formula_formula__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_dropin_dropin__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_userviewuserprofile_userviewuserprofile__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_ngx_swiper_wrapper__ = __webpack_require__(938);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_ngx_swiper_wrapper__ = __webpack_require__(939);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_ngx_swiper_wrapper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24_ngx_swiper_wrapper__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_fullfeed_fullfeed__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_ionic2_calendar__ = __webpack_require__(464);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_keyboard__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_angularfire2__ = __webpack_require__(942);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29_angularfire2_auth__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_ionic2_calendar__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_keyboard__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_angularfire2__ = __webpack_require__(943);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29_angularfire2_auth__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__ionic_native_transfer__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__ionic_native_crop__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_file__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_file__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_cameraservice__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_cameraservicepost__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__services_cameraserviceprofile__ = __webpack_require__(293);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__angular_http__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39_ionic_img_viewer__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__services_cameraserviceprofile__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__angular_http__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39_ionic_img_viewer__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__ionic_native_facebook__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__ionic_native_google_plus__ = __webpack_require__(462);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__modals_popup_popup__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__modals_popupother_popupother__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__ionic_native_google_plus__ = __webpack_require__(463);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_43__modals_popup_popup__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__modals_popupother_popupother__ = __webpack_require__(459);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__modals_formulabuy_formulabuy__ = __webpack_require__(281);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__modals_rate_rate__ = __webpack_require__(300);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47_ionic_image_loader__ = __webpack_require__(943);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__ionic_native_date_picker__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__ionic_native_native_geocoder__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__ionic_native_geolocation__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__ionic_native_diagnostic__ = __webpack_require__(459);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__ionic_native_location_accuracy__ = __webpack_require__(945);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__ionic_native_call_number__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__ionic_native_sms__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__pages_map_map__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__ionic_native_google_maps__ = __webpack_require__(463);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57_ionic_cache__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58__ionic_native_screen_orientation__ = __webpack_require__(506);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59_firebase__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_59_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__modals_depositpage_depositpage__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__modals_rate_rate__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_48_ionic_image_loader__ = __webpack_require__(944);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__ionic_native_date_picker__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__ionic_native_native_geocoder__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__ionic_native_geolocation__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__ionic_native_diagnostic__ = __webpack_require__(460);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_53__ionic_native_location_accuracy__ = __webpack_require__(946);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_54__ionic_native_call_number__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_55__ionic_native_sms__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_56__pages_map_map__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_57__ionic_native_google_maps__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_58_ionic_cache__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_59__ionic_native_screen_orientation__ = __webpack_require__(507);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60_firebase__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_60_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_60_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4158,6 +4261,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 //import { Ng2ImgMaxModule } from 'ng2-img-max'; // <-- import the module
 var firebaseConfig = {
     apiKey: "AIzaSyC1pFZzY3w0zT7hB2hcc6zhLwYgaK0MhvQ",
@@ -4172,7 +4276,7 @@ var SWIPER_CONFIG = {
     slidesPerView: '4',
     keyboardControl: false
 };
-__WEBPACK_IMPORTED_MODULE_59_firebase__["initializeApp"](firebaseConfig);
+__WEBPACK_IMPORTED_MODULE_60_firebase__["initializeApp"](firebaseConfig);
 var AppModule = (function () {
     function AppModule() {
     }
@@ -4193,13 +4297,14 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_43__modals_popup_popup__["a" /* PopUp */],
             __WEBPACK_IMPORTED_MODULE_44__modals_popupother_popupother__["a" /* PopUpOther */],
             __WEBPACK_IMPORTED_MODULE_45__modals_formulabuy_formulabuy__["a" /* FormulaBuy */],
+            __WEBPACK_IMPORTED_MODULE_46__modals_depositpage_depositpage__["a" /* DepositPage */],
             __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__["a" /* SettingsPage */],
             __WEBPACK_IMPORTED_MODULE_15__pages_userprofile_userprofile__["a" /* UserProfile */],
-            __WEBPACK_IMPORTED_MODULE_46__modals_rate_rate__["a" /* Rate */],
+            __WEBPACK_IMPORTED_MODULE_47__modals_rate_rate__["a" /* Rate */],
             __WEBPACK_IMPORTED_MODULE_17__pages_userviewprofile_userviewprofile__["a" /* UserViewProfile */],
             __WEBPACK_IMPORTED_MODULE_18__pages_followers_followers__["a" /* FollowersPage */],
             __WEBPACK_IMPORTED_MODULE_23__pages_userviewuserprofile_userviewuserprofile__["a" /* UserviewuserprofilePage */],
-            __WEBPACK_IMPORTED_MODULE_55__pages_map_map__["a" /* MapPage */],
+            __WEBPACK_IMPORTED_MODULE_56__pages_map_map__["a" /* MapPage */],
             __WEBPACK_IMPORTED_MODULE_25__pages_fullfeed_fullfeed__["a" /* FullfeedPage */],
             __WEBPACK_IMPORTED_MODULE_19__pages_formulapost_formulapost__["a" /* FormulapostPage */],
             __WEBPACK_IMPORTED_MODULE_20__pages_formulas_formulas__["a" /* FormulasPage */],
@@ -4213,15 +4318,15 @@ AppModule = __decorate([
                 links: [
                     { loadChildren: '../pages/dropin/dropin.module#DropinPageModule', name: 'DropinPage', segment: 'dropin', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/followers/followers.module#FollowersPageModule', name: 'FollowersPage', segment: 'followers', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/booking/booking.module#BookingPageModule', name: 'BookingPage', segment: 'booking', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/formula/formula.module#FormulaPageModule', name: 'FormulaPage', segment: 'formula', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/formulas/formulas.module#FormulasPageModule', name: 'FormulasPage', segment: 'formulas', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/formulapost/formulapost.module#FormulapostPageModule', name: 'FormulapostPage', segment: 'formulapost', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/formulas/formulas.module#FormulasPageModule', name: 'FormulasPage', segment: 'formulas', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/fullfeed/fullfeed.module#FullfeedPageModule', name: 'FullfeedPage', segment: 'fullfeed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/map/map.module#MapPageModule', name: 'MapPage', segment: 'map', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/booking/booking.module#BookingPageModule', name: 'BookingPage', segment: 'booking', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/userviewuserprofile/userviewuserprofile.module#UserviewuserprofilePageModule', name: 'UserviewuserprofilePage', segment: 'userviewuserprofile', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/postpage/postpage.module#PostpagePageModule', name: 'PostpagePage', segment: 'postpage', priority: 'low', defaultHistory: [] }
+                    { loadChildren: '../pages/postpage/postpage.module#PostpagePageModule', name: 'PostpagePage', segment: 'postpage', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/userviewuserprofile/userviewuserprofile.module#UserviewuserprofilePageModule', name: 'UserviewuserprofilePage', segment: 'userviewuserprofile', priority: 'low', defaultHistory: [] }
                 ]
             }),
             __WEBPACK_IMPORTED_MODULE_38__angular_http__["c" /* HttpModule */],
@@ -4231,9 +4336,9 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_30_angularfire2_database__["b" /* AngularFireDatabaseModule */],
             __WEBPACK_IMPORTED_MODULE_39_ionic_img_viewer__["b" /* IonicImageViewerModule */],
             __WEBPACK_IMPORTED_MODULE_40__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
-            __WEBPACK_IMPORTED_MODULE_47_ionic_image_loader__["a" /* IonicImageLoader */],
+            __WEBPACK_IMPORTED_MODULE_48_ionic_image_loader__["a" /* IonicImageLoader */],
             __WEBPACK_IMPORTED_MODULE_24_ngx_swiper_wrapper__["SwiperModule"].forRoot(SWIPER_CONFIG),
-            __WEBPACK_IMPORTED_MODULE_57_ionic_cache__["a" /* CacheModule */].forRoot()
+            __WEBPACK_IMPORTED_MODULE_58_ionic_cache__["a" /* CacheModule */].forRoot()
             //Ng2ImgMaxModule
             /*CalendarModule.forRoot()*/
         ],
@@ -4250,14 +4355,15 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_43__modals_popup_popup__["a" /* PopUp */],
             __WEBPACK_IMPORTED_MODULE_44__modals_popupother_popupother__["a" /* PopUpOther */],
             __WEBPACK_IMPORTED_MODULE_45__modals_formulabuy_formulabuy__["a" /* FormulaBuy */],
-            __WEBPACK_IMPORTED_MODULE_46__modals_rate_rate__["a" /* Rate */],
+            __WEBPACK_IMPORTED_MODULE_46__modals_depositpage_depositpage__["a" /* DepositPage */],
+            __WEBPACK_IMPORTED_MODULE_47__modals_rate_rate__["a" /* Rate */],
             __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__["a" /* SettingsPage */],
             __WEBPACK_IMPORTED_MODULE_15__pages_userprofile_userprofile__["a" /* UserProfile */],
             __WEBPACK_IMPORTED_MODULE_16__pages_userbooking_userbooking__["a" /* UserBooking */],
             __WEBPACK_IMPORTED_MODULE_17__pages_userviewprofile_userviewprofile__["a" /* UserViewProfile */],
             __WEBPACK_IMPORTED_MODULE_18__pages_followers_followers__["a" /* FollowersPage */],
             __WEBPACK_IMPORTED_MODULE_23__pages_userviewuserprofile_userviewuserprofile__["a" /* UserviewuserprofilePage */],
-            __WEBPACK_IMPORTED_MODULE_55__pages_map_map__["a" /* MapPage */],
+            __WEBPACK_IMPORTED_MODULE_56__pages_map_map__["a" /* MapPage */],
             __WEBPACK_IMPORTED_MODULE_25__pages_fullfeed_fullfeed__["a" /* FullfeedPage */],
             __WEBPACK_IMPORTED_MODULE_19__pages_formulapost_formulapost__["a" /* FormulapostPage */],
             __WEBPACK_IMPORTED_MODULE_20__pages_formulas_formulas__["a" /* FormulasPage */],
@@ -4279,15 +4385,15 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_39_ionic_img_viewer__["a" /* ImageViewerController */],
             __WEBPACK_IMPORTED_MODULE_41__ionic_native_facebook__["a" /* Facebook */],
             __WEBPACK_IMPORTED_MODULE_42__ionic_native_google_plus__["a" /* GooglePlus */],
-            __WEBPACK_IMPORTED_MODULE_48__ionic_native_date_picker__["a" /* DatePicker */],
-            __WEBPACK_IMPORTED_MODULE_49__ionic_native_native_geocoder__["a" /* NativeGeocoder */],
-            __WEBPACK_IMPORTED_MODULE_50__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_51__ionic_native_diagnostic__["a" /* Diagnostic */],
-            __WEBPACK_IMPORTED_MODULE_52__ionic_native_location_accuracy__["a" /* LocationAccuracy */],
-            __WEBPACK_IMPORTED_MODULE_53__ionic_native_call_number__["a" /* CallNumber */],
-            __WEBPACK_IMPORTED_MODULE_54__ionic_native_sms__["a" /* SMS */],
-            __WEBPACK_IMPORTED_MODULE_56__ionic_native_google_maps__["a" /* GoogleMaps */],
-            __WEBPACK_IMPORTED_MODULE_58__ionic_native_screen_orientation__["a" /* ScreenOrientation */]
+            __WEBPACK_IMPORTED_MODULE_49__ionic_native_date_picker__["a" /* DatePicker */],
+            __WEBPACK_IMPORTED_MODULE_50__ionic_native_native_geocoder__["a" /* NativeGeocoder */],
+            __WEBPACK_IMPORTED_MODULE_51__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_52__ionic_native_diagnostic__["a" /* Diagnostic */],
+            __WEBPACK_IMPORTED_MODULE_53__ionic_native_location_accuracy__["a" /* LocationAccuracy */],
+            __WEBPACK_IMPORTED_MODULE_54__ionic_native_call_number__["a" /* CallNumber */],
+            __WEBPACK_IMPORTED_MODULE_55__ionic_native_sms__["a" /* SMS */],
+            __WEBPACK_IMPORTED_MODULE_57__ionic_native_google_maps__["a" /* GoogleMaps */],
+            __WEBPACK_IMPORTED_MODULE_59__ionic_native_screen_orientation__["a" /* ScreenOrientation */]
         ]
     })
 ], AppModule);
@@ -4296,24 +4402,24 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 54:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StylistProfile; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__formulapost_formulapost__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cameraservice__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_img_viewer__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_img_viewer__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_storage__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4588,7 +4694,8 @@ var StylistProfile = (function () {
         this.storage.set("profile" + squarez, null);
         this.storage.set("formula" + squarez, null);
         var postdata = {
-            square: null
+            square: null,
+            visible: false
         };
         var arrr = [];
         this.items5 = this.af.list('/formulas', {
@@ -5025,15 +5132,1007 @@ StylistProfile = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PostpagePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_date_picker__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_keyboard__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_cameraservicepost__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__ = __webpack_require__(33);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+/**
+ * Generated class for the PostpagePage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+var PostpagePage = (function () {
+    function PostpagePage(cameraServicePost, actionSheetCtrl, camera, af, viewCtrl, storage, keyboard, datePicker, myrenderer, navCtrl, navParams) {
+        this.cameraServicePost = cameraServicePost;
+        this.actionSheetCtrl = actionSheetCtrl;
+        this.camera = camera;
+        this.af = af;
+        this.viewCtrl = viewCtrl;
+        this.storage = storage;
+        this.keyboard = keyboard;
+        this.datePicker = datePicker;
+        this.myrenderer = myrenderer;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.item = { 'date': null, 'title': '', 'price': '', 'caption': '', 'typeofselect': 'Post' };
+        this.optionsGetMedia = {
+            allowEdit: false,
+            quality: 2,
+            targetWidth: 600,
+            targetHeight: 600,
+            encodingType: this.camera.EncodingType.PNG,
+            sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+            mediaType: this.camera.MediaType.PICTURE,
+            destinationType: this.camera.DestinationType.FILE_URI
+        };
+        this.optionsGetCamera = {
+            quality: 2,
+            targetWidth: 600,
+            targetHeight: 600,
+            encodingType: this.camera.EncodingType.PNG,
+            sourceType: this.camera.PictureSourceType.CAMERA,
+            mediaType: this.camera.MediaType.PICTURE,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            saveToPhotoAlbum: true
+        };
+    }
+    PostpagePage.prototype.typeChanged = function (event) {
+        console.log(event + "   event event event");
+        if (this.item.typeofselect == "Class") {
+            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
+        }
+        else if (this.item.typeofselect == "Product") {
+            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
+        }
+        else if (this.item.typeofselect == "Post") {
+            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
+        }
+        else if (this.item.typeofselect == "Promo") {
+            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
+        }
+        else if (this.item.typeofselect == "Formula") {
+            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
+            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
+            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'none');
+        }
+    };
+    PostpagePage.prototype.presentActionSheet = function () {
+        var _this = this;
+        var actionSheet = this.actionSheetCtrl.create({
+            title: 'Choose source',
+            buttons: [
+                {
+                    text: 'Camera',
+                    handler: function () {
+                        //let itemArrayTwo = this.profComponents.toArray();
+                        _this.cameraServicePost.getMedia(_this.optionsGetCamera).then(function (data) {
+                            _this.image.nativeElement.src = data;
+                            /*let storageRef = firebase.storage().ref().child('/profile/' + this.username + '/profile_' + this.username + '_' + this.square + '.png');
+                            let loading = this.loadingController.create({content : "Loading..."});
+                            loading.present();
+                            setTimeout(() => {
+                              storageRef.getDownloadURL().then(url => {
+                                console.log(url);
+                                this.myrenderer.setElementAttribute(itemArrayTwo[this.square - 1].nativeElement, 'src', url);
+                                this.showSquare();
+                                loading.dismiss();
+                              });
+                            }, 3000);*/
+                        }); //pass in square choice
+                        //this.myrenderer.setElementAttribute(this.itemArrayTwo[this.square - 1].nativeElement, 'src', 'block');
+                        console.log('camera clicked');
+                    }
+                }, {
+                    text: 'Photo Library',
+                    handler: function () {
+                        //let itemArrayTwo = this.profComponents.toArray();
+                        _this.cameraServicePost.getMedia(_this.optionsGetMedia).then(function (data) {
+                            _this.image.nativeElement.src = data;
+                            /*return new Promise((resolve, reject) => {
+                              let storageRef = firebase.storage().ref().child('/profile/' + this.username + '/profile_' + this.username + '_' + this.square + '.png');
+                              let loading = this.loadingController.create({content : "Loading..."});
+                              loading.present();
+                              setTimeout(() => {
+                                storageRef.getDownloadURL().then(url => {
+                                  console.log(url);
+                                  this.myrenderer.setElementAttribute(itemArrayTwo[this.square - 1].nativeElement, 'src', url);
+                                  this.showSquare();
+                                  loading.dismiss();
+                                  resolve();
+                                });
+                              }, 3000);
+                            });*/
+                            //
+                        });
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    };
+    PostpagePage.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+        this.subscription2.unsubscribe();
+    };
+    PostpagePage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
+        this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
+        this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
+        this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
+        this.imageHolder = this.navParams.get("path");
+        console.log(this.imageHolder + " imageholder imagehodl a pefsj'aes");
+        if (this.imageHolder != null) {
+            this.myrenderer.setElementAttribute(this.image.nativeElement, 'src', this.imageHolder);
+        }
+        else {
+        }
+        this.subscription = this.keyboard.onKeyboardShow().subscribe(function () {
+            _this.myrenderer.setElementStyle(_this.share.getNativeElement(), 'bottom', '-150px');
+        });
+        this.subscription2 = this.keyboard.onKeyboardHide().subscribe(function () {
+            console.log("keyboard being hid **&^&^&^&^&^&");
+            console.log(_this.share.getNativeElement() + " * f8d fd8 f8df8 fd8 f8d 8f fd8 8 fd");
+            _this.myrenderer.setElementStyle(_this.share.getNativeElement(), 'bottom', '0');
+        });
+        this.storage.get('username').then(function (val) { _this.username = val; console.log(val + "        getting username"); });
+    };
+    PostpagePage.prototype.goToFeed = function () {
+        this.navCtrl.pop();
+    };
+    PostpagePage.prototype.showDatePicker = function () {
+        var _this = this;
+        this.datePicker.show({
+            date: new Date(),
+            mode: 'date',
+            androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+        }).then(function (date) { console.log(date + " this is the date &&&&&&&"); _this.item.date = date; }, function (err) { return console.log('Error occurred while getting date: ', err); });
+    };
+    PostpagePage.prototype.formatDate = function (date) {
+        var d = new Date(date), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        return [day, month, year].join('-');
+    };
+    PostpagePage.prototype.isPromo = function () {
+        var metadata = {
+            customMetadata: {
+                'title': this.item.title,
+                'caption': this.item.caption,
+                //'price': this.item.price,
+                //'date': this.item.date,
+                'typeofselect': this.item.typeofselect,
+                'username': this.username,
+                'postdate': Date.now()
+            }
+        };
+        this.list = this.af.list('/promotions');
+        this.list.push(metadata);
+    };
+    PostpagePage.prototype.isPost = function () {
+        var _this = this;
+        var image = 'promo_' + this.username + '_' + new Date() + '.png', storageRef, parseUpload;
+        return new Promise(function (resolve, reject) {
+            storageRef = __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.storage().ref('/promos/' + image);
+            parseUpload = storageRef.putString(_this.image.nativeElement.src, 'data_url');
+            parseUpload.on('state_changed', function (_snapshot) {
+                // We could log the progress here IF necessary
+                console.log('snapshot progess ' + _snapshot);
+            }, function (_err) {
+                reject(_err);
+                console.log(_err.messsage);
+            }, function (success) {
+                resolve(parseUpload.snapshot);
+            });
+        }).then(function (value) {
+            console.log("storing post post post &&&&&&&");
+            storageRef.getDownloadURL()
+                .then(function (url) {
+                var metadata = {
+                    customMetadata: {
+                        'title': _this.item.title,
+                        'caption': _this.item.caption,
+                        //'price': this.item.price,
+                        //'date': this.item.date,
+                        'typeofselect': _this.item.typeofselect,
+                        'username': _this.username,
+                        'url': url,
+                        'postdate': Date.now()
+                    }
+                };
+                _this.list = _this.af.list('/promos');
+                _this.list.push(metadata);
+            });
+        }).catch(function (error) {
+            console.log(error.message);
+        });
+    };
+    PostpagePage.prototype.isClass = function () {
+        var _this = this;
+        if (!this.item.date) {
+            alert("Please select a date for your class");
+        }
+        else {
+            var image_1 = 'class_' + this.username + '_' + new Date() + '.png', storageRef_1, parseUpload_1;
+            return new Promise(function (resolve, reject) {
+                storageRef_1 = __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.storage().ref('/classes/' + image_1);
+                parseUpload_1 = storageRef_1.putString(_this.image.nativeElement.src, 'data_url');
+                parseUpload_1.on('state_changed', function (_snapshot) {
+                    // We could log the progress here IF necessary
+                    console.log('snapshot progess ' + _snapshot);
+                }, function (_err) {
+                    reject(_err);
+                    console.log(_err.messsage);
+                }, function (success) {
+                    resolve(parseUpload_1.snapshot);
+                });
+            }).then(function (value) {
+                storageRef_1.getDownloadURL()
+                    .then(function (url) {
+                    var metadata = {
+                        customMetadata: {
+                            'title': _this.item.title,
+                            'caption': _this.item.caption,
+                            //'price': this.item.price,
+                            //'date': this.formatDate(this.item.date),
+                            'typeofselect': _this.item.typeofselect,
+                            'username': _this.username,
+                            'url': url,
+                            'postdate': Date.now()
+                        }
+                    };
+                    _this.list = _this.af.list('/classes');
+                    _this.list.push(metadata);
+                });
+            }).catch(function (error) {
+                console.log(error.message);
+            });
+        }
+    };
+    PostpagePage.prototype.isProduct = function () {
+        var _this = this;
+        var image = 'product_' + this.username + '_' + new Date() + '.png', storageRef, parseUpload;
+        return new Promise(function (resolve, reject) {
+            storageRef = __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.storage().ref('/products/' + image);
+            parseUpload = storageRef.putString(_this.image.nativeElement.src, 'data_url');
+            parseUpload.on('state_changed', function (_snapshot) {
+                // We could log the progress here IF necessary
+                console.log('snapshot progess ' + _snapshot);
+            }, function (_err) {
+                reject(_err);
+                console.log(_err.messsage);
+            }, function (success) {
+                resolve(parseUpload.snapshot);
+            });
+        }).then(function (value) {
+            storageRef.getDownloadURL()
+                .then(function (url) {
+                var metadata = {
+                    customMetadata: {
+                        'title': _this.item.title,
+                        'caption': _this.item.caption,
+                        'price': _this.item.price,
+                        //'date': this.item.date,
+                        'typeofselect': _this.item.typeofselect,
+                        'username': _this.username,
+                        'url': url,
+                        'postdate': Date.now()
+                    }
+                };
+                _this.list = _this.af.list('/products');
+                _this.list.push(metadata);
+            });
+        }).catch(function (error) {
+            console.log(error.message);
+        });
+    };
+    PostpagePage.prototype.isFormula = function () {
+        var metadata = {
+            'formula': this.item.caption,
+            'price': '3',
+            'username': this.username,
+            'url': this.image.nativeElement.src,
+            'postdate': Date.now(),
+            'square': '0'
+        };
+        var self = this;
+        var database = __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.database();
+        var bool = false;
+        __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.database().ref('/formulas').push(metadata);
+    };
+    PostpagePage.prototype.shareItem = function () {
+        console.log(this.item.title);
+        console.log(this.item.caption);
+        console.log(this.item.price);
+        console.log(this.item.date);
+        console.log(this.image.nativeElement.src + "                    **************************** src ****************");
+        console.log("****&*&&*&*&*&*&*          " + this.item.typeofselect);
+        if (this.item.typeofselect == "Post") {
+            if (this.item.title == '' || this.item.caption == '' || this.image.nativeElement.src == null) {
+                alert("You need to fill in all of the information");
+            }
+            else {
+                this.isPost();
+                this.navCtrl.popToRoot();
+            }
+        }
+        else if (this.item.typeofselect == 'Formula') {
+            if (this.item.caption == '' || this.image.nativeElement.src == null) {
+                alert("You need to fill in all of the information");
+            }
+            else {
+                this.isFormula();
+                this.navCtrl.popToRoot();
+            }
+        }
+        else if (this.item.typeofselect == 'Class') {
+            if (this.item.title == '' || this.item.caption == '' || this.image.nativeElement.src == null || this.item.date == '') {
+                alert("You need to fill in all of the information");
+            }
+            else {
+                this.isClass();
+                this.navCtrl.popToRoot();
+            }
+        }
+        else if (this.item.typeofselect == 'Product') {
+            if (this.item.title == '' || this.item.caption == '' || this.image.nativeElement.src == null || this.item.price == '') {
+                alert("You need to fill in all of the information");
+            }
+            else {
+                this.isProduct();
+                this.navCtrl.popToRoot();
+            }
+        }
+        else if (this.item.typeofselect == 'Promo') {
+            if (this.item.title == '' || this.item.caption == '') {
+                alert("You need to fill in all of the information");
+            }
+            else {
+                this.isPromo();
+                this.navCtrl.popToRoot();
+            }
+        }
+        /*var dataURL = data;
+    
+        let image       : string  = 'profile_' + this.username + '_' + square + '.png',
+          storageRef  : any,
+          parseUpload : any;
+    
+        return new Promise((resolve, reject) => {
+          storageRef       = firebase.storage().ref('/profile/' + this.username + '/' + image);
+          parseUpload      = storageRef.putString(dataURL, 'data_url');
+    
+          parseUpload.on('state_changed', (_snapshot) => {
+              // We could log the progress here IF necessary
+              console.log('snapshot progess ' + _snapshot);
+            },
+            (_err) => {
+               reject(_err);
+               console.log(_err.messsage);
+            },
+            (success) => {
+               resolve(parseUpload.snapshot);
+            })
+          }).then(value => {
+            //this.af.list('/profile/' + self.username).push({ pic: image });
+          }).catch(function(error) {
+            console.log(error.message);
+          });*/
+    };
+    PostpagePage.prototype.pushPage = function () {
+        // push another page on to the navigation stack
+        // causing the nav controller to transition to the new page
+        // optional data can also be passed to the pushed page.
+        //this.navCtrl.push(SignUpPage);
+    };
+    return PostpagePage;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('imagey'),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+], PostpagePage.prototype, "image", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('price'),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+], PostpagePage.prototype, "price", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('date'),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+], PostpagePage.prototype, "date", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('imageholder'),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+], PostpagePage.prototype, "imagesquare", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('title'),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+], PostpagePage.prototype, "title", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('sharer'),
+    __metadata("design:type", Object)
+], PostpagePage.prototype, "share", void 0);
+PostpagePage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-postpage',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/postpage/postpage.html"*/'<!--\n  Generated template for the PostpagePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>New Post</ion-title>\n    <ion-icon (tap)="goToFeed()" class=\'backk\' name="arrow-back"></ion-icon>\n    <!--<div class="stylistview">\n	    <button class="stylistviewbutton" ion-button color="secondary">Stylist View</button>\n	  </div>-->\n  </ion-navbar>\n</ion-header>\n\n<ion-content no-padding>\n	<ion-item class="typeofpost" no-padding>\n		<ion-label class="headerr">What type of post is this?</ion-label>\n		<ion-select class="selector" [(ngModel)]="item.typeofselect" (ngModelChange)="typeChanged($event)">\n		    <ion-option selected>Post</ion-option>\n		    <ion-option>Promo</ion-option>\n		    <ion-option>Class</ion-option>\n		    <ion-option>Product</ion-option>\n		    <ion-option>Formula</ion-option>\n		</ion-select>\n	</ion-item>\n	<div class="titlecaption" #title>\n		<div class="titlee">\n			<div class=\'detailpic\'>\n				<ion-icon ios="ios-bookmarks" md="md-bookmarks" class="titleicon"></ion-icon>\n			</div>\n			<div class="inputtitle">\n				<input name=\'title\' [(ngModel)]="item.title" class="titleinput" type="text" placeholder="Write a title">\n			</div>\n		</div>\n	</div>\n	<div class="caption">\n		<div class="captione">\n			<div class=\'detailpictwo\'>\n				<h1>...</h1>\n			</div>\n			<div class="inputcaption">\n				<input name=\'caption\' [(ngModel)]="item.caption" class="captioninput" type="text" placeholder="Write a caption">\n				<div class="postimagecontain" (tap)="presentActionSheet()" #imageholder>\n					<img class="postimage" #imagey src="assets/camera.png">\n				</div>\n			</div>\n		</div>\n	</div>\n	<div class="titlecaption" #price>\n		<div class="titlee">\n			<div class=\'detailpic\'>\n				<ion-icon name="pricetags" class="titleicon"></ion-icon>\n			</div>\n			<div class="inputtitle">\n				<input name=\'price\' [(ngModel)]="item.price" class="titleinput" type="text" placeholder="Enter price">\n			</div>\n		</div>\n	</div>\n	<div class="datepickcont" #date>\n		<div class="datepickk">\n			<!--<button  ion-button class="pickadate"> <!--(tap)="showDatePicker()"-->\n			<ion-item>\n				<ion-datetime displayFormat="MMMM/D/YYYY" [(ngModel)]="item.date"></ion-datetime>\n			</ion-item>\n			<!--</button>\n			<!--<div class=\'detailpic\'>\n				<img src="">\n			</div>\n			<div class="inputtitle">\n				<input name=\'price\' class="titleinput" type="text"></input>\n			</div>-->\n		</div>\n	</div>\n	<button #sharer class="share" (tap)="shareItem()" ion-button full color="black">SHARE</button>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/postpage/postpage.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_7__services_cameraservicepost__["a" /* CameraServicePost */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */], __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["x" /* ViewController */], __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_keyboard__["a" /* Keyboard */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_date_picker__["a" /* DatePicker */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */]])
+], PostpagePage);
+
+//# sourceMappingURL=postpage.js.map
+
+/***/ }),
+
+/***/ 61:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_keyboard__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_cameraserviceprofile__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_app__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_firebase_app__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__signin_signin__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__formulas_formulas__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__map_map__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_facebook__ = __webpack_require__(178);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Generated class for the SettingsPage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+var SettingsPage = (function () {
+    function SettingsPage(facebook, af, afAuth, storage, camera, cameraService, myrenderer, loadingController, actionSheetCtrl, navCtrl, navParams, keyboard) {
+        this.facebook = facebook;
+        this.af = af;
+        this.afAuth = afAuth;
+        this.storage = storage;
+        this.camera = camera;
+        this.cameraService = cameraService;
+        this.myrenderer = myrenderer;
+        this.loadingController = loadingController;
+        this.actionSheetCtrl = actionSheetCtrl;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.keyboard = keyboard;
+        this.user = {};
+        this.priceRanges = ['<100', '100-149', '150-199', '200-249', '250-300'];
+        this.loggedIn = false;
+        this.linked = "Link Profile";
+        this.optionsGetMedia = {
+            allowEdit: false,
+            quality: 10,
+            targetWidth: 600,
+            targetHeight: 600,
+            encodingType: this.camera.EncodingType.PNG,
+            sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+            mediaType: this.camera.MediaType.PICTURE,
+            destinationType: this.camera.DestinationType.FILE_URI
+        };
+        this.optionsGetCamera = {
+            quality: 10,
+            targetWidth: 600,
+            targetHeight: 600,
+            encodingType: this.camera.EncodingType.PNG,
+            sourceType: this.camera.PictureSourceType.CAMERA,
+            mediaType: this.camera.MediaType.PICTURE,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            saveToPhotoAlbum: true
+        };
+    }
+    SettingsPage.prototype.formulas = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_14__formulas_formulas__["a" /* FormulasPage */]);
+    };
+    SettingsPage.prototype.linkProfile = function () {
+        var _this = this;
+        if (this.linked == "Link Profile") {
+            if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
+                this.facebook.login(['email', 'public_profile']).then(function (response) {
+                    _this.facebook.api('me?fields=id', []).then(function (profile) {
+                        console.log(JSON.stringify(profile));
+                        _this.facebookURL = "http://www.facebook.com/" + profile['id'];
+                        _this.storage.set('fblinkedstylist', true);
+                        _this.linked = "Linked";
+                        alert("You must press SAVE to finalize the link.");
+                        //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
+                    });
+                });
+            }
+            else if (this.type == 'user' || this.type == 'user/stylist/user') {
+                this.facebook.login(['email', 'public_profile']).then(function (response) {
+                    _this.facebook.api('me?fields=id', []).then(function (profile) {
+                        console.log(JSON.stringify(profile));
+                        _this.facebookURL = "http://www.facebook.com/" + profile['id'];
+                        _this.storage.set('fblinkeduser', true);
+                        _this.linked = "Linked";
+                        alert("You must press SAVE to finalize the link.");
+                        //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
+                    });
+                });
+            }
+        }
+        ;
+    };
+    SettingsPage.prototype.changeShape = function (shape) {
+        console.log(shape.value);
+        this.price = shape.value;
+    };
+    SettingsPage.prototype.tappedToggle = function () {
+        console.log(this.locationtoggle + "          3344343 locationtoggle");
+        if (this.locationtoggle == true) {
+            this.af.object('/profiles/users/' + this.username + '/location').remove().then(function (_) { return console.log('item deleted!'); });
+        }
+        this.storage.set('location', this.locationtoggle);
+    };
+    SettingsPage.prototype.goToProfile = function () {
+        if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
+        }
+        if (this.type == 'user' || this.type == 'user/stylist/user') {
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
+        }
+    };
+    SettingsPage.prototype.map = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_15__map_map__["a" /* MapPage */]);
+    };
+    SettingsPage.prototype.logForm = function () {
+        var _this = this;
+        console.log("        ADDDDREESSSSS77777777:  " + this.address); //moved up here!
+        /*if(this.type == 'user' || this.type == 'user/stylist/user') {
+     
+           if(this.username == null || this.password == null || this.email == null || this.bio == null) {
+             alert("You need to fill out all of the information");
+           }
+         }*/
+        this.subscription3 = this.afAuth.authState.subscribe(function (data) {
+            console.log(data + "    data from login");
+            if (data != null) {
+                if (data.email && data.uid) {
+                    console.log("logged in");
+                    _this.authUser = data;
+                    _this.loggedIn = true;
+                }
+            }
+        });
+        console.log(this.authUser + '      authuser       998877');
+        this.x = 0;
+        console.log(this.passwordIfChanged + "  passwordifchanged                  this.password: " + this.password);
+        console.log(this.emailIfChanged + "  passwordifchanged                  this.password: " + this.email);
+        this.storage.set('username', this.username);
+        if (this.passwordIfChanged != this.password && this.authUser != null) {
+            this.authUser.updatePassword(this.password).then(function () { }).catch(function (e) { alert(e); });
+        }
+        /*else {
+          this.password = this.passwordIfChanged;
+          alert("You are not logged in yet, you cannot update your password or email.")
+        }*/
+        this.storage.set('password', this.password);
+        if (this.emailIfChanged != this.email && this.authUser != null) {
+            this.authUser.updateEmail(this.email).then(function () { }).catch(function (e) { alert(e); });
+        }
+        /*else {
+          this.email = this.emailIfChanged;
+          alert("You are not logged in yet, you cannot update your password or email.")
+        }*/
+        this.storage.set('email', this.email);
+        this.storage.set('bio', this.bio);
+        this.storage.set('picURL', this.picURL);
+        this.storage.set('phone', this.phone);
+        this.storage.set('instausername', this.instagramURL);
+        if (this.facebookURL == null) {
+            this.facebookURL = "";
+        }
+        //this.storage.get('type').then((val) => {
+        if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
+            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '') {
+                alert("You need to fill out all of the information");
+            }
+            else if (this.phone.match(/\d/g).length !== 10) {
+                alert("Please enter a 10 digit phone number, only the digits.");
+            }
+            else {
+                this.storage.set('address', this.address);
+                this.storage.set('price', this.price);
+                if (this.price == "<100") {
+                    this.price = "$";
+                }
+                else if (this.price == "100-149") {
+                    this.price = "$$";
+                }
+                else if (this.price == "150-199") {
+                    this.price = "$$$";
+                }
+                else if (this.price == "200-249") {
+                    this.price = "$$$$";
+                }
+                else if (this.price == "250-300") {
+                    this.price = "$$$$$";
+                }
+                this.items = this.af.list('/profiles/stylists');
+                if (this.username == this.oldUser) {
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
+                        'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
+                        'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL });
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
+                    }
+                    else {
+                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__["a" /* FeedStylist */]);
+                    }
+                }
+                else {
+                    this.af.object('/profiles/stylists/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
+                        'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
+                        'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
+                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } });
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
+                    }
+                    else {
+                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__["a" /* FeedStylist */]);
+                    }
+                }
+            }
+        }
+        if (this.type == 'user' || this.type == 'user/stylist/user') {
+            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '') {
+                alert("You need to fill out all of the information");
+            }
+            else if (this.phone.match(/\d/g).length !== 10) {
+                alert("Please enter a 10 digit phone number, only the digits.");
+            }
+            else {
+                this.items = this.af.list('/profiles/users');
+                if (this.username == this.oldUser) {
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
+                        'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL });
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
+                    }
+                    else {
+                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__["a" /* FeedUser */]);
+                    }
+                }
+                else {
+                    this.af.object('/profiles/users/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
+                        'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
+                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } });
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
+                    }
+                    else {
+                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__["a" /* FeedUser */]);
+                    }
+                }
+            }
+        }
+        ;
+        //})
+    };
+    SettingsPage.prototype.logout = function () {
+        if (this.loggedIn) {
+            console.log("being logged out ()()()()ER()EW()RWE()()REW()");
+            this.afAuth.auth.signOut();
+            this.storage.set('loggedin', false);
+        }
+        else {
+            this.storage.set('loggedin', false);
+        }
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_12__signin_signin__["a" /* SignInPage */]);
+    };
+    SettingsPage.prototype.ngOnDestroy = function () {
+        if (this.subscription3 != null) {
+            this.subscription3.unsubscribe();
+        }
+    };
+    SettingsPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.storage.get('type').then(function (val) {
+            _this.type = val;
+            console.log(_this.typeparam + '       this.typeparam       ');
+            console.log(_this.logoutButton + '       this.typeparam       ');
+            if (_this.typeparam == 'user') {
+                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.logoutButton._elementRef.nativeElement, 'display', 'none');
+            }
+            if (_this.typeparam == 'user/stylist/user') {
+                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
+                //this.myrenderer.setElementStyle(this.logoutButton._elementRef.nativeElement, 'display', 'none');
+            }
+            else if (_this.type == 'user/stylist/user') {
+                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
+            }
+            else if (_this.typeparam == 'stylist') {
+                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.logoutButton._elementRef.nativeElement, 'display', 'none');
+            }
+            _this.oldUser = _this.username;
+            _this.isTypeNull = _this.navParams.get('type');
+            setTimeout(function () {
+                console.log('ionViewDidLoad SettingsPage');
+                _this.storage.get('username').then(function (val) { _this.username = val; _this.getProfilePic(); console.log(val + "        getting username          3333222222"); });
+                _this.storage.get('password').then(function (val) { _this.password = val; _this.passwordIfChanged = _this.password; console.log(val + "        getting password222222"); });
+                _this.storage.get('email').then(function (val) { _this.email = val; _this.emailIfChanged = _this.email; console.log(val + "        getting email33333333"); });
+                _this.storage.get('bio').then(function (val) { _this.bio = val; console.log(val + "        getting biooooooooo"); });
+                _this.storage.get('picURL').then(function (val) { _this.picURL = val; });
+                _this.storage.get('phone').then(function (val) { _this.phone = val; });
+                _this.storage.get('instausername').then(function (val) { _this.instagramURL = val; });
+                if (_this.type == 'stylist' || _this.type == 'user/stylist/stylist') {
+                    _this.storage.get('address').then(function (val) { _this.address = val; console.log(val + "        getting addressssssss"); });
+                    _this.storage.get('price').then(function (val) { _this.price = val; });
+                    for (var x = 0; x < 5; x++) {
+                        if (_this.priceRanges[x] == _this.price) {
+                            document.getElementById(x + "").setAttribute('selected', null);
+                        }
+                    }
+                }
+            }, 1000);
+            if (_this.type == 'user' || _this.type == 'user/stylist/user') {
+                _this.storage.get('fblinkeduser').then(function (val) {
+                    console.log(val + " val vlal v avlal v allavl val ");
+                    console.log(_this.type + " tyope aosefi; fai; sefeji a'aj '' ");
+                    if (val) {
+                        _this.linked = "Linked";
+                    }
+                    else {
+                        _this.linked = "Link Profile";
+                    }
+                });
+            }
+            else if (_this.type == 'stylist' || _this.type == 'user/stylist/stylist') {
+                _this.storage.get('fblinkedstylist').then(function (val) {
+                    if (val) {
+                        _this.linked = "Linked";
+                    }
+                    else {
+                        _this.linked = "Link Profile";
+                    }
+                });
+            }
+        });
+        this.storage.get('location').then(function (val) {
+            _this.locationtoggle = val;
+            if (val == true) {
+                _this.locationtoggle = false;
+            }
+            else {
+                _this.locationtoggle = true;
+            }
+            console.log(_this.locationtoggle + "     in view did load locationtoggle");
+        });
+        this.typeparam = this.navParams.get('type');
+    };
+    SettingsPage.prototype.getProfilePic = function () {
+        var _this = this;
+        console.log("inside get profile pic &*&*(&*%^$%$%$%$%$%");
+        return new Promise(function (resolve, reject) {
+            var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
+            storageRef.getDownloadURL().then(function (url) {
+                console.log(url);
+                _this.picURL = url;
+                _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
+                resolve();
+            }).catch(function (e) {
+                console.log(e.message);
+            });
+        });
+    };
+    SettingsPage.prototype.goButton = function (code) {
+        console.log(code);
+        if (code == 13) {
+            this.keyboard.close();
+        }
+    };
+    SettingsPage.prototype.change = function () {
+        this.presentActionSheet();
+    };
+    SettingsPage.prototype.presentActionSheet = function () {
+        var _this = this;
+        var actionSheet = this.actionSheetCtrl.create({
+            title: 'Choose source',
+            buttons: [
+                {
+                    text: 'Camera',
+                    handler: function () {
+                        _this.cameraService.getMedia(_this.optionsGetCamera, null, _this.username).then(function () {
+                            var loading = _this.loadingController.create({ content: "Loading..." });
+                            loading.present();
+                            return new Promise(function (resolve, reject) {
+                                //setTimeout(() => {
+                                var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
+                                storageRef.getDownloadURL().then(function (url) {
+                                    console.log(url);
+                                    _this.picURL = url;
+                                    _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
+                                    loading.dismiss();
+                                    resolve();
+                                }).catch(function (e) {
+                                    alert("Something went wrong with the upload, please try again.");
+                                    loading.dismiss();
+                                    resolve();
+                                });
+                                loading.dismiss();
+                                //}, 3500);
+                            });
+                        }); //pass in square choice
+                        //this.myrenderer.setElementAttribute(this.itemArrayTwo[this.square - 1].nativeElement, 'src', 'block');
+                        console.log('camera clicked');
+                    }
+                }, {
+                    text: 'Photo Library',
+                    handler: function () {
+                        _this.cameraService.getMedia(_this.optionsGetMedia, null, _this.username).then(function () {
+                            var loading = _this.loadingController.create({ content: "Loading..." });
+                            loading.present();
+                            return new Promise(function (resolve, reject) {
+                                //setTimeout(() => {
+                                var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
+                                storageRef.getDownloadURL().then(function (url) {
+                                    console.log(url);
+                                    _this.picURL = url;
+                                    _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
+                                    loading.dismiss();
+                                    resolve();
+                                }).catch(function (e) {
+                                    alert("Something went wrong with the upload, please try again.");
+                                    loading.dismiss();
+                                    resolve();
+                                });
+                                loading.dismiss();
+                                //}, 3500);
+                            });
+                        });
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    };
+    return SettingsPage;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('profsquare'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object)
+], SettingsPage.prototype, "profilepic", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('addressEl'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "addressEl", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('priceEl'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "priceEl", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('arrowback'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "arrowBackEl", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('logoutbutton'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "logoutButton", void 0);
+SettingsPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-settings',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/settings/settings.html"*/'<!--\n  Generated template for the SettingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <!---->\n	<div style="position: absolute; left: 50%; width:35%; z-index: 1">\n    <div style="position: relative; left: -50%; width:100%">\n      <img (tap)="presentActionSheet()" class="imagesquare" #profsquare src="assets/blankprof.png">\n    </div>\n  </div>\n  <ion-navbar>\n    <ion-icon (tap)="goToProfile()" class=\'backk\' name="arrow-back" #arrowback></ion-icon>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content no-padding>\n	<ion-item no-padding class="sect">\n		<ion-label>Username</ion-label>\n		<ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="username" name="username"></ion-input> <!--[(ngModel)]="user.username"-->\n	</ion-item>\n	<ion-item no-padding class="sect">\n	  <ion-label>Password</ion-label>\n	  <ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="password" name="password"></ion-input>\n	</ion-item>\n	<ion-item no-padding class="sect">\n  	<ion-label>Email</ion-label>\n  	<ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="email" name="email"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n  	<ion-label>Salon Address</ion-label>\n  	<ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. 28 Jay St, Winston, NJ" [(ngModel)]="address" name="address"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n    <ion-label>Phone</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. 1231231234" [(ngModel)]="phone" name="phone"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #priceEl>\n\n    <ion-label>Price Range</ion-label>\n    <ion-select [(ngModel)]="price">\n      <ion-option *ngFor="let z of priceRanges ; let i = index" value="{{z}}" id="{{i}}">{{z}}</ion-option>\n    </ion-select>\n\n  </ion-item>\n  <ion-item no-padding class="sect">\n  	<ion-label>Bio</ion-label>\n  	<ion-textarea style="width: 65%" placeholder="Bio..." [(ngModel)]="bio" name="bio"></ion-textarea>\n  </ion-item>\n  <ion-item no-padding class="sect">\n    <ion-label>Location</ion-label>\n    <ion-toggle [(ngModel)]="locationtoggle" (tap)="tappedToggle()"></ion-toggle>\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n    <div class="fblabelcontainer">\n      <div class="inlineblock">Facebook</div>\n    \n      <button ion-button round color="tertiary" class="linkfbprof" (tap)="linkProfile()">{{linked}}</button>\n    </div>\n    <!--<ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="http://www.facebook.com/username" [(ngModel)]="facebookURL" name="facebook"></ion-input>--> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl2>\n    <ion-label>Instagram Username</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. username" [(ngModel)]="instagramURL" name="instagram"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n\n  <div id="savebutton">\n    <button class="save" (tap)=\'logForm()\' ion-button round color="primary">Save</button>\n    <button class="save" (tap)=\'logout()\' ion-button round color="tertiary" #logoutbutton>Logout</button>\n    <button class="save" (tap)=\'formulas()\' ion-button round color="tertiary">Formulas</button> <!--map()-->\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/settings/settings.html"*/,
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_16__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_16__ionic_native_facebook__["a" /* Facebook */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3__services_cameraserviceprofile__["a" /* CameraServiceProfile */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_cameraserviceprofile__["a" /* CameraServiceProfile */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_keyboard__["a" /* Keyboard */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_keyboard__["a" /* Keyboard */]) === "function" && _o || Object])
+], SettingsPage);
+
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+//# sourceMappingURL=settings.js.map
+
+/***/ }),
+
+/***/ 69:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FeedStylist; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stylistprofile_stylistprofile__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feeduser_feeduser__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stylistprofile_stylistprofile__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feeduser_feeduser__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__userprofile_userprofile__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__followers_followers__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_date_picker__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_cameraservicepost__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_camera__ = __webpack_require__(33);
@@ -6177,509 +7276,26 @@ FeedStylist = __decorate([
 
 /***/ }),
 
-/***/ 61:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PostpagePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_date_picker__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_keyboard__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_cameraservicepost__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__ = __webpack_require__(33);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-/**
- * Generated class for the PostpagePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var PostpagePage = (function () {
-    function PostpagePage(cameraServicePost, actionSheetCtrl, camera, af, viewCtrl, storage, keyboard, datePicker, myrenderer, navCtrl, navParams) {
-        this.cameraServicePost = cameraServicePost;
-        this.actionSheetCtrl = actionSheetCtrl;
-        this.camera = camera;
-        this.af = af;
-        this.viewCtrl = viewCtrl;
-        this.storage = storage;
-        this.keyboard = keyboard;
-        this.datePicker = datePicker;
-        this.myrenderer = myrenderer;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.item = { 'date': null, 'title': '', 'price': '', 'caption': '', 'typeofselect': 'Post' };
-        this.optionsGetMedia = {
-            allowEdit: false,
-            quality: 2,
-            targetWidth: 600,
-            targetHeight: 600,
-            encodingType: this.camera.EncodingType.PNG,
-            sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-            mediaType: this.camera.MediaType.PICTURE,
-            destinationType: this.camera.DestinationType.FILE_URI
-        };
-        this.optionsGetCamera = {
-            quality: 2,
-            targetWidth: 600,
-            targetHeight: 600,
-            encodingType: this.camera.EncodingType.PNG,
-            sourceType: this.camera.PictureSourceType.CAMERA,
-            mediaType: this.camera.MediaType.PICTURE,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            saveToPhotoAlbum: true
-        };
-    }
-    PostpagePage.prototype.typeChanged = function (event) {
-        console.log(event + "   event event event");
-        if (this.item.typeofselect == "Class") {
-            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
-            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'block');
-            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
-            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
-        }
-        else if (this.item.typeofselect == "Product") {
-            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'block');
-            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
-            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
-            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
-        }
-        else if (this.item.typeofselect == "Post") {
-            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
-            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
-            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
-            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
-        }
-        else if (this.item.typeofselect == "Promo") {
-            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
-            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
-            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'none');
-            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
-        }
-        else if (this.item.typeofselect == "Formula") {
-            this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
-            this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
-            this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
-            this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'none');
-        }
-    };
-    PostpagePage.prototype.presentActionSheet = function () {
-        var _this = this;
-        var actionSheet = this.actionSheetCtrl.create({
-            title: 'Choose source',
-            buttons: [
-                {
-                    text: 'Camera',
-                    handler: function () {
-                        //let itemArrayTwo = this.profComponents.toArray();
-                        _this.cameraServicePost.getMedia(_this.optionsGetCamera).then(function (data) {
-                            _this.image.nativeElement.src = data;
-                            /*let storageRef = firebase.storage().ref().child('/profile/' + this.username + '/profile_' + this.username + '_' + this.square + '.png');
-                            let loading = this.loadingController.create({content : "Loading..."});
-                            loading.present();
-                            setTimeout(() => {
-                              storageRef.getDownloadURL().then(url => {
-                                console.log(url);
-                                this.myrenderer.setElementAttribute(itemArrayTwo[this.square - 1].nativeElement, 'src', url);
-                                this.showSquare();
-                                loading.dismiss();
-                              });
-                            }, 3000);*/
-                        }); //pass in square choice
-                        //this.myrenderer.setElementAttribute(this.itemArrayTwo[this.square - 1].nativeElement, 'src', 'block');
-                        console.log('camera clicked');
-                    }
-                }, {
-                    text: 'Photo Library',
-                    handler: function () {
-                        //let itemArrayTwo = this.profComponents.toArray();
-                        _this.cameraServicePost.getMedia(_this.optionsGetMedia).then(function (data) {
-                            _this.image.nativeElement.src = data;
-                            /*return new Promise((resolve, reject) => {
-                              let storageRef = firebase.storage().ref().child('/profile/' + this.username + '/profile_' + this.username + '_' + this.square + '.png');
-                              let loading = this.loadingController.create({content : "Loading..."});
-                              loading.present();
-                              setTimeout(() => {
-                                storageRef.getDownloadURL().then(url => {
-                                  console.log(url);
-                                  this.myrenderer.setElementAttribute(itemArrayTwo[this.square - 1].nativeElement, 'src', url);
-                                  this.showSquare();
-                                  loading.dismiss();
-                                  resolve();
-                                });
-                              }, 3000);
-                            });*/
-                            //
-                        });
-                    }
-                }, {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
-        actionSheet.present();
-    };
-    PostpagePage.prototype.ngOnDestroy = function () {
-        this.subscription.unsubscribe();
-        this.subscription2.unsubscribe();
-    };
-    PostpagePage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.myrenderer.setElementStyle(this.price.nativeElement, 'display', 'none');
-        this.myrenderer.setElementStyle(this.date.nativeElement, 'display', 'none');
-        this.myrenderer.setElementStyle(this.imagesquare.nativeElement, 'display', 'block');
-        this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
-        this.imageHolder = this.navParams.get("path");
-        console.log(this.imageHolder + " imageholder imagehodl a pefsj'aes");
-        if (this.imageHolder != null) {
-            this.myrenderer.setElementAttribute(this.image.nativeElement, 'src', this.imageHolder);
-        }
-        else {
-        }
-        this.subscription = this.keyboard.onKeyboardShow().subscribe(function () {
-            _this.myrenderer.setElementStyle(_this.share.getNativeElement(), 'bottom', '-150px');
-        });
-        this.subscription2 = this.keyboard.onKeyboardHide().subscribe(function () {
-            console.log("keyboard being hid **&^&^&^&^&^&");
-            console.log(_this.share.getNativeElement() + " * f8d fd8 f8df8 fd8 f8d 8f fd8 8 fd");
-            _this.myrenderer.setElementStyle(_this.share.getNativeElement(), 'bottom', '0');
-        });
-        this.storage.get('username').then(function (val) { _this.username = val; console.log(val + "        getting username"); });
-    };
-    PostpagePage.prototype.goToFeed = function () {
-        this.navCtrl.pop();
-    };
-    PostpagePage.prototype.showDatePicker = function () {
-        var _this = this;
-        this.datePicker.show({
-            date: new Date(),
-            mode: 'date',
-            androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-        }).then(function (date) { console.log(date + " this is the date &&&&&&&"); _this.item.date = date; }, function (err) { return console.log('Error occurred while getting date: ', err); });
-    };
-    PostpagePage.prototype.formatDate = function (date) {
-        var d = new Date(date), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
-        if (month.length < 2)
-            month = '0' + month;
-        if (day.length < 2)
-            day = '0' + day;
-        return [day, month, year].join('-');
-    };
-    PostpagePage.prototype.isPromo = function () {
-        var metadata = {
-            customMetadata: {
-                'title': this.item.title,
-                'caption': this.item.caption,
-                //'price': this.item.price,
-                //'date': this.item.date,
-                'typeofselect': this.item.typeofselect,
-                'username': this.username,
-                'postdate': Date.now()
-            }
-        };
-        this.list = this.af.list('/promotions');
-        this.list.push(metadata);
-    };
-    PostpagePage.prototype.isPost = function () {
-        var _this = this;
-        var image = 'promo_' + this.username + '_' + new Date() + '.png', storageRef, parseUpload;
-        return new Promise(function (resolve, reject) {
-            storageRef = __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.storage().ref('/promos/' + image);
-            parseUpload = storageRef.putString(_this.image.nativeElement.src, 'data_url');
-            parseUpload.on('state_changed', function (_snapshot) {
-                // We could log the progress here IF necessary
-                console.log('snapshot progess ' + _snapshot);
-            }, function (_err) {
-                reject(_err);
-                console.log(_err.messsage);
-            }, function (success) {
-                resolve(parseUpload.snapshot);
-            });
-        }).then(function (value) {
-            console.log("storing post post post &&&&&&&");
-            storageRef.getDownloadURL()
-                .then(function (url) {
-                var metadata = {
-                    customMetadata: {
-                        'title': _this.item.title,
-                        'caption': _this.item.caption,
-                        //'price': this.item.price,
-                        //'date': this.item.date,
-                        'typeofselect': _this.item.typeofselect,
-                        'username': _this.username,
-                        'url': url,
-                        'postdate': Date.now()
-                    }
-                };
-                _this.list = _this.af.list('/promos');
-                _this.list.push(metadata);
-            });
-        }).catch(function (error) {
-            console.log(error.message);
-        });
-    };
-    PostpagePage.prototype.isClass = function () {
-        var _this = this;
-        if (!this.item.date) {
-            alert("Please select a date for your class");
-        }
-        else {
-            var image_1 = 'class_' + this.username + '_' + new Date() + '.png', storageRef_1, parseUpload_1;
-            return new Promise(function (resolve, reject) {
-                storageRef_1 = __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.storage().ref('/classes/' + image_1);
-                parseUpload_1 = storageRef_1.putString(_this.image.nativeElement.src, 'data_url');
-                parseUpload_1.on('state_changed', function (_snapshot) {
-                    // We could log the progress here IF necessary
-                    console.log('snapshot progess ' + _snapshot);
-                }, function (_err) {
-                    reject(_err);
-                    console.log(_err.messsage);
-                }, function (success) {
-                    resolve(parseUpload_1.snapshot);
-                });
-            }).then(function (value) {
-                storageRef_1.getDownloadURL()
-                    .then(function (url) {
-                    var metadata = {
-                        customMetadata: {
-                            'title': _this.item.title,
-                            'caption': _this.item.caption,
-                            //'price': this.item.price,
-                            //'date': this.formatDate(this.item.date),
-                            'typeofselect': _this.item.typeofselect,
-                            'username': _this.username,
-                            'url': url,
-                            'postdate': Date.now()
-                        }
-                    };
-                    _this.list = _this.af.list('/classes');
-                    _this.list.push(metadata);
-                });
-            }).catch(function (error) {
-                console.log(error.message);
-            });
-        }
-    };
-    PostpagePage.prototype.isProduct = function () {
-        var _this = this;
-        var image = 'product_' + this.username + '_' + new Date() + '.png', storageRef, parseUpload;
-        return new Promise(function (resolve, reject) {
-            storageRef = __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.storage().ref('/products/' + image);
-            parseUpload = storageRef.putString(_this.image.nativeElement.src, 'data_url');
-            parseUpload.on('state_changed', function (_snapshot) {
-                // We could log the progress here IF necessary
-                console.log('snapshot progess ' + _snapshot);
-            }, function (_err) {
-                reject(_err);
-                console.log(_err.messsage);
-            }, function (success) {
-                resolve(parseUpload.snapshot);
-            });
-        }).then(function (value) {
-            storageRef.getDownloadURL()
-                .then(function (url) {
-                var metadata = {
-                    customMetadata: {
-                        'title': _this.item.title,
-                        'caption': _this.item.caption,
-                        'price': _this.item.price,
-                        //'date': this.item.date,
-                        'typeofselect': _this.item.typeofselect,
-                        'username': _this.username,
-                        'url': url,
-                        'postdate': Date.now()
-                    }
-                };
-                _this.list = _this.af.list('/products');
-                _this.list.push(metadata);
-            });
-        }).catch(function (error) {
-            console.log(error.message);
-        });
-    };
-    PostpagePage.prototype.isFormula = function () {
-        var metadata = {
-            'formula': this.item.caption,
-            'price': '3',
-            'username': this.username,
-            'url': this.image.nativeElement.src,
-            'postdate': Date.now(),
-            'square': '0'
-        };
-        var self = this;
-        var database = __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.database();
-        var bool = false;
-        __WEBPACK_IMPORTED_MODULE_5_firebase___default.a.database().ref('/formulas').push(metadata);
-    };
-    PostpagePage.prototype.shareItem = function () {
-        console.log(this.item.title);
-        console.log(this.item.caption);
-        console.log(this.item.price);
-        console.log(this.item.date);
-        console.log(this.image.nativeElement.src + "                    **************************** src ****************");
-        console.log("****&*&&*&*&*&*&*          " + this.item.typeofselect);
-        if (this.item.typeofselect == "Post") {
-            if (this.item.title == '' || this.item.caption == '' || this.image.nativeElement.src == null) {
-                alert("You need to fill in all of the information");
-            }
-            else {
-                this.isPost();
-                this.navCtrl.popToRoot();
-            }
-        }
-        else if (this.item.typeofselect == 'Formula') {
-            if (this.item.caption == '' || this.image.nativeElement.src == null) {
-                alert("You need to fill in all of the information");
-            }
-            else {
-                this.isFormula();
-                this.navCtrl.popToRoot();
-            }
-        }
-        else if (this.item.typeofselect == 'Class') {
-            if (this.item.title == '' || this.item.caption == '' || this.image.nativeElement.src == null || this.item.date == '') {
-                alert("You need to fill in all of the information");
-            }
-            else {
-                this.isClass();
-                this.navCtrl.popToRoot();
-            }
-        }
-        else if (this.item.typeofselect == 'Product') {
-            if (this.item.title == '' || this.item.caption == '' || this.image.nativeElement.src == null || this.item.price == '') {
-                alert("You need to fill in all of the information");
-            }
-            else {
-                this.isProduct();
-                this.navCtrl.popToRoot();
-            }
-        }
-        else if (this.item.typeofselect == 'Promo') {
-            if (this.item.title == '' || this.item.caption == '') {
-                alert("You need to fill in all of the information");
-            }
-            else {
-                this.isPromo();
-                this.navCtrl.popToRoot();
-            }
-        }
-        /*var dataURL = data;
-    
-        let image       : string  = 'profile_' + this.username + '_' + square + '.png',
-          storageRef  : any,
-          parseUpload : any;
-    
-        return new Promise((resolve, reject) => {
-          storageRef       = firebase.storage().ref('/profile/' + this.username + '/' + image);
-          parseUpload      = storageRef.putString(dataURL, 'data_url');
-    
-          parseUpload.on('state_changed', (_snapshot) => {
-              // We could log the progress here IF necessary
-              console.log('snapshot progess ' + _snapshot);
-            },
-            (_err) => {
-               reject(_err);
-               console.log(_err.messsage);
-            },
-            (success) => {
-               resolve(parseUpload.snapshot);
-            })
-          }).then(value => {
-            //this.af.list('/profile/' + self.username).push({ pic: image });
-          }).catch(function(error) {
-            console.log(error.message);
-          });*/
-    };
-    PostpagePage.prototype.pushPage = function () {
-        // push another page on to the navigation stack
-        // causing the nav controller to transition to the new page
-        // optional data can also be passed to the pushed page.
-        //this.navCtrl.push(SignUpPage);
-    };
-    return PostpagePage;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('imagey'),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object)
-], PostpagePage.prototype, "image", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('price'),
-    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _b || Object)
-], PostpagePage.prototype, "price", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('date'),
-    __metadata("design:type", typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _c || Object)
-], PostpagePage.prototype, "date", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('imageholder'),
-    __metadata("design:type", typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _d || Object)
-], PostpagePage.prototype, "imagesquare", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('title'),
-    __metadata("design:type", typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _e || Object)
-], PostpagePage.prototype, "title", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('sharer'),
-    __metadata("design:type", Object)
-], PostpagePage.prototype, "share", void 0);
-PostpagePage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-postpage',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/postpage/postpage.html"*/'<!--\n  Generated template for the PostpagePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>New Post</ion-title>\n    <ion-icon (tap)="goToFeed()" class=\'backk\' name="arrow-back"></ion-icon>\n    <!--<div class="stylistview">\n	    <button class="stylistviewbutton" ion-button color="secondary">Stylist View</button>\n	  </div>-->\n  </ion-navbar>\n</ion-header>\n\n<ion-content no-padding>\n	<ion-item class="typeofpost" no-padding>\n		<ion-label class="headerr">What type of post is this?</ion-label>\n		<ion-select class="selector" [(ngModel)]="item.typeofselect" (ngModelChange)="typeChanged($event)">\n		    <ion-option selected>Post</ion-option>\n		    <ion-option>Promo</ion-option>\n		    <ion-option>Class</ion-option>\n		    <ion-option>Product</ion-option>\n		    <ion-option>Formula</ion-option>\n		</ion-select>\n	</ion-item>\n	<div class="titlecaption" #title>\n		<div class="titlee">\n			<div class=\'detailpic\'>\n				<ion-icon ios="ios-bookmarks" md="md-bookmarks" class="titleicon"></ion-icon>\n			</div>\n			<div class="inputtitle">\n				<input name=\'title\' [(ngModel)]="item.title" class="titleinput" type="text" placeholder="Write a title">\n			</div>\n		</div>\n	</div>\n	<div class="caption">\n		<div class="captione">\n			<div class=\'detailpictwo\'>\n				<h1>...</h1>\n			</div>\n			<div class="inputcaption">\n				<input name=\'caption\' [(ngModel)]="item.caption" class="captioninput" type="text" placeholder="Write a caption">\n				<div class="postimagecontain" (tap)="presentActionSheet()" #imageholder>\n					<img class="postimage" #imagey src="assets/camera.png">\n				</div>\n			</div>\n		</div>\n	</div>\n	<div class="titlecaption" #price>\n		<div class="titlee">\n			<div class=\'detailpic\'>\n				<ion-icon name="pricetags" class="titleicon"></ion-icon>\n			</div>\n			<div class="inputtitle">\n				<input name=\'price\' [(ngModel)]="item.price" class="titleinput" type="text" placeholder="Enter price">\n			</div>\n		</div>\n	</div>\n	<div class="datepickcont" #date>\n		<div class="datepickk">\n			<!--<button  ion-button class="pickadate"> <!--(tap)="showDatePicker()"-->\n			<ion-item>\n				<ion-datetime displayFormat="MMMM/D/YYYY" [(ngModel)]="item.date"></ion-datetime>\n			</ion-item>\n			<!--</button>\n			<!--<div class=\'detailpic\'>\n				<img src="">\n			</div>\n			<div class="inputtitle">\n				<input name=\'price\' class="titleinput" type="text"></input>\n			</div>-->\n		</div>\n	</div>\n	<button #sharer class="share" (tap)="shareItem()" ion-button full color="black">SHARE</button>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/postpage/postpage.html"*/
-    }),
-    __metadata("design:paramtypes", [typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__services_cameraservicepost__["a" /* CameraServicePost */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_cameraservicepost__["a" /* CameraServicePost */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__["a" /* Camera */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["x" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["x" /* ViewController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_keyboard__["a" /* Keyboard */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_keyboard__["a" /* Keyboard */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_date_picker__["a" /* DatePicker */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_date_picker__["a" /* DatePicker */]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === "function" && _p || Object, typeof (_q = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _q || Object, typeof (_r = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */]) === "function" && _r || Object])
-], PostpagePage);
-
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
-//# sourceMappingURL=postpage.js.map
-
-/***/ }),
-
-/***/ 72:
+/***/ 73:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FeedUser; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stylistprofile_stylistprofile__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feedstylist_feedstylist__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stylistprofile_stylistprofile__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feedstylist_feedstylist__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__userbooking_userbooking__ = __webpack_require__(168);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modals_popup_popup__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modals_popupother_popupother__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modals_popup_popup__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modals_popupother_popupother__ = __webpack_require__(459);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(459);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(460);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_rxjs_BehaviorSubject__ = __webpack_require__(174);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_rxjs_BehaviorSubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_rxjs_BehaviorSubject__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__userviewprofile_userviewprofile__ = __webpack_require__(176);
@@ -7569,18 +8185,18 @@ FeedUser = __decorate([
 
 /***/ }),
 
-/***/ 74:
+/***/ 75:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_feedstylist_feedstylist__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_feedstylist_feedstylist__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__stylistprofile_stylistprofile__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ionic2_calendar__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__stylistprofile_stylistprofile__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ionic2_calendar__ = __webpack_require__(465);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_sms__ = __webpack_require__(95);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -8041,500 +8657,7 @@ BookingPage = __decorate([
 
 /***/ }),
 
-/***/ 75:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_keyboard__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_cameraserviceprofile__ = __webpack_require__(293);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_app__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_firebase_app__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__signin_signin__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__ = __webpack_require__(176);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__formulas_formulas__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__map_map__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_facebook__ = __webpack_require__(178);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Generated class for the SettingsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var SettingsPage = (function () {
-    function SettingsPage(facebook, af, afAuth, storage, camera, cameraService, myrenderer, loadingController, actionSheetCtrl, navCtrl, navParams, keyboard) {
-        this.facebook = facebook;
-        this.af = af;
-        this.afAuth = afAuth;
-        this.storage = storage;
-        this.camera = camera;
-        this.cameraService = cameraService;
-        this.myrenderer = myrenderer;
-        this.loadingController = loadingController;
-        this.actionSheetCtrl = actionSheetCtrl;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.keyboard = keyboard;
-        this.user = {};
-        this.priceRanges = ['<100', '100-149', '150-199', '200-249', '250-300'];
-        this.loggedIn = false;
-        this.linked = "Link Profile";
-        this.optionsGetMedia = {
-            allowEdit: false,
-            quality: 10,
-            targetWidth: 600,
-            targetHeight: 600,
-            encodingType: this.camera.EncodingType.PNG,
-            sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-            mediaType: this.camera.MediaType.PICTURE,
-            destinationType: this.camera.DestinationType.FILE_URI
-        };
-        this.optionsGetCamera = {
-            quality: 10,
-            targetWidth: 600,
-            targetHeight: 600,
-            encodingType: this.camera.EncodingType.PNG,
-            sourceType: this.camera.PictureSourceType.CAMERA,
-            mediaType: this.camera.MediaType.PICTURE,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            saveToPhotoAlbum: true
-        };
-    }
-    SettingsPage.prototype.formulas = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_14__formulas_formulas__["a" /* FormulasPage */]);
-    };
-    SettingsPage.prototype.linkProfile = function () {
-        var _this = this;
-        if (this.linked == "Link Profile") {
-            if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-                this.facebook.login(['email', 'public_profile']).then(function (response) {
-                    _this.facebook.api('me?fields=id', []).then(function (profile) {
-                        console.log(JSON.stringify(profile));
-                        _this.facebookURL = "http://www.facebook.com/" + profile['id'];
-                        _this.storage.set('fblinkedstylist', true);
-                        _this.linked = "Linked";
-                        //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
-                    });
-                });
-            }
-            else if (this.type == 'user' || this.type == 'user/stylist/user') {
-                this.facebook.login(['email', 'public_profile']).then(function (response) {
-                    _this.facebook.api('me?fields=id', []).then(function (profile) {
-                        console.log(JSON.stringify(profile));
-                        _this.facebookURL = "http://www.facebook.com/" + profile['id'];
-                        _this.storage.set('fblinkeduser', true);
-                        _this.linked = "Linked";
-                        //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
-                    });
-                });
-            }
-        }
-        ;
-    };
-    SettingsPage.prototype.changeShape = function (shape) {
-        console.log(shape.value);
-        this.price = shape.value;
-    };
-    SettingsPage.prototype.tappedToggle = function () {
-        console.log(this.locationtoggle + "          3344343 locationtoggle");
-        if (this.locationtoggle == true) {
-            this.af.object('/profiles/users/' + this.username + '/location').remove().then(function (_) { return console.log('item deleted!'); });
-        }
-        this.storage.set('location', this.locationtoggle);
-    };
-    SettingsPage.prototype.goToProfile = function () {
-        if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
-        }
-        if (this.type == 'user' || this.type == 'user/stylist/user') {
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
-        }
-    };
-    SettingsPage.prototype.map = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_15__map_map__["a" /* MapPage */]);
-    };
-    SettingsPage.prototype.logForm = function () {
-        console.log("        ADDDDREESSSSS77777777:  " + this.address); //moved up here!
-        /*if(this.type == 'user' || this.type == 'user/stylist/user') {
-     
-           if(this.username == null || this.password == null || this.email == null || this.bio == null) {
-             alert("You need to fill out all of the information");
-           }
-         }*/
-        console.log(this.authUser + '      authuser       998877');
-        this.x = 0;
-        console.log(this.passwordIfChanged + "  passwordifchanged                  this.password: " + this.password);
-        console.log(this.emailIfChanged + "  passwordifchanged                  this.password: " + this.email);
-        this.storage.set('username', this.username);
-        if (this.passwordIfChanged != this.password && this.authUser != null) {
-            this.authUser.updatePassword(this.password).then(function () { }).catch(function (e) { alert("Password update failed."); });
-        }
-        /*else {
-          this.password = this.passwordIfChanged;
-          alert("You are not logged in yet, you cannot update your password or email.")
-        }*/
-        this.storage.set('password', this.password);
-        if (this.emailIfChanged != this.email && this.authUser != null) {
-            this.authUser.updateEmail(this.email).then(function () { }).catch(function (e) { alert("Email update failed."); });
-        }
-        /*else {
-          this.email = this.emailIfChanged;
-          alert("You are not logged in yet, you cannot update your password or email.")
-        }*/
-        this.storage.set('email', this.email);
-        this.storage.set('bio', this.bio);
-        this.storage.set('picURL', this.picURL);
-        this.storage.set('phone', this.phone);
-        this.storage.set('instausername', this.instagramURL);
-        if (this.facebookURL == null) {
-            this.facebookURL = "";
-        }
-        //this.storage.get('type').then((val) => {
-        if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '' || this.phone == '') {
-                alert("You need to fill out all of the information");
-            }
-            else {
-                this.storage.set('address', this.address);
-                this.storage.set('price', this.price);
-                if (this.price == "<100") {
-                    this.price = "$";
-                }
-                else if (this.price == "100-149") {
-                    this.price = "$$";
-                }
-                else if (this.price == "150-199") {
-                    this.price = "$$$";
-                }
-                else if (this.price == "200-249") {
-                    this.price = "$$$$";
-                }
-                else if (this.price == "250-300") {
-                    this.price = "$$$$$";
-                }
-                this.items = this.af.object('/profiles/stylists');
-                if (this.username == this.oldUser) {
-                    this.items.update((_a = {}, _a[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
-                        'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
-                        'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL }, _a));
-                    if (this.isTypeNull == null) {
-                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
-                    }
-                    else {
-                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__["a" /* FeedStylist */]);
-                    }
-                }
-                else {
-                    this.af.object('/profiles/stylists/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
-                    this.items.update((_b = {}, _b[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
-                        'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
-                        'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
-                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } }, _b));
-                    if (this.isTypeNull == null) {
-                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
-                    }
-                    else {
-                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__["a" /* FeedStylist */]);
-                    }
-                }
-            }
-        }
-        if (this.type == 'user' || this.type == 'user/stylist/user') {
-            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.phone == '') {
-                alert("You need to fill out all of the information");
-            }
-            else {
-                this.items = this.af.object('/profiles/users');
-                if (this.username == this.oldUser) {
-                    this.items.update((_c = {}, _c[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
-                        'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL }, _c));
-                    if (this.isTypeNull == null) {
-                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
-                    }
-                    else {
-                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__["a" /* FeedUser */]);
-                    }
-                }
-                else {
-                    this.af.object('/profiles/users/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
-                    this.items.update((_d = {}, _d[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
-                        'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
-                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } }, _d));
-                    if (this.isTypeNull == null) {
-                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
-                    }
-                    else {
-                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__["a" /* FeedUser */]);
-                    }
-                }
-            }
-        }
-        ;
-        var _a, _b, _c, _d;
-        //})
-    };
-    SettingsPage.prototype.logout = function () {
-        if (this.loggedIn) {
-            console.log("being logged out ()()()()ER()EW()RWE()()REW()");
-            this.afAuth.auth.signOut();
-            this.storage.set('loggedin', false);
-        }
-        else {
-            this.storage.set('loggedin', false);
-        }
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_12__signin_signin__["a" /* SignInPage */]);
-    };
-    SettingsPage.prototype.ngOnDestroy = function () {
-        this.subscription3.unsubscribe();
-    };
-    SettingsPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.storage.get('type').then(function (val) {
-            _this.type = val;
-            console.log(_this.typeparam + '       this.typeparam       ');
-            console.log(_this.logoutButton + '       this.typeparam       ');
-            if (_this.typeparam == 'user') {
-                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.logoutButton._elementRef.nativeElement, 'display', 'none');
-            }
-            if (_this.typeparam == 'user/stylist/user') {
-                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
-                //this.myrenderer.setElementStyle(this.logoutButton._elementRef.nativeElement, 'display', 'none');
-            }
-            else if (_this.type == 'user/stylist/user') {
-                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
-            }
-            else if (_this.typeparam == 'stylist') {
-                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.logoutButton._elementRef.nativeElement, 'display', 'none');
-            }
-            _this.oldUser = _this.username;
-            _this.subscription3 = _this.afAuth.authState.subscribe(function (data) {
-                if (data != null) {
-                    if (data.email && data.uid) {
-                        console.log("logged in");
-                        _this.authUser = data;
-                        _this.loggedIn = true;
-                    }
-                }
-            });
-            _this.isTypeNull = _this.navParams.get('type');
-            setTimeout(function () {
-                console.log('ionViewDidLoad SettingsPage');
-                _this.storage.get('username').then(function (val) { _this.username = val; _this.getProfilePic(); console.log(val + "        getting username          3333222222"); });
-                _this.storage.get('password').then(function (val) { _this.password = val; _this.passwordIfChanged = _this.password; console.log(val + "        getting password222222"); });
-                _this.storage.get('email').then(function (val) { _this.email = val; _this.emailIfChanged = _this.email; console.log(val + "        getting email33333333"); });
-                _this.storage.get('bio').then(function (val) { _this.bio = val; console.log(val + "        getting biooooooooo"); });
-                _this.storage.get('picURL').then(function (val) { _this.picURL = val; });
-                _this.storage.get('phone').then(function (val) { _this.phone = val; });
-                _this.storage.get('instausername').then(function (val) { _this.instagramURL = val; });
-                if (_this.type == 'stylist' || _this.type == 'user/stylist/stylist') {
-                    _this.storage.get('address').then(function (val) { _this.address = val; console.log(val + "        getting addressssssss"); });
-                    _this.storage.get('price').then(function (val) { _this.price = val; });
-                }
-            }, 1000);
-            if (_this.type == 'user' || _this.type == 'user/stylist/user') {
-                _this.storage.get('fblinkeduser').then(function (val) {
-                    console.log(val + " val vlal v avlal v allavl val ");
-                    console.log(_this.type + " tyope aosefi; fai; sefeji a'aj '' ");
-                    if (val) {
-                        _this.linked = "Linked";
-                    }
-                    else {
-                        _this.linked = "Link Profile";
-                    }
-                });
-            }
-            else if (_this.type == 'stylist' || _this.type == 'user/stylist/stylist') {
-                _this.storage.get('fblinkedstylist').then(function (val) {
-                    if (val) {
-                        _this.linked = "Linked";
-                    }
-                    else {
-                        _this.linked = "Link Profile";
-                    }
-                });
-            }
-        });
-        this.storage.get('location').then(function (val) {
-            _this.locationtoggle = val;
-            if (val == true) {
-                _this.locationtoggle = false;
-            }
-            else {
-                _this.locationtoggle = true;
-            }
-            console.log(_this.locationtoggle + "     in view did load locationtoggle");
-        });
-        this.typeparam = this.navParams.get('type');
-    };
-    SettingsPage.prototype.getProfilePic = function () {
-        var _this = this;
-        console.log("inside get profile pic &*&*(&*%^$%$%$%$%$%");
-        return new Promise(function (resolve, reject) {
-            var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
-            storageRef.getDownloadURL().then(function (url) {
-                console.log(url);
-                _this.picURL = url;
-                _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
-                resolve();
-            }).catch(function (e) {
-                console.log(e.message);
-            });
-        });
-    };
-    SettingsPage.prototype.goButton = function (code) {
-        console.log(code);
-        if (code == 13) {
-            this.keyboard.close();
-        }
-    };
-    SettingsPage.prototype.change = function () {
-        this.presentActionSheet();
-    };
-    SettingsPage.prototype.presentActionSheet = function () {
-        var _this = this;
-        var actionSheet = this.actionSheetCtrl.create({
-            title: 'Choose source',
-            buttons: [
-                {
-                    text: 'Camera',
-                    handler: function () {
-                        _this.cameraService.getMedia(_this.optionsGetCamera, null, _this.username).then(function () {
-                            var loading = _this.loadingController.create({ content: "Loading..." });
-                            loading.present();
-                            return new Promise(function (resolve, reject) {
-                                //setTimeout(() => {
-                                var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
-                                storageRef.getDownloadURL().then(function (url) {
-                                    console.log(url);
-                                    _this.picURL = url;
-                                    _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
-                                    loading.dismiss();
-                                    resolve();
-                                }).catch(function (e) {
-                                    alert("Something went wrong with the upload, please try again.");
-                                    loading.dismiss();
-                                    resolve();
-                                });
-                                loading.dismiss();
-                                //}, 3500);
-                            });
-                        }); //pass in square choice
-                        //this.myrenderer.setElementAttribute(this.itemArrayTwo[this.square - 1].nativeElement, 'src', 'block');
-                        console.log('camera clicked');
-                    }
-                }, {
-                    text: 'Photo Library',
-                    handler: function () {
-                        _this.cameraService.getMedia(_this.optionsGetMedia, null, _this.username).then(function () {
-                            var loading = _this.loadingController.create({ content: "Loading..." });
-                            loading.present();
-                            return new Promise(function (resolve, reject) {
-                                //setTimeout(() => {
-                                var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
-                                storageRef.getDownloadURL().then(function (url) {
-                                    console.log(url);
-                                    _this.picURL = url;
-                                    _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
-                                    loading.dismiss();
-                                    resolve();
-                                }).catch(function (e) {
-                                    alert("Something went wrong with the upload, please try again.");
-                                    loading.dismiss();
-                                    resolve();
-                                });
-                                loading.dismiss();
-                                //}, 3500);
-                            });
-                        });
-                    }
-                }, {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
-        actionSheet.present();
-    };
-    return SettingsPage;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('profsquare'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
-], SettingsPage.prototype, "profilepic", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('addressEl'),
-    __metadata("design:type", Object)
-], SettingsPage.prototype, "addressEl", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('priceEl'),
-    __metadata("design:type", Object)
-], SettingsPage.prototype, "priceEl", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('arrowback'),
-    __metadata("design:type", Object)
-], SettingsPage.prototype, "arrowBackEl", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('logoutbutton'),
-    __metadata("design:type", Object)
-], SettingsPage.prototype, "logoutButton", void 0);
-SettingsPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-settings',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/settings/settings.html"*/'<!--\n  Generated template for the SettingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <!---->\n	<div style="position: absolute; left: 50%; width:35%; z-index: 1">\n    <div style="position: relative; left: -50%; width:100%">\n      <img (tap)="presentActionSheet()" class="imagesquare" #profsquare src="assets/blankprof.png">\n    </div>\n  </div>\n  <ion-navbar>\n    <ion-icon (tap)="goToProfile()" class=\'backk\' name="arrow-back" #arrowback></ion-icon>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content no-padding>\n	<ion-item no-padding class="sect">\n		<ion-label>Username</ion-label>\n		<ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="username" name="username"></ion-input> <!--[(ngModel)]="user.username"-->\n	</ion-item>\n	<ion-item no-padding class="sect">\n	  <ion-label>Password</ion-label>\n	  <ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="password" name="password"></ion-input>\n	</ion-item>\n	<ion-item no-padding class="sect">\n  	<ion-label>Email</ion-label>\n  	<ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="email" name="email"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n  	<ion-label>Salon Address</ion-label>\n  	<ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. 28 Jay St, Winston, NJ" [(ngModel)]="address" name="address"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n    <ion-label>Phone</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. 1231231234" [(ngModel)]="phone" name="phone"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #priceEl>\n\n    <ion-label>Price Range</ion-label>\n    <ion-select [(ngModel)]="price">\n      <ion-option *ngFor="let z of priceRanges" value="{{z}}">{{z}}</ion-option>\n    </ion-select>\n\n  </ion-item>\n  <ion-item no-padding class="sect">\n  	<ion-label>Bio</ion-label>\n  	<ion-textarea style="width: 65%" placeholder="Bio..." [(ngModel)]="bio" name="bio"></ion-textarea>\n  </ion-item>\n  <ion-item no-padding class="sect">\n    <ion-label>Location</ion-label>\n    <ion-toggle [(ngModel)]="locationtoggle" (tap)="tappedToggle()"></ion-toggle>\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n    <div class="fblabelcontainer">\n      <div class="inlineblock">Facebook</div>\n    \n      <button ion-button round color="tertiary" class="linkfbprof" (tap)="linkProfile()">{{linked}}</button>\n    </div>\n    <!--<ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="http://www.facebook.com/username" [(ngModel)]="facebookURL" name="facebook"></ion-input>--> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl2>\n    <ion-label>Instagram Username</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. username" [(ngModel)]="instagramURL" name="instagram"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n\n  <div id="savebutton">\n    <button class="save" (tap)=\'logForm()\' ion-button round color="primary">Save</button>\n    <button class="save" (tap)=\'logout()\' ion-button round color="tertiary" #logoutbutton>Logout</button>\n    <button class="save" (tap)=\'formulas()\' ion-button round color="tertiary">Formulas</button> <!--map()-->\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/settings/settings.html"*/,
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_16__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_3__services_cameraserviceprofile__["a" /* CameraServiceProfile */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_keyboard__["a" /* Keyboard */]])
-], SettingsPage);
-
-//# sourceMappingURL=settings.js.map
-
-/***/ }),
-
-/***/ 912:
+/***/ 913:
 /***/ (function(module, exports) {
 
 /* (ignored) */
@@ -8547,21 +8670,21 @@ SettingsPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserProfile; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__userbooking_userbooking__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dropin_dropin__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cameraservice__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_img_viewer__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modals_rate_rate__ = __webpack_require__(300);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_storage__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ionic_native__ = __webpack_require__(654);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_img_viewer__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modals_rate_rate__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_storage__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ionic_native__ = __webpack_require__(655);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8694,6 +8817,9 @@ var UserProfile = (function () {
             }
         }).unsubscribe();
     };
+    UserProfile.prototype.depositOpen = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__dropin_dropin__["a" /* DropinPage */], { page: 'userprofile' });
+    };
     UserProfile.prototype.followStylist = function () {
         var _this = this;
         this.item = this.af.object('/profiles/stylists/' + this.username + '/followers');
@@ -8718,6 +8844,7 @@ var UserProfile = (function () {
     };
     UserProfile.prototype.ionViewDidLoad = function () {
         var _this = this;
+        this.storage.set('fblinkedstylist', false);
         this.username = this.params.get('username');
         this.storage.get('phone').then(function (val) { _this.phone = val; });
         this.subscription7 = this.afAuth.authState.subscribe(function (data) {
@@ -9254,7 +9381,7 @@ __decorate([
 ], UserProfile.prototype, "formulaBars", void 0);
 UserProfile = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-user-profile',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/userprofile/userprofile.html"*/'<ion-header (swipeRight)="swipeRight()">\n  <ion-toolbar>\n    <ion-title>@{{username}}</ion-title>\n\n    <!--<div class="settingscontainer">\n    	<ion-icon class="settings" name="settings" (tap)="goToSettings()"></ion-icon>\n    </div>-->\n  </ion-toolbar>\n    <!--<div class="stylistview">\n	    <button class="stylistviewbutton" ion-button color="secondary">Stylist View</button>\n	  </div>-->\n</ion-header>\n\n<ion-content no-padding>\n<div (swiperight)="swipeRight()">\n	<ion-item no-padding no-lines>\n		<div class="imageparent">\n		  <img class="postprofilepic" src="{{profilePic}}">\n		</div>\n	    <div class="rateandsocial">\n		    <div class=\'ratecontain\' (tap)="presentRateModal()">\n			    <div class=\'stars\'>{{stars}}</div>\n			    <div class=\'ratings\'>({{totalRatings}} ratings)</div>\n			</div>\n		    <div class="social">\n				<div class="fb inlineblock">\n					<img src="img/facebook.png" (tap)="facebookOpen()" #facebook>\n				</div>\n				<div class="insta inlineblock">\n		  			<img src="img/instagram.png" (tap)="instagramOpen()" #instagram>\n				</div>\n			</div>\n		</div>\n	  	<div class="stylistviewtwo">\n	    	<button class="stylistviewbuttontwo" ion-button (tap)="followStylist()" #followsty color="primary">Follow Stylist</button>\n	  	</div>\n	  	<div class=\'stylistsect\'>\n			<div class="name">@{{username}}</div>\n			<div class="bio">{{bio}}</div>\n		</div>\n		<div class=\'arrowleftholder\'>\n	    	<ion-icon class=\'forward\' name="arrow-back"></ion-icon>\n	    </div>\n		<div class="caltitle">{{viewTitle}} {{titleYear}}</div>\n		<div class=\'arrowrightholder\'>\n	    	<ion-icon class=\'forward\' name="arrow-forward"></ion-icon>\n	    </div>\n		<calendar (tap)="openCal()" class=\'cal\' [eventSource]="eventSource"\n	      [calendarMode]="calendar.mode"\n	      [currentDate]="calendar.currentDate"\n	      (onCurrentDateChanged)="onCurrentDateChanged($event)"\n	      (onRangeChanged)="reloadSource(startTime, endTime)"\n	      (onEventSelected)="onEventSelected($event)"\n	      (onTitleChanged)="onViewTitleChanged($event)"\n	      (onTimeSelected)="onTimeSelected($event)"\n	      step="30">\n	    </calendar>\n	</ion-item>\n	<ion-grid>\n	  <ion-row>\n	    <ion-col>\n\n	      <img (tap)="presentImage(1)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(2)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(3)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	  </ion-row>\n	  <ion-row>\n	    <ion-col>\n\n	      <img (tap)="presentImage(4)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(5)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(6)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	  </ion-row>\n	  <ion-row>\n	    <ion-col>\n\n	      <img (tap)="presentImage(7)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(8)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(9)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	  </ion-row>\n	</ion-grid>\n</div>\n\n<!--<ion-fab bottom center >\n  <button ion-fab></button>\n  <ion-fab-list side="right">\n    <button class="textsizebutton" (tap)=\'tappedPost()\' ion-fab>Post</button>\n  </ion-fab-list>\n  <ion-fab-list side="left">\n    <button class="textsizebutton" (tap)=\'tappedEmergency()\' ion-fab><ion-icon name="alarm"></ion-icon></button>\n  </ion-fab-list>\n</ion-fab>-->\n</ion-content>'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/userprofile/userprofile.html"*/,
+        selector: 'page-user-profile',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/userprofile/userprofile.html"*/'<ion-header (swipeRight)="swipeRight()">\n  <ion-toolbar>\n    <ion-title>@{{username}}</ion-title>\n\n    <!--<div class="settingscontainer">\n    	<ion-icon class="settings" name="settings" (tap)="goToSettings()"></ion-icon>\n    </div>-->\n  </ion-toolbar>\n    <!--<div class="stylistview">\n	    <button class="stylistviewbutton" ion-button color="secondary">Stylist View</button>\n	  </div>-->\n</ion-header>\n\n<ion-content no-padding>\n<div (swiperight)="swipeRight()">\n	<ion-item no-padding no-lines>\n		<div class="imageparent">\n		  <img class="postprofilepic" src="{{profilePic}}">\n		</div>\n	    <div class="rateandsocial">\n		    <div class=\'ratecontain\' (tap)="presentRateModal()">\n			    <div class=\'stars\'>{{stars}}</div>\n			    <div class=\'ratings\'>({{totalRatings}} ratings)</div>\n			</div>\n		    <div class="social">\n				<div class="fb inlineblock">\n					<img src="img/facebook.png" (tap)="facebookOpen()" #facebook>\n				</div>\n				<div class="insta inlineblock">\n		  			<img src="img/instagram.png" (tap)="instagramOpen()" #instagram>\n				</div>\n				<div class="deposit" (tap)="depositOpen()">\n		  			<img src="assets/dollarsign.png" #deposit>\n				</div>\n			</div>\n		</div>\n	  	<div class="stylistviewtwo">\n	    	<button class="stylistviewbuttontwo" ion-button (tap)="followStylist()" #followsty color="primary">Follow Stylist</button>\n	  	</div>\n	  	<div class=\'stylistsect\'>\n			<div class="name">@{{username}}</div>\n			<div class="bio">{{bio}}</div>\n		</div>\n		<div class=\'arrowleftholder\'>\n	    	<ion-icon class=\'forward\' name="arrow-back"></ion-icon>\n	    </div>\n		<div class="caltitle">{{viewTitle}} {{titleYear}}</div>\n		<div class=\'arrowrightholder\'>\n	    	<ion-icon class=\'forward\' name="arrow-forward"></ion-icon>\n	    </div>\n		<calendar (tap)="openCal()" class=\'cal\' [eventSource]="eventSource"\n	      [calendarMode]="calendar.mode"\n	      [currentDate]="calendar.currentDate"\n	      (onCurrentDateChanged)="onCurrentDateChanged($event)"\n	      (onRangeChanged)="reloadSource(startTime, endTime)"\n	      (onEventSelected)="onEventSelected($event)"\n	      (onTitleChanged)="onViewTitleChanged($event)"\n	      (onTimeSelected)="onTimeSelected($event)"\n	      step="30">\n	    </calendar>\n	</ion-item>\n	<ion-grid>\n	  <ion-row>\n	    <ion-col>\n\n	      <img (tap)="presentImage(1)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(2)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(3)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	  </ion-row>\n	  <ion-row>\n	    <ion-col>\n\n	      <img (tap)="presentImage(4)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(5)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(6)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	  </ion-row>\n	  <ion-row>\n	    <ion-col>\n\n	      <img (tap)="presentImage(7)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(8)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	    <ion-col>\n\n	      <img (tap)="presentImage(9)" class="imagesquare" #profsquare [src]="">\n	      <div class="formulabar" #formulabar>Formula</div>\n	    </ion-col>\n	  </ion-row>\n	</ion-grid>\n</div>\n\n<!--<ion-fab bottom center >\n  <button ion-fab></button>\n  <ion-fab-list side="right">\n    <button class="textsizebutton" (tap)=\'tappedPost()\' ion-fab>Post</button>\n  </ion-fab-list>\n  <ion-fab-list side="left">\n    <button class="textsizebutton" (tap)=\'tappedEmergency()\' ion-fab><ion-icon name="alarm"></ion-icon></button>\n  </ion-fab-list>\n</ion-fab>-->\n</ion-content>'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/userprofile/userprofile.html"*/,
         animations: [
             Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('moveCover', [
                 Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["state"])('down', Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({})),
@@ -9276,16 +9403,16 @@ UserProfile = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CameraService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_crop__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_storage__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_storage__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9579,18 +9706,18 @@ CameraService = __decorate([
 
 /***/ }),
 
-/***/ 935:
+/***/ 936:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(505);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(504);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_feedstylist_feedstylist__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(505);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_signin_signin__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_cache__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_screen_orientation__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_screen_orientation__ = __webpack_require__(507);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9611,7 +9738,7 @@ var MyApp = (function () {
     function MyApp(platform, statusBar, splashScreen, cache, screenOrientation) {
         var _this = this;
         this.screenOrientation = screenOrientation;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_feedstylist_feedstylist__["a" /* FeedStylist */];
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_signin_signin__["a" /* SignInPage */];
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
@@ -9637,5 +9764,5 @@ var _a, _b, _c, _d, _e;
 
 /***/ })
 
-},[511]);
+},[512]);
 //# sourceMappingURL=main.js.map

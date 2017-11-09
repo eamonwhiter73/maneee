@@ -110,8 +110,6 @@ export class FormulaBuy implements OnDestroy {
      }
      
      console.log(this.payload + '          paaaaayyyyyylllllooooooaaaaaddddd');
-      let params = new URLSearchParams();
-      params.set('payout', 'payyyyyy');
 
       let headers = new Headers({
         'Content-Type': 'application/json'
@@ -123,7 +121,7 @@ export class FormulaBuy implements OnDestroy {
       let body = JSON.stringify(this.payload);
 
      //INSERT CALL TO BACKEND
-     this.http.post('http://me.eamondev.com/api/buyformula.php', body)  
+     this.http.post('http://192.168.1.131:8888/api/buyformula.php', body)  
      .subscribe(res => {
        console.log(res + "response from formula buy");
        console.log(JSON.stringify(this.data) + "     data dat d dat add  dat");

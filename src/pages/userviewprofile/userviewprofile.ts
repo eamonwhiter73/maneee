@@ -96,7 +96,7 @@ export class UserViewProfile implements OnDestroy {
   }
 
   public optionsGetMedia: any = {
-        allowEdit: false,
+        //allowEdit: false,
         quality: 10,
         targetWidth: 600,
         targetHeight: 600,
@@ -114,7 +114,7 @@ export class UserViewProfile implements OnDestroy {
         sourceType: this.camera.PictureSourceType.CAMERA,
         mediaType: this.camera.MediaType.PICTURE,
         destinationType: this.camera.DestinationType.FILE_URI,
-        saveToPhotoAlbum: true
+        //saveToPhotoAlbum: true
   }
 
   ionViewWillUnload() {

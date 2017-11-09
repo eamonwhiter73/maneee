@@ -60,7 +60,7 @@ import { GooglePlus } from '@ionic-native/google-plus'
 import { PopUp } from '../modals/popup/popup';
 import { PopUpOther } from '../modals/popupother/popupother';
 import { FormulaBuy } from '../modals/formulabuy/formulabuy';
-
+import { DepositPage } from '../modals/depositpage/depositpage'
 import { Rate } from '../modals/rate/rate'
 import { IonicImageLoader } from 'ionic-image-loader';
 import { DatePicker } from '@ionic-native/date-picker';
@@ -127,6 +127,7 @@ firebase.initializeApp(firebaseConfig);
     PopUp,
     PopUpOther,
     FormulaBuy,
+    DepositPage,
     SettingsPage,
     UserProfile,
     Rate,
@@ -170,6 +171,7 @@ firebase.initializeApp(firebaseConfig);
     PopUp,
     PopUpOther,
     FormulaBuy,
+    DepositPage,
     Rate,
     SettingsPage,
     UserProfile,

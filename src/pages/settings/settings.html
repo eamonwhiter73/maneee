@@ -43,7 +43,7 @@
 
     <ion-label>Price Range</ion-label>
     <ion-select [(ngModel)]="price">
-      <ion-option *ngFor="let z of priceRanges" value="{{z}}">{{z}}</ion-option>
+      <ion-option *ngFor="let z of priceRanges ; let i = index" value="{{z}}" id="{{i}}">{{z}}</ion-option>
     </ion-select>
 
   </ion-item>
