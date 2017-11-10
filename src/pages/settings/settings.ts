@@ -51,6 +51,12 @@ export class SettingsPage implements OnDestroy {
   @ViewChild('priceEl') priceEl;
   @ViewChild('arrowback') arrowBackEl;
   @ViewChild('logoutbutton') logoutButton;
+  @ViewChild('locationToggle') locationToggle;
+  @ViewChild('merchantId') merchantId;
+  @ViewChild('publicKey') publicKey;
+  @ViewChild('privateKey') privateKey;
+
+
   username: string;
   password: string;
   email: string;
@@ -80,6 +86,9 @@ export class SettingsPage implements OnDestroy {
   facebookProf;
   linked = "Link Profile";
   isTypeNull;
+  merchantid = "";
+  publickey = "";
+  privatekey = "";
 
 
   constructor(public facebook: Facebook, public af: AngularFireDatabase, private afAuth: AngularFireAuth, public storage: Storage, public camera: Camera, public cameraService: CameraServiceProfile, public myrenderer: Renderer, public loadingController: LoadingController, public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public navParams: NavParams, public keyboard:Keyboard) {
@@ -156,11 +165,11 @@ export class SettingsPage implements OnDestroy {
 
   goToProfile() {
     if(this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-      this.navCtrl.push(StylistProfile);
+      this.navCtrl.pop();
     }
 
     if(this.type == 'user' || this.type == 'user/stylist/user') {
-      this.navCtrl.push(UserViewProfile);
+      this.navCtrl.pop();
     }
   }
 
@@ -221,7 +230,7 @@ export class SettingsPage implements OnDestroy {
 
     //this.storage.get('type').then((val) => {
       if(this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-        if(this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '' ) {
+        if(this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '' || this.merchantId == '' || this.publicKey == '' || this.privateKey == '') {
           alert("You need to fill out all of the information");
         }
         else if(this.phone.match(/\d/g).length!==10) {
@@ -230,6 +239,9 @@ export class SettingsPage implements OnDestroy {
         else {
           this.storage.set('address', this.address);
           this.storage.set('price', this.price);
+          this.storage.set('merchantid', this.merchantid);
+          this.storage.set('publickey', this.publickey);
+          this.storage.set('privatekey', this.privatekey);
 
           if(this.price == "<100") {
             this.price = "$";
@@ -252,7 +264,8 @@ export class SettingsPage implements OnDestroy {
           if(this.username == this.oldUser) {
             this.items.update(this.username, {'username': this.username, 'password': this.password, 'email': this.email,
                                   'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
-                                  'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL});
+                                  'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
+                                  'merchantid': this.merchantid, 'publickey': this.publickey, 'privatekey': this.privatekey});
             if(this.isTypeNull == null) {
               this.navCtrl.push(StylistProfile);
             }
@@ -265,6 +278,7 @@ export class SettingsPage implements OnDestroy {
             this.items.update(this.username, {'username': this.username, 'password': this.password, 'email': this.email,
                               'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
                               'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
+                              'merchantid': this.merchantid, 'publickey': this.publickey, 'privatekey': this.privatekey,
                               'rating': {'one':0, 'two':0, 'three':0, 'four':0, 'five':0}});
           
             if(this.isTypeNull == null) {
@@ -353,20 +367,33 @@ export class SettingsPage implements OnDestroy {
           this.myrenderer.setElementStyle(this.priceEl._elementRef.nativeElement, 'display', 'none');
           this.myrenderer.setElementStyle(this.arrowBackEl.nativeElement, 'display', 'none');
           this.myrenderer.setElementStyle(this.logoutButton._elementRef.nativeElement, 'display', 'none');
+          this.myrenderer.setElementStyle(this.merchantId._elementRef.nativeElement, 'display', 'none');
+          this.myrenderer.setElementStyle(this.publicKey._elementRef.nativeElement, 'display', 'none');
+          this.myrenderer.setElementStyle(this.privateKey._elementRef.nativeElement, 'display', 'none');
         }
         if(this.typeparam == 'user/stylist/user') { 
           this.myrenderer.setElementStyle(this.addressEl._elementRef.nativeElement, 'display', 'none');
           this.myrenderer.setElementStyle(this.priceEl._elementRef.nativeElement, 'display', 'none');
           this.myrenderer.setElementStyle(this.arrowBackEl.nativeElement, 'display', 'none');
+          this.myrenderer.setElementStyle(this.merchantId._elementRef.nativeElement, 'display', 'none');
+          this.myrenderer.setElementStyle(this.publicKey._elementRef.nativeElement, 'display', 'none');
+          this.myrenderer.setElementStyle(this.privateKey._elementRef.nativeElement, 'display', 'none');
           //this.myrenderer.setElementStyle(this.logoutButton._elementRef.nativeElement, 'display', 'none');
         }
         else if(this.type == 'user/stylist/user') {
           this.myrenderer.setElementStyle(this.addressEl._elementRef.nativeElement, 'display', 'none');
           this.myrenderer.setElementStyle(this.priceEl._elementRef.nativeElement, 'display', 'none');
+          this.myrenderer.setElementStyle(this.merchantId._elementRef.nativeElement, 'display', 'none');
+          this.myrenderer.setElementStyle(this.publicKey._elementRef.nativeElement, 'display', 'none');
+          this.myrenderer.setElementStyle(this.privateKey._elementRef.nativeElement, 'display', 'none');
         }
         else if(this.typeparam == 'stylist') {
           this.myrenderer.setElementStyle(this.arrowBackEl.nativeElement, 'display', 'none');
           this.myrenderer.setElementStyle(this.logoutButton._elementRef.nativeElement, 'display', 'none');
+          this.myrenderer.setElementStyle(this.locationToggle._elementRef.nativeElement, 'display', 'none');
+        }
+        else if(this.type == 'user/stylist/stylist') {
+          this.myrenderer.setElementStyle(this.locationToggle._elementRef.nativeElement, 'display', 'none');
         }
 
         this.oldUser = this.username;
@@ -391,6 +418,9 @@ export class SettingsPage implements OnDestroy {
           if(this.type == 'stylist' || this.type == 'user/stylist/stylist') {
             this.storage.get('address').then((val) => {this.address = val; console.log(val + "        getting addressssssss")});
             this.storage.get('price').then((val) => {this.price = val; });
+            this.storage.get('merchantid').then((val) => {this.merchantid = val; });
+            this.storage.get('publickey').then((val) => {this.publickey = val; });
+            this.storage.get('privatekey').then((val) => {this.privatekey = val; });
 
             for(let x = 0; x < 5; x++) {
               if(this.priceRanges[x] == this.price) {

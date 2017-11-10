@@ -47,6 +47,7 @@ export class DepositPage implements OnDestroy {
 
  ionViewDidLoad() {
   this.payload = this.params.get('payload');
+  this.username = this.params.get('username');
 
 
  	//this.renderer.appendText(this.salon.nativeElement, "@"+this.params.get('salon'));
@@ -54,36 +55,47 @@ export class DepositPage implements OnDestroy {
  }
 
  buy() {
-   if(this.deposit == '' || isNaN(parseInt(this.deposit)) ) {
-     alert("You must fill in an amount to deposit.")
-   }
-   else {  
-     console.log(this.payload + '          paaaaayyyyyylllllooooooaaaaaddddd');
-      let params = new URLSearchParams();
-      params.set('deposit', this.deposit);
+   console.log(this.username + "    this.username");
+   let database = firebase.database();
+   let reff = firebase.database().ref('/profiles/stylists').orderByChild('username').equalTo(this.username).on("value", (snapshot) => {
+      snapshot.forEach(snapshot => {
+          // key
+          let key = snapshot.key;
+          console.log("key: " + key);
+          // value, could be object
+          let childData = snapshot.val();
+          console.log("data: " + JSON.stringify(childData));
+          // Do what you want with these key/values here
+          if(this.deposit == '' || isNaN(parseInt(this.deposit)) ) {
+           alert("You must fill in an amount to deposit.")
+          }
+          else {  
+           console.log(this.payload + '          paaaaayyyyyylllllooooooaaaaaddddd');
+            
+            // TODO: Encode the values using encodeURIComponent().
+            this.payload['deposit'] = this.deposit;
+            this.payload.merchantid = childData.merchantid;
+            this.payload.publickey = childData.publickey;
+            this.payload.privatekey = childData.privatekey;
+            
+            let body = JSON.stringify(this.payload);
 
-      let headers = new Headers({
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+           //INSERT CALL TO BACKEND
+           this.http.post('http://192.168.1.131:8888/api/deposit.php', body)  
+           .subscribe(res => {
+             alert("Your deposit was successful.");
+             this.dismiss();
+           }, err => {
+             alert("Something went wrong.");
       });
-      let options = new RequestOptions({
-        headers: headers,
-        params: params
-      });
-      // TODO: Encode the values using encodeURIComponent().
-      this.payload['deposit'] = this.deposit;
-      let body = JSON.stringify(this.payload);
-
-     //INSERT CALL TO BACKEND
-     this.http.post('http://192.168.1.131:8888/api/deposit.php', body)  
-     .subscribe(res => {
-       alert("Your deposit was successful.");
-       this.dismiss();
-     }, err => {
-       alert("Something went wrong.");
-     });
 
      
    }
+          return true;
+      });
+  });
+
+   
  }
 
  dismiss() {

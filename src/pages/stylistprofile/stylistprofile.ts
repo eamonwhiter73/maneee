@@ -654,7 +654,7 @@ export class StylistProfile implements OnDestroy {
   }
 
   swipeRight() {
-    this.navCtrl.popToRoot({animate:true,animation:'ios-transition',duration:100,direction:'back'});
+    this.navCtrl.popToRoot({animate:true,animation:'transition',duration:100,direction:'back'});
   }
 
   

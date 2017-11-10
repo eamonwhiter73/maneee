@@ -1,6 +1,250 @@
 webpackJsonp([11],{
 
-/***/ 127:
+/***/ 120:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignInPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(462);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_keyboard__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+
+
+
+
+
+var SignInPage = (function () {
+    //subscription: ISubscription
+    function SignInPage(af, loadingCtrl, storage, afAuth, keyboard, navCtrl) {
+        this.af = af;
+        this.storage = storage;
+        this.afAuth = afAuth;
+        this.keyboard = keyboard;
+        this.navCtrl = navCtrl;
+        this.user = {};
+    }
+    SignInPage.prototype.ionViewWillUnload = function () {
+        //this.navCtrl.pop();
+    };
+    SignInPage.prototype.ngOnDestroy = function () {
+        //if(this.subscription != null) {
+        //this.subscription.unsubscribe();
+        //}
+    };
+    SignInPage.prototype.ionViewDidLoad = function () {
+        //let loading = this.loadingCtrl.create({content : "Loading..."});
+        //loading.present();
+        var _this = this;
+        this.storage.get('email').then(function (val) {
+            _this.email = val;
+        });
+        this.storage.get('password').then(function (val) {
+            _this.password = val;
+        });
+        this.storage.get('type').then(function (val) {
+            _this.type = val;
+        });
+        this.storage.get('loggedin').then(function (val) {
+            console.log(val + " logged innnnnnnn");
+            if (val == true) {
+                console.log(_this.type + " logged typeeeeee");
+                if (_this.type == 'user/stylist/user' || _this.type == 'user') {
+                    //loading.dismiss();
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__["a" /* FeedUser */]);
+                }
+                else if (_this.type == 'user/stylist/stylist' || _this.type == 'stylist') {
+                    //loading.dismiss();
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__["a" /* FeedStylist */]);
+                }
+            }
+            else {
+                console.log("Val == false......");
+            }
+        });
+    };
+    SignInPage.prototype.selectOneStylist = function () {
+        console.log("in select one stylist");
+        if (this.users) {
+            this.users = false;
+        }
+    };
+    SignInPage.prototype.selectOneUser = function () {
+        if (this.stylist) {
+            this.stylist = false;
+        }
+    };
+    SignInPage.prototype.goButton = function (code) {
+        console.log(code);
+        if (code == 13) {
+            this.keyboard.close();
+        }
+    };
+    SignInPage.prototype.login = function (userx) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                // push another page on to the navigation stack
+                // causing the nav controller to transition to the new page
+                // optional data can also be passed to the pushed page.
+                /**/
+                if (!userx.email || !userx.password) {
+                    alert("You need to enter an email and password");
+                }
+                else if (this.stylist && this.type == 'user') {
+                    alert("You do not have a stylist account, you can add one using the signup page");
+                }
+                else if (this.users && this.type == 'stylist') {
+                    alert("You do not have a user account, you can add one using the signup page");
+                }
+                else if (!this.users && !this.stylist) {
+                    alert('You need to select "Hair Stylist" or "User"');
+                }
+                else {
+                    this.afAuth.auth.signInWithEmailAndPassword(userx.email, userx.password).then(function (data) {
+                        console.log(data);
+                        if (data.email && data.uid) {
+                            if (_this.stylist) {
+                                console.log("chose stylist");
+                                _this.storage.set('type', 'user/stylist/stylist');
+                                _this.storage.set('loggedin', true);
+                                var database = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.database();
+                                var reff = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.database().ref('/profiles/stylists').orderByChild('email').equalTo(userx.email).on("value", function (snapshot) {
+                                    snapshot.forEach(function (snapshot) {
+                                        // key
+                                        var key = snapshot.key;
+                                        console.log("key: " + key);
+                                        // value, could be object
+                                        var childData = snapshot.val();
+                                        console.log("data: " + JSON.stringify(childData));
+                                        // Do what you want with these key/values here
+                                        console.log(childData.address + "    childdata address");
+                                        _this.storage.set('address', childData.address);
+                                        _this.storage.set('bio', childData.bio);
+                                        _this.storage.set('email', userx.email);
+                                        _this.storage.set('picURL', childData.picURL);
+                                        _this.storage.set('price', childData.price);
+                                        _this.storage.set('phone', childData.phone);
+                                        _this.storage.set('instausername', childData.instagramURL);
+                                        _this.storage.set('username', childData.username);
+                                        return true;
+                                    });
+                                });
+                                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__["a" /* FeedStylist */]);
+                            }
+                            else {
+                                _this.storage.set('type', 'user/stylist/user');
+                                _this.storage.set('loggedin', true);
+                                var database = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.database();
+                                var reff = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.database().ref('/profiles/users').orderByChild('email').equalTo(userx.email).on("value", function (snapshot) {
+                                    snapshot.forEach(function (snapshot) {
+                                        // key
+                                        var key = snapshot.key;
+                                        console.log("key: " + key);
+                                        // value, could be object
+                                        var childData = snapshot.val();
+                                        console.log("data: " + JSON.stringify(childData));
+                                        // Do what you want with these key/values here
+                                        //this.storage.set('address', childData.address);
+                                        _this.storage.set('bio', childData.bio);
+                                        _this.storage.set('email', userx.email);
+                                        _this.storage.set('picURL', childData.picURL);
+                                        _this.storage.set('phone', childData.phone);
+                                        _this.storage.set('instausername', childData.instagramURL);
+                                        _this.storage.set('username', childData.username);
+                                        return true;
+                                    });
+                                });
+                                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__["a" /* FeedUser */]);
+                            }
+                        }
+                    }).catch(function (e) { alert("The username or password is incorrect"); });
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
+    SignInPage.prototype.pushPage = function () {
+        // push another page on to the navigation stack
+        // causing the nav controller to transition to the new page
+        // optional data can also be passed to the pushed page.
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__signup_signup__["a" /* SignUpPage */]);
+    };
+    SignInPage.prototype.logForm = function () {
+        // push another page on to the navigation stack
+        // causing the nav controller to transition to the new page
+        // optional data can also be passed to the pushed page.
+    };
+    return SignInPage;
+}());
+SignInPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-sign-in',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/signin/signin.html"*/'<ion-content padding>\n  <h1 class="logo">Mane Emergency</h1>\n  <form (ngSubmit)="logForm()">\n  	<input [(ngModel)]="user.email" class="inputone" (keypress)="goButton($event.keyCode)" type="text" name="username" placeholder="Email"> <!--[(ngModel)]="user.username"-->\n  	<input type="text" [(ngModel)]="user.password" (keypress)="goButton($event.keyCode)" name="password" placeholder="Password"> <!--[(ngModel)]="user.username" name="password"-->\n  	<!--<div class=\'circle circone\'></div>\n  	<div class=\'circle circtwo\'></div>-->\n  	<ion-checkbox [(ngModel)]="stylist" name="stylist" class="circone" (tap)="selectOneStylist()"></ion-checkbox>\n  	<ion-checkbox [(ngModel)]="users" name="user" class="circtwo" (tap)="selectOneUser()"></ion-checkbox>\n  	<h2 class=\'hairstylist\'>Hair Stylist</h2>\n  	<h2 class=\'user\'>User</h2>\n  	<div class="signincontainer" style="text-align: center;">\n  		<button ion-button round color="primary" (tap)="login(user)">Sign In</button>\n  	</div>\n  </form>\n  <div class="account">\n    <p>Don\'t have an account? <a (click)="pushPage()">Sign Up</a></p>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/signin/signin.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_7_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_keyboard__["a" /* Keyboard */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]])
+], SignInPage);
+
+//# sourceMappingURL=signin.js.map
+
+/***/ }),
+
+/***/ 128:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -131,7 +375,7 @@ FollowersPage = __decorate([
 
 /***/ }),
 
-/***/ 167:
+/***/ 168:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -140,7 +384,7 @@ FollowersPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_crop__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_transfer__ = __webpack_require__(113);
@@ -357,14 +601,14 @@ CameraServicePost = __decorate([
 
 /***/ }),
 
-/***/ 168:
+/***/ 169:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserBooking; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_feeduser_feeduser__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_feeduser_feeduser__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__stylistprofile_stylistprofile__ = __webpack_require__(55);
@@ -799,22 +1043,22 @@ UserBooking = __decorate([
 
 /***/ }),
 
-/***/ 176:
+/***/ 177:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserViewProfile; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_settings__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_settings__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_cameraservice__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ionic_img_viewer__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ionic_img_viewer__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_native_geocoder__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(90);
@@ -1267,250 +1511,6 @@ UserViewProfile = __decorate([
 
 /***/ }),
 
-/***/ 177:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignInPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(462);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_keyboard__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_storage__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-
-
-
-
-
-
-var SignInPage = (function () {
-    //subscription: ISubscription
-    function SignInPage(af, loadingCtrl, storage, afAuth, keyboard, navCtrl) {
-        this.af = af;
-        this.storage = storage;
-        this.afAuth = afAuth;
-        this.keyboard = keyboard;
-        this.navCtrl = navCtrl;
-        this.user = {};
-    }
-    SignInPage.prototype.ionViewWillUnload = function () {
-        //this.navCtrl.pop();
-    };
-    SignInPage.prototype.ngOnDestroy = function () {
-        //if(this.subscription != null) {
-        //this.subscription.unsubscribe();
-        //}
-    };
-    SignInPage.prototype.ionViewDidLoad = function () {
-        //let loading = this.loadingCtrl.create({content : "Loading..."});
-        //loading.present();
-        var _this = this;
-        this.storage.get('email').then(function (val) {
-            _this.email = val;
-        });
-        this.storage.get('password').then(function (val) {
-            _this.password = val;
-        });
-        this.storage.get('type').then(function (val) {
-            _this.type = val;
-        });
-        this.storage.get('loggedin').then(function (val) {
-            console.log(val + " logged innnnnnnn");
-            if (val == true) {
-                console.log(_this.type + " logged typeeeeee");
-                if (_this.type == 'user/stylist/user' || _this.type == 'user') {
-                    //loading.dismiss();
-                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__["a" /* FeedUser */]);
-                }
-                else if (_this.type == 'user/stylist/stylist' || _this.type == 'stylist') {
-                    //loading.dismiss();
-                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__["a" /* FeedStylist */]);
-                }
-            }
-            else {
-                console.log("Val == false......");
-            }
-        });
-    };
-    SignInPage.prototype.selectOneStylist = function () {
-        console.log("in select one stylist");
-        if (this.users) {
-            this.users = false;
-        }
-    };
-    SignInPage.prototype.selectOneUser = function () {
-        if (this.stylist) {
-            this.stylist = false;
-        }
-    };
-    SignInPage.prototype.goButton = function (code) {
-        console.log(code);
-        if (code == 13) {
-            this.keyboard.close();
-        }
-    };
-    SignInPage.prototype.login = function (userx) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                // push another page on to the navigation stack
-                // causing the nav controller to transition to the new page
-                // optional data can also be passed to the pushed page.
-                /**/
-                if (!userx.email || !userx.password) {
-                    alert("You need to enter an email and password");
-                }
-                else if (this.stylist && this.type == 'user') {
-                    alert("You do not have a stylist account, you can add one using the signup page");
-                }
-                else if (this.users && this.type == 'stylist') {
-                    alert("You do not have a user account, you can add one using the signup page");
-                }
-                else if (!this.users && !this.stylist) {
-                    alert('You need to select "Hair Stylist" or "User"');
-                }
-                else {
-                    this.afAuth.auth.signInWithEmailAndPassword(userx.email, userx.password).then(function (data) {
-                        console.log(data);
-                        if (data.email && data.uid) {
-                            if (_this.stylist) {
-                                console.log("chose stylist");
-                                _this.storage.set('type', 'user/stylist/stylist');
-                                _this.storage.set('loggedin', true);
-                                var database = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.database();
-                                var reff = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.database().ref('/profiles/stylists').orderByChild('email').equalTo(userx.email).on("value", function (snapshot) {
-                                    snapshot.forEach(function (snapshot) {
-                                        // key
-                                        var key = snapshot.key;
-                                        console.log("key: " + key);
-                                        // value, could be object
-                                        var childData = snapshot.val();
-                                        console.log("data: " + JSON.stringify(childData));
-                                        // Do what you want with these key/values here
-                                        console.log(childData.address + "    childdata address");
-                                        _this.storage.set('address', childData.address);
-                                        _this.storage.set('bio', childData.bio);
-                                        _this.storage.set('email', userx.email);
-                                        _this.storage.set('picURL', childData.picURL);
-                                        _this.storage.set('price', childData.price);
-                                        _this.storage.set('phone', childData.phone);
-                                        _this.storage.set('instausername', childData.instagramURL);
-                                        _this.storage.set('username', childData.username);
-                                        return true;
-                                    });
-                                });
-                                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__["a" /* FeedStylist */]);
-                            }
-                            else {
-                                _this.storage.set('type', 'user/stylist/user');
-                                _this.storage.set('loggedin', true);
-                                var database = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.database();
-                                var reff = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.database().ref('/profiles/users').orderByChild('email').equalTo(userx.email).on("value", function (snapshot) {
-                                    snapshot.forEach(function (snapshot) {
-                                        // key
-                                        var key = snapshot.key;
-                                        console.log("key: " + key);
-                                        // value, could be object
-                                        var childData = snapshot.val();
-                                        console.log("data: " + JSON.stringify(childData));
-                                        // Do what you want with these key/values here
-                                        //this.storage.set('address', childData.address);
-                                        _this.storage.set('bio', childData.bio);
-                                        _this.storage.set('email', userx.email);
-                                        _this.storage.set('picURL', childData.picURL);
-                                        _this.storage.set('phone', childData.phone);
-                                        _this.storage.set('instausername', childData.instagramURL);
-                                        _this.storage.set('username', childData.username);
-                                        return true;
-                                    });
-                                });
-                                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__["a" /* FeedUser */]);
-                            }
-                        }
-                    }).catch(function (e) { alert("The username or password is incorrect"); });
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    SignInPage.prototype.pushPage = function () {
-        // push another page on to the navigation stack
-        // causing the nav controller to transition to the new page
-        // optional data can also be passed to the pushed page.
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__signup_signup__["a" /* SignUpPage */]);
-    };
-    SignInPage.prototype.logForm = function () {
-        // push another page on to the navigation stack
-        // causing the nav controller to transition to the new page
-        // optional data can also be passed to the pushed page.
-    };
-    return SignInPage;
-}());
-SignInPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-sign-in',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/signin/signin.html"*/'<ion-content padding>\n  <h1 class="logo">Mane Emergency</h1>\n  <form (ngSubmit)="logForm()">\n  	<input [(ngModel)]="user.email" class="inputone" (keypress)="goButton($event.keyCode)" type="text" name="username" placeholder="Email"> <!--[(ngModel)]="user.username"-->\n  	<input type="text" [(ngModel)]="user.password" (keypress)="goButton($event.keyCode)" name="password" placeholder="Password"> <!--[(ngModel)]="user.username" name="password"-->\n  	<!--<div class=\'circle circone\'></div>\n  	<div class=\'circle circtwo\'></div>-->\n  	<ion-checkbox [(ngModel)]="stylist" name="stylist" class="circone" (tap)="selectOneStylist()"></ion-checkbox>\n  	<ion-checkbox [(ngModel)]="users" name="user" class="circtwo" (tap)="selectOneUser()"></ion-checkbox>\n  	<h2 class=\'hairstylist\'>Hair Stylist</h2>\n  	<h2 class=\'user\'>User</h2>\n  	<div class="signincontainer" style="text-align: center;">\n  		<button ion-button round color="primary" (tap)="login(user)">Sign In</button>\n  	</div>\n  </form>\n  <div class="account">\n    <p>Don\'t have an account? <a (click)="pushPage()">Sign Up</a></p>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/signin/signin.html"*/
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_7_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_8__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_keyboard__["a" /* Keyboard */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]])
-], SignInPage);
-
-//# sourceMappingURL=signin.js.map
-
-/***/ }),
-
 /***/ 202:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1618,16 +1618,16 @@ DropinPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserviewuserprofilePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__followers_followers__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__followers_followers__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cameraservice__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_img_viewer__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_img_viewer__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_geolocation__ = __webpack_require__(90);
@@ -2068,7 +2068,7 @@ UserviewuserprofilePage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_date_picker__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__stylistprofile_stylistprofile__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_keyboard__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_keyboard__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_firebase__);
@@ -2715,11 +2715,11 @@ var map = {
 		5
 	],
 	"../pages/fullfeed/fullfeed.module": [
-		953,
+		954,
 		4
 	],
 	"../pages/map/map.module": [
-		954,
+		953,
 		3
 	],
 	"../pages/postpage/postpage.module": [
@@ -2831,39 +2831,54 @@ var FormulaBuy = (function () {
     };
     FormulaBuy.prototype.buy = function () {
         var _this = this;
-        if (this.folder1 == '' && this.folder2 == '') {
-            alert("You must select or create a folder for the formula.");
-        }
-        else {
-            if (this.folder1 != null && this.folder2 == null) {
-                this.list = this.af.list('/formulasowned/' + this.usernameowner + '/' + this.folder1);
-                this.data.color = this.folder1;
-            }
-            else {
-                this.list = this.af.list('/formulasowned/' + this.usernameowner + '/' + this.folder2);
-                this.data.color = this.folder2;
-            }
-            console.log(this.payload + '          paaaaayyyyyylllllooooooaaaaaddddd');
-            var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({
-                'Content-Type': 'application/json'
+        var reff = __WEBPACK_IMPORTED_MODULE_4_firebase___default.a.database().ref('/profiles/stylists').orderByChild('username').equalTo(this.username).on("value", function (snapshot) {
+            snapshot.forEach(function (snapshot) {
+                // key
+                var key = snapshot.key;
+                console.log("key: " + key);
+                // value, could be object
+                var childData = snapshot.val();
+                console.log("data: " + JSON.stringify(childData));
+                // Do what you want with these key/values here
+                _this.payload.merchantid = childData.merchantid;
+                _this.payload.publickey = childData.publickey;
+                _this.payload.privatekey = childData.privatekey;
+                if (_this.folder1 == '' && _this.folder2 == '') {
+                    alert("You must select or create a folder for the formula.");
+                }
+                else {
+                    if (_this.folder1 != null && _this.folder2 == null) {
+                        _this.list = _this.af.list('/formulasowned/' + _this.usernameowner + '/' + _this.folder1);
+                        _this.data.color = _this.folder1;
+                    }
+                    else {
+                        _this.list = _this.af.list('/formulasowned/' + _this.usernameowner + '/' + _this.folder2);
+                        _this.data.color = _this.folder2;
+                    }
+                    console.log(_this.payload + '          paaaaayyyyyylllllooooooaaaaaddddd');
+                    var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({
+                        'Content-Type': 'application/json'
+                    });
+                    var options = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["e" /* RequestOptions */]({
+                        headers: headers
+                    });
+                    // TODO: Encode the values using encodeURIComponent().
+                    var body = JSON.stringify(_this.payload);
+                    //INSERT CALL TO BACKEND
+                    _this.http.post('http://192.168.1.131:8888/api/buyformula.php', body)
+                        .subscribe(function (res) {
+                        console.log(res + "response from formula buy");
+                        console.log(JSON.stringify(_this.data) + "     data dat d dat add  dat");
+                        _this.list.push(_this.data).catch(function (e) { console.log(e) + "this is conosle e"; });
+                        alert("You bought a formula! Check the settings page to view it.");
+                        _this.dismiss();
+                    }, function (err) {
+                        console.log(JSON.stringify(err));
+                    });
+                }
+                return true;
             });
-            var options = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["e" /* RequestOptions */]({
-                headers: headers
-            });
-            // TODO: Encode the values using encodeURIComponent().
-            var body = JSON.stringify(this.payload);
-            //INSERT CALL TO BACKEND
-            this.http.post('http://192.168.1.131:8888/api/buyformula.php', body)
-                .subscribe(function (res) {
-                console.log(res + "response from formula buy");
-                console.log(JSON.stringify(_this.data) + "     data dat d dat add  dat");
-                _this.list.push(_this.data).catch(function (e) { console.log(e) + "this is conosle e"; });
-                alert("You bought a formula! Check the settings page to view it.");
-                _this.dismiss();
-            }, function (err) {
-                console.log(JSON.stringify(err));
-            });
-        }
+        });
     };
     FormulaBuy.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
@@ -2987,7 +3002,7 @@ DepositPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_crop__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase__ = __webpack_require__(25);
@@ -3681,13 +3696,13 @@ PopUpOther = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignUpPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signin_signin__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_keyboard__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signin_signin__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeduser_feeduser__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feedstylist_feedstylist__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_keyboard__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_facebook__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_firebase__ = __webpack_require__(25);
@@ -4136,19 +4151,19 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(505);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(506);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(936);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_signin_signin__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_signin_signin__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_signup_signup__ = __webpack_require__(462);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_feedstylist_feedstylist__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_feeduser_feeduser__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_feedstylist_feedstylist__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_feeduser_feeduser__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_postpage_postpage__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_platform_browser_animations__ = __webpack_require__(937);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_stylistprofile_stylistprofile__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_booking_booking__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_booking_booking__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_settings_settings__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_userprofile_userprofile__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_userbooking_userbooking__ = __webpack_require__(168);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_userviewprofile_userviewprofile__ = __webpack_require__(176);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_followers_followers__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_userbooking_userbooking__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_userviewprofile_userviewprofile__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_followers_followers__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_formulapost_formulapost__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_formulas_formulas__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_formula_formula__ = __webpack_require__(207);
@@ -4158,19 +4173,19 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_ngx_swiper_wrapper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24_ngx_swiper_wrapper__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_fullfeed_fullfeed__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_ionic2_calendar__ = __webpack_require__(465);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_keyboard__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_keyboard__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_angularfire2__ = __webpack_require__(943);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29_angularfire2_auth__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29_angularfire2_auth__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__ionic_native_transfer__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__ionic_native_crop__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_file__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_file__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__services_cameraservice__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_cameraservicepost__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__services_cameraservicepost__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__services_cameraserviceprofile__ = __webpack_require__(294);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__angular_http__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39_ionic_img_viewer__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39_ionic_img_viewer__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_41__ionic_native_facebook__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_42__ionic_native_google_plus__ = __webpack_require__(463);
@@ -4322,8 +4337,8 @@ AppModule = __decorate([
                     { loadChildren: '../pages/formula/formula.module#FormulaPageModule', name: 'FormulaPage', segment: 'formula', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/formulapost/formulapost.module#FormulapostPageModule', name: 'FormulapostPage', segment: 'formulapost', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/formulas/formulas.module#FormulasPageModule', name: 'FormulasPage', segment: 'formulas', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/fullfeed/fullfeed.module#FullfeedPageModule', name: 'FullfeedPage', segment: 'fullfeed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/map/map.module#MapPageModule', name: 'MapPage', segment: 'map', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/fullfeed/fullfeed.module#FullfeedPageModule', name: 'FullfeedPage', segment: 'fullfeed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/postpage/postpage.module#PostpagePageModule', name: 'PostpagePage', segment: 'postpage', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/userviewuserprofile/userviewuserprofile.module#UserviewuserprofilePageModule', name: 'UserviewuserprofilePage', segment: 'userviewuserprofile', priority: 'low', defaultHistory: [] }
@@ -4409,16 +4424,16 @@ AppModule = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StylistProfile; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__formulapost_formulapost__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(75);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cameraservice__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_img_viewer__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_img_viewer__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_storage__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4954,7 +4969,7 @@ var StylistProfile = (function () {
         this.backToCal();
     };
     StylistProfile.prototype.swipeRight = function () {
-        this.navCtrl.popToRoot({ animate: true, animation: 'ios-transition', duration: 100, direction: 'back' });
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 100, direction: 'back' });
     };
     //changed this***
     StylistProfile.prototype.moveCover = function () {
@@ -5136,12 +5151,12 @@ StylistProfile = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_date_picker__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_keyboard__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_keyboard__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_cameraservicepost__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_cameraservicepost__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_camera__ = __webpack_require__(33);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5610,517 +5625,7 @@ PostpagePage = __decorate([
 
 /***/ }),
 
-/***/ 61:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_keyboard__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_cameraserviceprofile__ = __webpack_require__(294);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_app__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_firebase_app__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__signin_signin__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__ = __webpack_require__(176);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__formulas_formulas__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__map_map__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_facebook__ = __webpack_require__(178);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Generated class for the SettingsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-var SettingsPage = (function () {
-    function SettingsPage(facebook, af, afAuth, storage, camera, cameraService, myrenderer, loadingController, actionSheetCtrl, navCtrl, navParams, keyboard) {
-        this.facebook = facebook;
-        this.af = af;
-        this.afAuth = afAuth;
-        this.storage = storage;
-        this.camera = camera;
-        this.cameraService = cameraService;
-        this.myrenderer = myrenderer;
-        this.loadingController = loadingController;
-        this.actionSheetCtrl = actionSheetCtrl;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.keyboard = keyboard;
-        this.user = {};
-        this.priceRanges = ['<100', '100-149', '150-199', '200-249', '250-300'];
-        this.loggedIn = false;
-        this.linked = "Link Profile";
-        this.optionsGetMedia = {
-            allowEdit: false,
-            quality: 10,
-            targetWidth: 600,
-            targetHeight: 600,
-            encodingType: this.camera.EncodingType.PNG,
-            sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-            mediaType: this.camera.MediaType.PICTURE,
-            destinationType: this.camera.DestinationType.FILE_URI
-        };
-        this.optionsGetCamera = {
-            quality: 10,
-            targetWidth: 600,
-            targetHeight: 600,
-            encodingType: this.camera.EncodingType.PNG,
-            sourceType: this.camera.PictureSourceType.CAMERA,
-            mediaType: this.camera.MediaType.PICTURE,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            saveToPhotoAlbum: true
-        };
-    }
-    SettingsPage.prototype.formulas = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_14__formulas_formulas__["a" /* FormulasPage */]);
-    };
-    SettingsPage.prototype.linkProfile = function () {
-        var _this = this;
-        if (this.linked == "Link Profile") {
-            if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-                this.facebook.login(['email', 'public_profile']).then(function (response) {
-                    _this.facebook.api('me?fields=id', []).then(function (profile) {
-                        console.log(JSON.stringify(profile));
-                        _this.facebookURL = "http://www.facebook.com/" + profile['id'];
-                        _this.storage.set('fblinkedstylist', true);
-                        _this.linked = "Linked";
-                        alert("You must press SAVE to finalize the link.");
-                        //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
-                    });
-                });
-            }
-            else if (this.type == 'user' || this.type == 'user/stylist/user') {
-                this.facebook.login(['email', 'public_profile']).then(function (response) {
-                    _this.facebook.api('me?fields=id', []).then(function (profile) {
-                        console.log(JSON.stringify(profile));
-                        _this.facebookURL = "http://www.facebook.com/" + profile['id'];
-                        _this.storage.set('fblinkeduser', true);
-                        _this.linked = "Linked";
-                        alert("You must press SAVE to finalize the link.");
-                        //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
-                    });
-                });
-            }
-        }
-        ;
-    };
-    SettingsPage.prototype.changeShape = function (shape) {
-        console.log(shape.value);
-        this.price = shape.value;
-    };
-    SettingsPage.prototype.tappedToggle = function () {
-        console.log(this.locationtoggle + "          3344343 locationtoggle");
-        if (this.locationtoggle == true) {
-            this.af.object('/profiles/users/' + this.username + '/location').remove().then(function (_) { return console.log('item deleted!'); });
-        }
-        this.storage.set('location', this.locationtoggle);
-    };
-    SettingsPage.prototype.goToProfile = function () {
-        if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
-        }
-        if (this.type == 'user' || this.type == 'user/stylist/user') {
-            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
-        }
-    };
-    SettingsPage.prototype.map = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_15__map_map__["a" /* MapPage */]);
-    };
-    SettingsPage.prototype.logForm = function () {
-        var _this = this;
-        console.log("        ADDDDREESSSSS77777777:  " + this.address); //moved up here!
-        /*if(this.type == 'user' || this.type == 'user/stylist/user') {
-     
-           if(this.username == null || this.password == null || this.email == null || this.bio == null) {
-             alert("You need to fill out all of the information");
-           }
-         }*/
-        this.subscription3 = this.afAuth.authState.subscribe(function (data) {
-            console.log(data + "    data from login");
-            if (data != null) {
-                if (data.email && data.uid) {
-                    console.log("logged in");
-                    _this.authUser = data;
-                    _this.loggedIn = true;
-                }
-            }
-        });
-        console.log(this.authUser + '      authuser       998877');
-        this.x = 0;
-        console.log(this.passwordIfChanged + "  passwordifchanged                  this.password: " + this.password);
-        console.log(this.emailIfChanged + "  passwordifchanged                  this.password: " + this.email);
-        this.storage.set('username', this.username);
-        if (this.passwordIfChanged != this.password && this.authUser != null) {
-            this.authUser.updatePassword(this.password).then(function () { }).catch(function (e) { alert(e); });
-        }
-        /*else {
-          this.password = this.passwordIfChanged;
-          alert("You are not logged in yet, you cannot update your password or email.")
-        }*/
-        this.storage.set('password', this.password);
-        if (this.emailIfChanged != this.email && this.authUser != null) {
-            this.authUser.updateEmail(this.email).then(function () { }).catch(function (e) { alert(e); });
-        }
-        /*else {
-          this.email = this.emailIfChanged;
-          alert("You are not logged in yet, you cannot update your password or email.")
-        }*/
-        this.storage.set('email', this.email);
-        this.storage.set('bio', this.bio);
-        this.storage.set('picURL', this.picURL);
-        this.storage.set('phone', this.phone);
-        this.storage.set('instausername', this.instagramURL);
-        if (this.facebookURL == null) {
-            this.facebookURL = "";
-        }
-        //this.storage.get('type').then((val) => {
-        if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '') {
-                alert("You need to fill out all of the information");
-            }
-            else if (this.phone.match(/\d/g).length !== 10) {
-                alert("Please enter a 10 digit phone number, only the digits.");
-            }
-            else {
-                this.storage.set('address', this.address);
-                this.storage.set('price', this.price);
-                if (this.price == "<100") {
-                    this.price = "$";
-                }
-                else if (this.price == "100-149") {
-                    this.price = "$$";
-                }
-                else if (this.price == "150-199") {
-                    this.price = "$$$";
-                }
-                else if (this.price == "200-249") {
-                    this.price = "$$$$";
-                }
-                else if (this.price == "250-300") {
-                    this.price = "$$$$$";
-                }
-                this.items = this.af.list('/profiles/stylists');
-                if (this.username == this.oldUser) {
-                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
-                        'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
-                        'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL });
-                    if (this.isTypeNull == null) {
-                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
-                    }
-                    else {
-                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__["a" /* FeedStylist */]);
-                    }
-                }
-                else {
-                    this.af.object('/profiles/stylists/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
-                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
-                        'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
-                        'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
-                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } });
-                    if (this.isTypeNull == null) {
-                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
-                    }
-                    else {
-                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__["a" /* FeedStylist */]);
-                    }
-                }
-            }
-        }
-        if (this.type == 'user' || this.type == 'user/stylist/user') {
-            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '') {
-                alert("You need to fill out all of the information");
-            }
-            else if (this.phone.match(/\d/g).length !== 10) {
-                alert("Please enter a 10 digit phone number, only the digits.");
-            }
-            else {
-                this.items = this.af.list('/profiles/users');
-                if (this.username == this.oldUser) {
-                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
-                        'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL });
-                    if (this.isTypeNull == null) {
-                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
-                    }
-                    else {
-                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__["a" /* FeedUser */]);
-                    }
-                }
-                else {
-                    this.af.object('/profiles/users/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
-                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
-                        'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
-                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } });
-                    if (this.isTypeNull == null) {
-                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
-                    }
-                    else {
-                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__["a" /* FeedUser */]);
-                    }
-                }
-            }
-        }
-        ;
-        //})
-    };
-    SettingsPage.prototype.logout = function () {
-        if (this.loggedIn) {
-            console.log("being logged out ()()()()ER()EW()RWE()()REW()");
-            this.afAuth.auth.signOut();
-            this.storage.set('loggedin', false);
-        }
-        else {
-            this.storage.set('loggedin', false);
-        }
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_12__signin_signin__["a" /* SignInPage */]);
-    };
-    SettingsPage.prototype.ngOnDestroy = function () {
-        if (this.subscription3 != null) {
-            this.subscription3.unsubscribe();
-        }
-    };
-    SettingsPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.storage.get('type').then(function (val) {
-            _this.type = val;
-            console.log(_this.typeparam + '       this.typeparam       ');
-            console.log(_this.logoutButton + '       this.typeparam       ');
-            if (_this.typeparam == 'user') {
-                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.logoutButton._elementRef.nativeElement, 'display', 'none');
-            }
-            if (_this.typeparam == 'user/stylist/user') {
-                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
-                //this.myrenderer.setElementStyle(this.logoutButton._elementRef.nativeElement, 'display', 'none');
-            }
-            else if (_this.type == 'user/stylist/user') {
-                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
-            }
-            else if (_this.typeparam == 'stylist') {
-                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
-                _this.myrenderer.setElementStyle(_this.logoutButton._elementRef.nativeElement, 'display', 'none');
-            }
-            _this.oldUser = _this.username;
-            _this.isTypeNull = _this.navParams.get('type');
-            setTimeout(function () {
-                console.log('ionViewDidLoad SettingsPage');
-                _this.storage.get('username').then(function (val) { _this.username = val; _this.getProfilePic(); console.log(val + "        getting username          3333222222"); });
-                _this.storage.get('password').then(function (val) { _this.password = val; _this.passwordIfChanged = _this.password; console.log(val + "        getting password222222"); });
-                _this.storage.get('email').then(function (val) { _this.email = val; _this.emailIfChanged = _this.email; console.log(val + "        getting email33333333"); });
-                _this.storage.get('bio').then(function (val) { _this.bio = val; console.log(val + "        getting biooooooooo"); });
-                _this.storage.get('picURL').then(function (val) { _this.picURL = val; });
-                _this.storage.get('phone').then(function (val) { _this.phone = val; });
-                _this.storage.get('instausername').then(function (val) { _this.instagramURL = val; });
-                if (_this.type == 'stylist' || _this.type == 'user/stylist/stylist') {
-                    _this.storage.get('address').then(function (val) { _this.address = val; console.log(val + "        getting addressssssss"); });
-                    _this.storage.get('price').then(function (val) { _this.price = val; });
-                    for (var x = 0; x < 5; x++) {
-                        if (_this.priceRanges[x] == _this.price) {
-                            document.getElementById(x + "").setAttribute('selected', null);
-                        }
-                    }
-                }
-            }, 1000);
-            if (_this.type == 'user' || _this.type == 'user/stylist/user') {
-                _this.storage.get('fblinkeduser').then(function (val) {
-                    console.log(val + " val vlal v avlal v allavl val ");
-                    console.log(_this.type + " tyope aosefi; fai; sefeji a'aj '' ");
-                    if (val) {
-                        _this.linked = "Linked";
-                    }
-                    else {
-                        _this.linked = "Link Profile";
-                    }
-                });
-            }
-            else if (_this.type == 'stylist' || _this.type == 'user/stylist/stylist') {
-                _this.storage.get('fblinkedstylist').then(function (val) {
-                    if (val) {
-                        _this.linked = "Linked";
-                    }
-                    else {
-                        _this.linked = "Link Profile";
-                    }
-                });
-            }
-        });
-        this.storage.get('location').then(function (val) {
-            _this.locationtoggle = val;
-            if (val == true) {
-                _this.locationtoggle = false;
-            }
-            else {
-                _this.locationtoggle = true;
-            }
-            console.log(_this.locationtoggle + "     in view did load locationtoggle");
-        });
-        this.typeparam = this.navParams.get('type');
-    };
-    SettingsPage.prototype.getProfilePic = function () {
-        var _this = this;
-        console.log("inside get profile pic &*&*(&*%^$%$%$%$%$%");
-        return new Promise(function (resolve, reject) {
-            var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
-            storageRef.getDownloadURL().then(function (url) {
-                console.log(url);
-                _this.picURL = url;
-                _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
-                resolve();
-            }).catch(function (e) {
-                console.log(e.message);
-            });
-        });
-    };
-    SettingsPage.prototype.goButton = function (code) {
-        console.log(code);
-        if (code == 13) {
-            this.keyboard.close();
-        }
-    };
-    SettingsPage.prototype.change = function () {
-        this.presentActionSheet();
-    };
-    SettingsPage.prototype.presentActionSheet = function () {
-        var _this = this;
-        var actionSheet = this.actionSheetCtrl.create({
-            title: 'Choose source',
-            buttons: [
-                {
-                    text: 'Camera',
-                    handler: function () {
-                        _this.cameraService.getMedia(_this.optionsGetCamera, null, _this.username).then(function () {
-                            var loading = _this.loadingController.create({ content: "Loading..." });
-                            loading.present();
-                            return new Promise(function (resolve, reject) {
-                                //setTimeout(() => {
-                                var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
-                                storageRef.getDownloadURL().then(function (url) {
-                                    console.log(url);
-                                    _this.picURL = url;
-                                    _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
-                                    loading.dismiss();
-                                    resolve();
-                                }).catch(function (e) {
-                                    alert("Something went wrong with the upload, please try again.");
-                                    loading.dismiss();
-                                    resolve();
-                                });
-                                loading.dismiss();
-                                //}, 3500);
-                            });
-                        }); //pass in square choice
-                        //this.myrenderer.setElementAttribute(this.itemArrayTwo[this.square - 1].nativeElement, 'src', 'block');
-                        console.log('camera clicked');
-                    }
-                }, {
-                    text: 'Photo Library',
-                    handler: function () {
-                        _this.cameraService.getMedia(_this.optionsGetMedia, null, _this.username).then(function () {
-                            var loading = _this.loadingController.create({ content: "Loading..." });
-                            loading.present();
-                            return new Promise(function (resolve, reject) {
-                                //setTimeout(() => {
-                                var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
-                                storageRef.getDownloadURL().then(function (url) {
-                                    console.log(url);
-                                    _this.picURL = url;
-                                    _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
-                                    loading.dismiss();
-                                    resolve();
-                                }).catch(function (e) {
-                                    alert("Something went wrong with the upload, please try again.");
-                                    loading.dismiss();
-                                    resolve();
-                                });
-                                loading.dismiss();
-                                //}, 3500);
-                            });
-                        });
-                    }
-                }, {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
-        actionSheet.present();
-    };
-    return SettingsPage;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('profsquare'),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object)
-], SettingsPage.prototype, "profilepic", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('addressEl'),
-    __metadata("design:type", Object)
-], SettingsPage.prototype, "addressEl", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('priceEl'),
-    __metadata("design:type", Object)
-], SettingsPage.prototype, "priceEl", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('arrowback'),
-    __metadata("design:type", Object)
-], SettingsPage.prototype, "arrowBackEl", void 0);
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('logoutbutton'),
-    __metadata("design:type", Object)
-], SettingsPage.prototype, "logoutButton", void 0);
-SettingsPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-settings',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/settings/settings.html"*/'<!--\n  Generated template for the SettingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <!---->\n	<div style="position: absolute; left: 50%; width:35%; z-index: 1">\n    <div style="position: relative; left: -50%; width:100%">\n      <img (tap)="presentActionSheet()" class="imagesquare" #profsquare src="assets/blankprof.png">\n    </div>\n  </div>\n  <ion-navbar>\n    <ion-icon (tap)="goToProfile()" class=\'backk\' name="arrow-back" #arrowback></ion-icon>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content no-padding>\n	<ion-item no-padding class="sect">\n		<ion-label>Username</ion-label>\n		<ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="username" name="username"></ion-input> <!--[(ngModel)]="user.username"-->\n	</ion-item>\n	<ion-item no-padding class="sect">\n	  <ion-label>Password</ion-label>\n	  <ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="password" name="password"></ion-input>\n	</ion-item>\n	<ion-item no-padding class="sect">\n  	<ion-label>Email</ion-label>\n  	<ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="email" name="email"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n  	<ion-label>Salon Address</ion-label>\n  	<ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. 28 Jay St, Winston, NJ" [(ngModel)]="address" name="address"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n    <ion-label>Phone</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. 1231231234" [(ngModel)]="phone" name="phone"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #priceEl>\n\n    <ion-label>Price Range</ion-label>\n    <ion-select [(ngModel)]="price">\n      <ion-option *ngFor="let z of priceRanges ; let i = index" value="{{z}}" id="{{i}}">{{z}}</ion-option>\n    </ion-select>\n\n  </ion-item>\n  <ion-item no-padding class="sect">\n  	<ion-label>Bio</ion-label>\n  	<ion-textarea style="width: 65%" placeholder="Bio..." [(ngModel)]="bio" name="bio"></ion-textarea>\n  </ion-item>\n  <ion-item no-padding class="sect">\n    <ion-label>Location</ion-label>\n    <ion-toggle [(ngModel)]="locationtoggle" (tap)="tappedToggle()"></ion-toggle>\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n    <div class="fblabelcontainer">\n      <div class="inlineblock">Facebook</div>\n    \n      <button ion-button round color="tertiary" class="linkfbprof" (tap)="linkProfile()">{{linked}}</button>\n    </div>\n    <!--<ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="http://www.facebook.com/username" [(ngModel)]="facebookURL" name="facebook"></ion-input>--> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl2>\n    <ion-label>Instagram Username</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. username" [(ngModel)]="instagramURL" name="instagram"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n\n  <div id="savebutton">\n    <button class="save" (tap)=\'logForm()\' ion-button round color="primary">Save</button>\n    <button class="save" (tap)=\'logout()\' ion-button round color="tertiary" #logoutbutton>Logout</button>\n    <button class="save" (tap)=\'formulas()\' ion-button round color="tertiary">Formulas</button> <!--map()-->\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/settings/settings.html"*/,
-    }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_16__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_16__ionic_native_facebook__["a" /* Facebook */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3__services_cameraserviceprofile__["a" /* CameraServiceProfile */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_cameraserviceprofile__["a" /* CameraServiceProfile */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_keyboard__["a" /* Keyboard */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_keyboard__["a" /* Keyboard */]) === "function" && _o || Object])
-], SettingsPage);
-
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
-//# sourceMappingURL=settings.js.map
-
-/***/ }),
-
-/***/ 69:
+/***/ 68:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6129,19 +5634,19 @@ var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stylistprofile_stylistprofile__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feeduser_feeduser__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feeduser_feeduser__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__userprofile_userprofile__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__followers_followers__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__followers_followers__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_date_picker__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_cameraservicepost__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_cameraservicepost__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ionic_cache__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_sms__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_rxjs_add_operator_share__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_rxjs_add_operator_share__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_rxjs_add_operator_share___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_rxjs_add_operator_share__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7229,7 +6734,7 @@ __decorate([
 ], FeedStylist.prototype, "captionComponents4", void 0);
 FeedStylist = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-feed-stylist',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/feedstylist/feedstylist.html"*/'<ion-header> <!--[@slideDown]="downState"-->\n  <div (swiperight)="swipeRight()" (swipeleft)="swipeLeft()">\n    <ion-toolbar #clickme class="itemadspace" [@slideDown]="downState" no-padding> <!--[@slideDown]="downState"-->\n      <!--<ion-item class="ad" no-padding no-lines>-->\n      <div class="stylistview">\n        <button class="stylistviewbutton" (tap)=\'switchView()\' ion-button color="secondary">User View</button>\n      </div>\n\n      <swiper #swiper [config]="config" [(index)]="swiperIndex" (indexChange)="indexChange()">\n        <div *ngFor="let ad of ads; let i = index" class="adcontainer">\n          <img src="{{ad}}" class="adimage" #adimage>\n        </div>\n      </swiper>\n    </ion-toolbar>\n        \n    <!--</ion-item>-->\n    <div class=\'pluscontainer\' [@plusSlide]="downState">\n      <p>BUY</p><br><p>AD</p>\n    </div>\n\n    <div (tap)="toolClicked($event)">\n      <ion-navbar  color="black" [@toolSlide]="toolbarState" id="iontoolbar"> <!--[@toolSlide]="toolbarState"-->\n        <ion-icon class=\'custom-icon\' name="play"></ion-icon>\n        <button class="all toolbarstyle" #allF ion-button color="black" (tap)="all()">All</button>\n        <button class="toolbarstyle" #classesFeed ion-button color="black" (tap)="classes()">Classes</button>\n        <button class="toolbarstyle" #productsFeed ion-button color="black" (tap)="products()">Products</button>\n        <button class="toolbarstyle" #formulasFeed ion-button color="black" (tap)="formulasList()">Formulas</button>\n      </ion-navbar>\n    </div>\n  </div>\n</ion-header>\n\n<ion-content [@moveList]=\'moveState\' no-padding> <!--[@moveList]=\'moveState\'-->\n\n<div class="swipecont" (swiperight)="swipeRight()" (swipeleft)="swipeLeft()">\n  <!--<ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>-->\n\n  <div class =\'contentone\' [@moveList]=\'moveState\' #contentone>\n   <ion-list no-padding>\n     <ion-item class="changepadding" *ngFor="let j of items ; let i = index" id=\'{{i}}\' #feedstyle text-wrap>\n      <div class="flex" (tap)=\'expandItem(i)\' #flex>\n        <div class="nonzoomimage">\n          <img class="imagepost" src="{{j.url}}">\n        </div>\n        <div class="descholder">\n          <div class=\'description\'>{{j.title}}</div>\n          <div class=\'link\'>{{j.date}}</div>\n        </div>\n        <div class="priceholder" *ngIf="j.price > 0">\n          <div class=\'description\'>${{j.price}}</div>\n        </div>\n      </div>\n      <div class="feedtoptextcontainer" #feedtop (tap)="goSeeProfile(j)"> <!-- (tap)=\'contractItem(i)\'-->\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{j.profilepic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{j.username}}</h4><br>\n          <!--<h4 class="poststudio">Ed\'s Studio</h4>-->\n        </div>\n      </div>\n      <div class="feedtoptextcontainertwo" #feedtoptwo (tap)=\'contractItem(i)\'>\n        <div class="postprofilelink">\n          <div class="book">{{j.title}}</div>\n          <div class="book price" *ngIf="j.title == null">${{j.price}}</div>\n        </div>\n      </div>\n      <img class="imageposttwo" #imagepost src="{{j.url}}">\n      <div class=\'caption\' #caption>\n        {{j.caption}}\n      <br>\n      </div>\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n\n\n  <div class =\'contentone classeslist\' [@moveList]=\'moveState\' #classeslist>\n   <ion-list no-padding>\n     <ion-item class="changepadding" *ngFor="let j of classesListArray ; let i = index" id=\'{{i}}\' #feedstyle2 text-wrap>\n      <div class="flex" (tap)=\'expandItem2(i)\' #flex2>\n        <div class="nonzoomimage">\n          <img class="imagepost" src="{{j.url}}">\n        </div>\n        <div class="descholder">\n          <div class=\'description\'>{{j.title}}</div>\n          <div class=\'link\'>{{j.date}}</div>\n        </div>\n      </div>\n      <div class="feedtoptextcontainer" #feedtop2 (tap)="goSeeProfile(j)"> <!-- (tap)=\'contractItem(i)\'-->\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{j.profilepic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{j.username}}</h4><br>\n          <!--<h4 class="poststudio">Ed\'s Studio</h4>-->\n        </div>\n      </div>\n      <div class="feedtoptextcontainertwo" #feedtop2two (tap)=\'contractItem2(i)\'>\n        <div class="postprofilelink">\n          <div class="book">{{j.title}}</div>\n        </div>\n      </div>\n      <img class="imageposttwo" #imagepost2 src="{{j.url}}">\n      <div class=\'caption\' #caption2>\n        {{j.caption}}\n      <br>\n      </div>\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n\n  <div class =\'contentone productslist\' [@moveList]=\'moveState\' #productslist>\n   <ion-list no-padding>\n     <ion-item class="changepadding" *ngFor="let j of productListArray ; let i = index" id=\'{{i}}\' #feedstyle3 text-wrap>\n      <div class="flex" (tap)=\'expandItem3(i)\' #flex3>\n        <div class="nonzoomimage">\n          <img class="imagepost" src="{{j.url}}">\n        </div>\n        <div class="descholder">\n          <div class=\'description\'>{{j.title}}</div>\n        </div>\n        <div class="priceholder">\n          <div class=\'description\'>${{j.price}}</div>\n        </div>\n      </div>\n      <div class="feedtoptextcontainer" #feedtop3 (tap)="goSeeProfile(j)"> <!-- (tap)=\'contractItem(i)\'-->\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{j.profilepic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{j.username}}</h4><br>\n          <!--<h4 class="poststudio">Ed\'s Studio</h4>-->\n        </div>\n      </div>\n      <div class="feedtoptextcontainertwo" #feedtop3two (tap)=\'contractItem3(i)\'>\n        <div class="postprofilelink">\n          <div class="book">{{j.title}}</div>\n        </div>\n      </div>\n      <img class="imageposttwo" #imagepost3 src="{{j.url}}">\n      <div class=\'caption\' #caption3>\n        {{j.caption}}\n      <br>\n      </div>\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n</div>\n\n<div class="swipecont2" (swiperight)="swipeRight()" (swipeleft)="swipeLeft()">\n  <div class =\'contentone formulaslist\' [@moveList]=\'moveState\' #formulaslist>\n   <ion-list no-padding>\n     <ion-item class="changepadding" *ngFor="let j of formulaListArray ; let i = index" id=\'{{i}}\' #feedstyle4 text-wrap>\n      <div class="flex" (tap)=\'expandItem4(i)\' #flex4>\n        <div class="nonzoomimage">\n          <img class="imagepost" src="{{j.url}}">\n        </div>\n        <div class="priceholder">\n          <div class=\'description\'>${{j.price}}</div>\n        </div>\n      </div>\n      <div class="feedtoptextcontainer" #feedtop4 (tap)="goSeeProfile(j)"> <!-- (tap)=\'contractItem(i)\'-->\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{j.profilepic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{j.username}}</h4><br>\n          <!--<h4 class="poststudio">Ed\'s Studio</h4>-->\n        </div>\n      </div>\n      <div class="feedtoptextcontainertwo" #feedtop4two (tap)=\'contractItem4(i)\'>\n        <div class="postprofilelink">\n          <div class="book price">${{j.price}}</div>\n        </div>\n      </div>\n      <img class="imageposttwo" #imagepost4 src="{{j.url}}">\n      <div class=\'caption\' #caption4>\n        \n        <br>\n      </div>\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n</div>\n\n\n\n<ion-fab bottom center >\n  <button class="ionfab" ion-fab></button>\n  <ion-fab-list side="right">\n    <button class="textsizebutton" (tap)=\'tappedPost()\' ion-fab>Post</button>\n  </ion-fab-list>\n  <ion-fab-list side="left">\n    <button class="textsizebutton" ion-fab>\n      <ion-datetime displayFormat="MMM/D/YY h:mm:a" [(ngModel)]="dateofme" (ngModelChange)="modelChanged($event)"></ion-datetime>\n      <ion-icon name="alarm"></ion-icon>\n    </button>\n  </ion-fab-list>\n</ion-fab>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/feedstylist/feedstylist.html"*/,
+        selector: 'page-feed-stylist',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/feedstylist/feedstylist.html"*/'<ion-header> <!--[@slideDown]="downState"-->\n  <div (swiperight)="swipeRight()" (swipeleft)="swipeLeft()">\n    <ion-toolbar #clickme class="itemadspace" [@slideDown]="downState" no-padding> <!--[@slideDown]="downState"-->\n      <!--<ion-item class="ad" no-padding no-lines>-->\n      <div class="stylistview">\n        <button class="stylistviewbutton" (tap)=\'switchView()\' ion-button color="secondary">User View</button>\n      </div>\n\n      <swiper #swiper [config]="config" [(index)]="swiperIndex" (indexChange)="indexChange()">\n        <div *ngFor="let ad of ads; let i = index" class="adcontainer">\n          <img src="{{ad}}" class="adimage" #adimage>\n        </div>\n      </swiper>\n    </ion-toolbar>\n        \n    <!--</ion-item>-->\n    <div class=\'pluscontainer\' [@plusSlide]="downState">\n      <p>BUY</p><br><p>AD</p>\n    </div>\n\n    <div (tap)="toolClicked($event)">\n      <ion-navbar  color="black" [@toolSlide]="toolbarState" id="iontoolbar"> <!--[@toolSlide]="toolbarState"-->\n        <ion-icon class=\'custom-icon\' name="play"></ion-icon>\n        <button class="all toolbarstyle" #allF ion-button color="black" (tap)="all()">All</button>\n        <button class="toolbarstyle" #classesFeed ion-button color="black" (tap)="classes()">Classes</button>\n        <button class="toolbarstyle" #productsFeed ion-button color="black" (tap)="products()">Products</button>\n        <button class="toolbarstyle" #formulasFeed ion-button color="black" (tap)="formulasList()">Formulas</button>\n      </ion-navbar>\n    </div>\n  </div>\n</ion-header>\n\n<ion-content [@moveList]=\'moveState\' no-padding> <!--[@moveList]=\'moveState\'-->\n\n<div class="swipecont" (swiperight)="swipeRight()" (swipeleft)="swipeLeft()">\n  <!--<ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>-->\n\n  <div class =\'contentone\' [@moveList]=\'moveState\' #contentone>\n   <ion-list no-padding>\n     <ion-item class="changepadding" *ngFor="let j of items ; let i = index" id=\'{{i}}\' #feedstyle text-wrap>\n      <div class="flex" (tap)=\'expandItem(i)\' #flex>\n        <div class="nonzoomimage">\n          <img class="imagepost" src="{{j.url}}">\n        </div>\n        <div class="descholder">\n          <div class=\'description\'>{{j.title}}</div>\n          <div class=\'link\'>{{j.date}}</div>\n        </div>\n        <div class="priceholder" *ngIf="j.price > 0">\n          <div class=\'description\'>${{j.price}}</div>\n        </div>\n      </div>\n      <div class="feedtoptextcontainer" #feedtop (tap)="goSeeProfile(j)"> <!-- (tap)=\'contractItem(i)\'-->\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{j.profilepic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{j.username}}</h4><br>\n          <!--<h4 class="poststudio">Ed\'s Studio</h4>-->\n        </div>\n      </div>\n      <div class="feedtoptextcontainertwo" #feedtoptwo (tap)=\'contractItem(i)\'>\n        <div class="postprofilelink">\n          <div class="book">{{j.title}}</div>\n          <div class="book price" *ngIf="j.title == null">${{j.price}}</div>\n        </div>\n      </div>\n      <img class="imageposttwo" #imagepost src="{{j.url}}">\n      <div class=\'caption\' #caption>\n        <div *ngIf="j.title == null || j.date == null" style="text-align: center">\n          TAP TO BUY\n        </div>\n        <div *ngIf="j.title != null">\n          <br>\n          {{j.caption}}\n        </div>\n      </div>\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n\n\n  <div class =\'contentone classeslist\' [@moveList]=\'moveState\' #classeslist>\n   <ion-list no-padding>\n     <ion-item class="changepadding" *ngFor="let j of classesListArray ; let i = index" id=\'{{i}}\' #feedstyle2 text-wrap>\n      <div class="flex" (tap)=\'expandItem2(i)\' #flex2>\n        <div class="nonzoomimage">\n          <img class="imagepost" src="{{j.url}}">\n        </div>\n        <div class="descholder">\n          <div class=\'description\'>{{j.title}}</div>\n          <div class=\'link\'>{{j.date}}</div>\n        </div>\n      </div>\n      <div class="feedtoptextcontainer" #feedtop2 (tap)="goSeeProfile(j)"> <!-- (tap)=\'contractItem(i)\'-->\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{j.profilepic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{j.username}}</h4><br>\n          <!--<h4 class="poststudio">Ed\'s Studio</h4>-->\n        </div>\n      </div>\n      <div class="feedtoptextcontainertwo" #feedtop2two (tap)=\'contractItem2(i)\'>\n        <div class="postprofilelink">\n          <div class="book">{{j.title}}</div>\n        </div>\n      </div>\n      <img class="imageposttwo" #imagepost2 src="{{j.url}}">\n      <div class=\'caption\' #caption2>\n        {{j.caption}}\n      <br>\n      </div>\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n\n  <div class =\'contentone productslist\' [@moveList]=\'moveState\' #productslist>\n   <ion-list no-padding>\n     <ion-item class="changepadding" *ngFor="let j of productListArray ; let i = index" id=\'{{i}}\' #feedstyle3 text-wrap>\n      <div class="flex" (tap)=\'expandItem3(i)\' #flex3>\n        <div class="nonzoomimage">\n          <img class="imagepost" src="{{j.url}}">\n        </div>\n        <div class="descholder">\n          <div class=\'description\'>{{j.title}}</div>\n        </div>\n        <div class="priceholder">\n          <div class=\'description\'>${{j.price}}</div>\n        </div>\n      </div>\n      <div class="feedtoptextcontainer" #feedtop3 (tap)="goSeeProfile(j)"> <!-- (tap)=\'contractItem(i)\'-->\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{j.profilepic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{j.username}}</h4><br>\n          <!--<h4 class="poststudio">Ed\'s Studio</h4>-->\n        </div>\n      </div>\n      <div class="feedtoptextcontainertwo" #feedtop3two (tap)=\'contractItem3(i)\'>\n        <div class="postprofilelink">\n          <div class="book">{{j.title}}</div>\n        </div>\n      </div>\n      <img class="imageposttwo" #imagepost3 src="{{j.url}}">\n      <div class=\'caption\' #caption3>\n        <div style="text-align: center">\n          TAP TO BUY\n        </div>\n        <br>\n        {{j.caption}}\n      </div>\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n</div>\n\n<div class="swipecont2" (swiperight)="swipeRight()" (swipeleft)="swipeLeft()">\n  <div class =\'contentone formulaslist\' [@moveList]=\'moveState\' #formulaslist>\n   <ion-list no-padding>\n     <ion-item class="changepadding" *ngFor="let j of formulaListArray ; let i = index" id=\'{{i}}\' #feedstyle4 text-wrap>\n      <div class="flex" (tap)=\'expandItem4(i)\' #flex4>\n        <div class="nonzoomimage">\n          <img class="imagepost" src="{{j.url}}">\n        </div>\n        <div class="priceholder">\n          <div class=\'description\'>${{j.price}}</div>\n        </div>\n      </div>\n      <div class="feedtoptextcontainer" #feedtop4 (tap)="goSeeProfile(j)"> <!-- (tap)=\'contractItem(i)\'-->\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{j.profilepic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{j.username}}</h4><br>\n          <!--<h4 class="poststudio">Ed\'s Studio</h4>-->\n        </div>\n      </div>\n      <div class="feedtoptextcontainertwo" #feedtop4two (tap)=\'contractItem4(i)\'>\n        <div class="postprofilelink">\n          <div class="book price">${{j.price}}</div>\n        </div>\n      </div>\n      <img class="imageposttwo" #imagepost4 src="{{j.url}}">\n      <div class=\'caption\' #caption4 style="text-align: center">\n        TAP TO BUY\n      </div>\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n</div>\n\n\n\n<ion-fab bottom center >\n  <button class="ionfab" ion-fab></button>\n  <ion-fab-list side="right">\n    <button class="textsizebutton" (tap)=\'tappedPost()\' ion-fab>Post</button>\n  </ion-fab-list>\n  <ion-fab-list side="left">\n    <button class="textsizebutton" ion-fab>\n      <ion-datetime displayFormat="MMM/D/YY h:mm:a" [(ngModel)]="dateofme" (ngModelChange)="modelChanged($event)"></ion-datetime>\n      <ion-icon name="alarm"></ion-icon>\n    </button>\n  </ion-fab-list>\n</ion-fab>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/feedstylist/feedstylist.html"*/,
         animations: [
             Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('slideDown', [
                 Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["state"])('down', Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
@@ -7276,7 +6781,7 @@ FeedStylist = __decorate([
 
 /***/ }),
 
-/***/ 73:
+/***/ 72:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7284,9 +6789,9 @@ FeedStylist = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stylistprofile_stylistprofile__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feedstylist_feedstylist__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__userbooking_userbooking__ = __webpack_require__(168);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feedstylist_feedstylist__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__userbooking_userbooking__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modals_popup_popup__ = __webpack_require__(296);
@@ -7296,9 +6801,9 @@ FeedStylist = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__ = __webpack_require__(90);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__ = __webpack_require__(460);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_rxjs_BehaviorSubject__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_rxjs_BehaviorSubject__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_rxjs_BehaviorSubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_rxjs_BehaviorSubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__userviewprofile_userviewprofile__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__userviewprofile_userviewprofile__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__userprofile_userprofile__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__fullfeed_fullfeed__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_ionic_cache__ = __webpack_require__(96);
@@ -8185,14 +7690,14 @@ FeedUser = __decorate([
 
 /***/ }),
 
-/***/ 75:
+/***/ 74:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_feedstylist_feedstylist__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_feedstylist_feedstylist__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__stylistprofile_stylistprofile__ = __webpack_require__(55);
@@ -8657,6 +8162,555 @@ BookingPage = __decorate([
 
 /***/ }),
 
+/***/ 75:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_keyboard__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_cameraserviceprofile__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_app__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_firebase_app__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__signin_signin__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__formulas_formulas__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__map_map__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_facebook__ = __webpack_require__(178);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Generated class for the SettingsPage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+var SettingsPage = (function () {
+    function SettingsPage(facebook, af, afAuth, storage, camera, cameraService, myrenderer, loadingController, actionSheetCtrl, navCtrl, navParams, keyboard) {
+        this.facebook = facebook;
+        this.af = af;
+        this.afAuth = afAuth;
+        this.storage = storage;
+        this.camera = camera;
+        this.cameraService = cameraService;
+        this.myrenderer = myrenderer;
+        this.loadingController = loadingController;
+        this.actionSheetCtrl = actionSheetCtrl;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.keyboard = keyboard;
+        this.user = {};
+        this.priceRanges = ['<100', '100-149', '150-199', '200-249', '250-300'];
+        this.loggedIn = false;
+        this.linked = "Link Profile";
+        this.merchantid = "";
+        this.publickey = "";
+        this.privatekey = "";
+        this.optionsGetMedia = {
+            allowEdit: false,
+            quality: 10,
+            targetWidth: 600,
+            targetHeight: 600,
+            encodingType: this.camera.EncodingType.PNG,
+            sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+            mediaType: this.camera.MediaType.PICTURE,
+            destinationType: this.camera.DestinationType.FILE_URI
+        };
+        this.optionsGetCamera = {
+            quality: 10,
+            targetWidth: 600,
+            targetHeight: 600,
+            encodingType: this.camera.EncodingType.PNG,
+            sourceType: this.camera.PictureSourceType.CAMERA,
+            mediaType: this.camera.MediaType.PICTURE,
+            destinationType: this.camera.DestinationType.FILE_URI,
+            saveToPhotoAlbum: true
+        };
+    }
+    SettingsPage.prototype.formulas = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_14__formulas_formulas__["a" /* FormulasPage */]);
+    };
+    SettingsPage.prototype.linkProfile = function () {
+        var _this = this;
+        if (this.linked == "Link Profile") {
+            if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
+                this.facebook.login(['email', 'public_profile']).then(function (response) {
+                    _this.facebook.api('me?fields=id', []).then(function (profile) {
+                        console.log(JSON.stringify(profile));
+                        _this.facebookURL = "http://www.facebook.com/" + profile['id'];
+                        _this.storage.set('fblinkedstylist', true);
+                        _this.linked = "Linked";
+                        alert("You must press SAVE to finalize the link.");
+                        //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
+                    });
+                });
+            }
+            else if (this.type == 'user' || this.type == 'user/stylist/user') {
+                this.facebook.login(['email', 'public_profile']).then(function (response) {
+                    _this.facebook.api('me?fields=id', []).then(function (profile) {
+                        console.log(JSON.stringify(profile));
+                        _this.facebookURL = "http://www.facebook.com/" + profile['id'];
+                        _this.storage.set('fblinkeduser', true);
+                        _this.linked = "Linked";
+                        alert("You must press SAVE to finalize the link.");
+                        //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
+                    });
+                });
+            }
+        }
+        ;
+    };
+    SettingsPage.prototype.changeShape = function (shape) {
+        console.log(shape.value);
+        this.price = shape.value;
+    };
+    SettingsPage.prototype.tappedToggle = function () {
+        console.log(this.locationtoggle + "          3344343 locationtoggle");
+        if (this.locationtoggle == true) {
+            this.af.object('/profiles/users/' + this.username + '/location').remove().then(function (_) { return console.log('item deleted!'); });
+        }
+        this.storage.set('location', this.locationtoggle);
+    };
+    SettingsPage.prototype.goToProfile = function () {
+        if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
+            this.navCtrl.pop();
+        }
+        if (this.type == 'user' || this.type == 'user/stylist/user') {
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
+        }
+    };
+    SettingsPage.prototype.map = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_15__map_map__["a" /* MapPage */]);
+    };
+    SettingsPage.prototype.logForm = function () {
+        var _this = this;
+        console.log("        ADDDDREESSSSS77777777:  " + this.address); //moved up here!
+        /*if(this.type == 'user' || this.type == 'user/stylist/user') {
+     
+           if(this.username == null || this.password == null || this.email == null || this.bio == null) {
+             alert("You need to fill out all of the information");
+           }
+         }*/
+        this.subscription3 = this.afAuth.authState.subscribe(function (data) {
+            console.log(data + "    data from login");
+            if (data != null) {
+                if (data.email && data.uid) {
+                    console.log("logged in");
+                    _this.authUser = data;
+                    _this.loggedIn = true;
+                }
+            }
+        });
+        console.log(this.authUser + '      authuser       998877');
+        this.x = 0;
+        console.log(this.passwordIfChanged + "  passwordifchanged                  this.password: " + this.password);
+        console.log(this.emailIfChanged + "  passwordifchanged                  this.password: " + this.email);
+        this.storage.set('username', this.username);
+        if (this.passwordIfChanged != this.password && this.authUser != null) {
+            this.authUser.updatePassword(this.password).then(function () { }).catch(function (e) { alert(e); });
+        }
+        /*else {
+          this.password = this.passwordIfChanged;
+          alert("You are not logged in yet, you cannot update your password or email.")
+        }*/
+        this.storage.set('password', this.password);
+        if (this.emailIfChanged != this.email && this.authUser != null) {
+            this.authUser.updateEmail(this.email).then(function () { }).catch(function (e) { alert(e); });
+        }
+        /*else {
+          this.email = this.emailIfChanged;
+          alert("You are not logged in yet, you cannot update your password or email.")
+        }*/
+        this.storage.set('email', this.email);
+        this.storage.set('bio', this.bio);
+        this.storage.set('picURL', this.picURL);
+        this.storage.set('phone', this.phone);
+        this.storage.set('instausername', this.instagramURL);
+        if (this.facebookURL == null) {
+            this.facebookURL = "";
+        }
+        //this.storage.get('type').then((val) => {
+        if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
+            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '' || this.merchantId == '' || this.publicKey == '' || this.privateKey == '') {
+                alert("You need to fill out all of the information");
+            }
+            else if (this.phone.match(/\d/g).length !== 10) {
+                alert("Please enter a 10 digit phone number, only the digits.");
+            }
+            else {
+                this.storage.set('address', this.address);
+                this.storage.set('price', this.price);
+                this.storage.set('merchantid', this.merchantid);
+                this.storage.set('publickey', this.publickey);
+                this.storage.set('privatekey', this.privatekey);
+                if (this.price == "<100") {
+                    this.price = "$";
+                }
+                else if (this.price == "100-149") {
+                    this.price = "$$";
+                }
+                else if (this.price == "150-199") {
+                    this.price = "$$$";
+                }
+                else if (this.price == "200-249") {
+                    this.price = "$$$$";
+                }
+                else if (this.price == "250-300") {
+                    this.price = "$$$$$";
+                }
+                this.items = this.af.list('/profiles/stylists');
+                if (this.username == this.oldUser) {
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
+                        'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
+                        'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
+                        'merchantid': this.merchantid, 'publickey': this.publickey, 'privatekey': this.privatekey });
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
+                    }
+                    else {
+                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__["a" /* FeedStylist */]);
+                    }
+                }
+                else {
+                    this.af.object('/profiles/stylists/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
+                        'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
+                        'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
+                        'merchantid': this.merchantid, 'publickey': this.publickey, 'privatekey': this.privatekey,
+                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } });
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__stylistprofile_stylistprofile__["a" /* StylistProfile */]);
+                    }
+                    else {
+                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_10__feedstylist_feedstylist__["a" /* FeedStylist */]);
+                    }
+                }
+            }
+        }
+        if (this.type == 'user' || this.type == 'user/stylist/user') {
+            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '') {
+                alert("You need to fill out all of the information");
+            }
+            else if (this.phone.match(/\d/g).length !== 10) {
+                alert("Please enter a 10 digit phone number, only the digits.");
+            }
+            else {
+                this.items = this.af.list('/profiles/users');
+                if (this.username == this.oldUser) {
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
+                        'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL });
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
+                    }
+                    else {
+                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__["a" /* FeedUser */]);
+                    }
+                }
+                else {
+                    this.af.object('/profiles/users/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
+                        'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
+                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } });
+                    if (this.isTypeNull == null) {
+                        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__userviewprofile_userviewprofile__["a" /* UserViewProfile */]);
+                    }
+                    else {
+                        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_11__feeduser_feeduser__["a" /* FeedUser */]);
+                    }
+                }
+            }
+        }
+        ;
+        //})
+    };
+    SettingsPage.prototype.logout = function () {
+        if (this.loggedIn) {
+            console.log("being logged out ()()()()ER()EW()RWE()()REW()");
+            this.afAuth.auth.signOut();
+            this.storage.set('loggedin', false);
+        }
+        else {
+            this.storage.set('loggedin', false);
+        }
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_12__signin_signin__["a" /* SignInPage */]);
+    };
+    SettingsPage.prototype.ngOnDestroy = function () {
+        if (this.subscription3 != null) {
+            this.subscription3.unsubscribe();
+        }
+    };
+    SettingsPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.storage.get('type').then(function (val) {
+            _this.type = val;
+            console.log(_this.typeparam + '       this.typeparam       ');
+            console.log(_this.logoutButton + '       this.typeparam       ');
+            if (_this.typeparam == 'user') {
+                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.logoutButton._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.merchantId._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.publicKey._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.privateKey._elementRef.nativeElement, 'display', 'none');
+            }
+            if (_this.typeparam == 'user/stylist/user') {
+                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.merchantId._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.publicKey._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.privateKey._elementRef.nativeElement, 'display', 'none');
+                //this.myrenderer.setElementStyle(this.logoutButton._elementRef.nativeElement, 'display', 'none');
+            }
+            else if (_this.type == 'user/stylist/user') {
+                _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.merchantId._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.publicKey._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.privateKey._elementRef.nativeElement, 'display', 'none');
+            }
+            else if (_this.typeparam == 'stylist') {
+                _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.logoutButton._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.locationToggle._elementRef.nativeElement, 'display', 'none');
+            }
+            else if (_this.type == 'user/stylist/stylist') {
+                _this.myrenderer.setElementStyle(_this.locationToggle._elementRef.nativeElement, 'display', 'none');
+            }
+            _this.oldUser = _this.username;
+            _this.isTypeNull = _this.navParams.get('type');
+            setTimeout(function () {
+                console.log('ionViewDidLoad SettingsPage');
+                _this.storage.get('username').then(function (val) { _this.username = val; _this.getProfilePic(); console.log(val + "        getting username          3333222222"); });
+                _this.storage.get('password').then(function (val) { _this.password = val; _this.passwordIfChanged = _this.password; console.log(val + "        getting password222222"); });
+                _this.storage.get('email').then(function (val) { _this.email = val; _this.emailIfChanged = _this.email; console.log(val + "        getting email33333333"); });
+                _this.storage.get('bio').then(function (val) { _this.bio = val; console.log(val + "        getting biooooooooo"); });
+                _this.storage.get('picURL').then(function (val) { _this.picURL = val; });
+                _this.storage.get('phone').then(function (val) { _this.phone = val; });
+                _this.storage.get('instausername').then(function (val) { _this.instagramURL = val; });
+                if (_this.type == 'stylist' || _this.type == 'user/stylist/stylist') {
+                    _this.storage.get('address').then(function (val) { _this.address = val; console.log(val + "        getting addressssssss"); });
+                    _this.storage.get('price').then(function (val) { _this.price = val; });
+                    _this.storage.get('merchantid').then(function (val) { _this.merchantid = val; });
+                    _this.storage.get('publickey').then(function (val) { _this.publickey = val; });
+                    _this.storage.get('privatekey').then(function (val) { _this.privatekey = val; });
+                    for (var x = 0; x < 5; x++) {
+                        if (_this.priceRanges[x] == _this.price) {
+                            document.getElementById(x + "").setAttribute('selected', null);
+                        }
+                    }
+                }
+            }, 1000);
+            if (_this.type == 'user' || _this.type == 'user/stylist/user') {
+                _this.storage.get('fblinkeduser').then(function (val) {
+                    console.log(val + " val vlal v avlal v allavl val ");
+                    console.log(_this.type + " tyope aosefi; fai; sefeji a'aj '' ");
+                    if (val) {
+                        _this.linked = "Linked";
+                    }
+                    else {
+                        _this.linked = "Link Profile";
+                    }
+                });
+            }
+            else if (_this.type == 'stylist' || _this.type == 'user/stylist/stylist') {
+                _this.storage.get('fblinkedstylist').then(function (val) {
+                    if (val) {
+                        _this.linked = "Linked";
+                    }
+                    else {
+                        _this.linked = "Link Profile";
+                    }
+                });
+            }
+        });
+        this.storage.get('location').then(function (val) {
+            _this.locationtoggle = val;
+            if (val == true) {
+                _this.locationtoggle = false;
+            }
+            else {
+                _this.locationtoggle = true;
+            }
+            console.log(_this.locationtoggle + "     in view did load locationtoggle");
+        });
+        this.typeparam = this.navParams.get('type');
+    };
+    SettingsPage.prototype.getProfilePic = function () {
+        var _this = this;
+        console.log("inside get profile pic &*&*(&*%^$%$%$%$%$%");
+        return new Promise(function (resolve, reject) {
+            var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
+            storageRef.getDownloadURL().then(function (url) {
+                console.log(url);
+                _this.picURL = url;
+                _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
+                resolve();
+            }).catch(function (e) {
+                console.log(e.message);
+            });
+        });
+    };
+    SettingsPage.prototype.goButton = function (code) {
+        console.log(code);
+        if (code == 13) {
+            this.keyboard.close();
+        }
+    };
+    SettingsPage.prototype.change = function () {
+        this.presentActionSheet();
+    };
+    SettingsPage.prototype.presentActionSheet = function () {
+        var _this = this;
+        var actionSheet = this.actionSheetCtrl.create({
+            title: 'Choose source',
+            buttons: [
+                {
+                    text: 'Camera',
+                    handler: function () {
+                        _this.cameraService.getMedia(_this.optionsGetCamera, null, _this.username).then(function () {
+                            var loading = _this.loadingController.create({ content: "Loading..." });
+                            loading.present();
+                            return new Promise(function (resolve, reject) {
+                                //setTimeout(() => {
+                                var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
+                                storageRef.getDownloadURL().then(function (url) {
+                                    console.log(url);
+                                    _this.picURL = url;
+                                    _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
+                                    loading.dismiss();
+                                    resolve();
+                                }).catch(function (e) {
+                                    alert("Something went wrong with the upload, please try again.");
+                                    loading.dismiss();
+                                    resolve();
+                                });
+                                loading.dismiss();
+                                //}, 3500);
+                            });
+                        }); //pass in square choice
+                        //this.myrenderer.setElementAttribute(this.itemArrayTwo[this.square - 1].nativeElement, 'src', 'block');
+                        console.log('camera clicked');
+                    }
+                }, {
+                    text: 'Photo Library',
+                    handler: function () {
+                        _this.cameraService.getMedia(_this.optionsGetMedia, null, _this.username).then(function () {
+                            var loading = _this.loadingController.create({ content: "Loading..." });
+                            loading.present();
+                            return new Promise(function (resolve, reject) {
+                                //setTimeout(() => {
+                                var storageRef = __WEBPACK_IMPORTED_MODULE_7_firebase_app__["storage"]().ref().child('/settings/' + _this.username + '/profilepicture.png');
+                                storageRef.getDownloadURL().then(function (url) {
+                                    console.log(url);
+                                    _this.picURL = url;
+                                    _this.myrenderer.setElementAttribute(_this.profilepic.nativeElement, 'src', url);
+                                    loading.dismiss();
+                                    resolve();
+                                }).catch(function (e) {
+                                    alert("Something went wrong with the upload, please try again.");
+                                    loading.dismiss();
+                                    resolve();
+                                });
+                                loading.dismiss();
+                                //}, 3500);
+                            });
+                        });
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    };
+    return SettingsPage;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('profsquare'),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+], SettingsPage.prototype, "profilepic", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('addressEl'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "addressEl", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('priceEl'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "priceEl", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('arrowback'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "arrowBackEl", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('logoutbutton'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "logoutButton", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('locationToggle'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "locationToggle", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('merchantId'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "merchantId", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('publicKey'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "publicKey", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('privateKey'),
+    __metadata("design:type", Object)
+], SettingsPage.prototype, "privateKey", void 0);
+SettingsPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-settings',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/settings/settings.html"*/'<!--\n  Generated template for the SettingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <!---->\n	<div style="position: absolute; left: 50%; width:35%; z-index: 1">\n    <div style="position: relative; left: -50%; width:100%">\n      <img (tap)="presentActionSheet()" class="imagesquare" #profsquare src="assets/blankprof.png">\n    </div>\n  </div>\n  <ion-navbar>\n    <ion-icon (tap)="goToProfile()" class=\'backk\' name="arrow-back" #arrowback></ion-icon>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content no-padding>\n	<ion-item no-padding class="sect">\n		<ion-label>Username</ion-label>\n		<ion-input [disabled]="true" type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="username" name="username"></ion-input> <!--[(ngModel)]="user.username"-->\n	</ion-item>\n	<ion-item no-padding class="sect">\n	  <ion-label>Password</ion-label>\n	  <ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="password" name="password"></ion-input>\n	</ion-item>\n	<ion-item no-padding class="sect">\n  	<ion-label>Email</ion-label>\n  	<ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="email" name="email"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n  	<ion-label>Salon Address</ion-label>\n  	<ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. 28 Jay St, Winston, NJ" [(ngModel)]="address" name="address"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n    <ion-label>Phone</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. 1231231234" [(ngModel)]="phone" name="phone"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #priceEl>\n\n    <ion-label>Price Range</ion-label>\n    <ion-select [(ngModel)]="price">\n      <ion-option *ngFor="let z of priceRanges ; let i = index" value="{{z}}" id="{{i}}">{{z}}</ion-option>\n    </ion-select>\n\n  </ion-item>\n  <ion-item no-padding class="sect">\n  	<ion-label>Bio</ion-label>\n  	<ion-textarea style="width: 65%" placeholder="Bio..." [(ngModel)]="bio" name="bio"></ion-textarea>\n  </ion-item>\n  <ion-item no-padding class="sect" #locationToggle>\n    <ion-label>Location</ion-label>\n    <ion-toggle [(ngModel)]="locationtoggle" (tap)="tappedToggle()"></ion-toggle>\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl>\n    <div class="fblabelcontainer">\n      <div class="inlineblock">Facebook</div>\n    \n      <button ion-button round color="tertiary" class="linkfbprof" (tap)="linkProfile()">{{linked}}</button>\n    </div>\n    <!--<ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="http://www.facebook.com/username" [(ngModel)]="facebookURL" name="facebook"></ion-input>--> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #addressEl2>\n    <ion-label>Instagram Username</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. username" [(ngModel)]="instagramURL" name="instagram"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #merchantId>\n    <ion-label>Merchant ID</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="Get this from you Braintree account" [(ngModel)]="merchantid" name="merchantid"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #publicKey>\n    <ion-label>Public Key</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="Get this from you Braintree account" [(ngModel)]="publickey" name="publickey"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <ion-item no-padding class="sect" #privateKey>\n    <ion-label>Private Key</ion-label>\n    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="Get this from you Braintree account" [(ngModel)]="privatekey" name="privatekey"></ion-input> <!--[(ngModel)]="user.username" name="password"-->\n  </ion-item>\n  <div id="savebutton">\n    <button class="save" (tap)=\'logForm()\' ion-button round color="primary">Save</button>\n    <button class="save" (tap)=\'logout()\' ion-button round color="tertiary" #logoutbutton>Logout</button>\n    <button class="save" (tap)=\'formulas()\' ion-button round color="tertiary">Formulas</button> <!--map()-->\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/settings/settings.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_16__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_6_angularfire2_auth__["a" /* AngularFireAuth */], __WEBPACK_IMPORTED_MODULE_5__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_3__services_cameraserviceprofile__["a" /* CameraServiceProfile */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_keyboard__["a" /* Keyboard */]])
+], SettingsPage);
+
+//# sourceMappingURL=settings.js.map
+
+/***/ }),
+
 /***/ 913:
 /***/ (function(module, exports) {
 
@@ -8671,17 +8725,17 @@ BookingPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserProfile; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__userbooking_userbooking__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__userbooking_userbooking__ = __webpack_require__(169);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dropin_dropin__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cameraservice__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(71);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_img_viewer__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_img_viewer__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__modals_rate_rate__ = __webpack_require__(301);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_storage__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ionic_native__ = __webpack_require__(655);
@@ -9406,7 +9460,7 @@ UserProfile = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_crop__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_transfer__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_firebase__ = __webpack_require__(25);
@@ -9715,7 +9769,7 @@ CameraService = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(506);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(505);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_signin_signin__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_signin_signin__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_cache__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_screen_orientation__ = __webpack_require__(507);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -9756,10 +9810,9 @@ var MyApp = (function () {
 MyApp = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/app/app.html"*/'<ion-nav [root]="rootPage" swipeBackEnabled="true"></ion-nav>\n'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/app/app.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* Platform */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_ionic_cache__["b" /* CacheService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_ionic_cache__["b" /* CacheService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_screen_orientation__["a" /* ScreenOrientation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_screen_orientation__["a" /* ScreenOrientation */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_5_ionic_cache__["b" /* CacheService */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_screen_orientation__["a" /* ScreenOrientation */]])
 ], MyApp);
 
-var _a, _b, _c, _d, _e;
 //# sourceMappingURL=app.component.js.map
 
 /***/ })

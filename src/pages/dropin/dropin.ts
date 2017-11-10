@@ -49,9 +49,10 @@ export class DropinPage {
               // Submit payload.nonce to your server
               this.blurAll();
               if(comingFrom == 'userprofile') {
-              	let profileModal = this.modalCtrl.create(DepositPage, { payload: payload});
-	  			  profileModal.present();
-	  			  this.navCtrl.pop();
+              	let profileModal = this.modalCtrl.create(DepositPage, { payload: payload, username: username });
+	  			  profileModal.present().then(() => {
+	  			  	this.navCtrl.pop();
+	  			  });
               }
               else if(comingFrom == null) {
 	              let profileModal = this.modalCtrl.create(FormulaBuy, { username: username, square: square, payload: payload});

@@ -1,8 +1,14 @@
 page-settings {
+
+	.usernameslot {
+		width: 100%;
+		display: inline-block;
+	}
 	.backk{
 		font-size: 36px;
 		float: left;
-		margin-left: 5px;
+		margin-left: 15px;
+		width: 36px;
 	}
 
 	.back-button.show-back-button {

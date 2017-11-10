@@ -166,7 +166,7 @@ export class UserProfile implements OnDestroy {
   }
 
   depositOpen() {
-    this.navCtrl.push(DropinPage, {page:'userprofile'});
+    this.navCtrl.push(DropinPage, {page:'userprofile', username: this.username});
   }
 
 
@@ -192,7 +192,6 @@ export class UserProfile implements OnDestroy {
   }
 
   ionViewDidLoad() {
-    this.storage.set('fblinkedstylist', false);
     this.username = this.params.get('username');
     this.storage.get('phone').then((val) => {this.phone = val; });
 

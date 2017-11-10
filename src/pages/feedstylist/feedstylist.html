@@ -69,8 +69,13 @@
       </div>
       <img class="imageposttwo" #imagepost src="{{j.url}}">
       <div class='caption' #caption>
-        {{j.caption}}
-      <br>
+        <div *ngIf="j.title == null || j.date == null" style="text-align: center">
+          TAP TO BUY
+        </div>
+        <div *ngIf="j.title != null">
+          <br>
+          {{j.caption}}
+        </div>
       </div>
      </ion-item>
    </ion-list>
@@ -154,8 +159,11 @@
       </div>
       <img class="imageposttwo" #imagepost3 src="{{j.url}}">
       <div class='caption' #caption3>
+        <div style="text-align: center">
+          TAP TO BUY
+        </div>
+        <br>
         {{j.caption}}
-      <br>
       </div>
      </ion-item>
    </ion-list>
@@ -195,9 +203,8 @@
         </div>
       </div>
       <img class="imageposttwo" #imagepost4 src="{{j.url}}">
-      <div class='caption' #caption4>
-        
-        <br>
+      <div class='caption' #caption4 style="text-align: center">
+        TAP TO BUY
       </div>
      </ion-item>
    </ion-list>

@@ -96,45 +96,63 @@ export class FormulaBuy implements OnDestroy {
  }
 
  buy() {
-   if(this.folder1 == '' && this.folder2 == '') {
-     alert("You must select or create a folder for the formula.")
-   }
-   else {
-     if(this.folder1 != null && this.folder2 == null) {
-       this.list = this.af.list('/formulasowned/'+ this.usernameowner + '/'+ this.folder1);
-        this.data.color = this.folder1;
-     }
-     else {
-       this.list = this.af.list('/formulasowned/'+ this.usernameowner + '/'+ this.folder2);
-       this.data.color = this.folder2;
-     }
+   let reff = firebase.database().ref('/profiles/stylists').orderByChild('username').equalTo(this.username).on("value", (snapshot) => {
+      snapshot.forEach(snapshot => {
+          // key
+          let key = snapshot.key;
+          console.log("key: " + key);
+          // value, could be object
+          let childData = snapshot.val();
+          console.log("data: " + JSON.stringify(childData));
+          // Do what you want with these key/values here
+
+          this.payload.merchantid = childData.merchantid;
+          this.payload.publickey = childData.publickey;
+          this.payload.privatekey = childData.privatekey;
+
+          if(this.folder1 == '' && this.folder2 == '') {
+           alert("You must select or create a folder for the formula.")
+          }
+          else {
+           if(this.folder1 != null && this.folder2 == null) {
+             this.list = this.af.list('/formulasowned/'+ this.usernameowner + '/'+ this.folder1);
+              this.data.color = this.folder1;
+           }
+           else {
+             this.list = this.af.list('/formulasowned/'+ this.usernameowner + '/'+ this.folder2);
+             this.data.color = this.folder2;
+           }
+           
+           console.log(this.payload + '          paaaaayyyyyylllllooooooaaaaaddddd');
+
+            let headers = new Headers({
+              'Content-Type': 'application/json'
+            });
+            let options = new RequestOptions({
+              headers: headers
+            });
+            // TODO: Encode the values using encodeURIComponent().
+            let body = JSON.stringify(this.payload);
+
+           //INSERT CALL TO BACKEND
+           this.http.post('http://192.168.1.131:8888/api/buyformula.php', body)  
+           .subscribe(res => {
+             console.log(res + "response from formula buy");
+             console.log(JSON.stringify(this.data) + "     data dat d dat add  dat");
+             this.list.push(this.data).catch(e => { console.log(e) + "this is conosle e" });
+
+             alert("You bought a formula! Check the settings page to view it.");
+             this.dismiss();
+           }, err => {
+             console.log(JSON.stringify(err))
+           });
+
      
-     console.log(this.payload + '          paaaaayyyyyylllllooooooaaaaaddddd');
-
-      let headers = new Headers({
-        'Content-Type': 'application/json'
-      });
-      let options = new RequestOptions({
-        headers: headers
-      });
-      // TODO: Encode the values using encodeURIComponent().
-      let body = JSON.stringify(this.payload);
-
-     //INSERT CALL TO BACKEND
-     this.http.post('http://192.168.1.131:8888/api/buyformula.php', body)  
-     .subscribe(res => {
-       console.log(res + "response from formula buy");
-       console.log(JSON.stringify(this.data) + "     data dat d dat add  dat");
-       this.list.push(this.data).catch(e => { console.log(e) + "this is conosle e" });
-
-       alert("You bought a formula! Check the settings page to view it.");
-       this.dismiss();
-     }, err => {
-       console.log(JSON.stringify(err))
-     });
-
-     
    }
+          
+          return true;
+      });
+  });
  }
 
  dismiss() {

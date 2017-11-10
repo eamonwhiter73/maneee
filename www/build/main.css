@@ -33859,10 +33859,16 @@ page-postpage .backk {
   padding: 0 15px 0 15px;
 }
 
+page-settings .usernameslot {
+  width: 100%;
+  display: inline-block;
+}
+
 page-settings .backk {
   font-size: 36px;
   float: left;
-  margin-left: 5px;
+  margin-left: 15px;
+  width: 36px;
 }
 
 page-settings .back-button.show-back-button {

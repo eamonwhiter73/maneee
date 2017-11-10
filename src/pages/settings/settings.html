@@ -21,7 +21,7 @@
 <ion-content no-padding>
 	<ion-item no-padding class="sect">
 		<ion-label>Username</ion-label>
-		<ion-input type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="username" name="username"></ion-input> <!--[(ngModel)]="user.username"-->
+		<ion-input [disabled]="true" type="text" (keypress)="goButton($event.keyCode)" [(ngModel)]="username" name="username"></ion-input> <!--[(ngModel)]="user.username"-->
 	</ion-item>
 	<ion-item no-padding class="sect">
 	  <ion-label>Password</ion-label>
@@ -51,7 +51,7 @@
   	<ion-label>Bio</ion-label>
   	<ion-textarea style="width: 65%" placeholder="Bio..." [(ngModel)]="bio" name="bio"></ion-textarea>
   </ion-item>
-  <ion-item no-padding class="sect">
+  <ion-item no-padding class="sect" #locationToggle>
     <ion-label>Location</ion-label>
     <ion-toggle [(ngModel)]="locationtoggle" (tap)="tappedToggle()"></ion-toggle>
   </ion-item>
@@ -67,7 +67,18 @@
     <ion-label>Instagram Username</ion-label>
     <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="ex. username" [(ngModel)]="instagramURL" name="instagram"></ion-input> <!--[(ngModel)]="user.username" name="password"-->
   </ion-item>
-
+  <ion-item no-padding class="sect" #merchantId>
+    <ion-label>Merchant ID</ion-label>
+    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="Get this from you Braintree account" [(ngModel)]="merchantid" name="merchantid"></ion-input> <!--[(ngModel)]="user.username" name="password"-->
+  </ion-item>
+  <ion-item no-padding class="sect" #publicKey>
+    <ion-label>Public Key</ion-label>
+    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="Get this from you Braintree account" [(ngModel)]="publickey" name="publickey"></ion-input> <!--[(ngModel)]="user.username" name="password"-->
+  </ion-item>
+  <ion-item no-padding class="sect" #privateKey>
+    <ion-label>Private Key</ion-label>
+    <ion-input type="text" (keypress)="goButton($event.keyCode)" placeholder="Get this from you Braintree account" [(ngModel)]="privatekey" name="privatekey"></ion-input> <!--[(ngModel)]="user.username" name="password"-->
+  </ion-item>
   <div id="savebutton">
     <button class="save" (tap)='logForm()' ion-button round color="primary">Save</button>
     <button class="save" (tap)='logout()' ion-button round color="tertiary" #logoutbutton>Logout</button>
