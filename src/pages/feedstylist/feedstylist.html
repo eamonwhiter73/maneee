@@ -79,12 +79,12 @@
       </div>
      </ion-item>
    </ion-list>
-   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+   <ion-infinite-scroll (ionInfinite)="doInfiniteAll($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-   </ion-infinite-scroll>-->
+   </ion-infinite-scroll>
   </div>
 
 
@@ -121,12 +121,12 @@
       </div>
      </ion-item>
    </ion-list>
-   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+   <ion-infinite-scroll (ionInfinite)="(doInfiniteClass($event))">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-   </ion-infinite-scroll>-->
+   </ion-infinite-scroll>
   </div>
 
   <div class ='contentone productslist' [@moveList]='moveState' #productslist>
@@ -167,12 +167,12 @@
       </div>
      </ion-item>
    </ion-list>
-   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+   <ion-infinite-scroll (ionInfinite)="doInfiniteProduct($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-   </ion-infinite-scroll>-->
+   </ion-infinite-scroll>
   </div>
 </div>
 
@@ -208,12 +208,12 @@
       </div>
      </ion-item>
    </ion-list>
-   <!--<ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+   <ion-infinite-scroll (ionInfinite)="doInfiniteFormula($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-   </ion-infinite-scroll>-->
+   </ion-infinite-scroll>
   </div>
 </div>
 

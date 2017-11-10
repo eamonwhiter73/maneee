@@ -1,5 +1,5 @@
 import { Component, trigger, state, style, transition, animate, ViewChild, ViewChildren, QueryList, Renderer, ElementRef } from '@angular/core';
-import { NavController, App, Platform, Slides, Slide } from 'ionic-angular';
+import { NavController, App, Platform, Slides, Slide, Content } from 'ionic-angular';
 import { LoadingController, ActionSheetController } from 'ionic-angular';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { PostpagePage } from '../postpage/postpage';
@@ -127,6 +127,7 @@ export class FeedStylist implements OnDestroy {
   toolbarClicks = 0;
 
   items = [];
+  items2 = [];
   totalCount = 0;
   lastNumRows = 0;
   el;
@@ -136,16 +137,21 @@ export class FeedStylist implements OnDestroy {
 
   list: FirebaseListObservable<any>;
   list1: FirebaseListObservable<any>;
+  list2: FirebaseListObservable<any>;
+  list3: FirebaseListObservable<any>;
   objj: FirebaseObjectObservable<any>;
   month: FirebaseListObservable<any>;
   formulas: FirebaseListObservable<any>;
   follow: FirebaseListObservable<any>;
   subscription: ISubscription;
+  subscription3: ISubscription;
   subscription4: ISubscription;
   subscription5: ISubscription;
   subscription6: ISubscription;
   subscription7: ISubscription;
   subscription8: ISubscription;
+  subscription11: ISubscription;
+  subscription12: ISubscription;
   ads = [];
   swiperIndex;
   config: SwiperConfigInterface;
@@ -155,7 +161,14 @@ export class FeedStylist implements OnDestroy {
   dateofme;
   saveButton;
   username;
-
+  startAtKey;
+  startAtKey1;
+  startAtKey2;
+  lastKey1;
+  lastKey;
+  lastKey2;
+  show;
+  @ViewChild(Content  ) content: Content;
 
 
   
@@ -188,6 +201,177 @@ export class FeedStylist implements OnDestroy {
         mediaType: this.camera.MediaType.PICTURE,
         destinationType: this.camera.DestinationType.FILE_URI,
         saveToPhotoAlbum: true
+  }
+
+  doInfiniteAll(infiniteScroll) {
+    setTimeout(() => {
+      this.items = [];
+      this.listAll();
+      infiniteScroll.complete();
+    }, 500)
+  }
+
+  doInfiniteProduct(infiniteScroll) {
+    setTimeout(() => {
+      console.log('Begin async operation');
+      /*console.log(this.content.directionY + "        upupupupupupu********");
+      if(this.content.directionY == 'up') {
+        this.show = false
+      }
+      else {
+        this.show = true;
+      }*/
+
+      console.log(this.startAtKey1 + "     before %%^&^&^% start at");
+      this.list2 = this.af.list('/products', {
+      query: {
+        orderByKey: true,
+        endAt: this.startAtKey1,
+        limitToLast: 11
+      }});
+
+      this.subscription11 = this.list2.subscribe(items => { 
+          let x = 0;
+          this.lastKey1 = this.startAtKey1;
+          items.forEach(item => {
+
+
+            let storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                       
+            storageRef.getDownloadURL().then(url => {
+              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+              item.customMetadata.picURL = url;
+            }).catch((e) => {
+              console.log("in caught url !!!!!!!$$$$$$$!!");
+              item.customMetadata.picURL = 'assets/blankprof.png';
+            });
+            
+            if(this.startAtKey1 !== item.$key && this.lastKey1 !== item.$key) {
+              console.log(this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
+              this.productListArray.push(item.customMetadata); //unshift?**************
+            }
+
+            if(x == 0) {
+              this.startAtKey1 = item.$key;
+            }
+
+            x++;
+          });          
+          
+      })
+
+      infiniteScroll.complete(); 
+        
+    }, 500);
+  }
+
+  doInfiniteFormula(infiniteScroll) {
+    setTimeout(() => {
+      console.log('Begin async operation');
+      /*console.log(this.content.directionY + "        upupupupupupu********");
+      if(this.content.directionY == 'up') {
+        this.show = false
+      }
+      else {
+        this.show = true;
+      }*/
+
+      console.log(this.startAtKey2 + "     before %%^&^&^% start at");
+      this.list3 = this.af.list('/formulas', {
+      query: {
+        orderByKey: true,
+        endAt: this.startAtKey2,
+        limitToLast: 11
+      }});
+
+      this.subscription12 = this.list3.subscribe(items => { 
+          let x = 0;
+          this.lastKey2 = this.startAtKey2;
+          items.forEach(item => {
+
+
+            let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                       
+            storageRef.getDownloadURL().then(url => {
+              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+              item.picURL = url;
+            }).catch((e) => {
+              console.log("in caught url !!!!!!!$$$$$$$!!");
+              item.picURL = 'assets/blankprof.png';
+            });
+            
+            if(this.startAtKey2 !== item.$key && this.lastKey2 !== item.$key) {
+              console.log(this.startAtKey2 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
+              this.formulaListArray.push(item); //unshift?**************
+            }
+
+            if(x == 0) {
+              this.startAtKey2 = item.$key;
+            }
+
+            x++;
+          });          
+          
+      })
+
+      infiniteScroll.complete(); 
+        
+    }, 500);
+  }
+
+  doInfiniteClass(infiniteScroll) {
+    setTimeout(() => {
+      console.log('Begin async operation');
+      /*console.log(this.content.directionY + "        upupupupupupu********");
+      if(this.content.directionY == 'up') {
+        this.show = false
+      }
+      else {
+        this.show = true;
+      }*/
+
+      console.log(this.startAtKey + "     before %%^&^&^% start at");
+      this.list = this.af.list('/classes', {
+      query: {
+        orderByKey: true,
+        endAt: this.startAtKey,
+        limitToLast: 11
+      }});
+
+      this.subscription3 = this.list.subscribe(items => { 
+          let x = 0;
+          this.lastKey = this.startAtKey;
+          items.forEach(item => {
+
+
+            let storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                       
+            storageRef.getDownloadURL().then(url => {
+              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+              item.customMetadata.picURL = url;
+            }).catch((e) => {
+              console.log("in caught url !!!!!!!$$$$$$$!!");
+              item.customMetadata.picURL = 'assets/blankprof.png';
+            });
+            
+            if(this.startAtKey !== item.$key && this.lastKey !== item.$key) {
+              console.log(this.startAtKey + "   :startatkey before 4444444        item key:     " + item.$key);
+              this.classesListArray.push(item.customMetadata); //unshift?**************
+            }
+
+            if(x == 0) {
+              this.startAtKey = item.$key;
+            }
+
+            x++;
+          });          
+          
+      })
+
+      infiniteScroll.complete(); 
+        
+    }, 500);
+
   }
 
   ionViewWillUnload() {
@@ -888,7 +1072,9 @@ export class FeedStylist implements OnDestroy {
       //this.cache.getItem(cacheKey).catch(() => {
         let store = [];
 
-        this.list = this.af.list('/classes');
+        this.list = this.af.list('/classes', { query: {
+          limitToLast: 10
+        }});
 
         this.subscription4 = this.list.subscribe(items => { 
           mapped = items.map((item) => {
@@ -915,6 +1101,10 @@ export class FeedStylist implements OnDestroy {
             });
 
           })
+
+          this.startAtKey = items[0].$key;
+          this.lastKey = this.startAtKey;
+
           let results = Promise.all(mapped);
           results.then(() => {
           //setTimeout(() => {
@@ -948,7 +1138,9 @@ export class FeedStylist implements OnDestroy {
       //this.cache.getItem(cacheKey).catch(() => {
         let store = [];
 
-        this.list1 = this.af.list('/products');
+        this.list1 = this.af.list('/products', { query: {
+          limitToLast: 10
+        }});
         this.subscription5 = this.list1.subscribe(items => {
           mapped = items.map((item) => {
             return new Promise((resolve,reject) => {
@@ -971,6 +1163,10 @@ export class FeedStylist implements OnDestroy {
             });
 
           })
+
+          this.startAtKey1 = items[0].$key;
+          this.lastKey1 = this.startAtKey1;
+
           let results = Promise.all(mapped);
           results.then(() => {
           //setTimeout(() => {
@@ -1002,7 +1198,9 @@ export class FeedStylist implements OnDestroy {
       //this.cache.getItem(cacheKey).catch(() => {
         let store = [];
 
-        this.formulas = this.af.list('/formulas');
+        this.formulas = this.af.list('/formulas', { query: {
+          limitToLast: 10
+        }});
         this.subscription8 = this.formulas.subscribe(items => {
           mapped = items.map((item) => {
             console.log(JSON.stringify(item) + "       item being mapped");
@@ -1026,6 +1224,10 @@ export class FeedStylist implements OnDestroy {
             });
 
           })
+
+          this.startAtKey2 = items[0].$key;
+          this.lastKey2 = this.startAtKey2;
+
           Promise.all(mapped).then(() => {
           //setTimeout(() => {
             this.formulaListArray = store.reverse();  
@@ -1106,8 +1308,9 @@ export class FeedStylist implements OnDestroy {
   }
 
   ngOnDestroy() {
-    //this.subscription.unsubscribe();
-    //this.subscription2.unsubscribe();
+    if(this.subscription3 != null) {
+      this.subscription3.unsubscribe();
+    }
     if(this.subscription4 != null) {
       this.subscription4.unsubscribe();
     }
@@ -1122,6 +1325,9 @@ export class FeedStylist implements OnDestroy {
     }
     if(this.subscription8 != null) {
       this.subscription8.unsubscribe();
+    }
+    if(this.subscription11 != null) {
+      this.subscription11.unsubscribe();
     }
   }
 
