@@ -21,6 +21,10 @@ import { UserViewProfile } from '../userviewprofile/userviewprofile';
 import { UserProfile } from '../userprofile/userprofile';
 import { FullfeedPage } from '../fullfeed/fullfeed';
 import { CacheService } from 'ionic-cache';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+
+
 
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
@@ -46,7 +50,7 @@ const limit:BehaviorSubject<number> = new BehaviorSubject<number>(2); // import 
         top: 200 + "px",
       })),
       state('up', style({
-        top: 38 + "px",
+        top: 0 + "px",
       })),
       transition('* => *', animate('400ms ease-in')),
     ]),
@@ -90,6 +94,7 @@ export class FeedUser implements OnDestroy {
   @ViewChild('price') price: ElementRef;
   @ViewChild('distance') distancey: ElementRef;
   @ViewChild('noavail') noavail;
+  @ViewChild('infinitescroll') infinitescroll: ElementRef;
 
   @ViewChild(Content  ) content: Content;
 
@@ -123,6 +128,8 @@ export class FeedUser implements OnDestroy {
   private subscription8: ISubscription;
   private subscription9: ISubscription;
   private subscription10: ISubscription;
+  private subscription11: ISubscription;
+  private subscription12: ISubscription;
 
 
   queryable: boolean = true;
@@ -131,6 +138,8 @@ export class FeedUser implements OnDestroy {
   toolbarClicks = 0;
 
   list: FirebaseListObservable<any>;
+  list2: FirebaseListObservable<any>;
+  list4: FirebaseListObservable<any>;
   objj: FirebaseObjectObservable<any>;
   availabilities = [];
   items = [];
@@ -150,9 +159,130 @@ export class FeedUser implements OnDestroy {
   swiperEvent;
   totalAdCount;
   swiperSize = 'begin';
+  startAtKey1;
+  lastKey1;
+  startAtKey2;
+  lastKey2;
 
-  constructor(private cache: CacheService, private diagnostic: Diagnostic, private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public zone: NgZone, public modalCtrl: ModalController, public af: AngularFireDatabase, public storage: Storage, private afAuth: AngularFireAuth, public renderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
+
+  constructor(public elRef: ElementRef, private cache: CacheService, private diagnostic: Diagnostic, private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public zone: NgZone, public modalCtrl: ModalController, public af: AngularFireDatabase, public storage: Storage, private afAuth: AngularFireAuth, public renderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
      
+  }
+
+  doInfinite(infiniteScroll) {
+    console.log("in doinfinite promotionsssssss");
+    setTimeout(() => {
+      console.log('Begin async operation');
+      /*console.log(this.content.directionY + "        upupupupupupu********");
+      if(this.content.directionY == 'up') {
+        this.show = false
+      }
+      else {
+        this.show = true;
+      }*/
+
+      console.log(this.startAtKey1 + "     before %%^&^&^% start at");
+      this.list2 = this.af.list('/promotions', {
+      query: {
+        orderByKey: true,
+        endAt: this.startAtKey1,
+        limitToLast: 11
+      }});
+
+      this.subscription11 = this.list2.subscribe(items => { 
+          let x = 0;
+          this.lastKey1 = this.startAtKey1;
+          items.forEach(item => {
+
+
+            let storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                       
+            storageRef.getDownloadURL().then(url => {
+              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+              item.customMetadata.picURL = url;
+            }).catch((e) => {
+              console.log("in caught url !!!!!!!$$$$$$$!!");
+              item.customMetadata.picURL = 'assets/blankprof.png';
+            });
+            
+            if(this.startAtKey1 !== item.$key && this.lastKey1 !== item.$key) {
+              console.log(this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
+              if(item.customMetadata.username != null) {
+                this.promotions.push(item.customMetadata); //unshift?**************
+              }
+            }
+
+            if(x == 0) {
+              this.startAtKey1 = item.$key;
+            }
+
+            x++;
+          });          
+          
+      })
+
+      infiniteScroll.complete(); 
+        
+    }, 500);
+  }
+
+  doInfiniteP(infiniteScroll) {
+    console.log("in doinfinite promotionsssssss");
+    setTimeout(() => {
+      console.log('Begin async operation');
+      /*console.log(this.content.directionY + "        upupupupupupu********");
+      if(this.content.directionY == 'up') {
+        this.show = false
+      }
+      else {
+        this.show = true;
+      }*/
+
+      console.log(this.startAtKey2 + "     before %%^&^&^% start at");
+      this.list4 = this.af.list('/profiles/stylists', {
+      query: {
+        orderByChild: 'price',
+        endAt: this.startAtKey2,
+        limitToLast: 11
+      }});
+
+      this.subscription12 = this.list4.subscribe(items => { 
+          let x = 0;
+          console.log(JSON.stringify(items[0]) + "     items 00000000000000");
+          this.lastKey2 = this.startAtKey2;
+          items.forEach(item => {
+
+
+            let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                       
+            storageRef.getDownloadURL().then(url => {
+              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+              item.picURL = url;
+            }).catch((e) => {
+              console.log("in caught url !!!!!!!$$$$$$$!!");
+              item.picURL = 'assets/blankprof.png';
+            });
+            
+
+            if(this.startAtKey2 !== item.$key && this.lastKey2 !== item.$key) {
+              console.log(this.startAtKey2 + "   :startAtKey2:");
+              console.log(item.$key + "   :itemkey:");
+              console.log(this.lastKey2 + "   :lastkey:");
+              this.pricesArray.push(item); //unshift?**************
+            }
+
+            if(x == 0) {
+              this.startAtKey2 = item.$key;
+            }
+
+            x++;
+          });          
+          
+      })
+
+      infiniteScroll.complete(); 
+        
+    }, 500);
   }
 
   getAds() {
@@ -284,6 +414,12 @@ export class FeedUser implements OnDestroy {
     }
     if(this.subscription10 != null) {
       this.subscription10.unsubscribe();
+    }
+    if(this.subscription11 != null) {
+      this.subscription11.unsubscribe();
+    }
+    if(this.subscription12 != null) {
+      this.subscription12.unsubscribe();
     }
   } 
 
@@ -453,11 +589,18 @@ export class FeedUser implements OnDestroy {
   loadPromotions() {
     console.log("In loadPromotions fdskkfdskldfkfdslkfds");
     
-    this.prom = this.af.list('/promotions');
+    this.prom = this.af.list('/promotions', { query: {
+      limitToLast: 14
+    }});
 
     this.promotions = [];
 
-    this.subscription10 = this.prom.subscribe(items => items.forEach(item => {
+    this.subscription10 = this.prom.subscribe(items => { 
+
+      this.startAtKey1 = items[0].$key;
+      this.lastKey1 = this.startAtKey1;
+
+      items.forEach(item => {
       //mapped = items.map((item) => {
         //return new Promise(resolve => {
 
@@ -465,14 +608,18 @@ export class FeedUser implements OnDestroy {
             console.log("pushing ITEM (((((()()()()()() promotions" + JSON.stringify(item.customMetadata));
             //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
 
+            
           
         //})  
       //})
       
-    }));
+      });
+
+      
+    });
 
     if(this.promotions != []) {
-      this.renderer.setElementStyle(this.noavail._elementRef.nativeElement, 'display', 'none');
+      //this.renderer.setElementStyle(this.noavail._elementRef.nativeElement, 'display', 'none');
     }
   }
 
@@ -489,10 +636,16 @@ export class FeedUser implements OnDestroy {
 
       this.prices = this.af.list('/profiles/stylists', {
         query: {
-          orderByChild: 'price'
+          orderByChild: 'price',
+          limitToLast: 10
         }
       });
-      this.subscription5 = this.prices.subscribe(items => items.forEach(item => {
+      this.subscription5 = this.prices.subscribe(items => { 
+        
+        this.startAtKey2 = items[0].$key;
+        this.lastKey2 = this.startAtKey2;
+
+        items.forEach(item => {
         //mapped = items.map((item) => {
           //return new Promise(resolve => {
             if(item.price == null) {
@@ -510,7 +663,8 @@ export class FeedUser implements OnDestroy {
           //})  
         //})
         
-      }));
+        })
+      });
 
         //results2 = Promise.all(mapped);
         //results2.then(() => {  
@@ -573,9 +727,79 @@ export class FeedUser implements OnDestroy {
      
 
   ionViewDidLoad() {
-
     
+    /*let element = this.elRef.nativeElement.querySelector('.scroll-content');
+    element.addEventListener('scroll', (event) =>
+    {
+        var element = event.target;
+        if (element.scrollHeight - element.scrollTop === element.clientHeight)
+        {
+            console.log('scrolled');
+            if(this.weekly.nativeElement.style.display != 'none') {
+              console.log("in doinfinite promotionsssssss");
+              setTimeout(() => {
+                /*console.log('Begin async operation');
+                console.log(this.content.directionY + "        upupupupupupu********");
+                if(this.content.directionY == 'up') {
+                  this.show = false
+                }
+                else {
+                  this.show = true;
+                }*/
 
+                /*console.log(this.startAtKey1 + "     before %%^&^&^% start at");
+                this.list2 = this.af.list('/promotions', {
+                query: {
+                  orderByKey: true,
+                  endAt: this.startAtKey1,
+                  limitToLast: 11
+                }});
+
+                this.subscription11 = this.list2.subscribe(items => { 
+                    let x = 0;
+                    this.lastKey1 = this.startAtKey1;
+                    items.forEach(item => {
+
+
+                      let storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                                 
+                      storageRef.getDownloadURL().then(url => {
+                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                        item.customMetadata.picURL = url;
+                      }).catch((e) => {
+                        console.log("in caught url !!!!!!!$$$$$$$!!");
+                        item.customMetadata.picURL = 'assets/blankprof.png';
+                      });
+                      
+                      if(this.startAtKey1 !== item.$key && this.lastKey1 !== item.$key) {
+                        console.log(this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
+                        if(item.customMetadata.username != null) {
+                          this.promotions.push(item.customMetadata); //unshift?**************
+                        }
+                      }
+
+                      if(x == 0) {
+                        this.startAtKey1 = item.$key;
+                      }
+
+                      x++;
+                    });          
+                    
+                })
+
+                infiniteScroll.complete(); 
+                  
+              }, 500);
+            }
+        }
+    });*/
+    //setTimeout(() => {
+
+
+      //div.style.marginTop = "-47%";
+      
+    //}, 1000);
+    
     this.loadAvailabilities().then(() => {
       
       
@@ -1013,7 +1237,7 @@ export class FeedUser implements OnDestroy {
       //})
   }
 
-  doInfinite(infiniteScroll) {
+  /*doInfinite(infiniteScroll) {
     console.log('Begin async operation');
     console.log(this.content.directionY + "        upupupupupupu********");
     if(this.content.directionY == 'up') {
@@ -1070,6 +1294,6 @@ export class FeedUser implements OnDestroy {
         
       }, 500);
 
-  }
+  }*/
 
 }

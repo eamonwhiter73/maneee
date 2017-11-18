@@ -1,7 +1,7 @@
 page-feed-user {
 
 	.scroll-content {
-		margin-top: -4% !important
+		//margin-top: -8% !important;
 	}
 
 	.distance, .ratings, .price, .availability {
@@ -75,16 +75,10 @@ page-feed-user {
 		font-size: 14px;
 	}
 
-	ion-infinite-scroll {
-		position: relative;
-		bottom: 30px;
-		background-color: white;
-	}
-
   .feedtoptextcontainer {
   	height: 44px;
   	display: flex;
-	align-items: center; /* align vertical */
+	align-items: center;
   }
 
 	.back-button.show-back-button {
@@ -189,10 +183,6 @@ page-feed-user {
 		text-align: center;
 	}
 
-	/*.marginstatus {
-		margin-top: 20px;
-	}*/
-
 	.contentone {
 		position: relative;
 		width: 100%;
@@ -261,7 +251,6 @@ page-feed-user {
 
 	.weeklydeals {
 		display: block;
-		margin-top: 35%;
 	}
 
 	.book {

@@ -75,7 +75,7 @@ import { MapPage } from '../pages/map/map';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { CacheModule } from "ionic-cache";
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -154,7 +154,8 @@ firebase.initializeApp(firebaseConfig);
     IonicStorageModule.forRoot(),
     IonicImageLoader,
     SwiperModule.forRoot(SWIPER_CONFIG),
-    CacheModule.forRoot()
+    CacheModule.forRoot(),
+    InfiniteScrollModule
     //Ng2ImgMaxModule
     /*CalendarModule.forRoot()*/
   ],

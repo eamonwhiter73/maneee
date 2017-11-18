@@ -32606,16 +32606,6 @@ page-feed-stylist .book {
   margin-right: 5px;
 }
 
-page-feed-user {
-  /*.marginstatus {
-		margin-top: 20px;
-	}*/
-}
-
-page-feed-user .scroll-content {
-  margin-top: -4% !important;
-}
-
 page-feed-user .distance, page-feed-user .ratings, page-feed-user .price, page-feed-user .availability {
   margin-top: 36%;
 }
@@ -32683,12 +32673,6 @@ page-feed-user .caption {
   font-size: 14px;
 }
 
-page-feed-user ion-infinite-scroll {
-  position: relative;
-  bottom: 30px;
-  background-color: white;
-}
-
 page-feed-user .feedtoptextcontainer {
   height: 44px;
   display: -webkit-box;
@@ -32699,7 +32683,6 @@ page-feed-user .feedtoptextcontainer {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  /* align vertical */
 }
 
 page-feed-user .back-button.show-back-button {
@@ -32866,7 +32849,6 @@ page-feed-user .ratings {
 
 page-feed-user .weeklydeals {
   display: block;
-  margin-top: 35%;
 }
 
 page-feed-user .book {
