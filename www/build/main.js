@@ -2692,7 +2692,7 @@ webpackEmptyAsyncContext.id = 218;
 
 var map = {
 	"../pages/booking/booking.module": [
-		950,
+		951,
 		10
 	],
 	"../pages/dropin/dropin.module": [
@@ -2704,7 +2704,7 @@ var map = {
 		8
 	],
 	"../pages/formula/formula.module": [
-		951,
+		950,
 		7
 	],
 	"../pages/formulapost/formulapost.module": [
@@ -2716,11 +2716,11 @@ var map = {
 		5
 	],
 	"../pages/fullfeed/fullfeed.module": [
-		954,
+		955,
 		4
 	],
 	"../pages/map/map.module": [
-		955,
+		954,
 		3
 	],
 	"../pages/postpage/postpage.module": [
@@ -4348,12 +4348,12 @@ AppModule = __decorate([
                 links: [
                     { loadChildren: '../pages/dropin/dropin.module#DropinPageModule', name: 'DropinPage', segment: 'dropin', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/followers/followers.module#FollowersPageModule', name: 'FollowersPage', segment: 'followers', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/booking/booking.module#BookingPageModule', name: 'BookingPage', segment: 'booking', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/formula/formula.module#FormulaPageModule', name: 'FormulaPage', segment: 'formula', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/booking/booking.module#BookingPageModule', name: 'BookingPage', segment: 'booking', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/formulas/formulas.module#FormulasPageModule', name: 'FormulasPage', segment: 'formulas', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/formulapost/formulapost.module#FormulapostPageModule', name: 'FormulapostPage', segment: 'formulapost', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/fullfeed/fullfeed.module#FullfeedPageModule', name: 'FullfeedPage', segment: 'fullfeed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/map/map.module#MapPageModule', name: 'MapPage', segment: 'map', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/fullfeed/fullfeed.module#FullfeedPageModule', name: 'FullfeedPage', segment: 'fullfeed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/postpage/postpage.module#PostpagePageModule', name: 'PostpagePage', segment: 'postpage', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/userviewuserprofile/userviewuserprofile.module#UserviewuserprofilePageModule', name: 'UserviewuserprofilePage', segment: 'userviewuserprofile', priority: 'low', defaultHistory: [] }
@@ -7098,7 +7098,7 @@ var FeedUser = (function () {
             infiniteScroll.complete();
         }, 500);
     };
-    FeedUser.prototype.doInfiniteP = function (infiniteScroll) {
+    FeedUser.prototype.doInfiniteP = function () {
         var _this = this;
         console.log("in doinfinite promotionsssssss");
         setTimeout(function () {
@@ -7113,7 +7113,7 @@ var FeedUser = (function () {
             console.log(_this.startAtKey2 + "     before %%^&^&^% start at");
             _this.list4 = _this.af.list('/profiles/stylists', {
                 query: {
-                    orderByChild: 'price',
+                    orderByKey: true,
                     endAt: _this.startAtKey2,
                     limitToLast: 11
                 }
@@ -7135,7 +7135,9 @@ var FeedUser = (function () {
                         console.log(_this.startAtKey2 + "   :startAtKey2:");
                         console.log(item.$key + "   :itemkey:");
                         console.log(_this.lastKey2 + "   :lastkey:");
-                        _this.pricesArray.push(item); //unshift?**************
+                        if (item.price != null) {
+                            _this.pricesArray.push(item); //unshift?**************
+                        }
                     }
                     if (x == 0) {
                         _this.startAtKey2 = item.$key;
@@ -7143,7 +7145,108 @@ var FeedUser = (function () {
                     x++;
                 });
             });
-            infiniteScroll.complete();
+            _this.pricesArray.sort(function (a, b) {
+                return b.price.length - a.price.length;
+            });
+            //infiniteScroll.complete(); 
+        }, 500);
+    };
+    FeedUser.prototype.doInfiniteR = function () {
+        var _this = this;
+        console.log("in doinfinite promotionsssssss");
+        setTimeout(function () {
+            console.log('Begin async operation');
+            /*console.log(this.content.directionY + "        upupupupupupu********");
+            if(this.content.directionY == 'up') {
+              this.show = false
+            }
+            else {
+              this.show = true;
+      
+            }*/
+            console.log(_this.startAtKey3 + "     before startatkey3 start at 67767676765676765757");
+            _this.list5 = _this.af.list('/profiles/stylists', {
+                query: {
+                    orderByKey: true,
+                    endAt: _this.startAtKey3,
+                    limitToLast: 11
+                }
+            });
+            _this.subscription13 = _this.list5.subscribe(function (items) {
+                var x = 0;
+                console.log(JSON.stringify(items[0]) + "     items 00000000000000");
+                _this.lastKey3 = _this.startAtKey3;
+                console.log(_this.lastKey3 + " lastkey3333333333333asdfasdasdfasdfweew32323223fasdfasdf beginning");
+                items.forEach(function (item) {
+                    var storageRef = __WEBPACK_IMPORTED_MODULE_10_firebase__["storage"]().ref().child('/settings/' + item.username + '/profilepicture.png');
+                    storageRef.getDownloadURL().then(function (url) {
+                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                        item.picURL = url;
+                    }).catch(function (e) {
+                        console.log("in caught url !!!!!!!$$$$$$$!!");
+                        item.picURL = 'assets/blankprof.png';
+                    });
+                    if (item.rating.one == 0 && item.rating.two == 0 && item.rating.three == 0 && item.rating.four == 0 && item.rating.five == 0) {
+                        _this.stars = "No ratings";
+                    }
+                    else {
+                        console.log("making the stars");
+                        var totalPotential = void 0;
+                        var ratings = void 0;
+                        totalPotential = item.rating.one * 5 + item.rating.two * 5 + item.rating.three * 5 + item.rating.four * 5 + item.rating.five * 5;
+                        ratings = item.rating.one + item.rating.two * 2 + item.rating.three * 3 + item.rating.four * 4 + item.rating.five * 5;
+                        var i = (ratings / totalPotential) * 100;
+                        if (Math.round(i) <= 20) {
+                            _this.stars = '\u2605';
+                        }
+                        if (Math.round(i) > 20 && Math.round(i) <= 40) {
+                            _this.stars = '\u2605\u2605';
+                        }
+                        if (Math.round(i) > 40 && Math.round(i) <= 60) {
+                            _this.stars = '\u2605\u2605\u2605';
+                        }
+                        if (Math.round(i) > 60 && Math.round(i) <= 80) {
+                            _this.stars = '\u2605\u2605\u2605\u2605';
+                        }
+                        if (Math.round(i) > 80) {
+                            _this.stars = '\u2605\u2605\u2605\u2605\u2605';
+                        }
+                    }
+                    item.stars = _this.stars;
+                    //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+                    if (_this.startAtKey3 !== item.$key && _this.lastKey3 !== item.$key) {
+                        console.log(_this.startAtKey3 + "   :startAtKey3 being pushed       item key:     " + item.$key);
+                        if (item.username != null) {
+                            _this.rating.push(item); //unshift?**************
+                        }
+                    }
+                    if (x == 0) {
+                        _this.startAtKey3 = item.$key;
+                    }
+                    console.log(_this.startAtKey3 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
+                    console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
+                    x++;
+                });
+            });
+            _this.rating.sort(function (a, b) {
+                if (a.stars !== "No ratings" && b.stars !== "No ratings") {
+                    if (a.stars === b.stars) {
+                        return 0;
+                    }
+                    else {
+                        return a.stars.length < b.stars.length ? 1 : -1;
+                    }
+                }
+                else {
+                    if (a.stars === "No ratings") {
+                        return 1;
+                    }
+                    else if (b.stars === "No ratings") {
+                        return -1;
+                    }
+                }
+            });
+            //infiniteScroll.complete(); 
         }, 500);
     };
     FeedUser.prototype.getAds = function () {
@@ -7450,8 +7553,9 @@ var FeedUser = (function () {
                     if (!item.picURL) {
                         item.picURL = 'assets/blankprof.png';
                     }
-                    _this.pricesArray.push(item);
-                    console.log("     pushing ITEM (((((()()()()()() loadprices");
+                    if (item.price !== undefined) {
+                        _this.pricesArray.push(item); //unshift?**************
+                    }
                     //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
                 }
                 //})  
@@ -7476,8 +7580,15 @@ var FeedUser = (function () {
             var results;
             var array = [];
             //this.cache.getItem(cacheKey).catch(() => {
-            _this.ratingslist = _this.af.list('/profiles/stylists');
+            _this.ratingslist = _this.af.list('/profiles/stylists', { query: {
+                    orderByKey: true,
+                    limitToLast: 10
+                } });
             _this.subscription7 = _this.ratingslist.subscribe(function (items) {
+                _this.startAtKey3 = items[0].$key;
+                _this.lastKey3 = _this.startAtKey3;
+                console.log(_this.startAtKey3 + " startatkey3333333333333 beginning");
+                console.log(_this.lastKey3 + " lastkey3333333333333asdfasdfasdfasdf beginning");
                 mapped = items.map(function (item) {
                     return new Promise(function (resolve) {
                         if (!item.picURL) {
@@ -7503,71 +7614,69 @@ var FeedUser = (function () {
         });
     };
     FeedUser.prototype.ionViewDidLoad = function () {
-        /*let element = this.elRef.nativeElement.querySelector('.scroll-content');
-        element.addEventListener('scroll', (event) =>
-        {
-            var element = event.target;
-            if (element.scrollHeight - element.scrollTop === element.clientHeight)
-            {
-                console.log('scrolled');
-                if(this.weekly.nativeElement.style.display != 'none') {
-                  console.log("in doinfinite promotionsssssss");
-                  setTimeout(() => {
-                    /*console.log('Begin async operation');
-                    console.log(this.content.directionY + "        upupupupupupu********");
-                    if(this.content.directionY == 'up') {
-                      this.show = false
-                    }
-                    else {
-                      this.show = true;
-                    }*/
         var _this = this;
-        /*console.log(this.startAtKey1 + "     before %%^&^&^% start at");
-        this.list2 = this.af.list('/promotions', {
-        query: {
-          orderByKey: true,
-          endAt: this.startAtKey1,
-          limitToLast: 11
-        }});
-
-        this.subscription11 = this.list2.subscribe(items => {
-            let x = 0;
-            this.lastKey1 = this.startAtKey1;
-            items.forEach(item => {
-
-
-              let storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
-                         
-              storageRef.getDownloadURL().then(url => {
-                console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                item.customMetadata.picURL = url;
-              }).catch((e) => {
-                console.log("in caught url !!!!!!!$$$$$$$!!");
-                item.customMetadata.picURL = 'assets/blankprof.png';
-              });
-              
-              if(this.startAtKey1 !== item.$key && this.lastKey1 !== item.$key) {
-                console.log(this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
-                if(item.customMetadata.username != null) {
-                  this.promotions.push(item.customMetadata); //unshift?**************
+        setTimeout(function () {
+            _this.renderer.setElementStyle(_this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '43%');
+        }, 500);
+        var element = this.elRef.nativeElement.querySelector('.scroll-content');
+        element.addEventListener('scroll', function (event) {
+            var element = event.target;
+            if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+                console.log('scrolled');
+                if (_this.weekly.nativeElement.style.display != 'none') {
+                    console.log("in doinfinite promotionsssssss");
+                    setTimeout(function () {
+                        /*console.log('Begin async operation');
+                        console.log(this.content.directionY + "        upupupupupupu********");
+                        if(this.content.directionY == 'up') {
+                          this.show = false
+                        }
+                        else {
+                          this.show = true;
+                        }*/
+                        console.log(_this.startAtKey1 + "     before %%^&^&^% start at");
+                        _this.list2 = _this.af.list('/promotions', {
+                            query: {
+                                orderByKey: true,
+                                endAt: _this.startAtKey1,
+                                limitToLast: 11
+                            }
+                        });
+                        _this.subscription11 = _this.list2.subscribe(function (items) {
+                            var x = 0;
+                            _this.lastKey1 = _this.startAtKey1;
+                            items.forEach(function (item) {
+                                var storageRef = __WEBPACK_IMPORTED_MODULE_10_firebase__["storage"]().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                                storageRef.getDownloadURL().then(function (url) {
+                                    console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                                    item.customMetadata.picURL = url;
+                                }).catch(function (e) {
+                                    console.log("in caught url !!!!!!!$$$$$$$!!");
+                                    item.customMetadata.picURL = 'assets/blankprof.png';
+                                });
+                                if (_this.startAtKey1 !== item.$key && _this.lastKey1 !== item.$key) {
+                                    console.log(_this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
+                                    if (item.customMetadata.username != null) {
+                                        _this.promotions.push(item.customMetadata); //unshift?**************
+                                    }
+                                }
+                                if (x == 0) {
+                                    _this.startAtKey1 = item.$key;
+                                }
+                                x++;
+                            });
+                        });
+                        //infiniteScroll.complete(); 
+                    }, 500);
                 }
-              }
-
-              if(x == 0) {
-                this.startAtKey1 = item.$key;
-              }
-
-              x++;
-            });
-            
-        })
-
-        infiniteScroll.complete();
-          
-      }, 500);
-    }
-}
-});*/
+                else if (_this.price.nativeElement.style.display != 'none') {
+                    _this.doInfiniteP();
+                }
+                else if (_this.ratingbox.nativeElement.style.display != 'none') {
+                    _this.doInfiniteR();
+                }
+            }
+        });
         //setTimeout(() => {
         //div.style.marginTop = "-47%";
         //}, 1000);
@@ -7790,16 +7899,21 @@ var FeedUser = (function () {
         this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
         this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
         //this.renderer.setElementStyle(this.promos.nativeElement, 'color', 'gray');
+        this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '6%');
         this.renderer.setElementStyle(this.price.nativeElement, 'display', 'block');
         //this.renderer.setElementStyle(this.contentOne.nativeElement, 'display', 'none');
         this.renderer.setElementStyle(this.availability.nativeElement, 'display', 'none');
         this.renderer.setElementStyle(this.ratingbox.nativeElement, 'display', 'none');
         this.renderer.setElementStyle(this.weekly.nativeElement, 'display', 'none');
         this.renderer.setElementStyle(this.distancey.nativeElement, 'display', 'none');
+        //setTimeout(() => {
+        //this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '-47%');
+        //}, 1000);
         this.dropDown();
     };
     FeedUser.prototype.dropDownR = function () {
         this.changeText.nativeElement.innerHTML = "Rating";
+        this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '6%');
         this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
         this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
         //this.renderer.setElementStyle(this.promos.nativeElement, 'color', 'gray');
@@ -7902,39 +8016,39 @@ var FeedUser = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('changeText'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object)
 ], FeedUser.prototype, "changeText", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('availability'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _b || Object)
 ], FeedUser.prototype, "availability", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('contentone'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _c || Object)
 ], FeedUser.prototype, "contentOne", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('ratings'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _d || Object)
 ], FeedUser.prototype, "ratingbox", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('weeklydeals'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _e || Object)
 ], FeedUser.prototype, "weekly", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('promos'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _f || Object)
 ], FeedUser.prototype, "promos", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('weekly'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _g || Object)
 ], FeedUser.prototype, "weeklyyellow", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('price'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _h || Object)
 ], FeedUser.prototype, "price", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('distance'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _j || Object)
 ], FeedUser.prototype, "distancey", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('noavail'),
@@ -7942,11 +8056,11 @@ __decorate([
 ], FeedUser.prototype, "noavail", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('infinitescroll'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _k || Object)
 ], FeedUser.prototype, "infinitescroll", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */])
+    __metadata("design:type", typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]) === "function" && _l || Object)
 ], FeedUser.prototype, "content", void 0);
 FeedUser = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -7999,9 +8113,10 @@ FeedUser = __decorate([
             ]),
         ]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_18_ionic_cache__["b" /* CacheService */], __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */], __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */], __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */], __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]])
+    __metadata("design:paramtypes", [typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_18_ionic_cache__["b" /* CacheService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_18_ionic_cache__["b" /* CacheService */]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */]) === "function" && _p || Object, typeof (_q = typeof __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */]) === "function" && _q || Object, typeof (_r = typeof __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _r || Object, typeof (_s = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _s || Object, typeof (_t = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */]) === "function" && _t || Object, typeof (_u = typeof __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _u || Object, typeof (_v = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]) === "function" && _v || Object, typeof (_w = typeof __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _w || Object, typeof (_x = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === "function" && _x || Object, typeof (_y = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */]) === "function" && _y || Object, typeof (_z = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _z || Object])
 ], FeedUser);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z;
 //# sourceMappingURL=feeduser.js.map
 
 /***/ }),

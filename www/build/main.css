@@ -32606,6 +32606,10 @@ page-feed-stylist .book {
   margin-right: 5px;
 }
 
+page-feed-user .scroll-content {
+  margin-top: 43%;
+}
+
 page-feed-user .distance, page-feed-user .ratings, page-feed-user .price, page-feed-user .availability {
   margin-top: 36%;
 }

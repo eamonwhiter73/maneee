@@ -130,6 +130,7 @@ export class FeedUser implements OnDestroy {
   private subscription10: ISubscription;
   private subscription11: ISubscription;
   private subscription12: ISubscription;
+  private subscription13: ISubscription;
 
 
   queryable: boolean = true;
@@ -140,6 +141,7 @@ export class FeedUser implements OnDestroy {
   list: FirebaseListObservable<any>;
   list2: FirebaseListObservable<any>;
   list4: FirebaseListObservable<any>;
+  list5: FirebaseListObservable<any>;
   objj: FirebaseObjectObservable<any>;
   availabilities = [];
   items = [];
@@ -163,7 +165,8 @@ export class FeedUser implements OnDestroy {
   lastKey1;
   startAtKey2;
   lastKey2;
-
+  startAtKey3;
+  lastKey3;
 
   constructor(public elRef: ElementRef, private cache: CacheService, private diagnostic: Diagnostic, private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public zone: NgZone, public modalCtrl: ModalController, public af: AngularFireDatabase, public storage: Storage, private afAuth: AngularFireAuth, public renderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
      
@@ -226,7 +229,7 @@ export class FeedUser implements OnDestroy {
     }, 500);
   }
 
-  doInfiniteP(infiniteScroll) {
+  doInfiniteP() {
     console.log("in doinfinite promotionsssssss");
     setTimeout(() => {
       console.log('Begin async operation');
@@ -241,7 +244,7 @@ export class FeedUser implements OnDestroy {
       console.log(this.startAtKey2 + "     before %%^&^&^% start at");
       this.list4 = this.af.list('/profiles/stylists', {
       query: {
-        orderByChild: 'price',
+        orderByKey: true,
         endAt: this.startAtKey2,
         limitToLast: 11
       }});
@@ -268,7 +271,9 @@ export class FeedUser implements OnDestroy {
               console.log(this.startAtKey2 + "   :startAtKey2:");
               console.log(item.$key + "   :itemkey:");
               console.log(this.lastKey2 + "   :lastkey:");
-              this.pricesArray.push(item); //unshift?**************
+              if(item.price != null) {
+                this.pricesArray.push(item); //unshift?**************
+              }
             }
 
             if(x == 0) {
@@ -280,7 +285,128 @@ export class FeedUser implements OnDestroy {
           
       })
 
-      infiniteScroll.complete(); 
+      this.pricesArray.sort(function(a,b) {
+        return b.price.length - a.price.length;
+      });
+
+      //infiniteScroll.complete(); 
+        
+    }, 500);
+  }
+
+  doInfiniteR() {
+    console.log("in doinfinite promotionsssssss");
+    setTimeout(() => {
+      console.log('Begin async operation');
+      /*console.log(this.content.directionY + "        upupupupupupu********");
+      if(this.content.directionY == 'up') {
+        this.show = false
+      }
+      else {
+        this.show = true;
+
+      }*/
+
+      console.log(this.startAtKey3 + "     before startatkey3 start at 67767676765676765757");
+      this.list5 = this.af.list('/profiles/stylists', {
+      query: {
+        orderByKey: true,
+        endAt: this.startAtKey3,
+        limitToLast: 11
+      }});
+
+      this.subscription13 = this.list5.subscribe(items => { 
+          let x = 0;
+          console.log(JSON.stringify(items[0]) + "     items 00000000000000");
+          this.lastKey3 = this.startAtKey3;
+          console.log(this.lastKey3 + " lastkey3333333333333asdfasdasdfasdfweew32323223fasdfasdf beginning");
+          items.forEach(item => {
+
+
+            let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                       
+            storageRef.getDownloadURL().then(url => {
+              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+              item.picURL = url;
+            }).catch((e) => {
+              console.log("in caught url !!!!!!!$$$$$$$!!");
+              item.picURL = 'assets/blankprof.png';
+            });
+
+            if(item.rating.one == 0 && item.rating.two == 0 && item.rating.three == 0 && item.rating.four == 0 && item.rating.five == 0) {
+              this.stars = "No ratings";
+            }
+            else {
+
+              console.log("making the stars");
+              let totalPotential;
+              let ratings;
+              totalPotential = item.rating.one * 5 + item.rating.two * 5 + item.rating.three * 5 + item.rating.four * 5 + item.rating.five * 5;
+              ratings = item.rating.one + item.rating.two * 2 + item.rating.three * 3 + item.rating.four * 4 + item.rating.five *5;
+              
+
+              let i = (ratings / totalPotential) * 100;
+              if(Math.round(i) <= 20) {
+                this.stars = '\u2605';
+              }
+              if(Math.round(i) > 20 && Math.round(i) <= 40) {
+                this.stars = '\u2605\u2605';
+              }
+              if(Math.round(i) > 40 && Math.round(i) <= 60) {
+                this.stars = '\u2605\u2605\u2605';
+              }
+              if(Math.round(i) > 60 && Math.round(i) <= 80) {
+                this.stars = '\u2605\u2605\u2605\u2605';
+              }
+              if(Math.round(i) > 80) {
+                this.stars = '\u2605\u2605\u2605\u2605\u2605';
+              }
+            }
+
+            item.stars = this.stars;
+            
+            //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+            
+            if(this.startAtKey3 !== item.$key && this.lastKey3 !== item.$key) {
+              console.log(this.startAtKey3 + "   :startAtKey3 being pushed       item key:     " + item.$key);
+              if(item.username != null) {
+                this.rating.push(item); //unshift?**************
+              }
+            }
+
+            if(x == 0) {
+              this.startAtKey3 = item.$key;
+            }
+
+            console.log(this.startAtKey3 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
+            console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
+
+            x++;
+          });          
+          
+      })
+
+      this.rating.sort(function(a,b){ 
+        if(a.stars !== "No ratings" && b.stars !== "No ratings") {
+          if(a.stars === b.stars){
+            return 0;
+          }
+          else {
+            return a.stars.length < b.stars.length ? 1 : -1;
+          }
+        }
+        else {
+          if(a.stars === "No ratings"){
+            return 1;
+          }
+          else if(b.stars === "No ratings"){
+            return -1;
+          }
+        }
+
+      });
+
+      //infiniteScroll.complete(); 
         
     }, 500);
   }
@@ -656,7 +782,9 @@ export class FeedUser implements OnDestroy {
               if(!item.picURL) {
                 item.picURL = 'assets/blankprof.png';
               }
-              this.pricesArray.push(item); console.log("     pushing ITEM (((((()()()()()() loadprices")
+              if(item.price !== undefined) {
+                this.pricesArray.push(item); //unshift?**************
+              }
               //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
 
             }
@@ -686,8 +814,19 @@ export class FeedUser implements OnDestroy {
 
       //this.cache.getItem(cacheKey).catch(() => {
 
-        this.ratingslist = this.af.list('/profiles/stylists');
+        this.ratingslist = this.af.list('/profiles/stylists', { query: {
+          orderByKey: true,
+          limitToLast: 10
+        }});
         this.subscription7 = this.ratingslist.subscribe(items => {
+
+            this.startAtKey3 = items[0].$key;
+            this.lastKey3 = this.startAtKey3;
+
+            console.log(this.startAtKey3 + " startatkey3333333333333 beginning");
+            console.log(this.lastKey3 + " lastkey3333333333333asdfasdfasdfasdf beginning");
+
+
             mapped = items.map((item) => {
               return new Promise(resolve => {
                 if(!item.picURL) {
@@ -727,8 +866,11 @@ export class FeedUser implements OnDestroy {
      
 
   ionViewDidLoad() {
+    setTimeout(() => {
+      this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '43%');
+    }, 500)
     
-    /*let element = this.elRef.nativeElement.querySelector('.scroll-content');
+    let element = this.elRef.nativeElement.querySelector('.scroll-content');
     element.addEventListener('scroll', (event) =>
     {
         var element = event.target;
@@ -747,7 +889,7 @@ export class FeedUser implements OnDestroy {
                   this.show = true;
                 }*/
 
-                /*console.log(this.startAtKey1 + "     before %%^&^&^% start at");
+                console.log(this.startAtKey1 + "     before %%^&^&^% start at");
                 this.list2 = this.af.list('/promotions', {
                 query: {
                   orderByKey: true,
@@ -787,12 +929,18 @@ export class FeedUser implements OnDestroy {
                     
                 })
 
-                infiniteScroll.complete(); 
+                //infiniteScroll.complete(); 
                   
               }, 500);
             }
+            else if(this.price.nativeElement.style.display != 'none') {
+              this.doInfiniteP();
+            }
+            else if(this.ratingbox.nativeElement.style.display != 'none') {
+              this.doInfiniteR();
+            }
         }
-    });*/
+    });
     //setTimeout(() => {
 
 
@@ -816,6 +964,7 @@ export class FeedUser implements OnDestroy {
 
           let r = 0;
           for(let item of array) {
+
             if(item.rating.one == 0 && item.rating.two == 0 && item.rating.three == 0 && item.rating.four == 0 && item.rating.five == 0) {
               this.stars = "No ratings";
             }
@@ -1078,10 +1227,12 @@ export class FeedUser implements OnDestroy {
   }
 
   dropDownP() {
+
     this.changeText.nativeElement.innerHTML = "Price";
     this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
     this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
     //this.renderer.setElementStyle(this.promos.nativeElement, 'color', 'gray');
+    this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '6%');
     this.renderer.setElementStyle(this.price.nativeElement, 'display', 'block');
     //this.renderer.setElementStyle(this.contentOne.nativeElement, 'display', 'none');
     this.renderer.setElementStyle(this.availability.nativeElement, 'display', 'none');
@@ -1090,13 +1241,16 @@ export class FeedUser implements OnDestroy {
     this.renderer.setElementStyle(this.weekly.nativeElement, 'display', 'none');
     this.renderer.setElementStyle(this.distancey.nativeElement, 'display', 'none');
 
-
+    //setTimeout(() => {
+      //this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '-47%');
+    //}, 1000);
 
     this.dropDown();
   }
 
   dropDownR() {
     this.changeText.nativeElement.innerHTML = "Rating";
+    this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '6%');
     this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
     this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
     //this.renderer.setElementStyle(this.promos.nativeElement, 'color', 'gray');
