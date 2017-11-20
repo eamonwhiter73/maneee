@@ -230,11 +230,14 @@ export class SettingsPage implements OnDestroy {
 
     //this.storage.get('type').then((val) => {
       if(this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-        if(this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '' || this.merchantId == '' || this.publicKey == '' || this.privateKey == '') {
+        if(this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.price == '' || this.merchantId == '' || this.publicKey == '' || this.privateKey == '') {
           alert("You need to fill out all of the information");
         }
         else if(this.phone.match(/\d/g).length!==10) {
           alert("Please enter a 10 digit phone number, only the digits.");
+        }
+        else if(this.address.split(' ').length != 5 || this.address.split(' ').length != 6) {
+          alert("Please enter a valid address. ex: 99 main st cambridge ma");
         }
         else {
           this.storage.set('address', this.address);

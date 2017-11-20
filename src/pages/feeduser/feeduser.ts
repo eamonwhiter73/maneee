@@ -172,6 +172,11 @@ export class FeedUser implements OnDestroy {
      
   }
 
+  loadModal(salon) {
+    let profileModal = this.modalCtrl.create(PopUpOther, { salon: salon });
+    profileModal.present();
+  }
+
   doInfinite(infiniteScroll) {
     console.log("in doinfinite promotionsssssss");
     setTimeout(() => {

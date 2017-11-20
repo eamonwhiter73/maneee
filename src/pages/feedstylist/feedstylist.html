@@ -14,7 +14,7 @@
     </ion-toolbar>
         
     <!--</ion-item>-->
-    <div class='pluscontainer' [@plusSlide]="downState">
+    <div class='pluscontainer' [@plusSlide]="downState" (tap)='buyAd()'>
       <p>BUY</p><br><p>AD</p>
     </div>
 
@@ -202,7 +202,7 @@
           <div class="book price">${{j.price}}</div>
         </div>
       </div>
-      <img class="imageposttwo" #imagepost4 src="{{j.url}}">
+      <img class="imageposttwo" #imagepost4 src="{{j.url}}" (tap)="beginPurchase(j)">
       <div class='caption' #caption4 style="text-align: center">
         TAP TO BUY
       </div>

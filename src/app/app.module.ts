@@ -54,14 +54,16 @@ import { HttpModule } from '@angular/http';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { ImageViewerController } from 'ionic-img-viewer';
 import { IonicStorageModule } from '@ionic/storage';
-import { Facebook } from '@ionic-native/facebook'
-import { GooglePlus } from '@ionic-native/google-plus'
+import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 import { PopUp } from '../modals/popup/popup';
 import { PopUpOther } from '../modals/popupother/popupother';
 import { FormulaBuy } from '../modals/formulabuy/formulabuy';
-import { DepositPage } from '../modals/depositpage/depositpage'
-import { Rate } from '../modals/rate/rate'
+import { DepositPage } from '../modals/depositpage/depositpage';
+import { BuyAd } from '../modals/buyad/buyad';
+
+import { Rate } from '../modals/rate/rate';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { DatePicker } from '@ionic-native/date-picker';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
@@ -126,6 +128,7 @@ firebase.initializeApp(firebaseConfig);
     UserBooking,
     PopUp,
     PopUpOther,
+    BuyAd,
     FormulaBuy,
     DepositPage,
     SettingsPage,
@@ -171,6 +174,7 @@ firebase.initializeApp(firebaseConfig);
     BookingPage,
     PopUp,
     PopUpOther,
+    BuyAd,
     FormulaBuy,
     DepositPage,
     Rate,

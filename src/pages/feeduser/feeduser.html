@@ -115,17 +115,17 @@
       <!--<img class="imagepost" src="{{i}}">-->
      </ion-item>
    </ion-list>
-   <ion-infinite-scroll (ionInfinite)="doInfiniteP($event)">
+   <!--<ion-infinite-scroll (ionInfinite)="doInfiniteP($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-   </ion-infinite-scroll>
+   </ion-infinite-scroll>-->
   </div>
 
   <div class ='contentone weeklydeals' #weeklydeals [@moveList]='moveState'>
    <ion-list class="marginstatus weeklyy" no-padding>
-     <ion-item *ngFor="let a of promotions" no-padding>
+     <ion-item *ngFor="let a of promotions" no-padding (tap)="loadModal(a.username)">
       <div class="feedtoptextcontainer">
         <!--<div class="imageparent">
           <img class="postprofilepic" src="{{a.url}}">
@@ -141,12 +141,12 @@
       <!--<img class="imagepost" src="{{i}}">-->
      </ion-item>
    </ion-list>
-   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" #infinitescroll>
+   <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" #infinitescroll>
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-   </ion-infinite-scroll>
+   </ion-infinite-scroll>-->
   </div>
 
   <ion-item class="noavail" #noavail no-padding no-lines>NO RESULTS</ion-item>

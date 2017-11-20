@@ -1,10 +1,14 @@
 import { Component, trigger, state, style, transition, animate, ViewChild, ViewChildren, QueryList, Renderer, ElementRef } from '@angular/core';
 import { NavController, App, Platform, Slides, Slide, Content } from 'ionic-angular';
-import { LoadingController, ActionSheetController } from 'ionic-angular';
+import { LoadingController, ActionSheetController, ModalController } from 'ionic-angular';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { PostpagePage } from '../postpage/postpage';
 import { FeedUser } from '../feeduser/feeduser';
 import { UserProfile } from '../userprofile/userprofile';
+import { DropinPage } from '../dropin/dropin';
+
+import { BuyAd } from '../../modals/buyad/buyad';
+
 import { FollowersPage } from '../followers/followers';
 import { Storage } from '@ionic/storage';
 import { DatePicker } from '@ionic-native/date-picker';
@@ -177,7 +181,7 @@ export class FeedStylist implements OnDestroy {
   private swipeTime?: number;
   private nav:NavController;
 
-  constructor(public sms: SMS, private cache: CacheService, public datePicker: DatePicker, public storage: Storage, public platform: Platform, public af: AngularFireDatabase, public element: ElementRef, public camera: Camera, private app:App, public cameraServicePost: CameraServicePost, public actionSheetCtrl: ActionSheetController, public myrenderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
+  constructor(public modalCtrl: ModalController, public sms: SMS, private cache: CacheService, public datePicker: DatePicker, public storage: Storage, public platform: Platform, public af: AngularFireDatabase, public element: ElementRef, public camera: Camera, private app:App, public cameraServicePost: CameraServicePost, public actionSheetCtrl: ActionSheetController, public myrenderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
     this.nav = this.app.getActiveNav();
   }
 
@@ -201,6 +205,15 @@ export class FeedStylist implements OnDestroy {
         mediaType: this.camera.MediaType.PICTURE,
         destinationType: this.camera.DestinationType.FILE_URI,
         saveToPhotoAlbum: true
+  }
+
+  beginPurchase(identity) {
+    this.navCtrl.push(DropinPage, { username: this.username, key: identity.$key });
+  }
+
+  buyAd() {
+    let profileModal = this.modalCtrl.create(BuyAd);
+    profileModal.present();
   }
 
   doInfiniteAll(infiniteScroll) {
