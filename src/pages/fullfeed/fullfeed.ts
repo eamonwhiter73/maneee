@@ -46,9 +46,9 @@ export class FullfeedPage {
     let cacheKey = 'promos';
     let promises_array:Array<any> = [];
     let mapped;
-    this.cache.removeItem(cacheKey);
+    //this.cache.removeItem(cacheKey);
 
-    this.cache.getItem(cacheKey).catch(() => {
+    //this.cache.getItem(cacheKey).catch(() => {
       let store = [];
     
       this.list2 = this.af.list('/promos', {
@@ -91,14 +91,10 @@ export class FullfeedPage {
           this.items = store.reverse();
           //this.classesListArray.reverse();   
           console.log(JSON.stringify(this.items) + " value value vlaue items");
-          return this.cache.saveItem(cacheKey, this.items);
         //}, 3000);
       
         })
       })
-    }).then(data => {
-      this.items = data;
-    })
   }
 
   gotoProfile() {

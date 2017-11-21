@@ -45,7 +45,7 @@ var StylistProfile = /** @class */ (function () {
         this.square = 0;
         this.datesToSelect = [];
         this.optionsGetMedia = {
-            allowEdit: false,
+            //allowEdit: false,
             quality: 10,
             targetWidth: 600,
             targetHeight: 600,
@@ -123,7 +123,6 @@ var StylistProfile = /** @class */ (function () {
         //return Promise.all(promises_array);
     };
     StylistProfile.prototype.ionViewDidUnload = function () {
-        this.navCtrl.pop();
     };
     StylistProfile.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -193,33 +192,55 @@ var StylistProfile = /** @class */ (function () {
             _this.selectedDate = _this.viewDate;
             console.log(_this.username + "this.username");
             _this.items2 = _this.af.list('appointments/' + _this.username + '/' + _this.selectedDate.getMonth());
-            _this.subscription2 = _this.items2.subscribe(function (items) { return items.forEach(function (item) {
-                console.log(item);
-                var da = new Date(item.date.day * 1000);
-                _this.datesToSelect.push(da.getDate());
-                console.log(da + "da");
-                console.log(da.getDate() + "dagetdate");
-                console.log(_this.selectedDate.getDate());
-                if (_this.selectedDate.getDate() == da.getDate() && _this.selectedDate.getMonth() == da.getMonth()) {
-                    console.log("selected = item");
-                    console.log(JSON.stringify(item.reserved) + "         item resesrved above");
-                    _this.times = item.reserved.appointment.slice(0);
-                    console.log('hit appointment');
-                }
-                for (var _i = 0, _a = _this.tds; _i < _a.length; _i++) {
-                    var item_1 = _a[_i];
-                    if (!item_1.classList.contains('text-muted')) {
-                        console.log(typeof item_1.innerText + "         innertext" + typeof _this.datesToSelect[0]);
-                        if (_this.datesToSelect.indexOf(parseInt(item_1.innerText)) != -1) {
-                            console.log("Inner text in      " + item_1.innerText);
-                            _this.myrenderer.setElementClass(item_1, "greencircle", true);
+            _this.subscription2 = _this.items2.subscribe(function (items) {
+                var mapped = items.map(function (item) {
+                    return new Promise(function (resolve, reject) {
+                        //console.log(JSON.stringify(item));
+                        //console.log(item.date.day);
+                        var boool = false;
+                        var da = new Date(item.date.day * 1000);
+                        console.log(da + "da");
+                        console.log(da.getDate() + "dagetdate");
+                        console.log(_this.selectedDate.getDate());
+                        if (_this.selectedDate.getDate() == da.getDate() && _this.selectedDate.getMonth() == da.getMonth()) {
+                            console.log("selected = item");
+                            console.log(JSON.stringify(item.reserved) + "         item resesrved above");
+                            _this.times = item.reserved.appointment.slice(0);
+                            console.log('hit appointment');
+                            resolve();
                         }
                         else {
-                            //this.myrenderer.setElementClass(item,"monthview-selected",false);
+                            resolve();
+                        }
+                        for (var _i = 0, _a = item.reserved.appointment; _i < _a.length; _i++) {
+                            var r = _a[_i];
+                            console.log(" in r of item.reserved.appointment");
+                            if (r.selected == true) {
+                                boool = true;
+                            }
+                        }
+                        if (boool) {
+                            console.log("in bool twice in bool once");
+                            _this.datesToSelect.push(da.getDate());
+                        }
+                    });
+                });
+                Promise.all(mapped).then(function () {
+                    for (var _i = 0, _a = _this.tds; _i < _a.length; _i++) {
+                        var item = _a[_i];
+                        if (!item.classList.contains('text-muted')) {
+                            console.log(JSON.stringify(_this.datesToSelect));
+                            if (_this.datesToSelect.indexOf(parseInt(item.innerText)) != -1) {
+                                console.log("Inner text in      " + item.innerText);
+                                _this.myrenderer.setElementClass(item, "greencircle", true);
+                            }
+                            else {
+                                //this.myrenderer.setElementClass(item,"monthview-selected",false);
+                            }
                         }
                     }
-                }
-            }); });
+                });
+            });
             //loading.dismiss();
         }, 1500);
     };
@@ -237,6 +258,7 @@ var StylistProfile = /** @class */ (function () {
         this.square = squarez;
     };
     StylistProfile.prototype.removePic = function (squarez) {
+        var _this = this;
         console.log("in remove pic 333333333          " + squarez);
         var itemArray = this.components.toArray();
         var itemArrayTwo = this.profComponents.toArray();
@@ -249,6 +271,60 @@ var StylistProfile = /** @class */ (function () {
         this.myrenderer.setElementStyle(itemArrayfour[squarez - 1].nativeElement, 'display', 'none');
         this.storage.set("profile" + squarez, null);
         this.storage.set("formula" + squarez, null);
+        var postdata = {
+            square: null,
+            visible: false
+        };
+        var arrr = [];
+        this.items5 = this.af.list('/formulas', {
+            query: {
+                orderByChild: 'username',
+                equalTo: this.username
+            }
+        });
+        this.subscription6 = this.items5.subscribe(function (items) {
+            var mapped = items.map(function (item) {
+                return new Promise(function (resolve, reject) {
+                    console.log(JSON.stringify(item) + "       getting an item");
+                    if (item.square == squarez) {
+                        console.log(" in update update te update te update");
+                        _this.items5.update(item.$key, postdata);
+                    }
+                });
+            });
+        });
+        /*let reff = firebase.database().ref('/formulas').orderByChild('username').equalTo(this.username).on("value", (snapshot) => {
+          snapshot.forEach(snapshot => {
+              // key
+              let key = snapshot.key;
+              console.log("key: " + key);
+              // value, could be object
+              let childData = snapshot.val();
+              console.log("data: " + JSON.stringify(childData));
+              // Do what you want with these key/values here
+              arrr.push({key: key, data: childData});
+              return true;
+          });
+        });
+    
+        for(let x of arrr) {
+          console.log(typeof squarez + "        :      jjjjyjy      " + typeof x.data.square);
+          if(squarez == x.data.square) {
+            console.log("in squarez ---========---- childata.square");
+            let updates = {};
+            updates['/formulas/' + x.key] = postdata;
+    
+            firebase.database().ref().update(updates);
+            
+          }
+        }*/
+        /*let image : string  = 'formula_' + this.username + '_' + squarez + '.png';
+        let storageRef = firebase.storage().ref('/formulas/' + this.username + '/' + image);
+        storageRef.delete().catch(e => {console.log(e)});
+    
+        let image2 : string  = 'profile_' + this.username + '_' + squarez + '.png';
+        let storageRef2 = firebase.storage().ref('/profiles/' + this.username + '/' + image2);
+        storageRef2.delete().catch(e => {console.log(e)});*/
     };
     StylistProfile.prototype.removePicFormula = function (squarez) {
         console.log("in remove pic 333333333          " + squarez);
@@ -312,7 +388,7 @@ var StylistProfile = /** @class */ (function () {
                     text: 'Photo Library',
                     handler: function () {
                         var itemArrayTwo = _this.profComponents.toArray();
-                        _this.cameraService.getMedia(_this.optionsGetCamera, _this.square).then(function () {
+                        _this.cameraService.getMedia(_this.optionsGetMedia, _this.square).then(function () {
                             return new Promise(function (resolve, reject) {
                                 var storageRef = firebase.storage().ref().child('/profile/' + _this.username + '/profile_' + _this.username + '_' + _this.square + '.png');
                                 var loading = _this.loadingController.create({ content: "Loading..." });
@@ -442,7 +518,7 @@ var StylistProfile = /** @class */ (function () {
     };
     StylistProfile.prototype.backToCal = function () {
         //if(this.navParams.get('param1') == 'user') {
-        this.navCtrl.push(BookingPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.push(BookingPage, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
         //this.navCtrl.push(BookingPage);
         //}
         //else {
@@ -456,7 +532,7 @@ var StylistProfile = /** @class */ (function () {
         this.backToCal();
     };
     StylistProfile.prototype.swipeRight = function () {
-        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 100, direction: 'back' });
     };
     //changed this***
     StylistProfile.prototype.moveCover = function () {
@@ -527,55 +603,71 @@ var StylistProfile = /** @class */ (function () {
         if ($event.dontRunCode) {
             //console.log($event);
             this.items3 = this.af.list('appointments/' + this.username + '/' + this.selectedDate.getMonth());
-            this.subscription3 = this.items3.subscribe(function (items) { return items.forEach(function (item) {
-                //console.log(JSON.stringify(item));
-                //console.log(item.date.day);
-                console.log("dafirst    " + item.date.day);
-                var da = new Date(item.date.day * 1000);
-                _this.datesToSelect = [];
-                _this.datesToSelect.push(da.getDate());
-                console.log(da + "da");
-                console.log(da.getDate() + "dagetdate");
-                console.log(_this.selectedDate.getDate());
-                if (_this.selectedDate.getDate() == da.getDate() && _this.selectedDate.getMonth() == da.getMonth()) {
-                    console.log("selected = item");
-                    console.log(JSON.stringify(item.reserved) + "         item resesrved");
-                    //for(let r of item.reserved.appointment) {
-                    //console.log(JSON.stringify(r));
-                    /*let bool = lse;
-                    for(let r in item.reserved.appointment) {
-                      if(r['selected'] == "true") {
-                        bool = true;
-                      }
-                    }*/
-                    _this.times = item.reserved.appointment.slice(0);
-                    console.log('hit appointment');
-                    console.log(JSON.stringify(_this.times));
-                    /*for(let x of this.times) {
-                      if(x.time == r) {
-                        console.log('change selected');
-                        x.selected = true;
-                      }
-                    }*/
-                    //}
-                }
-                //console.log($event.runCode + "     dont run code!!!!!!");
-                //if($event.runCode == true) {
-                for (var _i = 0, _a = _this.tds; _i < _a.length; _i++) {
-                    var item_2 = _a[_i];
-                    if (!item_2.classList.contains('text-muted')) {
-                        console.log(typeof item_2.innerText + "         innertext" + typeof _this.datesToSelect[0]);
-                        if (_this.datesToSelect.indexOf(parseInt(item_2.innerText)) != -1) {
-                            console.log("Inner text in      " + item_2.innerText);
-                            _this.myrenderer.setElementClass(item_2, "greencircle", true);
+            this.subscription3 = this.items3.subscribe(function (items) {
+                var mapped = items.map(function (item) {
+                    return new Promise(function (resolve, reject) {
+                        //console.log(JSON.stringify(item));
+                        //console.log(item.date.day);
+                        _this.datesToSelect = [];
+                        var boool = false;
+                        var da = new Date(item.date.day * 1000);
+                        for (var _i = 0, _a = item.reserved.appointment; _i < _a.length; _i++) {
+                            var r = _a[_i];
+                            if (r.selected == true) {
+                                boool = true;
+                            }
                         }
-                        else {
-                            //this.myrenderer.setElementClass(item,"monthview-selected",false);
+                        if (boool) {
+                            console.log("in bool twice in bool once");
+                            _this.datesToSelect.push(da.getDate());
+                        }
+                        console.log(da + "da");
+                        console.log(da.getDate() + "dagetdate");
+                        console.log(_this.selectedDate.getDate());
+                        if (_this.selectedDate.getDate() == da.getDate() && _this.selectedDate.getMonth() == da.getMonth()) {
+                            console.log("selected = item");
+                            console.log(JSON.stringify(item.reserved) + "         item resesrved");
+                            for (var _b = 0, _c = item.reserved.appointment; _b < _c.length; _b++) {
+                                var r = _c[_b];
+                                //console.log(JSON.stringify(r));
+                                /*for(let r in item.reserved.appointment) {
+                                  if(r['selected'] == "true") {
+                                    bool = true;
+                                  }
+                                }*/
+                                _this.times = item.reserved.appointment.slice(0);
+                                console.log('hit appointment');
+                                console.log(JSON.stringify(_this.times));
+                                /*for(let x of this.times) {
+                                  if(x.time == r) {
+                                    console.log('change selected');
+                                    x.selected = true;
+                                  }
+                                }*/
+                                //}
+                            }
+                        }
+                    });
+                });
+                Promise.all(mapped).then(function () {
+                    for (var _i = 0, _a = _this.tds; _i < _a.length; _i++) {
+                        var item = _a[_i];
+                        if (!item.classList.contains('text-muted')) {
+                            console.log(typeof item.innerText + "         innertext" + typeof _this.datesToSelect[0]);
+                            if (_this.datesToSelect.indexOf(parseInt(item.innerText)) != -1) {
+                                console.log("Inner text in      " + item.innerText);
+                                _this.myrenderer.setElementClass(item, "greencircle", true);
+                            }
+                            else {
+                                //this.myrenderer.setElementClass(item,"monthview-selected",false);
+                            }
                         }
                     }
-                }
+                });
+                //console.log($event.runCode + "     dont run code!!!!!!");
+                //if($event.runCode == true) {
                 //}
-            }); });
+            });
         }
     };
     __decorate([

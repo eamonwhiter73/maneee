@@ -8,10 +8,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, trigger, state, style, transition, animate, ViewChildren, ViewChild, ElementRef, Renderer, QueryList } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, App } from 'ionic-angular';
 import { BookingPage } from '../booking/booking';
 import { PostpagePage } from '../postpage/postpage';
 import { UserBooking } from '../userbooking/userbooking';
+import { DropinPage } from '../dropin/dropin';
 import { CameraService } from '../../services/cameraservice';
 import { Camera } from '@ionic-native/camera';
 import { ActionSheetController } from 'ionic-angular';
@@ -23,11 +24,11 @@ import { ImageViewerController } from 'ionic-img-viewer';
 import { Rate } from '../../modals/rate/rate';
 import { Storage } from '@ionic/storage';
 import { InAppBrowser } from 'ionic-native';
-import { FormulaBuy } from '../../modals/formulabuy/formulabuy';
 //import { IonicApp, IonicModule } from 'ionic-angular';
 //import { MyApp } from './app/app.component';
 var UserProfile = /** @class */ (function () {
-    function UserProfile(afAuth, elRef, params, modalCtrl, storage, imageViewerCtrl, loadingController, myrenderer, af, actionSheetCtrl, camera, navCtrl, navParams, cameraService) {
+    function UserProfile(app, afAuth, elRef, params, modalCtrl, storage, imageViewerCtrl, loadingController, myrenderer, af, actionSheetCtrl, camera, navCtrl, navParams, cameraService) {
+        this.app = app;
         this.afAuth = afAuth;
         this.elRef = elRef;
         this.params = params;
@@ -129,19 +130,22 @@ var UserProfile = /** @class */ (function () {
             }
         }).unsubscribe();
     };
+    UserProfile.prototype.depositOpen = function () {
+        this.navCtrl.push(DropinPage, { page: 'userprofile', username: this.username });
+    };
     UserProfile.prototype.followStylist = function () {
         var _this = this;
         this.item = this.af.object('/profiles/stylists/' + this.username + '/followers');
         this.subscription = this.item.subscribe(function (item) {
             if (item.$value == null) {
                 var array = [];
-                array.push((_a = {}, _a[_this.userusername] = _this.uuid, _a));
+                array.push((_a = {}, _a[_this.userusername] = _this.phone, _a));
                 _this.followsty._elementRef.nativeElement.innerHTML = "FOLLOWING";
                 _this.item.update(array);
             }
             else {
                 if (item.indexOf(_this.userusername) == -1) {
-                    item.push((_b = {}, _b[_this.userusername] = _this.uuid, _b));
+                    item.push((_b = {}, _b[_this.userusername] = _this.phone, _b));
                     _this.item.update(item);
                 }
                 else {
@@ -154,6 +158,7 @@ var UserProfile = /** @class */ (function () {
     UserProfile.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.username = this.params.get('username');
+        this.storage.get('phone').then(function (val) { _this.phone = val; });
         this.subscription7 = this.afAuth.authState.subscribe(function (data) {
             if (data.email && data.uid) {
                 console.log("logged in");
@@ -238,42 +243,63 @@ var UserProfile = /** @class */ (function () {
             console.log(_this.username + "this.username");
             var bool = false;
             _this.items2 = _this.af.list('appointments/' + _this.username + '/' + _this.selectedDate.getMonth());
-            _this.subscription2 = _this.items2.subscribe(function (items) { return items.forEach(function (item) {
-                console.log(item);
-                var da = new Date(item.date.day * 1000);
-                _this.datesToSelect.push(da.getDate());
-                console.log(da + "da");
-                console.log(da.getDate() + "dagetdate");
-                console.log(_this.selectedDate.getDate());
-                if (_this.selectedDate.getDate() == da.getDate() && _this.selectedDate.getMonth() == da.getMonth()) {
-                    console.log("selected = item");
-                    console.log(JSON.stringify(item.reserved) + "         item resesrved above");
-                    //for(let m = 0; m < item.reserved.length; m++) {
-                    //for(let r of item.reserved) {
-                    //console.log(JSON.stringify(r));
-                    for (var _i = 0, _a = item.reserved.appointment; _i < _a.length; _i++) {
-                        var r = _a[_i];
-                        if (r.selected == true) {
-                            _this.timesOpen.push(r);
-                            console.log('hit appointment');
-                            bool = true;
+            _this.subscription2 = _this.items2.subscribe(function (items) {
+                var mapped = items.map(function (item) {
+                    return new Promise(function (resolve, reject) {
+                        console.log(item);
+                        var boool = false;
+                        var da = new Date(item.date.day * 1000);
+                        console.log(da + "da");
+                        console.log(da.getDate() + "dagetdate");
+                        console.log(_this.selectedDate.getDate());
+                        if (_this.selectedDate.getDate() == da.getDate() && _this.selectedDate.getMonth() == da.getMonth()) {
+                            console.log("selected = item");
+                            console.log(JSON.stringify(item.reserved) + "         item resesrved above");
+                            //for(let m = 0; m < item.reserved.length; m++) {
+                            //for(let r of item.reserved) {
+                            //console.log(JSON.stringify(r));
+                            for (var _i = 0, _a = item.reserved.appointment; _i < _a.length; _i++) {
+                                var r = _a[_i];
+                                if (r.selected == true) {
+                                    _this.timesOpen.push(r);
+                                    console.log('hit appointment');
+                                    bool = true;
+                                }
+                            }
                         }
-                    }
-                }
-                for (var _b = 0, _c = _this.tds; _b < _c.length; _b++) {
-                    var item_1 = _c[_b];
-                    if (!item_1.classList.contains('text-muted')) {
-                        console.log(typeof item_1.innerText + "         innertext" + typeof _this.datesToSelect[0]);
-                        if (_this.datesToSelect.indexOf(parseInt(item_1.innerText)) != -1) {
-                            console.log("Inner text in      " + item_1.innerText);
-                            _this.myrenderer.setElementClass(item_1, "greencircle", true);
+                        for (var _b = 0, _c = item.reserved.appointment; _b < _c.length; _b++) {
+                            var r = _c[_b];
+                            console.log(" in r of item.reserved.appointment");
+                            if (r.selected == true) {
+                                boool = true;
+                            }
+                        }
+                        if (boool) {
+                            console.log("in bool twice in bool once");
+                            _this.datesToSelect.push(da.getDate());
+                            resolve();
                         }
                         else {
-                            //this.myrenderer.setElementClass(item,"monthview-selected",false);
+                            resolve();
+                        }
+                    });
+                });
+                Promise.all(mapped).then(function () {
+                    for (var _i = 0, _a = _this.tds; _i < _a.length; _i++) {
+                        var item = _a[_i];
+                        if (!item.classList.contains('text-muted')) {
+                            console.log(typeof item.innerText + "         innertext" + typeof _this.datesToSelect[0]);
+                            if (_this.datesToSelect.indexOf(parseInt(item.innerText)) != -1) {
+                                console.log("Inner text in      " + item.innerText);
+                                _this.myrenderer.setElementClass(item, "greencircle", true);
+                            }
+                            else {
+                                //this.myrenderer.setElementClass(item,"monthview-selected",false);
+                            }
                         }
                     }
-                }
-            }); });
+                });
+            });
             //loading.dismiss();
         }, 1500);
     };
@@ -292,8 +318,9 @@ var UserProfile = /** @class */ (function () {
         var itemArrayfour = this.formulaBars.toArray();
         if (itemArrayfour[this.square - 1].nativeElement.style.display != 'none') {
             console.log("inside formula box");
-            var profileModal = this.modalCtrl.create(FormulaBuy, { username: this.username, square: this.square });
-            profileModal.present();
+            /*let profileModal = this.modalCtrl.create(FormulaBuy, { username: this.username, square: this.square });
+            profileModal.present();*/
+            this.navCtrl.push(DropinPage, { username: this.username, square: this.square });
         }
         else {
             console.log(JSON.stringify(itemArrayTwo[this.square - 1]));
@@ -390,13 +417,13 @@ var UserProfile = /** @class */ (function () {
           this.navCtrl.push(FeedUser);
         }*/
         //else {
-        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 100, direction: 'back' });
         //this.navCtrl.push(FeedStylist);
         //}
     };
     UserProfile.prototype.backToCal = function () {
         //if(this.navParams.get('param1') == 'user') {
-        this.navCtrl.push(BookingPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.push(BookingPage, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
         //this.navCtrl.push(BookingPage);
         //}
         //else {
@@ -444,21 +471,38 @@ var UserProfile = /** @class */ (function () {
         var itemArrayTwo = this.profComponents.toArray();
         var itemArrayfour = this.formulaBars.toArray();
         var _loop_1 = function (z) {
-            promises_array.push(new Promise(function (resolve, reject) {
-                var storageRef = firebase.storage().ref().child('/formulas/' + self.username + '/formula_' + self.username + '_' + z + '.png');
-                storageRef.getDownloadURL().then(function (url) {
-                    self.myrenderer.setElementAttribute(itemArrayTwo[z - 1].nativeElement, 'src', url);
-                    self.myrenderer.setElementStyle(itemArrayTwo[z - 1].nativeElement, 'display', 'block');
-                    self.myrenderer.setElementStyle(itemArrayfour[z - 1].nativeElement, 'display', 'block');
-                    //self.myrenderer.setElementStyle(itemArray[z - 1].nativeElement, 'display', 'none');
-                    console.log(z);
-                    resolve();
-                }).catch(function (error) {
-                    resolve();
-                    console.log(error.message);
+            this_1.items5 = this_1.af.list('/formulas', {
+                query: {
+                    orderByChild: 'username',
+                    equalTo: this_1.username
+                }
+            });
+            this_1.subscription8 = this_1.items5.subscribe(function (items) {
+                var mapped = items.map(function (item) {
+                    return new Promise(function (resolve, reject) {
+                        console.log(JSON.stringify(item) + "       getting an item");
+                        if (item.visible == null && z == item.square) {
+                            console.log(" in update update te update te update");
+                            promises_array.push(new Promise(function (resolve, reject) {
+                                var storageRef = firebase.storage().ref().child('/formulas/' + self.username + '/formula_' + self.username + '_' + z + '.png');
+                                storageRef.getDownloadURL().then(function (url) {
+                                    self.myrenderer.setElementAttribute(itemArrayTwo[z - 1].nativeElement, 'src', url);
+                                    self.myrenderer.setElementStyle(itemArrayTwo[z - 1].nativeElement, 'display', 'block');
+                                    self.myrenderer.setElementStyle(itemArrayfour[z - 1].nativeElement, 'display', 'block');
+                                    //self.myrenderer.setElementStyle(itemArray[z - 1].nativeElement, 'display', 'none');
+                                    console.log(z);
+                                    resolve();
+                                }).catch(function (error) {
+                                    resolve();
+                                    console.log(error.message);
+                                });
+                            }));
+                        }
+                    });
                 });
-            }));
+            });
         };
+        var this_1 = this;
         for (var z = 1; z < 10; z++) {
             _loop_1(z);
         }
@@ -605,12 +649,12 @@ var UserProfile = /** @class */ (function () {
                 //console.log($event.runCode + "     dont run code!!!!!!");
                 //if($event.runCode == true) {
                 for (var _i = 0, _a = _this.tds; _i < _a.length; _i++) {
-                    var item_2 = _a[_i];
-                    if (!item_2.classList.contains('text-muted')) {
-                        console.log(typeof item_2.innerText + "         innertext" + typeof _this.datesToSelect[0]);
-                        if (_this.datesToSelect.indexOf(parseInt(item_2.innerText)) != -1) {
-                            console.log("Inner text in      " + item_2.innerText);
-                            _this.myrenderer.setElementClass(item_2, "greencircle", true);
+                    var item_1 = _a[_i];
+                    if (!item_1.classList.contains('text-muted')) {
+                        console.log(typeof item_1.innerText + "         innertext" + typeof _this.datesToSelect[0]);
+                        if (_this.datesToSelect.indexOf(parseInt(item_1.innerText)) != -1) {
+                            console.log("Inner text in      " + item_1.innerText);
+                            _this.myrenderer.setElementClass(item_1, "greencircle", true);
                         }
                         else {
                             //this.myrenderer.setElementClass(item,"monthview-selected",false);
@@ -657,7 +701,7 @@ var UserProfile = /** @class */ (function () {
                 ]),
             ]
         }),
-        __metadata("design:paramtypes", [AngularFireAuth, ElementRef, NavParams, ModalController, Storage, ImageViewerController, LoadingController, Renderer, AngularFireDatabase, ActionSheetController, Camera, NavController, NavParams, CameraService])
+        __metadata("design:paramtypes", [App, AngularFireAuth, ElementRef, NavParams, ModalController, Storage, ImageViewerController, LoadingController, Renderer, AngularFireDatabase, ActionSheetController, Camera, NavController, NavParams, CameraService])
     ], UserProfile);
     return UserProfile;
 }());

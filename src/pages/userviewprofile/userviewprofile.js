@@ -46,7 +46,7 @@ var UserViewProfile = /** @class */ (function () {
         this.square = 0;
         this.datesToSelect = [];
         this.optionsGetMedia = {
-            allowEdit: false,
+            //allowEdit: false,
             quality: 10,
             targetWidth: 600,
             targetHeight: 600,
@@ -63,7 +63,6 @@ var UserViewProfile = /** @class */ (function () {
             sourceType: this.camera.PictureSourceType.CAMERA,
             mediaType: this.camera.MediaType.PICTURE,
             destinationType: this.camera.DestinationType.FILE_URI,
-            saveToPhotoAlbum: true
         };
         this.times = [{ 'time': '8:00 AM', 'selected': false }, { 'time': '12:00 PM', 'selected': false }, { 'time': '4:00 PM', 'selected': false },
             { 'time': '8:30 AM', 'selected': false }, { 'time': '12:30 PM', 'selected': false }, { 'time': '4:30 PM', 'selected': false },
@@ -349,7 +348,7 @@ var UserViewProfile = /** @class */ (function () {
     };
     UserViewProfile.prototype.backToCal = function () {
         //if(this.navParams.get('param1') == 'user') {
-        this.navCtrl.push(BookingPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.push(BookingPage, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
         //this.navCtrl.push(BookingPage);
         //}
         //else {
@@ -384,7 +383,7 @@ var UserViewProfile = /** @class */ (function () {
         this.backToCal();
     };
     UserViewProfile.prototype.swipeRight = function () {
-        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 100, direction: 'back' });
     };
     UserViewProfile.prototype.downloadImages = function () {
         var self = this;

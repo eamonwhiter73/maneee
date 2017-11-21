@@ -54,8 +54,6 @@ var UserBooking = /** @class */ (function () {
         console.log("IN NGAFTER");
         //console.log(this.elRef.nativeElement.querySelectorAll('td[tappable]'));
     };
-    UserBooking.prototype.ionViewDidLoad = function () {
-    };
     UserBooking.prototype.emergency = function (i) {
         console.log(this.slots);
         var slotsarray = this.slots.toArray();
@@ -155,12 +153,12 @@ var UserBooking = /** @class */ (function () {
         this.username = val;
     };
     UserBooking.prototype.goToFeed = function () {
-        this.navCtrl.push(FeedUser, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.push(FeedUser, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
     };
     UserBooking.prototype.goToProfile = function () {
         //this.loading = this.loadingController.create({content : "Loading..."});
         //this.loading.present();
-        this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 100, direction: 'back' });
     };
     UserBooking.prototype.ionViewWillLeave = function () {
         //this.loading.dismiss()
@@ -175,7 +173,7 @@ var UserBooking = /** @class */ (function () {
       this.getData(val);
     });*/
     //}
-    UserBooking.prototype.ionViewDidEnter = function () {
+    UserBooking.prototype.ionViewDidLoad = function () {
         var _this = this;
         //let loading = this.loadingController.create({content : "Loading..."});
         //loading.present();
@@ -189,67 +187,71 @@ var UserBooking = /** @class */ (function () {
         console.log(this.username + "this.username");
         var bool = false;
         this.items2 = this.af.list('appointments/' + this.username + '/' + this.selectedDate.getMonth());
-        this.subscription2 = this.items2.subscribe(function (items) { return items.forEach(function (item) {
-            console.log(item);
-            var da = new Date(item.date.day * 1000);
-            _this.datesToSelect.push(da.getDate());
-            console.log(da + "da");
-            console.log(da.getDate() + "dagetdate");
-            console.log(_this.selectedDate.getDate());
-            if (_this.selectedDate.getDate() == da.getDate() && _this.selectedDate.getMonth() == da.getMonth()) {
-                console.log("selected = item");
-                console.log(JSON.stringify(item.reserved) + "         item resesrved above");
-                //for(let m = 0; m < item.reserved.length; m++) {
-                //for(let r of item.reserved) {
-                //console.log(JSON.stringify(r));
-                for (var _i = 0, _a = item.reserved.appointment; _i < _a.length; _i++) {
-                    var r = _a[_i];
-                    if (r.selected == true) {
-                        _this.timesOpen.push(r);
-                        console.log('hit appointment');
-                        bool = true;
+        this.subscription2 = this.items2.subscribe(function (items) {
+            var mapped = items.map(function (item) {
+                return new Promise(function (resolve, reject) {
+                    console.log(item);
+                    var da = new Date(item.date.day * 1000);
+                    var boool = false;
+                    console.log(da + "da");
+                    console.log(da.getDate() + "dagetdate");
+                    console.log(_this.selectedDate.getDate());
+                    if (_this.selectedDate.getDate() == da.getDate() && _this.selectedDate.getMonth() == da.getMonth()) {
+                        console.log("selected = item");
+                        console.log(JSON.stringify(item.reserved) + "         item resesrved above");
+                        //for(let m = 0; m < item.reserved.length; m++) {
+                        //for(let r of item.reserved) {
+                        //console.log(JSON.stringify(r));
+                        for (var _i = 0, _a = item.reserved.appointment; _i < _a.length; _i++) {
+                            var r = _a[_i];
+                            if (r.selected == true) {
+                                _this.timesOpen.push(r);
+                                console.log('hit appointment');
+                                bool = true;
+                            }
+                        }
+                        //count++;
+                        /*for(let x of this.times) {
+                          if(x.time == r) {
+                            console.log('change selected');
+                            x.selected = true;
+                          }
+                        }*/
+                        //}
                     }
-                }
-                //count++;
-                /*for(let x of this.times) {
-                  if(x.time == r) {
-                    console.log('change selected');
-                    x.selected = true;
-                  }
-                }*/
-                //}
-            }
-            /*let da = new Date(item.date.day*1000);
-            if(this.viewDate.getDate() == da.getDate() && this.viewDate.getMonth() == da.getMonth()) {
-              console.log("selected = item");
-              let count = 0;
-              console.log(JSON.stringify(item.reserved) + "         item resesrved");
-              for(let r in item.reserved) {
-                this.times[count].selected = r[count].selected;
-                console.log('hit appointment');
-                count++;
-                /*for(let x of this.times) {
-                  if(x.time == r) {
-                    console.log('change selected');
-                    x.selected = true;
-                  }
-                }*/
-            /*}
-          }*/
-            for (var _b = 0, _c = _this.tds; _b < _c.length; _b++) {
-                var item_1 = _c[_b];
-                if (!item_1.classList.contains('text-muted')) {
-                    console.log(typeof item_1.innerText + "         innertext" + typeof _this.datesToSelect[0]);
-                    if (_this.datesToSelect.indexOf(parseInt(item_1.innerText)) != -1) {
-                        console.log("Inner text in      " + item_1.innerText);
-                        _this.myrenderer.setElementClass(item_1, "greencircle", true);
+                    for (var _b = 0, _c = item.reserved.appointment; _b < _c.length; _b++) {
+                        var r = _c[_b];
+                        console.log(" in r of item.reserved.appointment");
+                        if (r.selected == true) {
+                            boool = true;
+                        }
+                    }
+                    if (boool) {
+                        console.log("in bool twice in bool once");
+                        _this.datesToSelect.push(da.getDate());
+                        resolve();
                     }
                     else {
-                        //this.myrenderer.setElementClass(item,"monthview-selected",false);
+                        resolve();
+                    }
+                });
+            });
+            Promise.all(mapped).then(function () {
+                for (var _i = 0, _a = _this.tds; _i < _a.length; _i++) {
+                    var item = _a[_i];
+                    if (!item.classList.contains('text-muted')) {
+                        console.log(typeof item.innerText + "         innertext" + typeof _this.datesToSelect[0]);
+                        if (_this.datesToSelect.indexOf(parseInt(item.innerText)) != -1) {
+                            console.log("Inner text in      " + item.innerText);
+                            _this.myrenderer.setElementClass(item, "greencircle", true);
+                        }
+                        else {
+                            //this.myrenderer.setElementClass(item,"monthview-selected",false);
+                        }
                     }
                 }
-            }
-        }); });
+            });
+        });
         if (!bool) {
             this.myrenderer.setElementStyle(this.noavail.nativeElement, 'display', 'block');
         }
@@ -383,13 +385,13 @@ var UserBooking = /** @class */ (function () {
                 //console.log($event.runCode + "     dont run code!!!!!!");
                 //if($event.runCode == true) {
                 for (var _b = 0, _c = _this.tds; _b < _c.length; _b++) {
-                    var item_2 = _c[_b];
-                    if (!item_2.classList.contains('text-muted')) {
-                        console.log(typeof item_2.innerText + "         innertext" + typeof _this.datesToSelect[0]);
+                    var item_1 = _c[_b];
+                    if (!item_1.classList.contains('text-muted')) {
+                        console.log(typeof item_1.innerText + "         innertext" + typeof _this.datesToSelect[0]);
                         var count = 0;
-                        if (_this.datesToSelect.indexOf(parseInt(item_2.innerText)) != -1) {
-                            console.log("Inner text in      " + item_2.innerText);
-                            _this.myrenderer.setElementClass(item_2, "greencircle", true);
+                        if (_this.datesToSelect.indexOf(parseInt(item_1.innerText)) != -1) {
+                            console.log("Inner text in      " + item_1.innerText);
+                            _this.myrenderer.setElementClass(item_1, "greencircle", true);
                         }
                         else {
                             //this.myrenderer.setElementClass(item,"monthview-selected",false);

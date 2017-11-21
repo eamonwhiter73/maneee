@@ -28,6 +28,7 @@ import { CacheService } from "ionic-cache";
 import { Observable } from 'rxjs/Rx';
 import { SMS } from '@ionic-native/sms';
 
+
 import 'rxjs/add/operator/share';
 
 
@@ -144,7 +145,7 @@ export class FeedStylist implements OnDestroy {
   list2: FirebaseListObservable<any>;
   list3: FirebaseListObservable<any>;
   objj: FirebaseObjectObservable<any>;
-  month: FirebaseListObservable<any>;
+  month: FirebaseObjectObservable<any>;
   formulas: FirebaseListObservable<any>;
   follow: FirebaseListObservable<any>;
   subscription: ISubscription;
@@ -216,7 +217,7 @@ export class FeedStylist implements OnDestroy {
     profileModal.present();
   }
 
-  doInfiniteAll(infiniteScroll) {
+  InfiniteAll(infiniteScroll) {
     setTimeout(() => {
       this.items = [];
       this.listAll();
@@ -391,31 +392,32 @@ export class FeedStylist implements OnDestroy {
     //this.navCtrl.pop();
   }
 
+  getID() {
+  // Math.random should be unique because of its seeding algorithm.
+  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+  // after the decimal.
+    return '_' + Math.random().toString(36).substr(2, 9);
+  };
+
   modelChanged(newObj) {
     console.log(typeof newObj + "  nnnnnneeeeeewwww     jo boboobbooooooob");
     let date = new Date(newObj);
     console.log(date.getDate() + "     :     " + date.getDay());
 
-    this.month = this.af.list('/appointments/'+this.username+'/'+date.getMonth());
+    this.month = this.af.object('/appointments/'+this.username+'/'+date.getMonth());
 
     let x = 0;
-    this.subscription7 = this.month.subscribe(items => items.forEach(item =>{
-       if(x == items.length - 1) {
-         console.log(JSON.stringify(item) + "    got the month");
-         let holderDate = new Date(item.date.day * 1000);
-         //console.log(date.getMinutes() + "   date : getmin   " + holderDate.getMinutes());
-         //console.log(date.getUTCHours() + "   date : gethours    " + holderDate.getUTCHours());
-         //console.log(date.getDate() + "   date : getdate    " + holderDate.getDate());
-         //console.log(date.getMonth() + "   date : getmonth    " + holderDate.getMonth());
-         //console.log(date.getFullYear() + "   date : getyear    " + holderDate.getFullYear());
-
-         let boool = false;
+    this.subscription7 = this.month.subscribe(item => {
+       console.log(JSON.stringify(item) + "    got the month");
+       if(item != null) {
+         let bo = false;
          let time;
+         let boool = false;
+         let skip = false;
 
-         if(date.getDate() == holderDate.getDate() && date.getMonth() == holderDate.getMonth() &&  date.getFullYear() == holderDate.getFullYear()) {
-           
-           
-           for( let x of item.reserved.appointment) {
+         for(let objj in item) {
+           if(objj == "$value") {
+             console.log(objj);
 
              let forHold;
              let minUnder = "";
@@ -439,61 +441,158 @@ export class FeedStylist implements OnDestroy {
 
              time = forHold+":"+minUnder+" "+ampm;
 
-             if(x.time == time) {
-               x.selected = false;
-               boool = true;
+             let array = [{"selected":false,"time":"8:00AM"},{"selected":true,"time":"8:30 AM"},{"selected":true,"time":"9:00 AM"},{"selected":false,"time":"9:30 AM"},{"selected":true,"time":"10:00 AM"},{"selected":true,"time":"10:30 AM"},{"selected":false,"time":"11:00 AM"},{"selected":true,"time":"11:30 AM"},{"selected":true,"time":"12:00 PM"},{"selected":false,"time":"12:30 PM"},{"selected":true,"time":"1:00 PM"},{"selected":true,"time":"1:30 PM"},{"selected":false,"time":"2:00 PM"},{"selected":true,"time":"2:30 PM"},{"selected":true,"time":"3:00 PM"},{"selected":false,"time":"3:30 PM"},{"selected":true,"time":"4:00 PM"},{"selected":true,"time":"4:30 PM"},{"selected":false,"time":"5:00 PM"},{"selected":true,"time":"5:30 PM"},{"selected":true,"time":"6:00 PM"},{"selected":false,"time":"6:30 PM"},{"selected":true,"time":"7:00 PM"},{"selected":true,"time":"7:30 PM"}];
+             
+             for(let z of array) {
+               if(z.time == time) {
+                 z.selected = true;
+                 boool = true;
+                 skip = true;
+               }
+             }
+             let u = this.getID();
+
+             console.log("looping here above");
+             this.month.update({[u]:{'date':{'day':date.getTime() / 1000}, 'reserved':{'appointment':array}}});
+           }
+           else {
+             console.log(JSON.stringify(objj));
+             let holderDate = new Date(item[objj].date.day * 1000);
+             //console.log(date.getMinutes() + "   date : getmin   " + holderDate.getMinutes());
+             //console.log(date.getUTCHours() + "   date : gethours    " + holderDate.getUTCHours());
+             //console.log(date.getDate() + "   date : getdate    " + holderDate.getDate());
+             //console.log(date.getMonth() + "   date : getmonth    " + holderDate.getMonth());
+             //console.log(date.getFullYear() + "   date : getyear    " + holderDate.getFullYear());
+
+             
+             
+
+             if(date.getDate() == holderDate.getDate() && date.getMonth() == holderDate.getMonth() &&  date.getFullYear() == holderDate.getFullYear()) {
+               
+               
+               for( let x of item[objj].reserved.appointment) {
+
+                 let forHold;
+                 let minUnder = "";
+                 let ampm;
+                 //console.log(<number>date.getUTCHours() + "<number>date.getUTCHours()");
+                 if(<number>date.getUTCHours() > 12) {
+                   forHold = <number>date.getUTCHours() - 12;
+                   ampm = "PM";
+                 }
+                 else {
+                   forHold = <number>date.getUTCHours();
+                   ampm = "AM";
+                 }
+
+                 if(<number>date.getMinutes() < 10) {
+                   minUnder = "0" + date.getMinutes();
+                 }
+                 else {
+                   minUnder = date.getMinutes().toString();
+                 }
+
+                 time = forHold+":"+minUnder+" "+ampm;
+                 console.log(x.selected + " selected    " + " xtime:"  + x.time + "  time  :" + time);
+                 if(x.time == time && x.selected == false) {
+                   x.selected = true;
+                   boool = true;
+                   //bo = true;
+                 }
+
+                 //console.log(x.time + "     x.time");
+                 //console.log(time + "     time");
+                 //console.log(date.getUTCHours()+":"+date.getUTCMinutes())
+
+                 //if(x.time == date.getHours +":"+ date.getMinutes 
+               }
+               
+             }
+             else {
+               let forHold;
+               let minUnder = "";
+               let ampm;
+               //console.log(<number>date.getUTCHours() + "<number>date.getUTCHours()");
+               if(<number>date.getUTCHours() > 12) {
+                 forHold = <number>date.getUTCHours() - 12;
+                 ampm = "PM";
+               }
+               else {
+                 forHold = <number>date.getUTCHours();
+                 ampm = "AM";
+               }
+
+               if(<number>date.getMinutes() < 10) {
+                 minUnder = "0" + date.getMinutes();
+               }
+               else {
+                 minUnder = date.getMinutes().toString();
+               }
+
+               time = forHold+":"+minUnder+" "+ampm;
+
+               let array = [{"selected":false,"time":"8:00AM"},{"selected":true,"time":"8:30 AM"},{"selected":true,"time":"9:00 AM"},{"selected":false,"time":"9:30 AM"},{"selected":true,"time":"10:00 AM"},{"selected":true,"time":"10:30 AM"},{"selected":false,"time":"11:00 AM"},{"selected":true,"time":"11:30 AM"},{"selected":true,"time":"12:00 PM"},{"selected":false,"time":"12:30 PM"},{"selected":true,"time":"1:00 PM"},{"selected":true,"time":"1:30 PM"},{"selected":false,"time":"2:00 PM"},{"selected":true,"time":"2:30 PM"},{"selected":true,"time":"3:00 PM"},{"selected":false,"time":"3:30 PM"},{"selected":true,"time":"4:00 PM"},{"selected":true,"time":"4:30 PM"},{"selected":false,"time":"5:00 PM"},{"selected":true,"time":"5:30 PM"},{"selected":true,"time":"6:00 PM"},{"selected":false,"time":"6:30 PM"},{"selected":true,"time":"7:00 PM"},{"selected":true,"time":"7:30 PM"}];
+               
+               for(let z of array) {
+                 if(z.time == time) {
+                   z.selected = true;
+                   boool = true;
+                   skip = true;
+                 }
+               }
+
+               let u = this.getID();
+
+               console.log("looping here below");
+               this.month.update({[u]:{'date':{'day':date.getTime() / 1000}, 'reserved':{'appointment':array}}});
              }
 
-             //console.log(x.time + "     x.time");
-             //console.log(time + "     time");
-             //console.log(date.getUTCHours()+":"+date.getUTCMinutes())
 
-             //if(x.time == date.getHours +":"+ date.getMinutes 
-           }
-           
-         }
-
-         if(boool == true) {
-           this.month.update(item.$key, {'reserved':{'appointment':item.reserved.appointment}});
-           let string1 = '';
-           let promises_array = [];
-            this.storage.get('username').then((val) => {
-              console.log('in storage');
-              this.follow = this.af.list('/profiles/stylists/' + val + "/followers");
-              this.subscription = this.follow.subscribe(items => {
-                let mapped = items.map((item) => {
-                  return new Promise((resolve, reject) => {
-                    console.log(JSON.stringify(item) + " item item item");
-                    let arr = Object.keys(item);
-                    console.log(typeof item[arr[0]] + "    type followers");
-                    string1 += (item[arr[0]]) + ", ";
-                    console.log(string1 + " this is string 1");
-                    resolve();
-                  })
-                })
-                
-                Promise.all(mapped).then(() => {
-                  let month1 = date.getUTCMonth() + 1;
-                  let date1 = date.getUTCDate();
+             if(boool == true) {
+               let r = item[objj];
+               if(!skip) {
+                 this.month.update({[objj]:{'date':{'day':item[objj].date.day}, 'reserved':{'appointment':item[objj].reserved.appointment}}});
+               }
+               let string1 = '';
+               let promises_array = [];
+                this.storage.get('username').then((val) => {
+                  console.log('in storage');
+                  this.follow = this.af.list('/profiles/stylists/' + val + "/followers");
+                  this.subscription = this.follow.subscribe(items => {
+                    let mapped = items.map((item) => {
+                      return new Promise((resolve, reject) => {
+                        console.log(JSON.stringify(item) + " item item item");
+                        let arr = Object.keys(item);
+                        console.log(typeof item[arr[0]] + "    type followers");
+                        string1 += (item[arr[0]]) + ", ";
+                        console.log(string1 + " this is string 1");
+                        resolve();
+                      })
+                    })
+                    
+                    Promise.all(mapped).then(() => {
+                      let month1 = date.getUTCMonth() + 1;
+                      let date1 = date.getUTCDate();
 
 
-                    console.log(string1 + " this is string 1 2");
-                    this.sms.send(string1, val + " just opened up a spot at " + time + " on " + month1 + "/" + date1 + "!")
-                      .catch(e => { console.log(JSON.stringify(e))});
-                  
+                        console.log(string1 + " this is string 1 2");
+                        this.sms.send(string1, val + " just opened up a spot at " + time + " on " + month1 + "/" + date1 + "!")
+                          .catch(e => { console.log(JSON.stringify(e))});
 
-                })
-              });
-
-              
-
-             //boool = false;
-           })
-          }
-        
+                    })
+                  });
+               })
+            }
+           }  
         }
-      x++;
-    }));
+        if(bo) {
+          alert("This spot is already available, or it is in the past.");
+        }
+        x++;
+      }
+    });
+
+
   }
 
 

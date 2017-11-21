@@ -8,12 +8,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, trigger, state, style, transition, animate, ViewChild, ViewChildren, QueryList, Renderer, ElementRef } from '@angular/core';
-import { NavController, App, Platform, Slides } from 'ionic-angular';
-import { LoadingController, ActionSheetController } from 'ionic-angular';
+import { NavController, App, Platform, Slides, Content } from 'ionic-angular';
+import { LoadingController, ActionSheetController, ModalController } from 'ionic-angular';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { PostpagePage } from '../postpage/postpage';
 import { FeedUser } from '../feeduser/feeduser';
 import { UserProfile } from '../userprofile/userprofile';
+import { DropinPage } from '../dropin/dropin';
+import { BuyAd } from '../../modals/buyad/buyad';
 import { FollowersPage } from '../followers/followers';
 import { Storage } from '@ionic/storage';
 import { DatePicker } from '@ionic-native/date-picker';
@@ -22,9 +24,12 @@ import { Camera } from '@ionic-native/camera';
 import { AngularFireDatabase } from 'angularfire2/database';
 import firebase from 'firebase';
 import { CacheService } from "ionic-cache";
+import { SMS } from '@ionic-native/sms';
 import 'rxjs/add/operator/share';
 var FeedStylist = /** @class */ (function () {
-    function FeedStylist(cache, datePicker, storage, platform, af, element, camera, app, cameraServicePost, actionSheetCtrl, myrenderer, loadingController, navCtrl) {
+    function FeedStylist(modalCtrl, sms, cache, datePicker, storage, platform, af, element, camera, app, cameraServicePost, actionSheetCtrl, myrenderer, loadingController, navCtrl) {
+        this.modalCtrl = modalCtrl;
+        this.sms = sms;
         this.cache = cache;
         this.datePicker = datePicker;
         this.storage = storage;
@@ -43,6 +48,7 @@ var FeedStylist = /** @class */ (function () {
         this.toolbarState = 'up';
         this.toolbarClicks = 0;
         this.items = [];
+        this.items2 = [];
         this.totalCount = 0;
         this.lastNumRows = 0;
         this.classesListArray = [];
@@ -72,6 +78,153 @@ var FeedStylist = /** @class */ (function () {
         };
         this.nav = this.app.getActiveNav();
     }
+    FeedStylist.prototype.beginPurchase = function (identity) {
+        this.navCtrl.push(DropinPage, { username: this.username, key: identity.$key });
+    };
+    FeedStylist.prototype.buyAd = function () {
+        var profileModal = this.modalCtrl.create(BuyAd);
+        profileModal.present();
+    };
+    FeedStylist.prototype.InfiniteAll = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            _this.items = [];
+            _this.listAll();
+            infiniteScroll.complete();
+        }, 500);
+    };
+    FeedStylist.prototype.doInfiniteProduct = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            console.log('Begin async operation');
+            /*console.log(this.content.directionY + "        upupupupupupu********");
+            if(this.content.directionY == 'up') {
+              this.show = false
+            }
+            else {
+              this.show = true;
+            }*/
+            console.log(_this.startAtKey1 + "     before %%^&^&^% start at");
+            _this.list2 = _this.af.list('/products', {
+                query: {
+                    orderByKey: true,
+                    endAt: _this.startAtKey1,
+                    limitToLast: 11
+                }
+            });
+            _this.subscription11 = _this.list2.subscribe(function (items) {
+                var x = 0;
+                _this.lastKey1 = _this.startAtKey1;
+                items.forEach(function (item) {
+                    var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                    storageRef.getDownloadURL().then(function (url) {
+                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                        item.customMetadata.picURL = url;
+                    }).catch(function (e) {
+                        console.log("in caught url !!!!!!!$$$$$$$!!");
+                        item.customMetadata.picURL = 'assets/blankprof.png';
+                    });
+                    if (_this.startAtKey1 !== item.$key && _this.lastKey1 !== item.$key) {
+                        console.log(_this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
+                        _this.productListArray.push(item.customMetadata); //unshift?**************
+                    }
+                    if (x == 0) {
+                        _this.startAtKey1 = item.$key;
+                    }
+                    x++;
+                });
+            });
+            infiniteScroll.complete();
+        }, 500);
+    };
+    FeedStylist.prototype.doInfiniteFormula = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            console.log('Begin async operation');
+            /*console.log(this.content.directionY + "        upupupupupupu********");
+            if(this.content.directionY == 'up') {
+              this.show = false
+            }
+            else {
+              this.show = true;
+            }*/
+            console.log(_this.startAtKey2 + "     before %%^&^&^% start at");
+            _this.list3 = _this.af.list('/formulas', {
+                query: {
+                    orderByKey: true,
+                    endAt: _this.startAtKey2,
+                    limitToLast: 11
+                }
+            });
+            _this.subscription12 = _this.list3.subscribe(function (items) {
+                var x = 0;
+                _this.lastKey2 = _this.startAtKey2;
+                items.forEach(function (item) {
+                    var storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                    storageRef.getDownloadURL().then(function (url) {
+                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                        item.picURL = url;
+                    }).catch(function (e) {
+                        console.log("in caught url !!!!!!!$$$$$$$!!");
+                        item.picURL = 'assets/blankprof.png';
+                    });
+                    if (_this.startAtKey2 !== item.$key && _this.lastKey2 !== item.$key) {
+                        console.log(_this.startAtKey2 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
+                        _this.formulaListArray.push(item); //unshift?**************
+                    }
+                    if (x == 0) {
+                        _this.startAtKey2 = item.$key;
+                    }
+                    x++;
+                });
+            });
+            infiniteScroll.complete();
+        }, 500);
+    };
+    FeedStylist.prototype.doInfiniteClass = function (infiniteScroll) {
+        var _this = this;
+        setTimeout(function () {
+            console.log('Begin async operation');
+            /*console.log(this.content.directionY + "        upupupupupupu********");
+            if(this.content.directionY == 'up') {
+              this.show = false
+            }
+            else {
+              this.show = true;
+            }*/
+            console.log(_this.startAtKey + "     before %%^&^&^% start at");
+            _this.list = _this.af.list('/classes', {
+                query: {
+                    orderByKey: true,
+                    endAt: _this.startAtKey,
+                    limitToLast: 11
+                }
+            });
+            _this.subscription3 = _this.list.subscribe(function (items) {
+                var x = 0;
+                _this.lastKey = _this.startAtKey;
+                items.forEach(function (item) {
+                    var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                    storageRef.getDownloadURL().then(function (url) {
+                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                        item.customMetadata.picURL = url;
+                    }).catch(function (e) {
+                        console.log("in caught url !!!!!!!$$$$$$$!!");
+                        item.customMetadata.picURL = 'assets/blankprof.png';
+                    });
+                    if (_this.startAtKey !== item.$key && _this.lastKey !== item.$key) {
+                        console.log(_this.startAtKey + "   :startatkey before 4444444        item key:     " + item.$key);
+                        _this.classesListArray.push(item.customMetadata); //unshift?**************
+                    }
+                    if (x == 0) {
+                        _this.startAtKey = item.$key;
+                    }
+                    x++;
+                });
+            });
+            infiniteScroll.complete();
+        }, 500);
+    };
     FeedStylist.prototype.ionViewWillUnload = function () {
         //this.navCtrl.pop();
     };
@@ -80,53 +233,108 @@ var FeedStylist = /** @class */ (function () {
         console.log(typeof newObj + "  nnnnnneeeeeewwww     jo boboobbooooooob");
         var date = new Date(newObj);
         console.log(date.getDate() + "     :     " + date.getDay());
-        this.month = this.af.list('/appointments/' + this.username + '/' + date.getMonth());
-        this.subscription7 = this.month.subscribe(function (items) { return items.forEach(function (item) {
+        this.month = this.af.object('/appointments/' + this.username + '/' + date.getMonth());
+        var x = 0;
+        this.subscription7 = this.month.subscribe(function (item) {
             console.log(JSON.stringify(item) + "    got the month");
-            var holderDate = new Date(item.date.day * 1000);
-            console.log(date.getMinutes() + "   date : getmin   " + holderDate.getMinutes());
-            console.log(date.getUTCHours() + "   date : gethours    " + holderDate.getUTCHours());
-            console.log(date.getDate() + "   date : getdate    " + holderDate.getDate());
-            console.log(date.getMonth() + "   date : getmonth    " + holderDate.getMonth());
-            console.log(date.getFullYear() + "   date : getyear    " + holderDate.getFullYear());
-            var boool = false;
-            if (date.getDate() == holderDate.getDate() && date.getMonth() == holderDate.getMonth() && date.getFullYear() == holderDate.getFullYear()) {
-                for (var _i = 0, _a = item.reserved.appointment; _i < _a.length; _i++) {
-                    var x = _a[_i];
-                    var forHold = void 0;
-                    var minUnder = "";
-                    var ampm = void 0;
-                    console.log(date.getUTCHours() + "<number>date.getUTCHours()");
-                    if (date.getUTCHours() > 12) {
-                        forHold = date.getUTCHours() - 12;
-                        ampm = "PM";
+            if (item != null) {
+                var bo = false;
+                var _loop_1 = function (objj) {
+                    if (objj == "$value") {
+                        bo = true;
                     }
                     else {
-                        forHold = date.getUTCHours();
-                        ampm = "AM";
+                        console.log(JSON.stringify(objj));
+                        var holderDate = new Date(item[objj].date.day * 1000);
+                        //console.log(date.getMinutes() + "   date : getmin   " + holderDate.getMinutes());
+                        //console.log(date.getUTCHours() + "   date : gethours    " + holderDate.getUTCHours());
+                        //console.log(date.getDate() + "   date : getdate    " + holderDate.getDate());
+                        //console.log(date.getMonth() + "   date : getmonth    " + holderDate.getMonth());
+                        //console.log(date.getFullYear() + "   date : getyear    " + holderDate.getFullYear());
+                        var boool = false;
+                        var time_1;
+                        if (date.getDate() == holderDate.getDate() && date.getMonth() == holderDate.getMonth() && date.getFullYear() == holderDate.getFullYear()) {
+                            for (var _i = 0, _a = item[objj].reserved.appointment; _i < _a.length; _i++) {
+                                var x_1 = _a[_i];
+                                var forHold = void 0;
+                                var minUnder = "";
+                                var ampm = void 0;
+                                //console.log(<number>date.getUTCHours() + "<number>date.getUTCHours()");
+                                if (date.getUTCHours() > 12) {
+                                    forHold = date.getUTCHours() - 12;
+                                    ampm = "PM";
+                                }
+                                else {
+                                    forHold = date.getUTCHours();
+                                    ampm = "AM";
+                                }
+                                if (date.getMinutes() < 10) {
+                                    minUnder = "0" + date.getMinutes();
+                                }
+                                else {
+                                    minUnder = date.getMinutes().toString();
+                                }
+                                time_1 = forHold + ":" + minUnder + " " + ampm;
+                                console.log(x_1.selected + " selected    " + " xtime:" + x_1.time + "  time  :" + time_1);
+                                if (x_1.time == time_1 && x_1.selected == false) {
+                                    x_1.selected = true;
+                                    boool = true;
+                                    bo = true;
+                                }
+                                //console.log(x.time + "     x.time");
+                                //console.log(time + "     time");
+                                //console.log(date.getUTCHours()+":"+date.getUTCMinutes())
+                                //if(x.time == date.getHours +":"+ date.getMinutes 
+                            }
+                        }
+                        else {
+                            alert("You do not have any entries for this month, please go to your booking page and fill in your availabilities first.");
+                        }
+                        if (boool == true) {
+                            var r = item[objj];
+                            _this.month.update((_b = {}, _b[objj] = { 'date': { 'day': item[objj].date.day }, 'reserved': { 'appointment': item[objj].reserved.appointment } }, _b));
+                            var string1_1 = '';
+                            var promises_array = [];
+                            _this.storage.get('username').then(function (val) {
+                                console.log('in storage');
+                                _this.follow = _this.af.list('/profiles/stylists/' + val + "/followers");
+                                _this.subscription = _this.follow.subscribe(function (items) {
+                                    var mapped = items.map(function (item) {
+                                        return new Promise(function (resolve, reject) {
+                                            console.log(JSON.stringify(item) + " item item item");
+                                            var arr = Object.keys(item);
+                                            console.log(typeof item[arr[0]] + "    type followers");
+                                            string1_1 += (item[arr[0]]) + ", ";
+                                            console.log(string1_1 + " this is string 1");
+                                            resolve();
+                                        });
+                                    });
+                                    Promise.all(mapped).then(function () {
+                                        var month1 = date.getUTCMonth() + 1;
+                                        var date1 = date.getUTCDate();
+                                        console.log(string1_1 + " this is string 1 2");
+                                        _this.sms.send(string1_1, val + " just opened up a spot at " + time_1 + " on " + month1 + "/" + date1 + "!")
+                                            .catch(function (e) { console.log(JSON.stringify(e)); });
+                                    });
+                                });
+                                //boool = false;
+                            });
+                        }
                     }
-                    if (date.getMinutes() < 10) {
-                        minUnder = "0" + date.getMinutes();
-                    }
-                    else {
-                        minUnder = date.getMinutes().toString();
-                    }
-                    var time = forHold + ":" + minUnder + " " + ampm;
-                    if (x.time == time) {
-                        x.selected = false;
-                        boool = true;
-                    }
-                    console.log(x.time + "     x.time");
-                    console.log(time + "     time");
-                    //console.log(date.getUTCHours()+":"+date.getUTCMinutes())
-                    //if(x.time == date.getHours +":"+ date.getMinutes 
+                    var _b;
+                };
+                for (var objj in item) {
+                    _loop_1(objj);
                 }
+                if (bo) {
+                    alert("This spot is already available, or it is in the past.");
+                }
+                x++;
             }
-            if (boool == true) {
-                _this.month.update(item.$key, { 'reserved': { 'appointment': item.reserved.appointment } });
-                boool = false;
+            else {
+                alert("You do not have any entries for this month, or this date is in the past");
             }
-        }); });
+        });
     };
     FeedStylist.prototype.sendIt = function () {
         console.log("sent sent sent setn");
@@ -149,7 +357,7 @@ var FeedStylist = /** @class */ (function () {
                 console.log(JSON.stringify(item) + "in adddd subscribe()()()()()()");
                 console.log(typeof item);
                 _this.totalAdCount = item.$value;
-                var _loop_1 = function (x) {
+                var _loop_2 = function (x) {
                     console.log("in promise gafdfsfads");
                     promises_array.push(new Promise(function (resolve, reject) {
                         var storageRef = firebase.storage().ref().child('/ads/ad' + x + '.png');
@@ -164,7 +372,7 @@ var FeedStylist = /** @class */ (function () {
                     }));
                 };
                 for (var x = 1; x < item.$value + 1; x++) {
-                    _loop_1(x);
+                    _loop_2(x);
                 }
                 var results = Promise.all(promises_array);
                 results.then(function (value) {
@@ -180,7 +388,7 @@ var FeedStylist = /** @class */ (function () {
         });
     };
     FeedStylist.prototype.goSeeProfile = function (item) {
-        this.navCtrl.push(UserProfile, { username: item.username });
+        this.navCtrl.push(UserProfile, { username: item.username }, { animate: true, animation: 'ios-transition', duration: 100 });
     };
     FeedStylist.prototype.tappedPost = function () {
         this.navCtrl.push(PostpagePage);
@@ -198,18 +406,18 @@ var FeedStylist = /** @class */ (function () {
         console.log(this.swiperIndex);
         if (this.swiperSize == 'small' || 'begin') {
             if (this.totalAdCount - 4 == this.swiperIndex) {
-                this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+                this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
             }
             else if (this.swiperIndex == 0) {
-                this.navCtrl.push(FollowersPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
+                this.navCtrl.push(FollowersPage, {}, { animate: true, animation: 'transition', duration: 100, direction: 'back' });
             }
         }
         else {
             if (this.totalAdCount - 1 == this.swiperIndex) {
-                this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+                this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
             }
             else if (this.swiperIndex == 0) {
-                this.navCtrl.push(FollowersPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
+                this.navCtrl.push(FollowersPage, {}, { animate: true, animation: 'transition', duration: 100, direction: 'back' });
             }
         }
     };
@@ -217,13 +425,13 @@ var FeedStylist = /** @class */ (function () {
         this.toProfile();
     };
     FeedStylist.prototype.swipeRight = function () {
-        this.navCtrl.push(FollowersPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        this.navCtrl.push(FollowersPage, {}, { animate: true, animation: 'ios-transition', duration: 100, direction: 'back' });
     };
     FeedStylist.prototype.switchView = function () {
         this.navCtrl.push(FeedUser);
     };
     FeedStylist.prototype.toProfile = function () {
-        this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'ios-transition', duration: 100, direction: 'forward' });
     };
     FeedStylist.prototype.loadPost = function () {
         this.presentActionSheet();
@@ -624,7 +832,9 @@ var FeedStylist = /** @class */ (function () {
             var mapped;
             //this.cache.getItem(cacheKey).catch(() => {
             var store = [];
-            _this.list = _this.af.list('/classes');
+            _this.list = _this.af.list('/classes', { query: {
+                    limitToLast: 10
+                } });
             _this.subscription4 = _this.list.subscribe(function (items) {
                 mapped = items.map(function (item) {
                     return new Promise(function (resolve, reject) {
@@ -646,6 +856,8 @@ var FeedStylist = /** @class */ (function () {
                         //this.startAtKey = item.$key;
                     });
                 });
+                _this.startAtKey = items[0].$key;
+                _this.lastKey = _this.startAtKey;
                 var results = Promise.all(mapped);
                 results.then(function () {
                     //setTimeout(() => {
@@ -673,7 +885,9 @@ var FeedStylist = /** @class */ (function () {
             var mapped;
             //this.cache.getItem(cacheKey).catch(() => {
             var store = [];
-            _this.list1 = _this.af.list('/products');
+            _this.list1 = _this.af.list('/products', { query: {
+                    limitToLast: 10
+                } });
             _this.subscription5 = _this.list1.subscribe(function (items) {
                 mapped = items.map(function (item) {
                     return new Promise(function (resolve, reject) {
@@ -693,6 +907,8 @@ var FeedStylist = /** @class */ (function () {
                         //this.startAtKey = item.$key;
                     });
                 });
+                _this.startAtKey1 = items[0].$key;
+                _this.lastKey1 = _this.startAtKey1;
                 var results = Promise.all(mapped);
                 results.then(function () {
                     //setTimeout(() => {
@@ -718,7 +934,9 @@ var FeedStylist = /** @class */ (function () {
             var mapped;
             //this.cache.getItem(cacheKey).catch(() => {
             var store = [];
-            _this.formulas = _this.af.list('/formulas');
+            _this.formulas = _this.af.list('/formulas', { query: {
+                    limitToLast: 10
+                } });
             _this.subscription8 = _this.formulas.subscribe(function (items) {
                 mapped = items.map(function (item) {
                     console.log(JSON.stringify(item) + "       item being mapped");
@@ -739,8 +957,9 @@ var FeedStylist = /** @class */ (function () {
                         //this.startAtKey = item.$key;
                     });
                 });
-                var results = Promise.all(mapped);
-                results.then(function () {
+                _this.startAtKey2 = items[0].$key;
+                _this.lastKey2 = _this.startAtKey2;
+                Promise.all(mapped).then(function () {
                     //setTimeout(() => {
                     _this.formulaListArray = store.reverse();
                     console.log(JSON.stringify(_this.formulaListArray) + " value value vlaue productlistarray");
@@ -812,8 +1031,9 @@ var FeedStylist = /** @class */ (function () {
         console.log(JSON.stringify(this.items) + " this.items.sort after 999999");
     };
     FeedStylist.prototype.ngOnDestroy = function () {
-        //this.subscription.unsubscribe();
-        //this.subscription2.unsubscribe();
+        if (this.subscription3 != null) {
+            this.subscription3.unsubscribe();
+        }
         if (this.subscription4 != null) {
             this.subscription4.unsubscribe();
         }
@@ -829,6 +1049,9 @@ var FeedStylist = /** @class */ (function () {
         if (this.subscription8 != null) {
             this.subscription8.unsubscribe();
         }
+        if (this.subscription11 != null) {
+            this.subscription11.unsubscribe();
+        }
     };
     FeedStylist.prototype.doInfinite = function () {
         console.log('Begin async operation');
@@ -837,7 +1060,7 @@ var FeedStylist = /** @class */ (function () {
             data.append('page', this.totalCount.toString());*/
             resolve();
             /*this.http
-              .post('http://me.eamondev.com/maneappback/more-items.php', data)
+              .post('http://192.168.1.131:8888/maneappback/more-items.php', data)
                 .subscribe(res => {
                   //console.log(JSON.stringify(res));
                   //let response = JSON.stringify(res);
@@ -879,7 +1102,7 @@ var FeedStylist = /** @class */ (function () {
         console.log("constructed");
     
         this.http
-          .post('http://me.eamondev.com/maneappback/more-items-refresher.php', data)
+          .post('http://192.168.1.131:8888/maneappback/more-items-refresher.php', data)
             .subscribe(res => {
               console.log('getInitialImages completed ***********');
     
@@ -1049,6 +1272,10 @@ var FeedStylist = /** @class */ (function () {
         ViewChildren('caption4'),
         __metadata("design:type", QueryList)
     ], FeedStylist.prototype, "captionComponents4", void 0);
+    __decorate([
+        ViewChild(Content),
+        __metadata("design:type", Content)
+    ], FeedStylist.prototype, "content", void 0);
     FeedStylist = __decorate([
         Component({
             selector: 'page-feed-stylist',
@@ -1092,7 +1319,7 @@ var FeedStylist = /** @class */ (function () {
                 ]),
             ]
         }),
-        __metadata("design:paramtypes", [CacheService, DatePicker, Storage, Platform, AngularFireDatabase, ElementRef, Camera, App, CameraServicePost, ActionSheetController, Renderer, LoadingController, NavController])
+        __metadata("design:paramtypes", [ModalController, SMS, CacheService, DatePicker, Storage, Platform, AngularFireDatabase, ElementRef, Camera, App, CameraServicePost, ActionSheetController, Renderer, LoadingController, NavController])
     ], FeedStylist);
     return FeedStylist;
 }());

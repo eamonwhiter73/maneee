@@ -36,7 +36,7 @@ var PostpagePage = /** @class */ (function () {
         this.myrenderer = myrenderer;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.item = { 'date': null, 'title': 'asdfasdf', 'price': '44', 'caption': 'asdfasdfasdfasdf', 'typeofselect': 'Post' };
+        this.item = { 'date': null, 'title': '', 'price': '', 'caption': '', 'typeofselect': 'Post' };
         this.optionsGetMedia = {
             allowEdit: false,
             quality: 2,
@@ -163,7 +163,11 @@ var PostpagePage = /** @class */ (function () {
         this.myrenderer.setElementStyle(this.title.nativeElement, 'display', 'block');
         this.imageHolder = this.navParams.get("path");
         console.log(this.imageHolder + " imageholder imagehodl a pefsj'aes");
-        this.myrenderer.setElementAttribute(this.image.nativeElement, 'src', this.imageHolder);
+        if (this.imageHolder != null) {
+            this.myrenderer.setElementAttribute(this.image.nativeElement, 'src', this.imageHolder);
+        }
+        else {
+        }
         this.subscription = this.keyboard.onKeyboardShow().subscribe(function () {
             _this.myrenderer.setElementStyle(_this.share.getNativeElement(), 'bottom', '-150px');
         });
@@ -293,7 +297,7 @@ var PostpagePage = /** @class */ (function () {
         var image = 'product_' + this.username + '_' + new Date() + '.png', storageRef, parseUpload;
         return new Promise(function (resolve, reject) {
             storageRef = firebase.storage().ref('/products/' + image);
-            parseUpload = storageRef.putString(_this.imageHolder, 'data_url');
+            parseUpload = storageRef.putString(_this.image.nativeElement.src, 'data_url');
             parseUpload.on('state_changed', function (_snapshot) {
                 // We could log the progress here IF necessary
                 console.log('snapshot progess ' + _snapshot);
@@ -344,7 +348,7 @@ var PostpagePage = /** @class */ (function () {
         console.log(this.item.caption);
         console.log(this.item.price);
         console.log(this.item.date);
-        console.log(this.imageHolder + "                    **************************** src ****************");
+        console.log(this.image.nativeElement.src + "                    **************************** src ****************");
         console.log("****&*&&*&*&*&*&*          " + this.item.typeofselect);
         if (this.item.typeofselect == "Post") {
             if (this.item.title == '' || this.item.caption == '' || this.image.nativeElement.src == null) {

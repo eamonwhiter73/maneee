@@ -30,6 +30,7 @@ export class DropinPage {
     let square = this.navParams.get('square');
     let username = this.navParams.get('username');
     let comingFrom = this.navParams.get('page');
+    let key = this.navParams.get('key');
 
     var button = document.querySelector('#submit-button');
 
@@ -50,18 +51,23 @@ export class DropinPage {
               this.blurAll();
               if(comingFrom == 'userprofile') {
               	let profileModal = this.modalCtrl.create(DepositPage, { payload: payload, username: username });
-	  			  profileModal.present().then(() => {
-	  			  	this.navCtrl.pop();
-	  			  });
+    	  			  profileModal.present().then(() => {
+    	  			  	this.navCtrl.pop();
+    	  			  });
               }
-              else if(comingFrom == null) {
+              else if(comingFrom == null && key == null) {
 	              let profileModal = this.modalCtrl.create(FormulaBuy, { username: username, square: square, payload: payload});
-	  			  profileModal.present();
-	  			  this.navCtrl.pop();
-	  		  }
-	  		  else {
-	  		  	//Add product code here
-	  		  }
+    	  			  profileModal.present();
+    	  			  this.navCtrl.pop();
+    	  		  }
+              else if(key != null) {
+                let profileModal = this.modalCtrl.create(FormulaBuy, { username: username, key: key, payload: payload});
+                profileModal.present();
+                this.navCtrl.pop();
+              }
+    	  		  else {
+    	  		  	//Add product code here
+    	  		  }
             });
           });
         });

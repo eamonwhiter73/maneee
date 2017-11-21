@@ -16,6 +16,7 @@ import { Storage } from '@ionic/storage';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { LoadingController } from 'ionic-angular';
 import { NgCalendarModule } from 'ionic2-calendar';
+import { SMS } from '@ionic-native/sms';
 /**
  * Generated class for the BookingPage page.
  *
@@ -23,7 +24,8 @@ import { NgCalendarModule } from 'ionic2-calendar';
  * on Ionic pages and navigation.
  */
 var BookingPage = /** @class */ (function () {
-    function BookingPage(elRef, myrenderer, loadingController, storage, navCtrl, navParams, af) {
+    function BookingPage(sms, elRef, myrenderer, loadingController, storage, navCtrl, navParams, af) {
+        this.sms = sms;
         this.elRef = elRef;
         this.myrenderer = myrenderer;
         this.loadingController = loadingController;
@@ -39,26 +41,38 @@ var BookingPage = /** @class */ (function () {
         this.appointments = [];
         this.datesToSelect = [];
     }
-    BookingPage.prototype.ionViewDidLoad = function () {
-        this.times = [{ 'time': '8:00 AM', 'selected': false }, { 'time': '8:30 AM', 'selected': false }, { 'time': '9:00 AM', 'selected': false },
-            { 'time': '9:30 AM', 'selected': false }, { 'time': '10:00 AM', 'selected': false }, { 'time': '10:30 AM', 'selected': false },
-            { 'time': '11:00 AM', 'selected': false }, { 'time': '11:30 AM', 'selected': false }, { 'time': '12:00 PM', 'selected': false },
-            { 'time': '12:30 PM', 'selected': false }, { 'time': '1:00 PM', 'selected': false }, { 'time': '1:30 PM', 'selected': false },
-            { 'time': '2:00 PM', 'selected': false }, { 'time': '2:30 PM', 'selected': false }, { 'time': '3:00 PM', 'selected': false },
-            { 'time': '3:30 PM', 'selected': false }, { 'time': '4:00 PM', 'selected': false }, { 'time': '4:30 PM', 'selected': false },
-            { 'time': '5:00 PM', 'selected': false }, { 'time': '5:30 PM', 'selected': false }, { 'time': '6:00 PM', 'selected': false },
-            { 'time': '6:30 PM', 'selected': false }, { 'time': '7:00 PM', 'selected': false }, { 'time': '7:30 PM', 'selected': false }
-        ];
-    };
     BookingPage.prototype.selectArrowRight = function () {
         console.log("month view component   *******  ******8    " + JSON.stringify(NgCalendarModule));
     };
     BookingPage.prototype.emergency = function (i) {
-        console.log(this.slots);
+        var _this = this;
+        console.log(JSON.stringify(i) + " this is i in emergency");
         var slotsarray = this.slots.toArray();
-        this.myrenderer.setElementStyle(slotsarray[i]._elementRef.nativeElement, 'background-color', 'red');
+        this.myrenderer.setElementStyle(slotsarray[i].nativeElement, 'background-color', 'red');
         this.times[i].selected = true;
-        alert("Mane Emergency text sent to followers.");
+        var string1 = '';
+        console.log('in emergency');
+        this.follow = this.af.list('/profiles/stylists/' + this.username + "/followers");
+        this.subscription4 = this.follow.subscribe(function (items) {
+            var mapped = items.map(function (item) {
+                return new Promise(function (resolve, reject) {
+                    console.log(JSON.stringify(item) + " item item item");
+                    var arr = Object.keys(item);
+                    console.log(typeof item[arr[0]] + "    type followers");
+                    string1 += (item[arr[0]]) + ", ";
+                    console.log(string1 + " this is string 1");
+                    resolve();
+                });
+            });
+            Promise.all(mapped).then(function () {
+                //let month1 = date.getUTCMonth() + 1;
+                //let date1 = date.getUTCDate();
+                console.log(string1 + " this is string 1 2");
+                _this.sms.send(string1, _this.username + " just opened up a spot at " + _this.times[i].time + " on " + _this.viewTitle + " " + _this.viewDate.getUTCDate() + "!").then(function () {
+                    alert("Press SAVE to update your calendar with the new time.");
+                }).catch(function (e) { console.log(JSON.stringify(e)); });
+            });
+        });
     };
     BookingPage.prototype.swipe = function (e, when) {
         var coord = [e.changedTouches[0].pageX, e.changedTouches[0].pageY];
@@ -175,12 +189,12 @@ var BookingPage = /** @class */ (function () {
         this.username = val;
     };
     BookingPage.prototype.goToFeed = function () {
-        this.navCtrl.push(FeedStylist, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.push(FeedStylist, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
     };
     BookingPage.prototype.goToProfile = function () {
         //this.loading = this.loadingController.create({content : "Loading..."});
         //this.loading.present();
-        this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 100, direction: 'back' });
     };
     BookingPage.prototype.ionViewWillLeave = function () {
         //this.loading.dismiss()
@@ -195,10 +209,19 @@ var BookingPage = /** @class */ (function () {
       this.getData(val);
     });*/
     //}
-    BookingPage.prototype.ionViewDidEnter = function () {
+    BookingPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         //let loading = this.loadingController.create({content : "Loading..."});
         //loading.present();
+        this.times = [{ 'time': '8:00 AM', 'selected': false }, { 'time': '8:30 AM', 'selected': false }, { 'time': '9:00 AM', 'selected': false },
+            { 'time': '9:30 AM', 'selected': false }, { 'time': '10:00 AM', 'selected': false }, { 'time': '10:30 AM', 'selected': false },
+            { 'time': '11:00 AM', 'selected': false }, { 'time': '11:30 AM', 'selected': false }, { 'time': '12:00 PM', 'selected': false },
+            { 'time': '12:30 PM', 'selected': false }, { 'time': '1:00 PM', 'selected': false }, { 'time': '1:30 PM', 'selected': false },
+            { 'time': '2:00 PM', 'selected': false }, { 'time': '2:30 PM', 'selected': false }, { 'time': '3:00 PM', 'selected': false },
+            { 'time': '3:30 PM', 'selected': false }, { 'time': '4:00 PM', 'selected': false }, { 'time': '4:30 PM', 'selected': false },
+            { 'time': '5:00 PM', 'selected': false }, { 'time': '5:30 PM', 'selected': false }, { 'time': '6:00 PM', 'selected': false },
+            { 'time': '6:30 PM', 'selected': false }, { 'time': '7:00 PM', 'selected': false }, { 'time': '7:30 PM', 'selected': false }
+        ];
         this.isSomething = true;
         this.tds = this.elRef.nativeElement.querySelectorAll('td[tappable]');
         this.storage.get('username').then(function (val) {
@@ -334,6 +357,9 @@ var BookingPage = /** @class */ (function () {
         if (this.subscription3 != null) {
             this.subscription3.unsubscribe();
         }
+        if (this.subscription4 != null) {
+            this.subscription4.unsubscribe();
+        }
     };
     BookingPage.prototype.reloadSource = function (startTime, endTime) {
         console.log(startTime + " : starttime           endtime: " + endTime);
@@ -424,7 +450,7 @@ var BookingPage = /** @class */ (function () {
             selector: 'page-booking',
             templateUrl: 'booking.html',
         }),
-        __metadata("design:paramtypes", [ElementRef, Renderer, LoadingController, Storage, NavController, NavParams, AngularFireDatabase])
+        __metadata("design:paramtypes", [SMS, ElementRef, Renderer, LoadingController, Storage, NavController, NavParams, AngularFireDatabase])
     ], BookingPage);
     return BookingPage;
 }());

@@ -29,7 +29,8 @@ import { FullfeedPage } from '../fullfeed/fullfeed';
 import { CacheService } from 'ionic-cache';
 var limit = new BehaviorSubject(2); // import 'rxjs/BehaviorSubject';
 var FeedUser = /** @class */ (function () {
-    function FeedUser(cache, diagnostic, nativeGeocoder, geolocation, zone, modalCtrl, af, storage, afAuth, renderer, loadingController, navCtrl) {
+    function FeedUser(elRef, cache, diagnostic, nativeGeocoder, geolocation, zone, modalCtrl, af, storage, afAuth, renderer, loadingController, navCtrl) {
+        this.elRef = elRef;
         this.cache = cache;
         this.diagnostic = diagnostic;
         this.nativeGeocoder = nativeGeocoder;
@@ -64,6 +65,208 @@ var FeedUser = /** @class */ (function () {
         this.ads = [];
         this.swiperSize = 'begin';
     }
+    FeedUser.prototype.loadModal = function (salon) {
+        var profileModal = this.modalCtrl.create(PopUpOther, { salon: salon });
+        profileModal.present();
+    };
+    FeedUser.prototype.doInfinite = function (infiniteScroll) {
+        var _this = this;
+        console.log("in doinfinite promotionsssssss");
+        setTimeout(function () {
+            console.log('Begin async operation');
+            /*console.log(this.content.directionY + "        upupupupupupu********");
+            if(this.content.directionY == 'up') {
+              this.show = false
+            }
+            else {
+              this.show = true;
+            }*/
+            console.log(_this.startAtKey1 + "     before %%^&^&^% start at");
+            _this.list2 = _this.af.list('/promotions', {
+                query: {
+                    orderByKey: true,
+                    endAt: _this.startAtKey1,
+                    limitToLast: 11
+                }
+            });
+            _this.subscription11 = _this.list2.subscribe(function (items) {
+                var x = 0;
+                _this.lastKey1 = _this.startAtKey1;
+                items.forEach(function (item) {
+                    var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                    storageRef.getDownloadURL().then(function (url) {
+                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                        item.customMetadata.picURL = url;
+                    }).catch(function (e) {
+                        console.log("in caught url !!!!!!!$$$$$$$!!");
+                        item.customMetadata.picURL = 'assets/blankprof.png';
+                    });
+                    if (_this.startAtKey1 !== item.$key && _this.lastKey1 !== item.$key) {
+                        console.log(_this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
+                        if (item.customMetadata.username != null) {
+                            _this.promotions.push(item.customMetadata); //unshift?**************
+                        }
+                    }
+                    if (x == 0) {
+                        _this.startAtKey1 = item.$key;
+                    }
+                    x++;
+                });
+            });
+            infiniteScroll.complete();
+        }, 500);
+    };
+    FeedUser.prototype.doInfiniteP = function () {
+        var _this = this;
+        console.log("in doinfinite promotionsssssss");
+        setTimeout(function () {
+            console.log('Begin async operation');
+            /*console.log(this.content.directionY + "        upupupupupupu********");
+            if(this.content.directionY == 'up') {
+              this.show = false
+            }
+            else {
+              this.show = true;
+            }*/
+            console.log(_this.startAtKey2 + "     before %%^&^&^% start at");
+            _this.list4 = _this.af.list('/profiles/stylists', {
+                query: {
+                    orderByKey: true,
+                    endAt: _this.startAtKey2,
+                    limitToLast: 11
+                }
+            });
+            _this.subscription12 = _this.list4.subscribe(function (items) {
+                var x = 0;
+                console.log(JSON.stringify(items[0]) + "     items 00000000000000");
+                _this.lastKey2 = _this.startAtKey2;
+                items.forEach(function (item) {
+                    var storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                    storageRef.getDownloadURL().then(function (url) {
+                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                        item.picURL = url;
+                    }).catch(function (e) {
+                        console.log("in caught url !!!!!!!$$$$$$$!!");
+                        item.picURL = 'assets/blankprof.png';
+                    });
+                    if (_this.startAtKey2 !== item.$key && _this.lastKey2 !== item.$key) {
+                        console.log(_this.startAtKey2 + "   :startAtKey2:");
+                        console.log(item.$key + "   :itemkey:");
+                        console.log(_this.lastKey2 + "   :lastkey:");
+                        if (item.price != null) {
+                            _this.pricesArray.push(item); //unshift?**************
+                        }
+                    }
+                    if (x == 0) {
+                        _this.startAtKey2 = item.$key;
+                    }
+                    x++;
+                });
+            });
+            _this.pricesArray.sort(function (a, b) {
+                return b.price.length - a.price.length;
+            });
+            //infiniteScroll.complete(); 
+        }, 500);
+    };
+    FeedUser.prototype.doInfiniteR = function () {
+        var _this = this;
+        console.log("in doinfinite promotionsssssss");
+        setTimeout(function () {
+            console.log('Begin async operation');
+            /*console.log(this.content.directionY + "        upupupupupupu********");
+            if(this.content.directionY == 'up') {
+              this.show = false
+            }
+            else {
+              this.show = true;
+      
+            }*/
+            console.log(_this.startAtKey3 + "     before startatkey3 start at 67767676765676765757");
+            _this.list5 = _this.af.list('/profiles/stylists', {
+                query: {
+                    orderByKey: true,
+                    endAt: _this.startAtKey3,
+                    limitToLast: 11
+                }
+            });
+            _this.subscription13 = _this.list5.subscribe(function (items) {
+                var x = 0;
+                console.log(JSON.stringify(items[0]) + "     items 00000000000000");
+                _this.lastKey3 = _this.startAtKey3;
+                console.log(_this.lastKey3 + " lastkey3333333333333asdfasdasdfasdfweew32323223fasdfasdf beginning");
+                items.forEach(function (item) {
+                    var storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                    storageRef.getDownloadURL().then(function (url) {
+                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                        item.picURL = url;
+                    }).catch(function (e) {
+                        console.log("in caught url !!!!!!!$$$$$$$!!");
+                        item.picURL = 'assets/blankprof.png';
+                    });
+                    if (item.rating.one == 0 && item.rating.two == 0 && item.rating.three == 0 && item.rating.four == 0 && item.rating.five == 0) {
+                        _this.stars = "No ratings";
+                    }
+                    else {
+                        console.log("making the stars");
+                        var totalPotential = void 0;
+                        var ratings = void 0;
+                        totalPotential = item.rating.one * 5 + item.rating.two * 5 + item.rating.three * 5 + item.rating.four * 5 + item.rating.five * 5;
+                        ratings = item.rating.one + item.rating.two * 2 + item.rating.three * 3 + item.rating.four * 4 + item.rating.five * 5;
+                        var i = (ratings / totalPotential) * 100;
+                        if (Math.round(i) <= 20) {
+                            _this.stars = '\u2605';
+                        }
+                        if (Math.round(i) > 20 && Math.round(i) <= 40) {
+                            _this.stars = '\u2605\u2605';
+                        }
+                        if (Math.round(i) > 40 && Math.round(i) <= 60) {
+                            _this.stars = '\u2605\u2605\u2605';
+                        }
+                        if (Math.round(i) > 60 && Math.round(i) <= 80) {
+                            _this.stars = '\u2605\u2605\u2605\u2605';
+                        }
+                        if (Math.round(i) > 80) {
+                            _this.stars = '\u2605\u2605\u2605\u2605\u2605';
+                        }
+                    }
+                    item.stars = _this.stars;
+                    //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+                    if (_this.startAtKey3 !== item.$key && _this.lastKey3 !== item.$key) {
+                        console.log(_this.startAtKey3 + "   :startAtKey3 being pushed       item key:     " + item.$key);
+                        if (item.username != null) {
+                            _this.rating.push(item); //unshift?**************
+                        }
+                    }
+                    if (x == 0) {
+                        _this.startAtKey3 = item.$key;
+                    }
+                    console.log(_this.startAtKey3 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
+                    console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
+                    x++;
+                });
+            });
+            _this.rating.sort(function (a, b) {
+                if (a.stars !== "No ratings" && b.stars !== "No ratings") {
+                    if (a.stars === b.stars) {
+                        return 0;
+                    }
+                    else {
+                        return a.stars.length < b.stars.length ? 1 : -1;
+                    }
+                }
+                else {
+                    if (a.stars === "No ratings") {
+                        return 1;
+                    }
+                    else if (b.stars === "No ratings") {
+                        return -1;
+                    }
+                }
+            });
+            //infiniteScroll.complete(); 
+        }, 500);
+    };
     FeedUser.prototype.getAds = function () {
         var _this = this;
         var promises_array = [];
@@ -110,7 +313,7 @@ var FeedUser = /** @class */ (function () {
         console.log(this.swiperIndex);
         if (this.swiperSize == 'small' || 'begin') {
             if (this.totalAdCount - 4 == this.swiperIndex) {
-                this.navCtrl.push(UserProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+                this.navCtrl.push(UserProfile, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
             }
             else if (this.swiperIndex == 0) {
                 //this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:100,direction:'back'});
@@ -118,7 +321,7 @@ var FeedUser = /** @class */ (function () {
         }
         else {
             if (this.totalAdCount - 1 == this.swiperIndex) {
-                this.navCtrl.push(UserProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+                this.navCtrl.push(UserProfile, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
             }
             else if (this.swiperIndex == 0) {
                 //this.navCtrl.push(FollowersPage,{},{animate:true,animation:'transition',duration:100,direction:'back'});
@@ -128,20 +331,20 @@ var FeedUser = /** @class */ (function () {
     FeedUser.prototype.swipeLeft = function () {
         this.navCtrl.push(UserViewProfile, {
             param1: 'user'
-        }, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        }, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
     };
     FeedUser.prototype.toUserBooking = function () {
     };
     FeedUser.prototype.toProfile = function () {
-        this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.push(StylistProfile, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
     };
     FeedUser.prototype.toFull = function () {
-        this.navCtrl.push(FullfeedPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        this.navCtrl.push(FullfeedPage, {}, { animate: true, animation: 'transition', duration: 100, direction: 'back' });
     };
     FeedUser.prototype.toBooking = function () {
         this.navCtrl.push(UserBooking, {
             param1: 'user'
-        }, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        }, { animate: true, animation: 'transition', duration: 100, direction: 'back' });
     };
     FeedUser.prototype.ngOnDestroy = function () {
         if (this.subscription != null) {
@@ -173,6 +376,12 @@ var FeedUser = /** @class */ (function () {
         }
         if (this.subscription10 != null) {
             this.subscription10.unsubscribe();
+        }
+        if (this.subscription11 != null) {
+            this.subscription11.unsubscribe();
+        }
+        if (this.subscription12 != null) {
+            this.subscription12.unsubscribe();
         }
     };
     FeedUser.prototype.pushPage = function () {
@@ -313,19 +522,25 @@ var FeedUser = /** @class */ (function () {
     FeedUser.prototype.loadPromotions = function () {
         var _this = this;
         console.log("In loadPromotions fdskkfdskldfkfdslkfds");
-        this.prom = this.af.list('/promotions');
+        this.prom = this.af.list('/promotions', { query: {
+                limitToLast: 14
+            } });
         this.promotions = [];
-        this.subscription10 = this.prom.subscribe(function (items) { return items.forEach(function (item) {
-            //mapped = items.map((item) => {
-            //return new Promise(resolve => {
-            _this.promotions.push(item.customMetadata);
-            console.log("pushing ITEM (((((()()()()()() promotions" + JSON.stringify(item.customMetadata));
-            //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-            //})  
-            //})
-        }); });
+        this.subscription10 = this.prom.subscribe(function (items) {
+            _this.startAtKey1 = items[0].$key;
+            _this.lastKey1 = _this.startAtKey1;
+            items.forEach(function (item) {
+                //mapped = items.map((item) => {
+                //return new Promise(resolve => {
+                _this.promotions.push(item.customMetadata);
+                console.log("pushing ITEM (((((()()()()()() promotions" + JSON.stringify(item.customMetadata));
+                //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+                //})  
+                //})
+            });
+        });
         if (this.promotions != []) {
-            this.renderer.setElementStyle(this.noavail._elementRef.nativeElement, 'display', 'none');
+            //this.renderer.setElementStyle(this.noavail._elementRef.nativeElement, 'display', 'none');
         }
     };
     FeedUser.prototype.loadPrices = function () {
@@ -338,27 +553,33 @@ var FeedUser = /** @class */ (function () {
         //let array = [];
         this.prices = this.af.list('/profiles/stylists', {
             query: {
-                orderByChild: 'price'
+                orderByChild: 'price',
+                limitToLast: 10
             }
         });
-        this.subscription5 = this.prices.subscribe(function (items) { return items.forEach(function (item) {
-            //mapped = items.map((item) => {
-            //return new Promise(resolve => {
-            if (item.price == null) {
-                //
-            }
-            else {
-                console.log(JSON.stringify(item));
-                if (!item.picURL) {
-                    item.picURL = 'assets/blankprof.png';
+        this.subscription5 = this.prices.subscribe(function (items) {
+            _this.startAtKey2 = items[0].$key;
+            _this.lastKey2 = _this.startAtKey2;
+            items.forEach(function (item) {
+                //mapped = items.map((item) => {
+                //return new Promise(resolve => {
+                if (item.price == null) {
+                    //
                 }
-                _this.pricesArray.push(item);
-                console.log("     pushing ITEM (((((()()()()()() loadprices");
-                //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-            }
-            //})  
-            //})
-        }); });
+                else {
+                    console.log(JSON.stringify(item));
+                    if (!item.picURL) {
+                        item.picURL = 'assets/blankprof.png';
+                    }
+                    if (item.price !== undefined) {
+                        _this.pricesArray.push(item); //unshift?**************
+                    }
+                    //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+                }
+                //})  
+                //})
+            });
+        });
         //results2 = Promise.all(mapped);
         //results2.then(() => {  
         //this.pricesArray = array;
@@ -377,8 +598,15 @@ var FeedUser = /** @class */ (function () {
             var results;
             var array = [];
             //this.cache.getItem(cacheKey).catch(() => {
-            _this.ratingslist = _this.af.list('/profiles/stylists');
+            _this.ratingslist = _this.af.list('/profiles/stylists', { query: {
+                    orderByKey: true,
+                    limitToLast: 10
+                } });
             _this.subscription7 = _this.ratingslist.subscribe(function (items) {
+                _this.startAtKey3 = items[0].$key;
+                _this.lastKey3 = _this.startAtKey3;
+                console.log(_this.startAtKey3 + " startatkey3333333333333 beginning");
+                console.log(_this.lastKey3 + " lastkey3333333333333asdfasdfasdfasdf beginning");
                 mapped = items.map(function (item) {
                     return new Promise(function (resolve) {
                         if (!item.picURL) {
@@ -405,6 +633,71 @@ var FeedUser = /** @class */ (function () {
     };
     FeedUser.prototype.ionViewDidLoad = function () {
         var _this = this;
+        setTimeout(function () {
+            _this.renderer.setElementStyle(_this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '43%');
+        }, 500);
+        var element = this.elRef.nativeElement.querySelector('.scroll-content');
+        element.addEventListener('scroll', function (event) {
+            var element = event.target;
+            if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+                console.log('scrolled');
+                if (_this.weekly.nativeElement.style.display != 'none') {
+                    console.log("in doinfinite promotionsssssss");
+                    setTimeout(function () {
+                        /*console.log('Begin async operation');
+                        console.log(this.content.directionY + "        upupupupupupu********");
+                        if(this.content.directionY == 'up') {
+                          this.show = false
+                        }
+                        else {
+                          this.show = true;
+                        }*/
+                        console.log(_this.startAtKey1 + "     before %%^&^&^% start at");
+                        _this.list2 = _this.af.list('/promotions', {
+                            query: {
+                                orderByKey: true,
+                                endAt: _this.startAtKey1,
+                                limitToLast: 11
+                            }
+                        });
+                        _this.subscription11 = _this.list2.subscribe(function (items) {
+                            var x = 0;
+                            _this.lastKey1 = _this.startAtKey1;
+                            items.forEach(function (item) {
+                                var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                                storageRef.getDownloadURL().then(function (url) {
+                                    console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                                    item.customMetadata.picURL = url;
+                                }).catch(function (e) {
+                                    console.log("in caught url !!!!!!!$$$$$$$!!");
+                                    item.customMetadata.picURL = 'assets/blankprof.png';
+                                });
+                                if (_this.startAtKey1 !== item.$key && _this.lastKey1 !== item.$key) {
+                                    console.log(_this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
+                                    if (item.customMetadata.username != null) {
+                                        _this.promotions.push(item.customMetadata); //unshift?**************
+                                    }
+                                }
+                                if (x == 0) {
+                                    _this.startAtKey1 = item.$key;
+                                }
+                                x++;
+                            });
+                        });
+                        //infiniteScroll.complete(); 
+                    }, 500);
+                }
+                else if (_this.price.nativeElement.style.display != 'none') {
+                    _this.doInfiniteP();
+                }
+                else if (_this.ratingbox.nativeElement.style.display != 'none') {
+                    _this.doInfiniteR();
+                }
+            }
+        });
+        //setTimeout(() => {
+        //div.style.marginTop = "-47%";
+        //}, 1000);
         this.loadAvailabilities().then(function () {
         });
         var ratings;
@@ -624,16 +917,21 @@ var FeedUser = /** @class */ (function () {
         this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
         this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
         //this.renderer.setElementStyle(this.promos.nativeElement, 'color', 'gray');
+        this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '6%');
         this.renderer.setElementStyle(this.price.nativeElement, 'display', 'block');
         //this.renderer.setElementStyle(this.contentOne.nativeElement, 'display', 'none');
         this.renderer.setElementStyle(this.availability.nativeElement, 'display', 'none');
         this.renderer.setElementStyle(this.ratingbox.nativeElement, 'display', 'none');
         this.renderer.setElementStyle(this.weekly.nativeElement, 'display', 'none');
         this.renderer.setElementStyle(this.distancey.nativeElement, 'display', 'none');
+        //setTimeout(() => {
+        //this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '-47%');
+        //}, 1000);
         this.dropDown();
     };
     FeedUser.prototype.dropDownR = function () {
         this.changeText.nativeElement.innerHTML = "Rating";
+        this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '6%');
         this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
         this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
         //this.renderer.setElementStyle(this.promos.nativeElement, 'color', 'gray');
@@ -732,51 +1030,6 @@ var FeedUser = /** @class */ (function () {
         }, 2000);*/
         //})
     };
-    FeedUser.prototype.doInfinite = function (infiniteScroll) {
-        var _this = this;
-        console.log('Begin async operation');
-        console.log(this.content.directionY + "        upupupupupupu********");
-        if (this.content.directionY == 'up') {
-            this.show = false;
-        }
-        else {
-            this.show = true;
-        }
-        //return new Promise((resolve, reject) => {
-        setTimeout(function () {
-            console.log(_this.startAtKey + "     before %%^&^&^% start at");
-            _this.list = _this.af.list('/promos', {
-                query: {
-                    orderByKey: true,
-                    endAt: _this.startAtKey,
-                    limitToLast: 11
-                }
-            });
-            _this.list.subscribe(function (items) {
-                var x = 0;
-                _this.lastKey = _this.startAtKey;
-                items.forEach(function (item) {
-                    var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
-                    storageRef.getDownloadURL().then(function (url) {
-                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                        item.customMetadata.picURL = url;
-                    }).catch(function (e) {
-                        console.log("in caught url !!!!!!!$$$$$$$!!");
-                        item.customMetadata.picURL = 'assets/blankprof.png';
-                    });
-                    if (_this.startAtKey !== item.$key && _this.lastKey !== item.$key) {
-                        console.log(_this.startAtKey + "   :startatkey before 4444444        item key:     " + item.$key);
-                        _this.items.push(item.customMetadata);
-                    }
-                    if (x == 0) {
-                        _this.startAtKey = item.$key;
-                    }
-                    x++;
-                });
-            });
-            infiniteScroll.complete();
-        }, 500);
-    };
     __decorate([
         ViewChild('changeText'),
         __metadata("design:type", ElementRef)
@@ -818,6 +1071,10 @@ var FeedUser = /** @class */ (function () {
         __metadata("design:type", Object)
     ], FeedUser.prototype, "noavail", void 0);
     __decorate([
+        ViewChild('infinitescroll'),
+        __metadata("design:type", ElementRef)
+    ], FeedUser.prototype, "infinitescroll", void 0);
+    __decorate([
         ViewChild(Content),
         __metadata("design:type", Content)
     ], FeedUser.prototype, "content", void 0);
@@ -840,7 +1097,7 @@ var FeedUser = /** @class */ (function () {
                         top: 200 + "px",
                     })),
                     state('up', style({
-                        top: 38 + "px",
+                        top: 0 + "px",
                     })),
                     transition('* => *', animate('400ms ease-in')),
                 ]),
@@ -873,7 +1130,7 @@ var FeedUser = /** @class */ (function () {
                 ]),
             ]
         }),
-        __metadata("design:paramtypes", [CacheService, Diagnostic, NativeGeocoder, Geolocation, NgZone, ModalController, AngularFireDatabase, Storage, AngularFireAuth, Renderer, LoadingController, NavController])
+        __metadata("design:paramtypes", [ElementRef, CacheService, Diagnostic, NativeGeocoder, Geolocation, NgZone, ModalController, AngularFireDatabase, Storage, AngularFireAuth, Renderer, LoadingController, NavController])
     ], FeedUser);
     return FeedUser;
 }());

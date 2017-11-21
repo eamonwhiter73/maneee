@@ -22,6 +22,7 @@ import { FeedStylist } from '../feedstylist/feedstylist';
 import { FeedUser } from '../feeduser/feeduser';
 import { SignInPage } from '../signin/signin';
 import { UserViewProfile } from '../userviewprofile/userviewprofile';
+import { FormulasPage } from '../formulas/formulas';
 import { MapPage } from '../map/map';
 import { Facebook } from '@ionic-native/facebook';
 /**
@@ -48,6 +49,9 @@ var SettingsPage = /** @class */ (function () {
         this.priceRanges = ['<100', '100-149', '150-199', '200-249', '250-300'];
         this.loggedIn = false;
         this.linked = "Link Profile";
+        this.merchantid = "";
+        this.publickey = "";
+        this.privatekey = "";
         this.optionsGetMedia = {
             allowEdit: false,
             quality: 10,
@@ -69,6 +73,9 @@ var SettingsPage = /** @class */ (function () {
             saveToPhotoAlbum: true
         };
     }
+    SettingsPage.prototype.formulas = function () {
+        this.navCtrl.push(FormulasPage);
+    };
     SettingsPage.prototype.linkProfile = function () {
         var _this = this;
         if (this.linked == "Link Profile") {
@@ -79,6 +86,7 @@ var SettingsPage = /** @class */ (function () {
                         _this.facebookURL = "http://www.facebook.com/" + profile['id'];
                         _this.storage.set('fblinkedstylist', true);
                         _this.linked = "Linked";
+                        alert("You must press SAVE to finalize the link.");
                         //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
                     });
                 });
@@ -90,6 +98,7 @@ var SettingsPage = /** @class */ (function () {
                         _this.facebookURL = "http://www.facebook.com/" + profile['id'];
                         _this.storage.set('fblinkeduser', true);
                         _this.linked = "Linked";
+                        alert("You must press SAVE to finalize the link.");
                         //this.userData = {email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']}
                     });
                 });
@@ -110,16 +119,17 @@ var SettingsPage = /** @class */ (function () {
     };
     SettingsPage.prototype.goToProfile = function () {
         if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-            this.navCtrl.push(StylistProfile);
+            this.navCtrl.pop();
         }
         if (this.type == 'user' || this.type == 'user/stylist/user') {
-            this.navCtrl.push(UserViewProfile);
+            this.navCtrl.pop();
         }
     };
     SettingsPage.prototype.map = function () {
         this.navCtrl.push(MapPage);
     };
     SettingsPage.prototype.logForm = function () {
+        var _this = this;
         console.log("        ADDDDREESSSSS77777777:  " + this.address); //moved up here!
         /*if(this.type == 'user' || this.type == 'user/stylist/user') {
      
@@ -127,13 +137,23 @@ var SettingsPage = /** @class */ (function () {
              alert("You need to fill out all of the information");
            }
          }*/
+        this.subscription3 = this.afAuth.authState.subscribe(function (data) {
+            console.log(data + "    data from login");
+            if (data != null) {
+                if (data.email && data.uid) {
+                    console.log("logged in");
+                    _this.authUser = data;
+                    _this.loggedIn = true;
+                }
+            }
+        });
         console.log(this.authUser + '      authuser       998877');
         this.x = 0;
         console.log(this.passwordIfChanged + "  passwordifchanged                  this.password: " + this.password);
         console.log(this.emailIfChanged + "  passwordifchanged                  this.password: " + this.email);
         this.storage.set('username', this.username);
         if (this.passwordIfChanged != this.password && this.authUser != null) {
-            this.authUser.updatePassword(this.password).then(function () { }).catch(function (e) { alert("Password update failed."); });
+            this.authUser.updatePassword(this.password).then(function () { }).catch(function (e) { alert(e); });
         }
         /*else {
           this.password = this.passwordIfChanged;
@@ -141,7 +161,7 @@ var SettingsPage = /** @class */ (function () {
         }*/
         this.storage.set('password', this.password);
         if (this.emailIfChanged != this.email && this.authUser != null) {
-            this.authUser.updateEmail(this.email).then(function () { }).catch(function (e) { alert("Email update failed."); });
+            this.authUser.updateEmail(this.email).then(function () { }).catch(function (e) { alert(e); });
         }
         /*else {
           this.email = this.emailIfChanged;
@@ -157,12 +177,21 @@ var SettingsPage = /** @class */ (function () {
         }
         //this.storage.get('type').then((val) => {
         if (this.type == 'stylist' || this.type == 'user/stylist/stylist') {
-            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.address == '' || this.price == '' || this.phone == '') {
+            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.price == '' || this.merchantId == '' || this.publicKey == '' || this.privateKey == '') {
                 alert("You need to fill out all of the information");
+            }
+            else if (this.phone.match(/\d/g).length !== 10) {
+                alert("Please enter a 10 digit phone number, only the digits.");
+            }
+            else if (this.address.split(' ').length != 5 || this.address.split(' ').length != 6) {
+                alert("Please enter a valid address. ex: 99 main st cambridge ma");
             }
             else {
                 this.storage.set('address', this.address);
                 this.storage.set('price', this.price);
+                this.storage.set('merchantid', this.merchantid);
+                this.storage.set('publickey', this.publickey);
+                this.storage.set('privatekey', this.privatekey);
                 if (this.price == "<100") {
                     this.price = "$";
                 }
@@ -178,11 +207,12 @@ var SettingsPage = /** @class */ (function () {
                 else if (this.price == "250-300") {
                     this.price = "$$$$$";
                 }
-                this.items = this.af.object('/profiles/stylists');
+                this.items = this.af.list('/profiles/stylists');
                 if (this.username == this.oldUser) {
-                    this.items.update((_a = {}, _a[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
                         'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
-                        'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL }, _a));
+                        'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
+                        'merchantid': this.merchantid, 'publickey': this.publickey, 'privatekey': this.privatekey });
                     if (this.isTypeNull == null) {
                         this.navCtrl.push(StylistProfile);
                     }
@@ -192,10 +222,11 @@ var SettingsPage = /** @class */ (function () {
                 }
                 else {
                     this.af.object('/profiles/stylists/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
-                    this.items.update((_b = {}, _b[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
                         'address': this.address, 'bio': this.bio, 'price': this.price, 'picURL': this.picURL, 'phone': this.phone,
                         'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
-                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } }, _b));
+                        'merchantid': this.merchantid, 'publickey': this.publickey, 'privatekey': this.privatekey,
+                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } });
                     if (this.isTypeNull == null) {
                         this.navCtrl.push(StylistProfile);
                     }
@@ -206,14 +237,17 @@ var SettingsPage = /** @class */ (function () {
             }
         }
         if (this.type == 'user' || this.type == 'user/stylist/user') {
-            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '' || this.phone == '') {
+            if (this.username == '' || this.password == '' || this.email == '' || this.bio == '') {
                 alert("You need to fill out all of the information");
             }
+            else if (this.phone.match(/\d/g).length !== 10) {
+                alert("Please enter a 10 digit phone number, only the digits.");
+            }
             else {
-                this.items = this.af.object('/profiles/users');
+                this.items = this.af.list('/profiles/users');
                 if (this.username == this.oldUser) {
-                    this.items.update((_c = {}, _c[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
-                        'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL }, _c));
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
+                        'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL });
                     if (this.isTypeNull == null) {
                         this.navCtrl.push(UserViewProfile);
                     }
@@ -223,9 +257,9 @@ var SettingsPage = /** @class */ (function () {
                 }
                 else {
                     this.af.object('/profiles/users/' + this.oldUser).remove().then(function (_) { return console.log('item deleted!'); });
-                    this.items.update((_d = {}, _d[this.username] = { 'username': this.username, 'password': this.password, 'email': this.email,
+                    this.items.update(this.username, { 'username': this.username, 'password': this.password, 'email': this.email,
                         'bio': this.bio, 'picURL': this.picURL, 'phone': this.phone, 'facebookURL': this.facebookURL, 'instagramURL': "http://www.instagram.com/" + this.instagramURL,
-                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } }, _d));
+                        'rating': { 'one': 0, 'two': 0, 'three': 0, 'four': 0, 'five': 0 } });
                     if (this.isTypeNull == null) {
                         this.navCtrl.push(UserViewProfile);
                     }
@@ -236,7 +270,6 @@ var SettingsPage = /** @class */ (function () {
             }
         }
         ;
-        var _a, _b, _c, _d;
         //})
     };
     SettingsPage.prototype.logout = function () {
@@ -251,7 +284,9 @@ var SettingsPage = /** @class */ (function () {
         this.navCtrl.push(SignInPage);
     };
     SettingsPage.prototype.ngOnDestroy = function () {
-        this.subscription3.unsubscribe();
+        if (this.subscription3 != null) {
+            this.subscription3.unsubscribe();
+        }
     };
     SettingsPage.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -264,31 +299,35 @@ var SettingsPage = /** @class */ (function () {
                 _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
                 _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
                 _this.myrenderer.setElementStyle(_this.logoutButton._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.merchantId._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.publicKey._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.privateKey._elementRef.nativeElement, 'display', 'none');
             }
             if (_this.typeparam == 'user/stylist/user') {
                 _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
                 _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
                 _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.merchantId._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.publicKey._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.privateKey._elementRef.nativeElement, 'display', 'none');
                 //this.myrenderer.setElementStyle(this.logoutButton._elementRef.nativeElement, 'display', 'none');
             }
             else if (_this.type == 'user/stylist/user') {
                 _this.myrenderer.setElementStyle(_this.addressEl._elementRef.nativeElement, 'display', 'none');
                 _this.myrenderer.setElementStyle(_this.priceEl._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.merchantId._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.publicKey._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.privateKey._elementRef.nativeElement, 'display', 'none');
             }
             else if (_this.typeparam == 'stylist') {
                 _this.myrenderer.setElementStyle(_this.arrowBackEl.nativeElement, 'display', 'none');
                 _this.myrenderer.setElementStyle(_this.logoutButton._elementRef.nativeElement, 'display', 'none');
+                _this.myrenderer.setElementStyle(_this.locationToggle._elementRef.nativeElement, 'display', 'none');
+            }
+            else if (_this.type == 'user/stylist/stylist') {
+                _this.myrenderer.setElementStyle(_this.locationToggle._elementRef.nativeElement, 'display', 'none');
             }
             _this.oldUser = _this.username;
-            _this.subscription3 = _this.afAuth.authState.subscribe(function (data) {
-                if (data != null) {
-                    if (data.email && data.uid) {
-                        console.log("logged in");
-                        _this.authUser = data;
-                        _this.loggedIn = true;
-                    }
-                }
-            });
             _this.isTypeNull = _this.navParams.get('type');
             setTimeout(function () {
                 console.log('ionViewDidLoad SettingsPage');
@@ -302,6 +341,14 @@ var SettingsPage = /** @class */ (function () {
                 if (_this.type == 'stylist' || _this.type == 'user/stylist/stylist') {
                     _this.storage.get('address').then(function (val) { _this.address = val; console.log(val + "        getting addressssssss"); });
                     _this.storage.get('price').then(function (val) { _this.price = val; });
+                    _this.storage.get('merchantid').then(function (val) { _this.merchantid = val; });
+                    _this.storage.get('publickey').then(function (val) { _this.publickey = val; });
+                    _this.storage.get('privatekey').then(function (val) { _this.privatekey = val; });
+                    for (var x = 0; x < 5; x++) {
+                        if (_this.priceRanges[x] == _this.price) {
+                            document.getElementById(x + "").setAttribute('selected', null);
+                        }
+                    }
                 }
             }, 1000);
             if (_this.type == 'user' || _this.type == 'user/stylist/user') {
@@ -451,6 +498,22 @@ var SettingsPage = /** @class */ (function () {
         ViewChild('logoutbutton'),
         __metadata("design:type", Object)
     ], SettingsPage.prototype, "logoutButton", void 0);
+    __decorate([
+        ViewChild('locationToggle'),
+        __metadata("design:type", Object)
+    ], SettingsPage.prototype, "locationToggle", void 0);
+    __decorate([
+        ViewChild('merchantId'),
+        __metadata("design:type", Object)
+    ], SettingsPage.prototype, "merchantId", void 0);
+    __decorate([
+        ViewChild('publicKey'),
+        __metadata("design:type", Object)
+    ], SettingsPage.prototype, "publicKey", void 0);
+    __decorate([
+        ViewChild('privateKey'),
+        __metadata("design:type", Object)
+    ], SettingsPage.prototype, "privateKey", void 0);
     SettingsPage = __decorate([
         IonicPage(),
         Component({

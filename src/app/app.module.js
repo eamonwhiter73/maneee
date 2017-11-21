@@ -25,8 +25,8 @@ import { UserViewProfile } from '../pages/userviewprofile/userviewprofile';
 import { FollowersPage } from '../pages/followers/followers';
 import { FormulapostPage } from '../pages/formulapost/formulapost';
 import { FormulasPage } from '../pages/formulas/formulas';
+import { FormulaPage } from '../pages/formula/formula';
 import { DropinPage } from '../pages/dropin/dropin';
-
 import { UserviewuserprofilePage } from '../pages/userviewuserprofile/userviewuserprofile';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { FullfeedPage } from '../pages/fullfeed/fullfeed';
@@ -52,6 +52,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { PopUp } from '../modals/popup/popup';
 import { PopUpOther } from '../modals/popupother/popupother';
 import { FormulaBuy } from '../modals/formulabuy/formulabuy';
+import { DepositPage } from '../modals/depositpage/depositpage';
+import { BuyAd } from '../modals/buyad/buyad';
 import { Rate } from '../modals/rate/rate';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { DatePicker } from '@ionic-native/date-picker';
@@ -65,6 +67,7 @@ import { MapPage } from '../pages/map/map';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { CacheModule } from "ionic-cache";
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import * as firebase from 'firebase';
 //import { Ng2ImgMaxModule } from 'ng2-img-max'; // <-- import the module
 export var firebaseConfig = {
@@ -98,7 +101,9 @@ var AppModule = /** @class */ (function () {
                 UserBooking,
                 PopUp,
                 PopUpOther,
+                BuyAd,
                 FormulaBuy,
+                DepositPage,
                 SettingsPage,
                 UserProfile,
                 Rate,
@@ -109,6 +114,7 @@ var AppModule = /** @class */ (function () {
                 FullfeedPage,
                 FormulapostPage,
                 FormulasPage,
+                FormulaPage,
                 DropinPage
             ],
             imports: [
@@ -124,7 +130,8 @@ var AppModule = /** @class */ (function () {
                 IonicStorageModule.forRoot(),
                 IonicImageLoader,
                 SwiperModule.forRoot(SWIPER_CONFIG),
-                CacheModule.forRoot()
+                CacheModule.forRoot(),
+                InfiniteScrollModule
                 //Ng2ImgMaxModule
                 /*CalendarModule.forRoot()*/
             ],
@@ -140,7 +147,9 @@ var AppModule = /** @class */ (function () {
                 BookingPage,
                 PopUp,
                 PopUpOther,
+                BuyAd,
                 FormulaBuy,
+                DepositPage,
                 Rate,
                 SettingsPage,
                 UserProfile,
@@ -152,6 +161,7 @@ var AppModule = /** @class */ (function () {
                 FullfeedPage,
                 FormulapostPage,
                 FormulasPage,
+                FormulaPage,
                 DropinPage
             ],
             providers: [

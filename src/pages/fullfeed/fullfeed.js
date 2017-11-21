@@ -29,7 +29,7 @@ var FullfeedPage = /** @class */ (function () {
         this.show = true;
     }
     FullfeedPage.prototype.swipeLeft = function () {
-        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 100, direction: 'forward' });
     };
     FullfeedPage.prototype.ionViewWillUnload = function () {
         //this.navCtrl.pop();
@@ -39,46 +39,42 @@ var FullfeedPage = /** @class */ (function () {
         var cacheKey = 'promos';
         var promises_array = [];
         var mapped;
-        this.cache.removeItem(cacheKey);
-        this.cache.getItem(cacheKey).catch(function () {
-            var store = [];
-            _this.list2 = _this.af.list('/promos', {
-                query: {
-                    limitToLast: 10
-                }
-            });
-            _this.subscription4 = _this.list2.subscribe(function (items) {
-                mapped = items.map(function (item) {
-                    return new Promise(function (resolve, reject) {
-                        var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
-                        storageRef.getDownloadURL().then(function (url) {
-                            console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                            item.customMetadata.picURL = url;
-                            store.push(item.customMetadata);
-                            resolve();
-                        }).catch(function (e) {
-                            console.log("in caught url !!!!!!!$$$$$$$!!");
-                            item.customMetadata.picURL = 'assets/blankprof.png';
-                            store.push(item.customMetadata);
-                            resolve();
-                        });
+        //this.cache.removeItem(cacheKey);
+        //this.cache.getItem(cacheKey).catch(() => {
+        var store = [];
+        this.list2 = this.af.list('/promos', {
+            query: {
+                limitToLast: 10
+            }
+        });
+        this.subscription4 = this.list2.subscribe(function (items) {
+            mapped = items.map(function (item) {
+                return new Promise(function (resolve, reject) {
+                    var storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                    storageRef.getDownloadURL().then(function (url) {
+                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                        item.customMetadata.picURL = url;
+                        store.push(item.customMetadata);
+                        resolve();
+                    }).catch(function (e) {
+                        console.log("in caught url !!!!!!!$$$$$$$!!");
+                        item.customMetadata.picURL = 'assets/blankprof.png';
+                        store.push(item.customMetadata);
+                        resolve();
                     });
                 });
-                console.log(JSON.stringify(mapped) + "    mappped things");
-                _this.startAtKey = items[0].$key;
-                _this.lastKey = _this.startAtKey;
-                var results = Promise.all(mapped);
-                results.then(function () {
-                    //setTimeout(() => {
-                    _this.items = store.reverse();
-                    //this.classesListArray.reverse();   
-                    console.log(JSON.stringify(_this.items) + " value value vlaue items");
-                    return _this.cache.saveItem(cacheKey, _this.items);
-                    //}, 3000);
-                });
             });
-        }).then(function (data) {
-            _this.items = data;
+            console.log(JSON.stringify(mapped) + "    mappped things");
+            _this.startAtKey = items[0].$key;
+            _this.lastKey = _this.startAtKey;
+            var results = Promise.all(mapped);
+            results.then(function () {
+                //setTimeout(() => {
+                _this.items = store.reverse();
+                //this.classesListArray.reverse();   
+                console.log(JSON.stringify(_this.items) + " value value vlaue items");
+                //}, 3000);
+            });
         });
     };
     FullfeedPage.prototype.gotoProfile = function () {

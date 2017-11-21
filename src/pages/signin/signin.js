@@ -49,10 +49,13 @@ import { FeedUser } from '../feeduser/feeduser';
 import { FeedStylist } from '../feedstylist/feedstylist';
 import { Keyboard } from '@ionic-native/keyboard';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Storage } from '@ionic/storage';
+import firebase from 'firebase';
 var SignInPage = /** @class */ (function () {
-    function SignInPage(loadingCtrl, storage, afAuth, keyboard, navCtrl) {
-        this.loadingCtrl = loadingCtrl;
+    //subscription: ISubscription
+    function SignInPage(af, loadingCtrl, storage, afAuth, keyboard, navCtrl) {
+        this.af = af;
         this.storage = storage;
         this.afAuth = afAuth;
         this.keyboard = keyboard;
@@ -61,6 +64,11 @@ var SignInPage = /** @class */ (function () {
     }
     SignInPage.prototype.ionViewWillUnload = function () {
         //this.navCtrl.pop();
+    };
+    SignInPage.prototype.ngOnDestroy = function () {
+        //if(this.subscription != null) {
+        //this.subscription.unsubscribe();
+        //}
     };
     SignInPage.prototype.ionViewDidLoad = function () {
         //let loading = this.loadingCtrl.create({content : "Loading..."});
@@ -89,11 +97,12 @@ var SignInPage = /** @class */ (function () {
                 }
             }
             else {
-                //loading.dismiss();
+                console.log("Val == false......");
             }
         });
     };
     SignInPage.prototype.selectOneStylist = function () {
+        console.log("in select one stylist");
         if (this.users) {
             this.users = false;
         }
@@ -134,13 +143,56 @@ var SignInPage = /** @class */ (function () {
                         console.log(data);
                         if (data.email && data.uid) {
                             if (_this.stylist) {
+                                console.log("chose stylist");
                                 _this.storage.set('type', 'user/stylist/stylist');
                                 _this.storage.set('loggedin', true);
+                                var database = firebase.database();
+                                var reff = firebase.database().ref('/profiles/stylists').orderByChild('email').equalTo(userx.email).on("value", function (snapshot) {
+                                    snapshot.forEach(function (snapshot) {
+                                        // key
+                                        var key = snapshot.key;
+                                        console.log("key: " + key);
+                                        // value, could be object
+                                        var childData = snapshot.val();
+                                        console.log("data: " + JSON.stringify(childData));
+                                        // Do what you want with these key/values here
+                                        console.log(childData.address + "    childdata address");
+                                        _this.storage.set('address', childData.address);
+                                        _this.storage.set('bio', childData.bio);
+                                        _this.storage.set('email', userx.email);
+                                        _this.storage.set('picURL', childData.picURL);
+                                        _this.storage.set('price', childData.price);
+                                        _this.storage.set('phone', childData.phone);
+                                        _this.storage.set('instausername', childData.instagramURL);
+                                        _this.storage.set('username', childData.username);
+                                        return true;
+                                    });
+                                });
                                 _this.navCtrl.setRoot(FeedStylist);
                             }
                             else {
                                 _this.storage.set('type', 'user/stylist/user');
                                 _this.storage.set('loggedin', true);
+                                var database = firebase.database();
+                                var reff = firebase.database().ref('/profiles/users').orderByChild('email').equalTo(userx.email).on("value", function (snapshot) {
+                                    snapshot.forEach(function (snapshot) {
+                                        // key
+                                        var key = snapshot.key;
+                                        console.log("key: " + key);
+                                        // value, could be object
+                                        var childData = snapshot.val();
+                                        console.log("data: " + JSON.stringify(childData));
+                                        // Do what you want with these key/values here
+                                        //this.storage.set('address', childData.address);
+                                        _this.storage.set('bio', childData.bio);
+                                        _this.storage.set('email', userx.email);
+                                        _this.storage.set('picURL', childData.picURL);
+                                        _this.storage.set('phone', childData.phone);
+                                        _this.storage.set('instausername', childData.instagramURL);
+                                        _this.storage.set('username', childData.username);
+                                        return true;
+                                    });
+                                });
                                 _this.navCtrl.setRoot(FeedUser);
                             }
                         }
@@ -166,7 +218,7 @@ var SignInPage = /** @class */ (function () {
             selector: 'page-sign-in',
             templateUrl: 'signin.html'
         }),
-        __metadata("design:paramtypes", [LoadingController, Storage, AngularFireAuth, Keyboard, NavController])
+        __metadata("design:paramtypes", [AngularFireDatabase, LoadingController, Storage, AngularFireAuth, Keyboard, NavController])
     ], SignInPage);
     return SignInPage;
 }());

@@ -37,6 +37,7 @@ export class FormulaBuy implements OnDestroy {
   list2: FirebaseObjectObservable<any>;
   items = [];
   payload;
+  key;
 
 
 
@@ -48,6 +49,7 @@ export class FormulaBuy implements OnDestroy {
    this.username = this.params.get('username');
    this.square = this.params.get('square');
    this.payload = this.params.get('payload');
+   this.key = this.params.get('key');
 
    this.storage.get('username').then((val) => {
      this.usernameowner = val;
@@ -64,30 +66,55 @@ export class FormulaBuy implements OnDestroy {
 
   
    
-   
+   if(this.key == null) {
 
-   let database = firebase.database();
-   let bool = false;
+     let database = firebase.database();
+     let bool = false;
 
-   let self = this;
+     let self = this;
 
-   let reff = firebase.database().ref('/formulas').orderByChild('username').equalTo(this.username).on("value", (snapshot) => {
-      snapshot.forEach(snapshot => {
-          // key
-          let key = snapshot.key;
-          console.log("key: " + key);
-          // value, could be object
-          let childData = snapshot.val();
-          console.log("data: " + JSON.stringify(childData));
-          // Do what you want with these key/values here
+     let reff = firebase.database().ref('/formulas').orderByChild('username').equalTo(this.username).on("value", (snapshot) => {
+        snapshot.forEach(snapshot => {
+            // key
+            let key = snapshot.key;
+            console.log("key: " + key);
+            // value, could be object
+            let childData = snapshot.val();
+            console.log("data: " + JSON.stringify(childData));
+            // Do what you want with these key/values here
 
-          if(self.square == childData.square) {
+            if(self.square == childData.square) {
+              self.data = childData;
+            }
+            
+            return true;
+        });
+    });
+   } 
+   else {
+     let database = firebase.database();
+     let bool = false;
+
+     let self = this;
+
+     let reff = firebase.database().ref('/formulas').orderByKey().equalTo(this.key).on("value", (snapshot) => {
+        snapshot.forEach(snapshot => {
+            // key
+            let key = snapshot.key;
+            console.log("key: " + key);
+            // value, could be object
+            let childData = snapshot.val();
+            console.log("data: " + JSON.stringify(childData));
+            // Do what you want with these key/values here
+
             self.data = childData;
-          }
-          
-          return true;
-      });
-  });
+            
+            return true;
+        });
+    });
+   }
+
+
 
   //this.buy();
 

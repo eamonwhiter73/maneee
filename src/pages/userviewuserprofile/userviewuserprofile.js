@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Component, ViewChildren, ViewChild, Renderer, ElementRef, QueryList } from '@angular/core';
-import { FeedStylist } from '../feedstylist/feedstylist';
 import { BookingPage } from '../booking/booking';
 import { PostpagePage } from '../postpage/postpage';
 import { FollowersPage } from '../followers/followers';
@@ -336,13 +335,13 @@ var UserviewuserprofilePage = /** @class */ (function () {
           this.navCtrl.push(FeedUser);
         }*/
         //else {
-        this.navCtrl.push(FeedStylist, {}, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 100, direction: 'back' });
         //this.navCtrl.push(FeedStylist);
         //}
     };
     UserviewuserprofilePage.prototype.backToCal = function () {
         //if(this.navParams.get('param1') == 'user') {
-        this.navCtrl.push(BookingPage, {}, { animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.push(BookingPage, {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
         //this.navCtrl.push(BookingPage);
         //}
         //else {
@@ -373,9 +372,6 @@ var UserviewuserprofilePage = /** @class */ (function () {
                 //Do whatever you want with swipe
             }
         }
-    };
-    UserviewuserprofilePage.prototype.swipeLeft = function () {
-        this.backToCal();
     };
     UserviewuserprofilePage.prototype.swipeRight = function () {
         this.backToFeed();

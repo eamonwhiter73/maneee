@@ -93,7 +93,7 @@ var FollowersPage = /** @class */ (function () {
         }
     };
     FollowersPage.prototype.swipeLeft = function () {
-        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 500, direction: 'forward' });
+        this.navCtrl.popToRoot({ animate: false, animation: 'transition', duration: 100, direction: 'forward' });
     };
     FollowersPage.prototype.makePhoneCall = function (userPhone) {
         this.userPhone = userPhone;

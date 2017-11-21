@@ -54,7 +54,7 @@ var FormulapostPage = /** @class */ (function () {
         this.storage.get('username').then(function (val) { _this.username = val; console.log(val + "        getting username"); });
     };
     FormulapostPage.prototype.goToProfile = function () {
-        this.navCtrl.push(StylistProfile, { square: this.square }, { animate: true, animation: 'transition', duration: 500, direction: 'back' });
+        this.navCtrl.push(StylistProfile, { square: this.square }, { animate: true, animation: 'transition', duration: 100, direction: 'back' });
     };
     FormulapostPage.prototype.formatDate = function (date) {
         var d = new Date(date), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
@@ -89,10 +89,11 @@ var FormulapostPage = /** @class */ (function () {
                 if (self.square == childData.square) {
                     var updates = {};
                     updates['/formulas/' + key] = metadata;
+                    console.log("in self square childdata");
                     firebase.database().ref().update(updates);
                     bool = true;
+                    return true;
                 }
-                return true;
             });
             if (!bool) {
                 firebase.database().ref('/formulas').push(metadata);
