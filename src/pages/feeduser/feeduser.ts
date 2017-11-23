@@ -117,6 +117,8 @@ export class FeedUser implements OnDestroy {
   distances = [];
   stars;
   starsArray = [];
+  rrr;
+
 
   private subscription: ISubscription;
   private subscription2: ISubscription;
@@ -131,6 +133,7 @@ export class FeedUser implements OnDestroy {
   private subscription11: ISubscription;
   private subscription12: ISubscription;
   private subscription13: ISubscription;
+  private subscription14: ISubscription;
 
 
   queryable: boolean = true;
@@ -142,11 +145,13 @@ export class FeedUser implements OnDestroy {
   list2: FirebaseListObservable<any>;
   list4: FirebaseListObservable<any>;
   list5: FirebaseListObservable<any>;
+  list6: FirebaseListObservable<any>;
   objj: FirebaseObjectObservable<any>;
   availabilities = [];
   items = [];
   rating = [];
   promotions = [];
+  username;
 
   totalCount = 0;
   lastNumRows = 0;
@@ -167,6 +172,8 @@ export class FeedUser implements OnDestroy {
   lastKey2;
   startAtKey3;
   lastKey3;
+  startAtKey4;
+  lastKey4;
 
   constructor(public elRef: ElementRef, private cache: CacheService, private diagnostic: Diagnostic, private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public zone: NgZone, public modalCtrl: ModalController, public af: AngularFireDatabase, public storage: Storage, private afAuth: AngularFireAuth, public renderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
      
@@ -416,6 +423,116 @@ export class FeedUser implements OnDestroy {
     }, 500);
   }
 
+  doInfiniteD() {
+    console.log("in doinfinite promotionsssssss");
+    setTimeout(() => {
+      console.log('Begin async operation');
+      /*console.log(this.content.directionY + "        upupupupupupu********");
+      if(this.content.directionY == 'up') {
+        this.show = false
+      }
+      else {
+        this.show = true;
+
+      }*/
+
+      console.log(this.startAtKey4 + "     before startatkey3 start at 67767676765676765757");
+      this.list6 = this.af.list('/profiles/stylists', {
+      query: {
+        orderByKey: true,
+        endAt: this.startAtKey4,
+        limitToLast: 11
+      }});
+
+      this.subscription14 = this.list6.subscribe(items => { 
+          let x = 0;
+          console.log(JSON.stringify(items[0]) + "     items 00000000000000");
+          this.lastKey4 = this.startAtKey4;
+          console.log(this.lastKey4 + " lastkey3333333333333asdfasdasdfasdfweew32323223fasdfasdf beginning");
+          //items.forEach(item => {
+           let arr;
+             let mapped = items.map((item) => {
+              return new Promise(resolve => {
+                let rr;
+                //console.log(JSON.stringify(item) + "               *((*&*&*&*&^&*&*&*(&*(&*&*(&(&(&*(              :::" + x);
+                if(item.address == "") {
+                  resolve();
+                }
+                else {
+                  console.log(item.address + " is the address empty??????");
+                  this.nativeGeocoder.forwardGeocode(item.address)
+                    .then((coordinates: NativeGeocoderForwardResult) => {
+                      console.log("I AM IN THE GEOCODING ***&&*&*&*&*");
+                        rr = this.round(this.distance(coordinates.latitude, coordinates.longitude, this.rrr.coords.latitude, this.rrr.coords.longitude, "M"), 1);
+                        if(!item.picURL) {
+                          item.picURL = 'assets/blankprof.png';
+                        }
+                        console.log("push to the array of results");
+                        
+                        if(this.startAtKey4 !== item.$key && this.lastKey4 !== item.$key) {
+                          console.log(this.startAtKey4 + "   :startAtKey3 being pushed       item key:     " + item.$key);
+                          if(item.username != null) {
+                            arr.push({'pic':item.picURL, 'salon':item.username, 'distance':rr});
+                          }
+                        }
+
+                        if(x == 0) {
+                          this.startAtKey4 = item.$key;
+                        }
+
+                        console.log(this.startAtKey4 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
+                        console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
+
+                        x++;
+
+                        resolve();
+                      }).catch(e => {
+                        console.log(e.message + " caught this error");
+                        /*x++;
+                        if(items.length - x == 1) {
+                          resolve(arr);
+                        }*/
+                        resolve();
+                      })
+
+                  
+                    //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+
+                }
+
+
+              })
+            })
+
+            let results = Promise.all(mapped);
+            results.then(() => {
+              console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
+              
+              arr.sort(function(a,b) {
+                return a.distance - b.distance;
+              });
+
+              this.distances = arr.slice();
+
+              console.log(JSON.stringify(this.distances) + " ^^^^&&&&&&&********88889999000000000");
+            })
+
+
+            console.log(this.rrr + "              this.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrrr");
+          //this.cache.getItem(cacheKey).catch(() => {
+          //setTimeout(() => {
+      
+             
+          
+            //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+            
+            
+          });          
+          
+        //})      
+    }, 500);
+  }
+
   getAds() {
     let promises_array:Array<any> = [];
     let cacheKey = 'ads';
@@ -609,42 +726,51 @@ export class FeedUser implements OnDestroy {
     return roundedTempNumber / factor;
   };
 
-  loadDistances(): Promise<any> {
-    return new Promise((resolve, reject) => {
+  loadDistances() {
+    //return new Promise((resolve, reject) => {
       let cacheKey = "distances"
-      let rrr;
       let arr = [];
       let mapped;
       //this.cache.removeItem(cacheKey);
 
       console.log("IN LOADDISTANCES #$$$$$$$$$$$$$$$$$$$$$");
 
-      this.geolocation.getCurrentPosition().then((resp) => {            
+      //this.geolocation.getCurrentPosition().then((resp) => {            
           // resp.coords.latitude
           console.log("IN geo get position #$$$$$$$5354554354$$$$$$$");
 
-          rrr = resp;
-          console.log(rrr + "              rrrrrrrrrrrrrrrrrrrrrrrrrr");
+          //this.rrr = resp;
+          //console.log(this.rrr + "              this.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrrr");
           //this.cache.getItem(cacheKey).catch(() => {
           //setTimeout(() => {
-            this.distancelist = this.af.list('/profiles/stylists');
+            this.distancelist = this.af.list('/distances/' + this.username, { query: {
+              orderByChild: 'distance',
+              limitToFirst: 10
+            }});
       
             let x = 0;
             this.subscription6 = this.distancelist.subscribe(items => {
+               
+               this.startAtKey3 = items[0].$key;
+               this.lastKey3 = this.startAtKey3;
 
-               mapped = items.map((item) => {
+               items.forEach(item => {
+                 this.distances.push(item);
+               })
+               
+               /*mapped = items.map((item) => {
                 return new Promise(resolve => {
                   let rr;
                   //console.log(JSON.stringify(item) + "               *((*&*&*&*&^&*&*&*(&*(&*&*(&(&(&*(              :::" + x);
-                  if(item.address == "") {
-                    resolve();
-                  }
+                  //if(item.address == "") {
+                    //resolve();
+                  //}
                   else {
                     console.log(item.address + " is the address empty??????");
                     this.nativeGeocoder.forwardGeocode(item.address)
                       .then((coordinates: NativeGeocoderForwardResult) => {
                         console.log("I AM IN THE GEOCODING ***&&*&*&*&*");
-                          rr = this.round(this.distance(coordinates.latitude, coordinates.longitude, rrr.coords.latitude, rrr.coords.longitude, "M"), 1);
+                          rr = this.round(this.distance(coordinates.latitude, coordinates.longitude, this.rrr.coords.latitude, this.rrr.coords.longitude, "M"), 1);
                           if(!item.picURL) {
                             item.picURL = 'assets/blankprof.png';
                           }
@@ -655,7 +781,7 @@ export class FeedUser implements OnDestroy {
                           if(items.length - x == 1) {
                             console.log("getting resolved in geocoder ^&^&^&&^^&^&^&");
                             resolve(arr);
-                          }*/
+                          }
                           //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
 
                           resolve();
@@ -664,20 +790,17 @@ export class FeedUser implements OnDestroy {
                           /*x++;
                           if(items.length - x == 1) {
                             resolve(arr);
-                          }*/
+                          }
                           resolve();
-                        })
+                        })*/
 
                     
                       //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
 
-                  }
-
-
                 })
-              })
+              //})
 
-              let results = Promise.all(mapped);
+              /*let results = Promise.all(mapped);
               results.then(() => {
                 console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
                 
@@ -694,7 +817,7 @@ export class FeedUser implements OnDestroy {
               })
             });
 
-          })  
+          })*/  
               
             /*}).then(data => {
               this.distances = data
@@ -710,9 +833,9 @@ export class FeedUser implements OnDestroy {
         resolve();
       });*/
 
-    }).catch((error) => {
+    /*}).catch((error) => {
       console.log('Error getting location', error);
-    });
+    });*/
 
     
   }
@@ -802,7 +925,7 @@ export class FeedUser implements OnDestroy {
         //results2 = Promise.all(mapped);
         //results2.then(() => {  
         //this.pricesArray = array;
-        //console.log(this.pricesArray + "     pricesarrrraaayyy ITEM (((((()()()()()() loadprices")   
+        //console.log(this.pricesArray + "     pricesathis.rrrraaayyy ITEM (((((()()()()()() loadprices")   
         //return this.cache.saveItem(cacheKey, this.pricesArray);
       //})    
     /*}).then(data => {
@@ -871,6 +994,9 @@ export class FeedUser implements OnDestroy {
      
 
   ionViewDidLoad() {
+    this.storage.get('username').then((val) => {
+      this.username = val;
+    })
     setTimeout(() => {
       this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '43%');
     }, 500)
@@ -885,14 +1011,6 @@ export class FeedUser implements OnDestroy {
             if(this.weekly.nativeElement.style.display != 'none') {
               console.log("in doinfinite promotionsssssss");
               setTimeout(() => {
-                /*console.log('Begin async operation');
-                console.log(this.content.directionY + "        upupupupupupu********");
-                if(this.content.directionY == 'up') {
-                  this.show = false
-                }
-                else {
-                  this.show = true;
-                }*/
 
                 console.log(this.startAtKey1 + "     before %%^&^&^% start at");
                 this.list2 = this.af.list('/promotions', {
@@ -946,6 +1064,9 @@ export class FeedUser implements OnDestroy {
             }
         }
     });
+
+    this.loadPromotions();
+    this.getAds();
     //setTimeout(() => {
 
 
@@ -1005,7 +1126,7 @@ export class FeedUser implements OnDestroy {
             r++;
           }
 
-          console.log("THIS IS THE SORTED ARRAY TO BE SORRRED        " + JSON.stringify(this.rating));
+          console.log("THIS IS THE SORTED ARRAY TO BE SOthis.rrrED        " + JSON.stringify(this.rating));
 
           this.rating.sort(function(a,b){ 
             if(a.stars !== "No ratings" && b.stars !== "No ratings") {
@@ -1027,7 +1148,7 @@ export class FeedUser implements OnDestroy {
 
           });
 
-          this.loadDistances().then(() => {
+          //this.loadDistances().then(() => {
            console.log("in load availabilities ......... ")
             console.log(JSON.stringify(this.availabilities));
 
@@ -1048,10 +1169,9 @@ export class FeedUser implements OnDestroy {
               i.time = str;
             }
 
-            this.loadPromotions();        /////////// START NEW GIT ////45//54/54555555''''''''''''''''''''
-            this.getAds();
+            this.loadDistances();
             this.loadPrices();
-         });
+         //});
 
          
        });   
@@ -1197,6 +1317,7 @@ export class FeedUser implements OnDestroy {
   }
 
   dropDownD() {
+    this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '8%');
     this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
     this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
     //this.renderer.setElementStyle(this.promos.nativeElement, 'color', 'gray');
@@ -1206,7 +1327,6 @@ export class FeedUser implements OnDestroy {
     this.renderer.setElementStyle(this.weekly.nativeElement, 'display', 'none');
     this.renderer.setElementStyle(this.price.nativeElement, 'display', 'none');
     this.renderer.setElementStyle(this.distancey.nativeElement, 'display', 'block');
-
 
 
     this.changeText.nativeElement.innerHTML = "Distance";

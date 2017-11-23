@@ -18,6 +18,8 @@ import { ImageViewerController } from 'ionic-img-viewer';
 import { Storage } from '@ionic/storage';
 import { NativeGeocoder, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Http, RequestOptions, Headers } from '@angular/http';
+
 
 
 
@@ -83,7 +85,7 @@ export class UserViewProfile implements OnDestroy {
   thoroughfare;
   locality;
 
-  constructor(private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public elRef: ElementRef, public storage: Storage, public imageViewerCtrl: ImageViewerController, public loadingController: LoadingController,/*public firebase: FirebaseApp, */public myrenderer: Renderer, public af: AngularFireDatabase, public actionSheetCtrl: ActionSheetController, public camera: Camera, public navCtrl: NavController, public cameraService: CameraService) {
+  constructor(public http: Http, private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public elRef: ElementRef, public storage: Storage, public imageViewerCtrl: ImageViewerController, public loadingController: LoadingController,/*public firebase: FirebaseApp, */public myrenderer: Renderer, public af: AngularFireDatabase, public actionSheetCtrl: ActionSheetController, public camera: Camera, public navCtrl: NavController, public cameraService: CameraService) {
     this.times = [{'time':'8:00 AM', 'selected': false}, {'time':'12:00 PM', 'selected': false}, {'time':'4:00 PM', 'selected': false},
                   {'time':'8:30 AM', 'selected': false}, {'time':'12:30 PM', 'selected': false}, {'time':'4:30 PM', 'selected': false},
                   {'time':'9:00 AM', 'selected': false}, {'time':'1:00 PM', 'selected': false}, {'time':'5:00 PM', 'selected': false},
@@ -158,7 +160,13 @@ export class UserViewProfile implements OnDestroy {
               this.storage.set('location', false);
             }).catch((e) => {alert("Something went wrong with setting your location, please try again.")});
 
-            
+            this.http.get('https://us-central1-mane-4152c.cloudfunctions.net/sortDistance?text='+resp.coords.latitude+':'+resp.coords.longitude+':'+this.username)  
+             .subscribe(res => {
+               console.log(res + "response from firesbase functions");
+               
+             }, err => {
+               console.log(JSON.stringify(err))
+             });
 
           }).catch(e => {
             console.log(e.message + " caught this error");

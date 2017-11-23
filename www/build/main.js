@@ -6053,9 +6053,8 @@ var FeedStylist = (function () {
                                 skip = true;
                             }
                         }
-                        var u = _this.getID();
                         console.log("looping here above");
-                        _this.month.update((_a = {}, _a[u] = { 'date': { 'day': date.getTime() / 1000 }, 'reserved': { 'appointment': array } }, _a));
+                        _this.month.update((_a = {}, _a[_this.getID()] = { 'date': { 'day': date.getTime() / 1000 }, 'reserved': { 'appointment': array } }, _a));
                     }
                     else {
                         console.log(JSON.stringify(objj));
@@ -6128,9 +6127,8 @@ var FeedStylist = (function () {
                                     skip = true;
                                 }
                             }
-                            var u = _this.getID();
                             console.log("looping here below");
-                            _this.month.update((_e = {}, _e[u] = { 'date': { 'day': date.getTime() / 1000 }, 'reserved': { 'appointment': array } }, _e));
+                            _this.month.update((_e = {}, _e[_this.getID()] = { 'date': { 'day': date.getTime() / 1000 }, 'reserved': { 'appointment': array } }, _e));
                         }
                         if (boool == true) {
                             var r = item[objj];
@@ -6972,51 +6970,51 @@ var FeedStylist = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedstyle'),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _a || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "components", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('flex'),
-    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _b || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "flexComponents", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedtop'),
-    __metadata("design:type", typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _c || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "feedComponents", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('imagepost'),
-    __metadata("design:type", typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _d || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "imageComponents", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('caption'),
-    __metadata("design:type", typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _e || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "captionComponents", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('allF'),
-    __metadata("design:type", typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _f || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "allFeed", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('productsFeed'),
-    __metadata("design:type", typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _g || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "productsF", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('classesFeed'),
-    __metadata("design:type", typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _h || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "classesF", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('formulasFeed'),
-    __metadata("design:type", typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _j || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "formulasF", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('contentone'),
-    __metadata("design:type", typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _k || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
 ], FeedStylist.prototype, "contentOne", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('classeslist'),
-    __metadata("design:type", typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _l || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
 ], FeedStylist.prototype, "classeslist", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('formulaslist'),
-    __metadata("design:type", typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _m || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
 ], FeedStylist.prototype, "formulaslist", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('swiper'),
@@ -7024,99 +7022,99 @@ __decorate([
 ], FeedStylist.prototype, "swiperEl", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('productslist'),
-    __metadata("design:type", typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _o || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
 ], FeedStylist.prototype, "productslist", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('adimage'),
-    __metadata("design:type", typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _p || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "adImage", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('slides'),
-    __metadata("design:type", typeof (_q = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* Slides */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* Slides */]) === "function" && _q || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* Slides */])
 ], FeedStylist.prototype, "slidess", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('slides2'),
-    __metadata("design:type", typeof (_r = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* Slides */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* Slides */]) === "function" && _r || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["v" /* Slides */])
 ], FeedStylist.prototype, "slidess2", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedtoptwo'),
-    __metadata("design:type", typeof (_s = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _s || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "feedTopTwoComponents", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedstyle2'),
-    __metadata("design:type", typeof (_t = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _t || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "components2", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('flex2'),
-    __metadata("design:type", typeof (_u = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _u || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "flexComponents2", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedtop2'),
-    __metadata("design:type", typeof (_v = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _v || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "feedComponents2", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedtop2two'),
-    __metadata("design:type", typeof (_w = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _w || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "feedTop22Components", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('imagepost2'),
-    __metadata("design:type", typeof (_x = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _x || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "imageComponents2", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('caption2'),
-    __metadata("design:type", typeof (_y = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _y || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "captionComponents2", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedstyle3'),
-    __metadata("design:type", typeof (_z = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _z || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "components3", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('flex3'),
-    __metadata("design:type", typeof (_0 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _0 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "flexComponents3", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedtop3'),
-    __metadata("design:type", typeof (_1 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _1 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "feedComponents3", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedtop3two'),
-    __metadata("design:type", typeof (_2 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _2 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "feedTop32Components", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('imagepost3'),
-    __metadata("design:type", typeof (_3 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _3 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "imageComponents3", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('caption3'),
-    __metadata("design:type", typeof (_4 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _4 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "captionComponents3", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedstyle4'),
-    __metadata("design:type", typeof (_5 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _5 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "components4", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('flex4'),
-    __metadata("design:type", typeof (_6 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _6 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "flexComponents4", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedtop4'),
-    __metadata("design:type", typeof (_7 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _7 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "feedComponents4", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('feedtop4two'),
-    __metadata("design:type", typeof (_8 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _8 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "feedTop42Components", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('imagepost4'),
-    __metadata("design:type", typeof (_9 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _9 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "imageComponents4", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('caption4'),
-    __metadata("design:type", typeof (_10 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _10 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
 ], FeedStylist.prototype, "captionComponents4", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]),
-    __metadata("design:type", typeof (_11 = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]) === "function" && _11 || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */])
 ], FeedStylist.prototype, "content", void 0);
 FeedStylist = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -7160,10 +7158,9 @@ FeedStylist = __decorate([
             ]),
         ]
     }),
-    __metadata("design:paramtypes", [typeof (_12 = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */]) === "function" && _12 || Object, typeof (_13 = typeof __WEBPACK_IMPORTED_MODULE_16__ionic_native_sms__["a" /* SMS */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_16__ionic_native_sms__["a" /* SMS */]) === "function" && _13 || Object, typeof (_14 = typeof __WEBPACK_IMPORTED_MODULE_15_ionic_cache__["b" /* CacheService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_15_ionic_cache__["b" /* CacheService */]) === "function" && _14 || Object, typeof (_15 = typeof __WEBPACK_IMPORTED_MODULE_10__ionic_native_date_picker__["a" /* DatePicker */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_10__ionic_native_date_picker__["a" /* DatePicker */]) === "function" && _15 || Object, typeof (_16 = typeof __WEBPACK_IMPORTED_MODULE_9__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__ionic_storage__["b" /* Storage */]) === "function" && _16 || Object, typeof (_17 = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* Platform */]) === "function" && _17 || Object, typeof (_18 = typeof __WEBPACK_IMPORTED_MODULE_13_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _18 || Object, typeof (_19 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _19 || Object, typeof (_20 = typeof __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__["a" /* Camera */]) === "function" && _20 || Object, typeof (_21 = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */]) === "function" && _21 || Object, typeof (_22 = typeof __WEBPACK_IMPORTED_MODULE_11__services_cameraservicepost__["a" /* CameraServicePost */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__services_cameraservicepost__["a" /* CameraServicePost */]) === "function" && _22 || Object, typeof (_23 = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _23 || Object, typeof (_24 = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === "function" && _24 || Object, typeof (_25 = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */]) === "function" && _25 || Object, typeof (_26 = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _26 || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */], __WEBPACK_IMPORTED_MODULE_16__ionic_native_sms__["a" /* SMS */], __WEBPACK_IMPORTED_MODULE_15_ionic_cache__["b" /* CacheService */], __WEBPACK_IMPORTED_MODULE_10__ionic_native_date_picker__["a" /* DatePicker */], __WEBPACK_IMPORTED_MODULE_9__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["t" /* Platform */], __WEBPACK_IMPORTED_MODULE_13_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_11__services_cameraservicepost__["a" /* CameraServicePost */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]])
 ], FeedStylist);
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26;
 //# sourceMappingURL=feedstylist.js.map
 
 /***/ }),
@@ -7463,6 +7460,93 @@ var FeedUser = (function () {
             //infiniteScroll.complete(); 
         }, 500);
     };
+    FeedUser.prototype.doInfiniteD = function () {
+        var _this = this;
+        console.log("in doinfinite promotionsssssss");
+        setTimeout(function () {
+            console.log('Begin async operation');
+            /*console.log(this.content.directionY + "        upupupupupupu********");
+            if(this.content.directionY == 'up') {
+              this.show = false
+            }
+            else {
+              this.show = true;
+      
+            }*/
+            console.log(_this.startAtKey4 + "     before startatkey3 start at 67767676765676765757");
+            _this.list6 = _this.af.list('/profiles/stylists', {
+                query: {
+                    orderByKey: true,
+                    endAt: _this.startAtKey4,
+                    limitToLast: 11
+                }
+            });
+            _this.subscription14 = _this.list6.subscribe(function (items) {
+                var x = 0;
+                console.log(JSON.stringify(items[0]) + "     items 00000000000000");
+                _this.lastKey4 = _this.startAtKey4;
+                console.log(_this.lastKey4 + " lastkey3333333333333asdfasdasdfasdfweew32323223fasdfasdf beginning");
+                //items.forEach(item => {
+                var arr;
+                var mapped = items.map(function (item) {
+                    return new Promise(function (resolve) {
+                        var rr;
+                        //console.log(JSON.stringify(item) + "               *((*&*&*&*&^&*&*&*(&*(&*&*(&(&(&*(              :::" + x);
+                        if (item.address == "") {
+                            resolve();
+                        }
+                        else {
+                            console.log(item.address + " is the address empty??????");
+                            _this.nativeGeocoder.forwardGeocode(item.address)
+                                .then(function (coordinates) {
+                                console.log("I AM IN THE GEOCODING ***&&*&*&*&*");
+                                rr = _this.round(_this.distance(coordinates.latitude, coordinates.longitude, _this.rrr.coords.latitude, _this.rrr.coords.longitude, "M"), 1);
+                                if (!item.picURL) {
+                                    item.picURL = 'assets/blankprof.png';
+                                }
+                                console.log("push to the array of results");
+                                if (_this.startAtKey4 !== item.$key && _this.lastKey4 !== item.$key) {
+                                    console.log(_this.startAtKey4 + "   :startAtKey3 being pushed       item key:     " + item.$key);
+                                    if (item.username != null) {
+                                        arr.push({ 'pic': item.picURL, 'salon': item.username, 'distance': rr });
+                                    }
+                                }
+                                if (x == 0) {
+                                    _this.startAtKey4 = item.$key;
+                                }
+                                console.log(_this.startAtKey4 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
+                                console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
+                                x++;
+                                resolve();
+                            }).catch(function (e) {
+                                console.log(e.message + " caught this error");
+                                /*x++;
+                                if(items.length - x == 1) {
+                                  resolve(arr);
+                                }*/
+                                resolve();
+                            });
+                            //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+                        }
+                    });
+                });
+                var results = Promise.all(mapped);
+                results.then(function () {
+                    console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
+                    arr.sort(function (a, b) {
+                        return a.distance - b.distance;
+                    });
+                    _this.distances = arr.slice();
+                    console.log(JSON.stringify(_this.distances) + " ^^^^&&&&&&&********88889999000000000");
+                });
+                console.log(_this.rrr + "              this.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrrr");
+                //this.cache.getItem(cacheKey).catch(() => {
+                //setTimeout(() => {
+                //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+            });
+            //})      
+        }, 500);
+    };
     FeedUser.prototype.getAds = function () {
         var _this = this;
         var promises_array = [];
@@ -7634,86 +7718,98 @@ var FeedUser = (function () {
     ;
     FeedUser.prototype.loadDistances = function () {
         var _this = this;
-        return new Promise(function (resolve, reject) {
-            var cacheKey = "distances";
-            var rrr;
-            var arr = [];
-            var mapped;
-            //this.cache.removeItem(cacheKey);
-            console.log("IN LOADDISTANCES #$$$$$$$$$$$$$$$$$$$$$");
-            _this.geolocation.getCurrentPosition().then(function (resp) {
-                // resp.coords.latitude
-                console.log("IN geo get position #$$$$$$$5354554354$$$$$$$");
-                rrr = resp;
-                console.log(rrr + "              rrrrrrrrrrrrrrrrrrrrrrrrrr");
-                //this.cache.getItem(cacheKey).catch(() => {
-                //setTimeout(() => {
-                _this.distancelist = _this.af.list('/profiles/stylists');
-                var x = 0;
-                _this.subscription6 = _this.distancelist.subscribe(function (items) {
-                    mapped = items.map(function (item) {
-                        return new Promise(function (resolve) {
-                            var rr;
-                            //console.log(JSON.stringify(item) + "               *((*&*&*&*&^&*&*&*(&*(&*&*(&(&(&*(              :::" + x);
-                            if (item.address == "") {
-                                resolve();
-                            }
-                            else {
-                                console.log(item.address + " is the address empty??????");
-                                _this.nativeGeocoder.forwardGeocode(item.address)
-                                    .then(function (coordinates) {
-                                    console.log("I AM IN THE GEOCODING ***&&*&*&*&*");
-                                    rr = _this.round(_this.distance(coordinates.latitude, coordinates.longitude, rrr.coords.latitude, rrr.coords.longitude, "M"), 1);
-                                    if (!item.picURL) {
-                                        item.picURL = 'assets/blankprof.png';
-                                    }
-                                    arr.push({ 'pic': item.picURL, 'salon': item.username, 'distance': rr });
-                                    console.log("push to the array of results");
-                                    //x++;
-                                    /*console.log(items.length + "         length   /    x:        " + x);
-                                    if(items.length - x == 1) {
-                                      console.log("getting resolved in geocoder ^&^&^&&^^&^&^&");
-                                      resolve(arr);
-                                    }*/
-                                    //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-                                    resolve();
-                                }).catch(function (e) {
-                                    console.log(e.message + " caught this error");
-                                    /*x++;
-                                    if(items.length - x == 1) {
-                                      resolve(arr);
-                                    }*/
-                                    resolve();
-                                });
-                                //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-                            }
-                        });
-                    });
-                    var results = Promise.all(mapped);
-                    results.then(function () {
-                        console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
-                        arr.sort(function (a, b) {
-                            return a.distance - b.distance;
-                        });
-                        _this.distances = arr.slice();
-                        console.log(JSON.stringify(_this.distances) + " ^^^^&&&&&&&********88889999000000000");
-                        resolve();
-                        //return this.cache.saveItem(cacheKey, this.distances);
-                    });
-                });
+        //return new Promise((resolve, reject) => {
+        var cacheKey = "distances";
+        var arr = [];
+        var mapped;
+        //this.cache.removeItem(cacheKey);
+        console.log("IN LOADDISTANCES #$$$$$$$$$$$$$$$$$$$$$");
+        //this.geolocation.getCurrentPosition().then((resp) => {            
+        // resp.coords.latitude
+        console.log("IN geo get position #$$$$$$$5354554354$$$$$$$");
+        //this.rrr = resp;
+        //console.log(this.rrr + "              this.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrrr");
+        //this.cache.getItem(cacheKey).catch(() => {
+        //setTimeout(() => {
+        this.distancelist = this.af.list('/distances/' + this.username, { query: {
+                orderByChild: 'distance',
+                limitToFirst: 10
+            } });
+        var x = 0;
+        this.subscription6 = this.distancelist.subscribe(function (items) {
+            _this.startAtKey3 = items[0].$key;
+            _this.lastKey3 = _this.startAtKey3;
+            items.forEach(function (item) {
+                _this.distances.push(item);
             });
-            /*}).then(data => {
-              this.distances = data
-            })*/
-            //}, 1500)
-            /*}).catch((error) => {
-              this.diagnostic.switchToLocationSettings();
-              console.log('Error getting location', error.message);
-              resolve();
-            });*/
-        }).catch(function (error) {
-            console.log('Error getting location', error);
+            /*mapped = items.map((item) => {
+             return new Promise(resolve => {
+               let rr;
+               //console.log(JSON.stringify(item) + "               *((*&*&*&*&^&*&*&*(&*(&*&*(&(&(&*(              :::" + x);
+               //if(item.address == "") {
+                 //resolve();
+               //}
+               else {
+                 console.log(item.address + " is the address empty??????");
+                 this.nativeGeocoder.forwardGeocode(item.address)
+                   .then((coordinates: NativeGeocoderForwardResult) => {
+                     console.log("I AM IN THE GEOCODING ***&&*&*&*&*");
+                       rr = this.round(this.distance(coordinates.latitude, coordinates.longitude, this.rrr.coords.latitude, this.rrr.coords.longitude, "M"), 1);
+                       if(!item.picURL) {
+                         item.picURL = 'assets/blankprof.png';
+                       }
+                       arr.push({'pic':item.picURL, 'salon':item.username, 'distance':rr});
+                       console.log("push to the array of results");
+                       //x++;
+                       /*console.log(items.length + "         length   /    x:        " + x);
+                       if(items.length - x == 1) {
+                         console.log("getting resolved in geocoder ^&^&^&&^^&^&^&");
+                         resolve(arr);
+                       }
+                       //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+
+                       resolve();
+                     }).catch(e => {
+                       console.log(e.message + " caught this error");
+                       /*x++;
+                       if(items.length - x == 1) {
+                         resolve(arr);
+                       }
+                       resolve();
+                     })*/
+            //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
         });
+        //})
+        /*let results = Promise.all(mapped);
+        results.then(() => {
+          console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
+          
+          arr.sort(function(a,b) {
+            return a.distance - b.distance;
+          });
+
+          this.distances = arr.slice();
+
+          console.log(JSON.stringify(this.distances) + " ^^^^&&&&&&&********88889999000000000");
+
+          resolve();
+          //return this.cache.saveItem(cacheKey, this.distances);
+        })
+      });
+
+    })*/
+        /*}).then(data => {
+          this.distances = data
+        })*/
+        //}, 1500)
+        /*}).catch((error) => {
+          this.diagnostic.switchToLocationSettings();
+          console.log('Error getting location', error.message);
+          resolve();
+        });*/
+        /*}).catch((error) => {
+          console.log('Error getting location', error);
+        });*/
     };
     FeedUser.prototype.loadPromotions = function () {
         var _this = this;
@@ -7779,7 +7875,7 @@ var FeedUser = (function () {
         //results2 = Promise.all(mapped);
         //results2.then(() => {  
         //this.pricesArray = array;
-        //console.log(this.pricesArray + "     pricesarrrraaayyy ITEM (((((()()()()()() loadprices")   
+        //console.log(this.pricesArray + "     pricesathis.rrrraaayyy ITEM (((((()()()()()() loadprices")   
         //return this.cache.saveItem(cacheKey, this.pricesArray);
         //})    
         /*}).then(data => {
@@ -7829,6 +7925,9 @@ var FeedUser = (function () {
     };
     FeedUser.prototype.ionViewDidLoad = function () {
         var _this = this;
+        this.storage.get('username').then(function (val) {
+            _this.username = val;
+        });
         setTimeout(function () {
             _this.renderer.setElementStyle(_this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '43%');
         }, 500);
@@ -7840,14 +7939,6 @@ var FeedUser = (function () {
                 if (_this.weekly.nativeElement.style.display != 'none') {
                     console.log("in doinfinite promotionsssssss");
                     setTimeout(function () {
-                        /*console.log('Begin async operation');
-                        console.log(this.content.directionY + "        upupupupupupu********");
-                        if(this.content.directionY == 'up') {
-                          this.show = false
-                        }
-                        else {
-                          this.show = true;
-                        }*/
                         console.log(_this.startAtKey1 + "     before %%^&^&^% start at");
                         _this.list2 = _this.af.list('/promotions', {
                             query: {
@@ -7891,6 +7982,8 @@ var FeedUser = (function () {
                 }
             }
         });
+        this.loadPromotions();
+        this.getAds();
         //setTimeout(() => {
         //div.style.marginTop = "-47%";
         //}, 1000);
@@ -7932,7 +8025,7 @@ var FeedUser = (function () {
                 //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
                 r++;
             }
-            console.log("THIS IS THE SORTED ARRAY TO BE SORRRED        " + JSON.stringify(_this.rating));
+            console.log("THIS IS THE SORTED ARRAY TO BE SOthis.rrrED        " + JSON.stringify(_this.rating));
             _this.rating.sort(function (a, b) {
                 if (a.stars !== "No ratings" && b.stars !== "No ratings") {
                     if (a.stars === b.stars) {
@@ -7951,28 +8044,27 @@ var FeedUser = (function () {
                     }
                 }
             });
-            _this.loadDistances().then(function () {
-                console.log("in load availabilities ......... ");
-                console.log(JSON.stringify(_this.availabilities));
-                _this.availabilities.sort(function (a, b) {
-                    return Date.parse('01/01/2013 ' + a.time) - Date.parse('01/01/2013 ' + b.time);
-                });
-                console.log('*****previous******');
-                console.log(JSON.stringify(_this.availabilities));
-                console.log('*****sorted********');
-                for (var _i = 0, _a = _this.availabilities; _i < _a.length; _i++) {
-                    var i = _a[_i];
-                    console.log(i.time + "          this is itime");
-                    var date = new Date('01/01/2013 ' + i.time);
-                    console.log(date + "          this is date in idate");
-                    var str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
-                    console.log(str);
-                    i.time = str;
-                }
-                _this.loadPromotions(); /////////// START NEW GIT ////45//54/54555555''''''''''''''''''''
-                _this.getAds();
-                _this.loadPrices();
+            //this.loadDistances().then(() => {
+            console.log("in load availabilities ......... ");
+            console.log(JSON.stringify(_this.availabilities));
+            _this.availabilities.sort(function (a, b) {
+                return Date.parse('01/01/2013 ' + a.time) - Date.parse('01/01/2013 ' + b.time);
             });
+            console.log('*****previous******');
+            console.log(JSON.stringify(_this.availabilities));
+            console.log('*****sorted********');
+            for (var _a = 0, _b = _this.availabilities; _a < _b.length; _a++) {
+                var i = _b[_a];
+                console.log(i.time + "          this is itime");
+                var date = new Date('01/01/2013 ' + i.time);
+                console.log(date + "          this is date in idate");
+                var str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
+                console.log(str);
+                i.time = str;
+            }
+            _this.loadDistances();
+            _this.loadPrices();
+            //});
         });
         ////this.renderer.setElementStyle(this.promos.nativeElement, 'color', '#e6c926');
         this.renderer.setElementStyle(this.weekly.nativeElement, 'display', 'block');
@@ -8083,6 +8175,7 @@ var FeedUser = (function () {
         }
     };
     FeedUser.prototype.dropDownD = function () {
+        this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '8%');
         this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
         this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
         //this.renderer.setElementStyle(this.promos.nativeElement, 'color', 'gray');
@@ -8230,39 +8323,39 @@ var FeedUser = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('changeText'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object)
 ], FeedUser.prototype, "changeText", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('availability'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _b || Object)
 ], FeedUser.prototype, "availability", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('contentone'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _c || Object)
 ], FeedUser.prototype, "contentOne", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('ratings'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _d || Object)
 ], FeedUser.prototype, "ratingbox", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('weeklydeals'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _e || Object)
 ], FeedUser.prototype, "weekly", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('promos'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _f || Object)
 ], FeedUser.prototype, "promos", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('weekly'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _g || Object)
 ], FeedUser.prototype, "weeklyyellow", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('price'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _h || Object)
 ], FeedUser.prototype, "price", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('distance'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _j || Object)
 ], FeedUser.prototype, "distancey", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('noavail'),
@@ -8270,15 +8363,15 @@ __decorate([
 ], FeedUser.prototype, "noavail", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('infinitescroll'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"])
+    __metadata("design:type", typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _k || Object)
 ], FeedUser.prototype, "infinitescroll", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */])
+    __metadata("design:type", typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Content */]) === "function" && _l || Object)
 ], FeedUser.prototype, "content", void 0);
 FeedUser = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-feed-user',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/feeduser/feeduser.html"*/'<ion-header (swipeleft)="swipeLeft()" (swiperight)="toFull()"> <!---->\n<div> <!--(swiperight)="swipeRight()" (swipeleft)="swipeLeft()"-->\n  <ion-item class="itemadspace" [@slideDown]="downState" no-padding no-lines>\n    <div class="stylistview">\n      <button class="stylistviewbutton" (tap)="switchView()" ion-button color="secondary">Stylist View</button>\n    </div>\n    <!--<h3 class="feedtitle">User Feed</h3>-->\n\n    <swiper #swiper [config]="config" [(index)]="swiperIndex" (indexChange)="indexChange()">\n      <div *ngFor="let ad of ads; let i = index" class="adcontainer">\n        <img src="{{ad}}" class="adimage" #adimage>\n      </div>\n    </swiper>\n  </ion-item>\n  \n  <div class="clickme" (tap)="toolClicked($event)">\n    <ion-toolbar [@toolSlide]="toolbarState" color="black" id="iontoolbar">\n      <ion-icon class=\'custom-icon\' name="play"></ion-icon>\n      <button #changeText class="all toolbarstyle" (tap)="dropDown()">Availability</button><ion-icon class=\'down-icon\' name="arrow-down"></ion-icon>\n\n      <!--<button #promos class="promos toolbarstyle" (tap)="closeMenuP()">Promos</button>-->\n      <button #weekly class="weekly toolbarstyle" (tap)="closeMenu()">Promotions</button>\n    </ion-toolbar>\n  </div>\n\n  <ul [@show]="showDropDown" class="dropdown">\n    <li (tap)="dropDownA()">Availability</li>\n    <li (tap)="dropDownD()">Distance</li>\n    <li (tap)="dropDownP()">Price</li>\n    <li (tap)="dropDownR()">Rating</li>\n  </ul>\n\n  <ul [@showHeight]="showDropDownHeight" class="dropdowntwo">\n    <li (tap)="dropDownA()">Availability</li>\n    <li (tap)="dropDownD()">Distance</li>\n    <li (tap)="dropDownP()">Price</li>\n    <li (tap)="dropDownR()">Rating</li>\n  </ul>\n</div>\n</ion-header>\n\n<ion-content no-padding>\n<div (swipeLeft)="swipeLeft()" (swipeRight)="toFull()"> <!--(swipeRight)="toProfile()"-->\n  \n\n  \n  <!--<ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>-->\n\n\n  <div class =\'availability contentone\' #availability [@moveList]=\'moveState\'>\n   <ion-list class="marginstatus" no-padding>\n     <ion-item *ngFor="let z of availabilities" no-padding (tap)="presentProfileModal(z.salon, z.time)">\n      <div class="feedtoptextcontainer">\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{z.pic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{z.salon}}</h4><br>\n          <h4 class="poststudio">{{z.time}}</h4>\n        </div>\n      </div>\n      <!--<img class="imagepost" src="{{i}}">-->\n     </ion-item>\n   </ion-list>\n  </div>\n\n  <div class =\'distance contentone\' #distance [@moveList]=\'moveState\'>\n   <ion-list class="marginstatus" no-padding>\n     <ion-item *ngFor="let z of distances" no-padding (tap)="presentProfileModalDistance(z.salon)">\n      <div class="feedtoptextcontainer">\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{z.pic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{z.salon}}</h4><br>\n          <h4 class="poststudio">{{z.distance}} mi</h4>\n        </div>\n      </div>\n      <!--<img class="imagepost" src="{{i}}">-->\n     </ion-item>\n   </ion-list>\n  </div>\n\n  <div class =\'ratings contentone\' #ratings [@moveList]=\'moveState\'>\n   <ion-list class="marginstatus" no-padding>\n     <ion-item *ngFor="let a of rating ; let i = index" no-padding (tap)="presentProfileModalRatings(a.username)">\n      <div class="feedtoptextcontainer">\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{a.picURL}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{a.username}}</h4><br>\n          <h4 class="poststudio">{{a.stars}}</h4>\n        </div>\n      </div>\n      <!--<img class="imagepost" src="{{i}}">-->\n     </ion-item>\n   </ion-list>\n  </div>\n\n  <div class =\'price contentone\' #price [@moveList]=\'moveState\'>\n   <ion-list class="marginstatus" no-padding>\n     <ion-item *ngFor="let a of pricesArray" no-padding (tap)="presentProfileModalPrice(a.username)">\n      <div class="feedtoptextcontainer">\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{a.picURL}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{a.username}}</h4><br>\n          <h4 class="poststudio">{{a.price}}</h4>\n        </div>\n      </div>\n      <!--<img class="imagepost" src="{{i}}">-->\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="doInfiniteP($event)">\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n\n  <div class =\'contentone weeklydeals\' #weeklydeals [@moveList]=\'moveState\'>\n   <ion-list class="marginstatus weeklyy" no-padding>\n     <ion-item *ngFor="let a of promotions" no-padding (tap)="loadModal(a.username)">\n      <div class="feedtoptextcontainer">\n        <!--<div class="imageparent">\n          <img class="postprofilepic" src="{{a.url}}">\n        </div>-->\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{a.username}}</h4><br>\n        </div>\n        <h3 class="promotitle">{{a.title}}</h3>\n        <div class="desccontainer">\n          <h4 class="deal">{{a.caption}}</h4>\n        </div>\n      </div>\n      <!--<img class="imagepost" src="{{i}}">-->\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" #infinitescroll>\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n\n  <ion-item class="noavail" #noavail no-padding no-lines>NO RESULTS</ion-item>\n</div>\n</ion-content>'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/feeduser/feeduser.html"*/,
+        selector: 'page-feed-user',template:/*ion-inline-start:"/Users/eamonwhite/ionicmane/myApp/src/pages/feeduser/feeduser.html"*/'<ion-header (swipeleft)="swipeLeft()" (swiperight)="toFull()"> <!---->\n<div> <!--(swiperight)="swipeRight()" (swipeleft)="swipeLeft()"-->\n  <ion-item class="itemadspace" [@slideDown]="downState" no-padding no-lines>\n    <div class="stylistview">\n      <button class="stylistviewbutton" (tap)="switchView()" ion-button color="secondary">Stylist View</button>\n    </div>\n    <!--<h3 class="feedtitle">User Feed</h3>-->\n\n    <swiper #swiper [config]="config" [(index)]="swiperIndex" (indexChange)="indexChange()">\n      <div *ngFor="let ad of ads; let i = index" class="adcontainer">\n        <img src="{{ad}}" class="adimage" #adimage>\n      </div>\n    </swiper>\n  </ion-item>\n  \n  <div class="clickme" (tap)="toolClicked($event)">\n    <ion-toolbar [@toolSlide]="toolbarState" color="black" id="iontoolbar">\n      <ion-icon class=\'custom-icon\' name="play"></ion-icon>\n      <button #changeText class="all toolbarstyle" (tap)="dropDown()">Availability</button><ion-icon class=\'down-icon\' name="arrow-down"></ion-icon>\n\n      <!--<button #promos class="promos toolbarstyle" (tap)="closeMenuP()">Promos</button>-->\n      <button #weekly class="weekly toolbarstyle" (tap)="closeMenu()">Promotions</button>\n    </ion-toolbar>\n  </div>\n\n  <ul [@show]="showDropDown" class="dropdown">\n    <li (tap)="dropDownA()">Availability</li>\n    <li (tap)="dropDownD()">Distance</li>\n    <li (tap)="dropDownP()">Price</li>\n    <li (tap)="dropDownR()">Rating</li>\n  </ul>\n\n  <ul [@showHeight]="showDropDownHeight" class="dropdowntwo">\n    <li (tap)="dropDownA()">Availability</li>\n    <li (tap)="dropDownD()">Distance</li>\n    <li (tap)="dropDownP()">Price</li>\n    <li (tap)="dropDownR()">Rating</li>\n  </ul>\n</div>\n</ion-header>\n\n<ion-content no-padding>\n<div (swipeLeft)="swipeLeft()" (swipeRight)="toFull()"> <!--(swipeRight)="toProfile()"-->\n  \n\n  \n  <!--<ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>-->\n\n\n  <div class =\'availability contentone\' #availability [@moveList]=\'moveState\'>\n   <ion-list class="marginstatus" no-padding>\n     <ion-item *ngFor="let z of availabilities" no-padding (tap)="presentProfileModal(z.salon, z.time)">\n      <div class="feedtoptextcontainer">\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{z.pic}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{z.salon}}</h4><br>\n          <h4 class="poststudio">{{z.time}}</h4>\n        </div>\n      </div>\n      <!--<img class="imagepost" src="{{i}}">-->\n     </ion-item>\n   </ion-list>\n  </div>\n\n  <div class =\'distance contentone\' #distance [@moveList]=\'moveState\'>\n   <ion-list class="marginstatus" no-padding>\n     <ion-item *ngFor="let z of distances" no-padding (tap)="presentProfileModalDistance(z.username)">\n      <div class="feedtoptextcontainer">\n        <div class="imageparent">\n          <img class="postprofilepic" src=""> <!--{{z.pic}}-->\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{z.username}}</h4><br>\n          <h4 class="poststudio">{{z.distance}} mi</h4>\n        </div>\n      </div>\n      <!--<img class="imagepost" src="{{i}}">-->\n     </ion-item>\n   </ion-list>\n  </div>\n\n  <div class =\'ratings contentone\' #ratings [@moveList]=\'moveState\'>\n   <ion-list class="marginstatus" no-padding>\n     <ion-item *ngFor="let a of rating ; let i = index" no-padding (tap)="presentProfileModalRatings(a.username)">\n      <div class="feedtoptextcontainer">\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{a.picURL}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{a.username}}</h4><br>\n          <h4 class="poststudio">{{a.stars}}</h4>\n        </div>\n      </div>\n      <!--<img class="imagepost" src="{{i}}">-->\n     </ion-item>\n   </ion-list>\n  </div>\n\n  <div class =\'price contentone\' #price [@moveList]=\'moveState\'>\n   <ion-list class="marginstatus" no-padding>\n     <ion-item *ngFor="let a of pricesArray" no-padding (tap)="presentProfileModalPrice(a.username)">\n      <div class="feedtoptextcontainer">\n        <div class="imageparent">\n          <img class="postprofilepic" src="{{a.picURL}}">\n        </div>\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{a.username}}</h4><br>\n          <h4 class="poststudio">{{a.price}}</h4>\n        </div>\n      </div>\n      <!--<img class="imagepost" src="{{i}}">-->\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="doInfiniteP($event)">\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n\n  <div class =\'contentone weeklydeals\' #weeklydeals [@moveList]=\'moveState\'>\n   <ion-list class="marginstatus weeklyy" no-padding>\n     <ion-item *ngFor="let a of promotions" no-padding (tap)="loadModal(a.username)">\n      <div class="feedtoptextcontainer">\n        <!--<div class="imageparent">\n          <img class="postprofilepic" src="{{a.url}}">\n        </div>-->\n        <div class="usernamecontainer">\n          <h4 class="postusername">@{{a.username}}</h4><br>\n        </div>\n        <h3 class="promotitle">{{a.title}}</h3>\n        <div class="desccontainer">\n          <h4 class="deal">{{a.caption}}</h4>\n        </div>\n      </div>\n      <!--<img class="imagepost" src="{{i}}">-->\n     </ion-item>\n   </ion-list>\n   <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" #infinitescroll>\n    <ion-infinite-scroll-content\n      loadingSpinner="bubbles"\n      loadingText="Loading more data...">\n    </ion-infinite-scroll-content>\n   </ion-infinite-scroll>-->\n  </div>\n\n  <ion-item class="noavail" #noavail no-padding no-lines>NO RESULTS</ion-item>\n</div>\n</ion-content>'/*ion-inline-end:"/Users/eamonwhite/ionicmane/myApp/src/pages/feeduser/feeduser.html"*/,
         animations: [
             Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('slideDown', [
                 Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["state"])('down', Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
@@ -8327,9 +8420,10 @@ FeedUser = __decorate([
             ]),
         ]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_18_ionic_cache__["b" /* CacheService */], __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */], __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */], __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */], __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]])
+    __metadata("design:paramtypes", [typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_18_ionic_cache__["b" /* CacheService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_18_ionic_cache__["b" /* CacheService */]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */]) === "function" && _p || Object, typeof (_q = typeof __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */]) === "function" && _q || Object, typeof (_r = typeof __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _r || Object, typeof (_s = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _s || Object, typeof (_t = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */]) === "function" && _t || Object, typeof (_u = typeof __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _u || Object, typeof (_v = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]) === "function" && _v || Object, typeof (_w = typeof __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _w || Object, typeof (_x = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === "function" && _x || Object, typeof (_y = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */]) === "function" && _y || Object, typeof (_z = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _z || Object])
 ], FeedUser);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z;
 //# sourceMappingURL=feeduser.js.map
 
 /***/ }),

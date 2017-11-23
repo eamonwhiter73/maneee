@@ -106,6 +106,7 @@
     "ng2-img-tools": "^1.0.4",
     "ngx-infinite-scroll": "^0.6.1",
     "ngx-swiper-wrapper": "^4.6.2",
+    "node-geocoder": "^3.21.1",
     "npm": "^5.5.1",
     "rx-lite-aggregates": "^4.0.8",
     "rxjs": "^5.4.3",
