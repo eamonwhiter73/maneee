@@ -51,7 +51,7 @@ exports.sortDistance = functions.https.onRequest((req, res) => {
 						  console.log(snap[user].username + "    snap username");
 						  refList.push({ 
 						  	username: snap[user].username,
-						  	distance: distanceBetween 
+						  	distance: Math.round(distanceBetween * 100) / 100
 						  })
 
 						  resolve();

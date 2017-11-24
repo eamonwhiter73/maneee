@@ -424,7 +424,7 @@ export class FeedUser implements OnDestroy {
   }
 
   doInfiniteD() {
-    console.log("in doinfinite promotionsssssss");
+    console.log("in doinfinite distance");
     setTimeout(() => {
       console.log('Begin async operation');
       /*console.log(this.content.directionY + "        upupupupupupu********");
@@ -436,12 +436,12 @@ export class FeedUser implements OnDestroy {
 
       }*/
 
-      console.log(this.startAtKey4 + "     before startatkey3 start at 67767676765676765757");
-      this.list6 = this.af.list('/profiles/stylists', {
+      console.log(this.startAtKey4 + "     before startatkey4 start at 67767676765676765757");
+      this.list6 = this.af.list('/distances/'+this.username, {
       query: {
-        orderByKey: true,
-        endAt: this.startAtKey4,
-        limitToLast: 11
+        orderByChild: 'distance',
+        startAt: this.startAtKey4,
+        limitToFirst: 11
       }});
 
       this.subscription14 = this.list6.subscribe(items => { 
@@ -449,85 +449,39 @@ export class FeedUser implements OnDestroy {
           console.log(JSON.stringify(items[0]) + "     items 00000000000000");
           this.lastKey4 = this.startAtKey4;
           console.log(this.lastKey4 + " lastkey3333333333333asdfasdasdfasdfweew32323223fasdfasdf beginning");
-          //items.forEach(item => {
-           let arr;
-             let mapped = items.map((item) => {
-              return new Promise(resolve => {
-                let rr;
-                //console.log(JSON.stringify(item) + "               *((*&*&*&*&^&*&*&*(&*(&*&*(&(&(&*(              :::" + x);
-                if(item.address == "") {
-                  resolve();
-                }
-                else {
-                  console.log(item.address + " is the address empty??????");
-                  this.nativeGeocoder.forwardGeocode(item.address)
-                    .then((coordinates: NativeGeocoderForwardResult) => {
-                      console.log("I AM IN THE GEOCODING ***&&*&*&*&*");
-                        rr = this.round(this.distance(coordinates.latitude, coordinates.longitude, this.rrr.coords.latitude, this.rrr.coords.longitude, "M"), 1);
-                        if(!item.picURL) {
-                          item.picURL = 'assets/blankprof.png';
-                        }
-                        console.log("push to the array of results");
-                        
-                        if(this.startAtKey4 !== item.$key && this.lastKey4 !== item.$key) {
-                          console.log(this.startAtKey4 + "   :startAtKey3 being pushed       item key:     " + item.$key);
-                          if(item.username != null) {
-                            arr.push({'pic':item.picURL, 'salon':item.username, 'distance':rr});
-                          }
-                        }
+          items.forEach(item => {
+            let arr;
+            if(x == 0) {
+              //
+            }
+            else {
 
-                        if(x == 0) {
-                          this.startAtKey4 = item.$key;
-                        }
-
-                        console.log(this.startAtKey4 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
-                        console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
-
-                        x++;
-
-                        resolve();
-                      }).catch(e => {
-                        console.log(e.message + " caught this error");
-                        /*x++;
-                        if(items.length - x == 1) {
-                          resolve(arr);
-                        }*/
-                        resolve();
-                      })
-
-                  
-                    //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-
-                }
-
-
-              })
-            })
-
-            let results = Promise.all(mapped);
-            results.then(() => {
-              console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
-              
-              arr.sort(function(a,b) {
-                return a.distance - b.distance;
+              let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                             
+              storageRef.getDownloadURL().then(url => {
+                console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                item.picURL = url;
+              }).catch((e) => {
+                console.log("in caught url !!!!!!!$$$$$$$!!");
+                item.picURL = 'assets/blankprof.png';
               });
+                  
+              this.distances.push(item);
 
-              this.distances = arr.slice();
+              if(x == items.length - 1) {
+                console.log("inside items.length - 1    " + item.distance);
+                this.startAtKey4 = item.distance;
+              }
 
-              console.log(JSON.stringify(this.distances) + " ^^^^&&&&&&&********88889999000000000");
-            })
+              console.log(this.startAtKey4 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
+              //console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
+            }
 
+            x++;
 
-            console.log(this.rrr + "              this.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrrr");
-          //this.cache.getItem(cacheKey).catch(() => {
-          //setTimeout(() => {
-      
-             
-          
-            //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-            
-            
-          });          
+          })
+
+       })         
           
         //})      
     }, 500);
@@ -750,12 +704,31 @@ export class FeedUser implements OnDestroy {
       
             let x = 0;
             this.subscription6 = this.distancelist.subscribe(items => {
+
                
-               this.startAtKey3 = items[0].$key;
-               this.lastKey3 = this.startAtKey3;
+               console.log(JSON.stringify(items) + "      length - 1 load");
+               
+               console.log("BEGGINNING STARTATKEY4 WITH DISTANCE:    " + this.startAtKey4);
+               
 
                items.forEach(item => {
+                 let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                             
+                  storageRef.getDownloadURL().then(url => {
+                    console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                    item.picURL = url;
+                  }).catch((e) => {
+                    console.log("in caught url !!!!!!!$$$$$$$!!");
+                    item.picURL = 'assets/blankprof.png';
+                  });
+
                  this.distances.push(item);
+
+                 if(x == items.length - 1) {
+                   this.startAtKey4 = items[x].distance;
+                 }
+
+                 x++;
                })
                
                /*mapped = items.map((item) => {
@@ -796,6 +769,7 @@ export class FeedUser implements OnDestroy {
 
                     
                       //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+                    
 
                 })
               //})
@@ -991,6 +965,11 @@ export class FeedUser implements OnDestroy {
 
     });
   }
+
+  ionViewDidEnter() {
+    //this.distances = [];
+    //this.loadDistances();
+  }
      
 
   ionViewDidLoad() {
@@ -999,7 +978,7 @@ export class FeedUser implements OnDestroy {
     })
     setTimeout(() => {
       this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '43%');
-    }, 500)
+    }, 750)
     
     let element = this.elRef.nativeElement.querySelector('.scroll-content');
     element.addEventListener('scroll', (event) =>
@@ -1061,6 +1040,9 @@ export class FeedUser implements OnDestroy {
             }
             else if(this.ratingbox.nativeElement.style.display != 'none') {
               this.doInfiniteR();
+            }
+            else if(this.distancey.nativeElement.style.display != 'none') {
+              this.doInfiniteD();
             }
         }
     });

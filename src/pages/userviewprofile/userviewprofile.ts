@@ -143,6 +143,7 @@ export class UserViewProfile implements OnDestroy {
           //console.log(JSON.stringify(address.street + "      " + address.city + "    add street city9999"));
           let newResult: NativeGeocoderResultModel = JSON.parse(JSON.stringify(result));
 
+            this.af.object('/distances/' + this.username).remove();
           
             this.thoroughfare = newResult.thoroughfare;
             this.locality = newResult.locality;
@@ -159,6 +160,8 @@ export class UserViewProfile implements OnDestroy {
               alert("Your location has been updated");
               this.storage.set('location', false);
             }).catch((e) => {alert("Something went wrong with setting your location, please try again.")});
+
+
 
             this.http.get('https://us-central1-mane-4152c.cloudfunctions.net/sortDistance?text='+resp.coords.latitude+':'+resp.coords.longitude+':'+this.username)  
              .subscribe(res => {
