@@ -23,14 +23,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-console": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-console@1.0.5"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-splashscreen": {
     "source": {
       "type": "registry",
@@ -53,7 +45,9 @@
       "id": "cordova-plugin-calendar"
     },
     "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "CALENDAR_USAGE_DESCRIPTION": " "
+    }
   },
   "cordova-plugin-camera": {
     "source": {
@@ -139,7 +133,9 @@
       "id": "cordova-plugin-geolocation"
     },
     "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "GEOLOCATION_USAGE_DESCRIPTION": " "
+    }
   },
   "cordova-plugin-nativegeocoder": {
     "source": {
@@ -210,7 +206,7 @@
   "mx.ferreyra.callnumber": {
     "source": {
       "type": "registry",
-      "id": "call-number@~0.0.2"
+      "id": "call-number@0.0.2"
     },
     "is_top_level": true,
     "variables": {}

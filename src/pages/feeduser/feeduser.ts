@@ -47,10 +47,10 @@ const limit:BehaviorSubject<number> = new BehaviorSubject<number>(2); // import 
     ]),
     trigger('moveList', [
       state('down', style({
-        top: 200 + "px",
+        'margin-top': "40%",
       })),
       state('up', style({
-        top: 0 + "px",
+        'margin-top': "-5%",
       })),
       transition('* => *', animate('400ms ease-in')),
     ]),
@@ -174,6 +174,8 @@ export class FeedUser implements OnDestroy {
   lastKey3;
   startAtKey4;
   lastKey4;
+  startAtKey5;
+  lastKey5;
 
   constructor(public elRef: ElementRef, private cache: CacheService, private diagnostic: Diagnostic, private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public zone: NgZone, public modalCtrl: ModalController, public af: AngularFireDatabase, public storage: Storage, private afAuth: AngularFireAuth, public renderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
      
@@ -465,7 +467,7 @@ export class FeedUser implements OnDestroy {
                 console.log("in caught url !!!!!!!$$$$$$$!!");
                 item.picURL = 'assets/blankprof.png';
               });
-                  
+
               this.distances.push(item);
 
               if(x == items.length - 1) {
@@ -484,6 +486,71 @@ export class FeedUser implements OnDestroy {
        })         
           
         //})      
+    }, 500);
+  }
+
+  doInfiniteA() {
+    console.log("in doinfinite promotionsssssss");
+    setTimeout(() => {
+      console.log('Begin async operation');
+      /*console.log(this.content.directionY + "        upupupupupupu********");
+      if(this.content.directionY == 'up') {
+        this.show = false
+      }
+      else {
+        this.show = true;
+      }*/
+
+      console.log(this.startAtKey5 + "     before %%^&^&^% start at");
+      this.list4 = this.af.list('/profiles/stylists', {
+      query: {
+        orderByKey: true,
+        endAt: this.startAtKey5,
+        limitToLast: 11
+      }});
+
+      this.subscription12 = this.list4.subscribe(items => { 
+          let x = 0;
+          console.log(JSON.stringify(items[0]) + "     items 00000000000000");
+          this.lastKey5 = this.startAtKey5;
+          items.forEach(item => {
+
+
+            let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                       
+            storageRef.getDownloadURL().then(url => {
+              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+              item.picURL = url;
+            }).catch((e) => {
+              console.log("in caught url !!!!!!!$$$$$$$!!");
+              item.picURL = 'assets/blankprof.png';
+            });
+            
+
+            if(this.startAtKey5 !== item.$key && this.lastKey5 !== item.$key) {
+              console.log(this.startAtKey5 + "   :startAtKey5:");
+              console.log(item.$key + "   :itemkey:");
+              console.log(this.lastKey5 + "   :lastkey:");
+              if(item.price != null) {
+                this.pricesArray.push(item); //unshift?**************
+              }
+            }
+
+            if(x == 0) {
+              this.startAtKey5 = item.$key;
+            }
+
+            x++;
+          });          
+          
+      })
+
+      this.pricesArray.sort(function(a,b) {
+        return b.price.length - a.price.length;
+      });
+
+      //infiniteScroll.complete(); 
+        
     }, 500);
   }
 
@@ -969,6 +1036,9 @@ export class FeedUser implements OnDestroy {
   ionViewDidEnter() {
     //this.distances = [];
     //this.loadDistances();
+    if(this.distances == null) {
+      this.loadDistances();
+    }
   }
      
 
@@ -976,6 +1046,9 @@ export class FeedUser implements OnDestroy {
     this.storage.get('username').then((val) => {
       this.username = val;
     })
+
+    this.loadAvailabilities();
+
     setTimeout(() => {
       this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '43%');
     }, 750)
@@ -1056,11 +1129,7 @@ export class FeedUser implements OnDestroy {
       
     //}, 1000);
     
-    this.loadAvailabilities().then(() => {
-      
-      
-
-    })
+    
 
     
     let ratings;
@@ -1131,7 +1200,14 @@ export class FeedUser implements OnDestroy {
           });
 
           //this.loadDistances().then(() => {
-           console.log("in load availabilities ......... ")
+           
+
+          this.loadDistances();
+          this.loadPrices();
+       //});
+
+          setTimeout(() => {
+            console.log("in load availabilities ......... ")
             console.log(JSON.stringify(this.availabilities));
 
             this.availabilities.sort(function(a,b) {
@@ -1150,12 +1226,8 @@ export class FeedUser implements OnDestroy {
               console.log(str);
               i.time = str;
             }
-
-            this.loadDistances();
-            this.loadPrices();
-         //});
-
-         
+          }, 1500);
+          
        });   
 
       
@@ -1316,6 +1388,8 @@ export class FeedUser implements OnDestroy {
   }
 
   dropDownA() {
+    
+
     this.changeText.nativeElement.innerHTML = "Availability";
     this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
     //this.renderer.setElementStyle(this.contentOne.nativeElement, 'display', 'none');
@@ -1381,71 +1455,116 @@ export class FeedUser implements OnDestroy {
     console.log(event);
   }
 
-  loadAvailabilities(): Promise<any> {
-    
-    return new Promise((resolve, reject) => {
-      this.appointments = this.af.list('/appointments');
-      this.subscription2 = this.appointments.subscribe(items => items.forEach(item => {
-        console.log(item);
-        let userName = item.$key;
-        this.availabilities = [];
-        for(let x in item) {
-          let month = x;
-          console.log(x + "      month");
-          this.appointmentsMonth = this.af.list('/appointments/' + userName + '/' + month);
-          this.subscription3 = this.appointmentsMonth.subscribe(items => items.forEach(item => {
-            this.startAtKeyAvail = item.$key;
-            //console.log(JSON.stringify(item) + "           item");
-            let date = new Date(item.date.day * 1000);
-            let today = new Date();
-            console.log(date.getMonth() + "==" + today.getMonth()  + "&&" + date.getDate() + "==" + today.getDate());
-            console.log("IN LOAD AVAILABILITIES *(*((**(*(*(*(*(*(*&^^^^%^%556565656565");
-            if(date.getMonth() == today.getMonth() && date.getDate() == today.getDate()) {
-              console.log("            inside the if that checks if its today");
-              console.log(item.reserved.appointment + "                *************appointment");
-              //let counter = 0;
-              item.reserved.appointment.forEach((r, index) => {
-                if(r.selected == true) {
-                  //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+  loadAvailabilities() {
 
-                  let storageRef = firebase.storage().ref().child('/settings/' + userName + '/profilepicture.png');
-                   
-                  let obj = {'pic':"", 'salon': userName, 'time': r.time};
+    //return new Promise((resolve, reject) => {
+      this.appointments = this.af.list('/appointments', { query: {
+        orderByChild: 'selected',
+        limitToFirst: 10
+      }});
 
-                  storageRef.getDownloadURL().then(url => {
-                    console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                    obj.pic = url;
-                    this.availabilities.push(obj);
-                  }).catch((e) => {
-                    console.log("in caught url !!!!!!!$$$$$$$!!");
-                    obj.pic = 'assets/blankprof.png';
-                    this.availabilities.push(obj);
-                  });
+      let promises = [];
+      let i2 = 0;
+      
+      this.subscription2 = this.appointments.subscribe(items => {
+        this.startAtKey5 = items[items.length - 1].$key;
+        this.lastKey5 = this.startAtKey5;
+        items.forEach(item => {
+        promises.push(new Promise((resolve, reject) => {
+          console.log(item);
+          let userName = item.$key;
+          let i1 = 0;
+          for(let month in item) {
 
-                  console.log(index + "         this is index !@@@@@!!");
-                  console.log(JSON.stringify(this.availabilities));
-                  
-                  
+            this.appointmentsMonth = this.af.list('/appointments/' + userName + '/' + month);
+            this.subscription3 = this.appointmentsMonth.subscribe(items => items.forEach(item => {
+              promises.push(new Promise((resolve, reject) => {
+                this.startAtKeyAvail = item.$key;
+                //console.log(JSON.stringify(item) + "           item");
+                let date = new Date(item.date.day * 1000);
+                let today = new Date();
+                console.log(date.getMonth() + "==" + today.getMonth()  + "&&" + date.getDate() + "==" + today.getDate());
+                console.log("IN LOAD AVAILABILITIES *(*((**(*(*(*(*(*(*&^^^^%^%556565656565");
+                if(date.getMonth() == today.getMonth() && date.getDate() == today.getDate()) {
+                  console.log("            inside the if that checks if its today");
+                  console.log(item.reserved.appointment + "                *************appointment");
+                  //let counter = 0;
+                  //mapped = item.reserved.appointment.map((r) => {
+                  //item.reserved.appointment.forEach((r, index) => {
+                    for(let r of item.reserved.appointment) {
+                      promises.push(new Promise((resolve, reject) => {
+                        if(r.selected == true) {
+                          //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+
+                          let storageRef = firebase.storage().ref().child('/settings/' + userName + '/profilepicture.png');
+                           
+                          let obj = {'pic':"", 'salon': userName, 'time': r.time};
+
+                          storageRef.getDownloadURL().then(url => {
+                            console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                            obj.pic = url;
+                            this.availabilities.push(obj);
+                            console.log(JSON.stringify(this.availabilities));
+                            resolve();
+                          }).catch((e) => {
+                            console.log("in caught url !!!!!!!$$$$$$$!!");
+                            obj.pic = 'assets/blankprof.png';
+                            this.availabilities.push(obj);
+                            console.log(JSON.stringify(this.availabilities));
+                            resolve();
+                          });
+                        }
+                      }))
+                      
+                  }
+
                 }
 
-                if(index == 23) {
-                  console.log("IN RESOLVE *(**(*(#*(*(#*(#*(#*(#))))))))");
-                  console.log(JSON.stringify(this.availabilities));
-                  resolve();
-                }
-              })
-
+               }))
+              if(i1 == items.length - 1) {
+                resolve()
+              }
               
-            }
 
-          }));
+              i1++;
+              }))
+             }
+             if(i2 == items.length - 1) {
+                resolve()
+             }
+              
 
+             i2++;
+          }))
+          })
+        });
+
+        Promise.all(promises).then(() => {
+          console.log("in load availabilities ......... ")
+          console.log(JSON.stringify(this.availabilities));
+
+          this.availabilities.sort(function(a,b) {
+            return Date.parse('01/01/2013 '+a.time) - Date.parse('01/01/2013 '+b.time);
+          });
+
+          console.log('*****previous******');
+          console.log(JSON.stringify(this.availabilities));
+          console.log('*****sorted********');
           
-        }
+          for(let i of this.availabilities) {
+            console.log(i.time + "          this is itime");
+            let date = new Date('01/01/2013 ' + i.time);
+            console.log(date + "          this is date in idate");
+            let str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
+            console.log(str);
+            i.time = str;
+          }
+        });
+      //}))
 
+      
         
-      }));
-    })
+    //})
     
   }
 

@@ -19,9 +19,6 @@
       "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
       "PACKAGE_NAME": "com.ionicframework.maneApp"
     },
-    "cordova-plugin-console": {
-      "PACKAGE_NAME": "com.ionicframework.maneApp"
-    },
     "cordova-plugin-crop": {
       "PACKAGE_NAME": "com.ionicframework.maneApp"
     },
@@ -59,6 +56,9 @@
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.ionicframework.maneApp"
     },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.ionicframework.maneApp"
+    },
     "cordova-plugin-nativegeocoder": {
       "PACKAGE_NAME": "com.ionicframework.maneApp"
     },
@@ -68,10 +68,16 @@
     "cordova-plugin-request-location-accuracy": {
       "PACKAGE_NAME": "com.ionicframework.maneApp"
     },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "com.ionicframework.maneApp"
+    },
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "com.ionicframework.maneApp"
     },
     "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.ionicframework.maneApp"
+    },
+    "cordova-plugin-uniquedeviceid": {
       "PACKAGE_NAME": "com.ionicframework.maneApp"
     },
     "cordova-plugin-whitelist": {
@@ -91,15 +97,6 @@
     },
     "mx.ferreyra.callnumber": {
       "PACKAGE_NAME": "com.ionicframework.maneApp"
-    },
-    "cordova-plugin-screen-orientation": {
-      "PACKAGE_NAME": "com.ionicframework.maneApp"
-    },
-    "cordova-plugin-ionic-webview": {
-      "PACKAGE_NAME": "com.ionicframework.maneApp"
-    },
-    "cordova-plugin-uniquedeviceid": {
-      "PACKAGE_NAME": "com.ionicframework.maneApp"
     }
   },
   "dependent_plugins": {
@@ -113,6 +110,9 @@
       "PACKAGE_NAME": "com.ionicframework.maneApp"
     },
     "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.ionicframework.maneApp"
+    },
+    "es6-promise-plugin": {
       "PACKAGE_NAME": "com.ionicframework.maneApp"
     }
   }

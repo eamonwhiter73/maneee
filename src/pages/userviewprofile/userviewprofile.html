@@ -12,8 +12,8 @@
 </ion-header>
 
 <ion-content no-padding>
-<div (swiperight)="swipeRight()">
-	<ion-item no-padding no-lines class="itemforprofile">
+<div >
+	<ion-item no-padding no-lines class="itemforprofile" (swiperight)="swipeRight()">
 		<div class="imageparent">
 		  <img class="postprofilepic" src="{{profilePic}}">
 		</div>
@@ -50,7 +50,7 @@
 	      step="30">
 	    </calendar>-->
 	</ion-item>
-	<ion-grid>
+	<ion-grid (swiperight)="swipeRight()">
 	  <ion-item>Hair Goals</ion-item>
 	  <ion-row>
 	    <ion-col>

@@ -2,18 +2,18 @@
   "_args": [
     [
       {
-        "raw": "call-number@~0.0.2",
+        "raw": "call-number@0.0.2",
         "scope": null,
         "escapedName": "call-number",
         "name": "call-number",
-        "rawSpec": "~0.0.2",
-        "spec": ">=0.0.2 <0.1.0",
-        "type": "range"
+        "rawSpec": "0.0.2",
+        "spec": "0.0.2",
+        "type": "version"
       },
       "/Users/eamonwhite/ionicmane/myApp"
     ]
   ],
-  "_from": "call-number@>=0.0.2 <0.1.0",
+  "_from": "call-number@0.0.2",
   "_id": "call-number@0.0.2",
   "_inCache": true,
   "_location": "/call-number",
@@ -24,13 +24,13 @@
   "_npmVersion": "1.4.21",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "call-number@~0.0.2",
+    "raw": "call-number@0.0.2",
     "scope": null,
     "escapedName": "call-number",
     "name": "call-number",
-    "rawSpec": "~0.0.2",
-    "spec": ">=0.0.2 <0.1.0",
-    "type": "range"
+    "rawSpec": "0.0.2",
+    "spec": "0.0.2",
+    "type": "version"
   },
   "_requiredBy": [
     "#USER",
@@ -39,7 +39,7 @@
   "_resolved": "https://registry.npmjs.org/call-number/-/call-number-0.0.2.tgz",
   "_shasum": "1969e1d5742de369daed0f44338c1ac2128370ff",
   "_shrinkwrap": null,
-  "_spec": "call-number@~0.0.2",
+  "_spec": "call-number@0.0.2",
   "_where": "/Users/eamonwhite/ionicmane/myApp",
   "author": "",
   "bugs": {
