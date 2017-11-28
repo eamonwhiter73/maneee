@@ -47,10 +47,10 @@ const limit:BehaviorSubject<number> = new BehaviorSubject<number>(2); // import 
     ]),
     trigger('moveList', [
       state('down', style({
-        'margin-top': "40%",
+        'margin-top': "270px",
       })),
       state('up', style({
-        'margin-top': "-5%",
+        'margin-top': "112px",
       })),
       transition('* => *', animate('400ms ease-in')),
     ]),
@@ -493,64 +493,174 @@ export class FeedUser implements OnDestroy {
     console.log("in doinfinite promotionsssssss");
     setTimeout(() => {
       console.log('Begin async operation');
-      /*console.log(this.content.directionY + "        upupupupupupu********");
-      if(this.content.directionY == 'up') {
-        this.show = false
-      }
-      else {
-        this.show = true;
-      }*/
-
-      console.log(this.startAtKey5 + "     before %%^&^&^% start at");
-      this.list4 = this.af.list('/profiles/stylists', {
-      query: {
+      
+      this.appointments = this.af.list('/today', { query: {
         orderByKey: true,
-        endAt: this.startAtKey5,
-        limitToLast: 11
+        startAt: this.startAtKey5,
+        limitToFirst: 20
       }});
 
-      this.subscription12 = this.list4.subscribe(items => { 
-          let x = 0;
-          console.log(JSON.stringify(items[0]) + "     items 00000000000000");
-          this.lastKey5 = this.startAtKey5;
+      this.subscription2 = this.appointments.subscribe(items => { 
+        var x = 0; 
+        this.startAtKey5 = items[items.length - 1].$key; 
+        new Promise((resolve, reject) => {
           items.forEach(item => {
+        
+        
+            if(x == 0) {
+              //
+            }
+            else {
 
-
-            let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
-                       
-            storageRef.getDownloadURL().then(url => {
-              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-              item.picURL = url;
-            }).catch((e) => {
-              console.log("in caught url !!!!!!!$$$$$$$!!");
-              item.picURL = 'assets/blankprof.png';
-            });
-            
-
-            if(this.startAtKey5 !== item.$key && this.lastKey5 !== item.$key) {
-              console.log(this.startAtKey5 + "   :startAtKey5:");
-              console.log(item.$key + "   :itemkey:");
-              console.log(this.lastKey5 + "   :lastkey:");
-              if(item.price != null) {
-                this.pricesArray.push(item); //unshift?**************
-              }
+              var storageRef = firebase.storage().ref().child('/settings/' + item.salon + '/profilepicture.png');
+                                       
+              storageRef.getDownloadURL().then(url => {
+                console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                item.pic = url;
+                this.availabilities.push(item);
+              }).catch((e) => {
+                console.log("in caught url !!!!!!!$$$$$$$!!");
+                item.pic = 'assets/blankprof.png';
+                this.availabilities.push(item);
+              });
             }
 
-            if(x == 0) {
-              this.startAtKey5 = item.$key;
+            if(x == items.length - 1) {
+              resolve();
             }
 
             x++;
-          });          
-          
-      })
 
-      this.pricesArray.sort(function(a,b) {
-        return b.price.length - a.price.length;
+          })
+        }).then(() => {
+          setTimeout(() => {
+            console.log("in load availabilities ......... ")
+            console.log(JSON.stringify(this.availabilities));
+
+            this.availabilities.sort(function(a,b) {
+              return Date.parse('01/01/2013 '+a.time) - Date.parse('01/01/2013 '+b.time);
+            });
+
+            console.log('*****previous******');
+            console.log(JSON.stringify(this.availabilities));
+            console.log('*****sorted********');
+            
+            for(let i of this.availabilities) {
+              console.log(i.time + "          this is itime");
+              let date = new Date('01/01/2013 ' + i.time);
+              console.log(date + "          this is date in idate");
+              let str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
+              console.log(str);
+              i.time = str;
+            }
+          }, 500)
+        }); 
       });
 
-      //infiniteScroll.complete(); 
-        
+      /*let promises = [];
+      let i2 = 0;
+
+      if(i2 == 0) {
+        // skip
+      }
+      else {
+      
+        this.subscription2 = this.appointments.subscribe(items => {
+          
+          items.forEach(item => {
+          promises.push(new Promise((resolve, reject) => {
+            console.log(item);
+            let userName = item.$key;
+            let i1 = 0;
+            for(let month in item) {
+
+              this.appointmentsMonth = this.af.list('/appointments/' + userName + '/' + month);
+              this.subscription3 = this.appointmentsMonth.subscribe(items => items.forEach(item => {
+                promises.push(new Promise((resolve, reject) => {
+                  this.startAtKeyAvail = item.$key;
+                  //console.log(JSON.stringify(item) + "           item");
+                  let date = new Date(item.date.day * 1000);
+                  let today = new Date();
+                  console.log(date.getMonth() + "==" + today.getMonth()  + "&&" + date.getDate() + "==" + today.getDate());
+                  console.log("IN LOAD AVAILABILITIES *(*((**(*(*(*(*(*(*&^^^^%^%556565656565");
+                  if(date.getMonth() == today.getMonth() && date.getDate() == today.getDate()) {
+                    console.log("            inside the if that checks if its today");
+                    console.log(item.reserved.appointment + "                *************appointment");
+                    //let counter = 0;
+                    //mapped = item.reserved.appointment.map((r) => {
+                    //item.reserved.appointment.forEach((r, index) => {
+                      for(let r of item.reserved.appointment) {
+                        promises.push(new Promise((resolve, reject) => {
+                          if(r.selected == true) {
+                            //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+
+                            let storageRef = firebase.storage().ref().child('/settings/' + userName + '/profilepicture.png');
+                             
+                            let obj = {'pic':"", 'salon': userName, 'time': r.time};
+
+                            storageRef.getDownloadURL().then(url => {
+                              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                              obj.pic = url;
+                              this.availabilities.push(obj);
+                              console.log(JSON.stringify(this.availabilities));
+                              resolve();
+                            }).catch((e) => {
+                              console.log("in caught url !!!!!!!$$$$$$$!!");
+                              obj.pic = 'assets/blankprof.png';
+                              this.availabilities.push(obj);
+                              console.log(JSON.stringify(this.availabilities));
+                              resolve();
+                            });
+                          }
+                        }))
+                        
+                    }
+
+                  }
+
+                 }))
+                if(i1 == items.length - 1) {
+                  resolve()
+                }
+                
+
+                i1++;
+                }))
+               }
+               if(i2 == items.length - 1) {
+                  this.startAtKey5 = item.$key;
+                  resolve();
+               }
+
+                
+
+               i2++;
+            }))
+            })
+          });
+
+          Promise.all(promises).then(() => {
+            console.log("in load availabilities ......... ")
+            console.log(JSON.stringify(this.availabilities));
+
+            this.availabilities.sort(function(a,b) {
+              return Date.parse('01/01/2013 '+a.time) - Date.parse('01/01/2013 '+b.time);
+            });
+
+            console.log('*****previous******');
+            console.log(JSON.stringify(this.availabilities));
+            console.log('*****sorted********');
+            
+            for(let i of this.availabilities) {
+              console.log(i.time + "          this is itime");
+              let date = new Date('01/01/2013 ' + i.time);
+              console.log(date + "          this is date in idate");
+              let str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
+              console.log(str);
+              i.time = str;
+            }
+          });
+        }*/
     }, 500);
   }
 
@@ -1050,7 +1160,7 @@ export class FeedUser implements OnDestroy {
     this.loadAvailabilities();
 
     setTimeout(() => {
-      this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '43%');
+      this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '6%');
     }, 750)
     
     let element = this.elRef.nativeElement.querySelector('.scroll-content');
@@ -1116,6 +1226,9 @@ export class FeedUser implements OnDestroy {
             }
             else if(this.distancey.nativeElement.style.display != 'none') {
               this.doInfiniteD();
+            }
+            else if(this.availability.nativeElement.style.display != 'none') {
+              this.doInfiniteA();
             }
         }
     });
@@ -1458,12 +1571,30 @@ export class FeedUser implements OnDestroy {
   loadAvailabilities() {
 
     //return new Promise((resolve, reject) => {
-      this.appointments = this.af.list('/appointments', { query: {
-        orderByChild: 'selected',
+      this.appointments = this.af.list('/today', { query: {
+        orderByKey: true,
         limitToFirst: 10
       }});
 
-      let promises = [];
+      this.subscription2 = this.appointments.subscribe(items => { this.startAtKey5 = items[items.length - 1].$key; items.forEach(item => {
+        
+        console.log(item + "    item item item");
+        let storageRef = firebase.storage().ref().child('/settings/' + item.salon + '/profilepicture.png');
+                                 
+        storageRef.getDownloadURL().then(url => {
+          console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+          item.pic = url;
+          this.availabilities.push(item);
+        }).catch((e) => {
+          console.log("in caught url !!!!!!!$$$$$$$!!");
+          item.pic = 'assets/blankprof.png';
+          this.availabilities.push(item);
+        });
+
+
+      })});
+        
+      /*let promises = [];
       let i2 = 0;
       
       this.subscription2 = this.appointments.subscribe(items => {
@@ -1491,6 +1622,7 @@ export class FeedUser implements OnDestroy {
                   //let counter = 0;
                   //mapped = item.reserved.appointment.map((r) => {
                   //item.reserved.appointment.forEach((r, index) => {
+                    let count = 0;
                     for(let r of item.reserved.appointment) {
                       promises.push(new Promise((resolve, reject) => {
                         if(r.selected == true) {
@@ -1515,7 +1647,7 @@ export class FeedUser implements OnDestroy {
                           });
                         }
                       }))
-                      
+                      count++;
                   }
 
                 }
@@ -1559,7 +1691,7 @@ export class FeedUser implements OnDestroy {
             console.log(str);
             i.time = str;
           }
-        });
+        });*/
       //}))
 
       
@@ -1598,24 +1730,6 @@ export class FeedUser implements OnDestroy {
 
 
 
-  getInitialImages() {
-
-
-     
-
-    
-
-        /*.then(array => {
-        setTimeout(() => {
-          console.log(JSON.stringify(array) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
-          //
-            
-          //}, 1000)
-          
-        }, 2000);*/
-          
-      //})
-  }
 
   /*doInfinite(infiniteScroll) {
     console.log('Begin async operation');

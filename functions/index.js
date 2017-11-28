@@ -14,6 +14,9 @@ var googleMapsClient = require('@google/maps').createClient({
   Promise: Promise
 });
 
+var date = new Date()
+var sortDate = date.getTime() / 1000;
+
 //var geocoder = NodeGeocoder(options);
 
 // Take the text parameter passed to this HTTP endpoint and insert it into the
@@ -74,12 +77,74 @@ exports.sortDistance = functions.https.onRequest((req, res) => {
 	});
 });
 
+exports.updateAvailabilities = functions.database.ref('/appointments/{username}/' + date.getMonth())
+    .onUpdate(event => {
+      var dateInner = new Date();
+      var db = admin.database();
+	  var ref = db.ref("today");
+      // Grab the current value of what was written to the Realtime Database.
+      // You must return a Promise when performing asynchronous tasks inside a Functions such as
+      // writing to the Firebase Realtime Database.
+      // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
+      console.log(JSON.stringify(event.data.val()) + "     event event event eeeeeee");
+      var obj = event.data.val();
+      var x = 0;
+   	  console.log(typeof obj + "     type of of of type of of of");
+      for(var day in obj) {
+      	console.log("dat:     " + JSON.stringify(day));
+      	var r = new Date(obj[day].date.day * 1000);
+      	console.log(r.getUTCDate() + "    rrrrrr" + "      :  dateinner  " + dateInner.getUTCDate());
+      	if(r.getUTCDate() == dateInner.getUTCDate()) {
+      		ref.orderByChild("salon").equalTo(event.params.username).on("value", function(snapshot) {
+			  if(snapshot.val() == null) {
+			  	for(var z = 0; z<obj[day].reserved.appointment.length; z++) {
+			  		if(obj[day].reserved.appointment[z].selected == true) {
+			  			console.log('selected == true push');
+			  			ref.push({salon:event.params.username, time:obj[day].reserved.appointment[z].time, selected:true});
+			  		}
+			  	}			  	
+			  }
+			  else {
+				  var b = false;
+				  var snapper = snapshot.val();
+				  snapshot.forEach(function(entry) {
+				  	
+				  	for(var a of obj[day].reserved.appointment) {
+				  		
+			  			for(var snap in snapper) {
+			  				if(snapper[snap].salon == event.params.username && snapper[snap].time == z.time) {
+			  					console.log('selected == true updating');
+			  					snapper[snap].selected = a.selected;
+			  				}
+			  			}
+			  			b = true;
+			  			console.log("    snapshot val    "+JSON.stringify(snapshot.val()));
+				  		
+				  	}
+				  })
+
+				  return ref.update(snapper)
+			  }
+
+			}, function (errorObject) {
+			  console.log("The read failed: " + errorObject.code);
+			});
+      	}
+
+      	x++;
+      }
+
+	  
+
+      //return event.data.ref.parent.child('uppercase').set(uppercase);
+    });
+
 function distance(lat1, lon1, lat2, lon2, unit) {
-    let radlat1 = Math.PI * lat1/180
-    let radlat2 = Math.PI * lat2/180
-    let theta = lon1-lon2
-    let radtheta = Math.PI * theta/180
-    let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    var radlat1 = Math.PI * lat1/180
+    var radlat2 = Math.PI * lat2/180
+    var theta = lon1-lon2
+    var radtheta = Math.PI * theta/180
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
     dist = Math.acos(dist)
     dist = dist * 180/Math.PI
     dist = dist * 60 * 1.1515

@@ -36476,6 +36476,10 @@ page-user-profile .deposit {
   }
 }
 
+user-view-profile .contentone {
+  margin-top: 35% !important;
+}
+
 user-view-profile ion-header ion-toolbar {
   color: #e6c926;
   border-bottom: #e6c926;

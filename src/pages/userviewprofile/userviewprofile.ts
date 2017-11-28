@@ -84,6 +84,7 @@ export class UserViewProfile implements OnDestroy {
   bio;
   thoroughfare;
   locality;
+  bool = false;
 
   constructor(public http: Http, private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public elRef: ElementRef, public storage: Storage, public imageViewerCtrl: ImageViewerController, public loadingController: LoadingController,/*public firebase: FirebaseApp, */public myrenderer: Renderer, public af: AngularFireDatabase, public actionSheetCtrl: ActionSheetController, public camera: Camera, public navCtrl: NavController, public cameraService: CameraService) {
     this.times = [{'time':'8:00 AM', 'selected': false}, {'time':'12:00 PM', 'selected': false}, {'time':'4:00 PM', 'selected': false},
@@ -175,6 +176,8 @@ export class UserViewProfile implements OnDestroy {
             console.log(e.message + " caught this error");
 
           })
+
+          this.bool = true;
     })
   }
 
@@ -502,7 +505,12 @@ export class UserViewProfile implements OnDestroy {
   }
 
   swipeRight() {
-    this.navCtrl.popToRoot({animate:true,animation:'transition',duration:100,direction:'back'});
+    if(this.bool) {
+      this.navCtrl.setRoot(FeedUser, null, {animate:true,animation:'transition',duration:100,direction:'back'});
+    }
+    else {
+      this.navCtrl.popToRoot({animate:true,animation:'transition',duration:100,direction:'back'});
+    }
   }
 
   downloadImages() {
