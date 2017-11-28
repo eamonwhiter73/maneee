@@ -258,41 +258,44 @@ export class FeedUser implements OnDestroy {
       console.log(this.startAtKey2 + "     before %%^&^&^% start at");
       this.list4 = this.af.list('/profiles/stylists', {
       query: {
-        orderByKey: true,
-        endAt: this.startAtKey2,
-        limitToLast: 11
+        orderByKey: 'price',
+        startAt: this.startAtKey2,
+        limitToFirst: 51
       }});
 
       this.subscription12 = this.list4.subscribe(items => { 
           let x = 0;
           console.log(JSON.stringify(items[0]) + "     items 00000000000000");
           this.lastKey2 = this.startAtKey2;
+          this.startAtKey2 = items[items.length - 1].$key;
           items.forEach(item => {
 
+            if(x == 0) {
 
-            let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+            }
+            else {
+              let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
                        
-            storageRef.getDownloadURL().then(url => {
-              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-              item.picURL = url;
-            }).catch((e) => {
-              console.log("in caught url !!!!!!!$$$$$$$!!");
-              item.picURL = 'assets/blankprof.png';
-            });
-            
+              storageRef.getDownloadURL().then(url => {
+                console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                item.picURL = url;
+              }).catch((e) => {
+                console.log("in caught url !!!!!!!$$$$$$$!!");
+                item.picURL = 'assets/blankprof.png';
+              });
+              
 
-            if(this.startAtKey2 !== item.$key && this.lastKey2 !== item.$key) {
-              console.log(this.startAtKey2 + "   :startAtKey2:");
-              console.log(item.$key + "   :itemkey:");
-              console.log(this.lastKey2 + "   :lastkey:");
-              if(item.price != null) {
-                this.pricesArray.push(item); //unshift?**************
+              if(this.startAtKey2 !== item.$key && this.lastKey2 !== item.$key) {
+                console.log(this.startAtKey2 + "   :startAtKey2:");
+                console.log(item.$key + "   :itemkey:");
+                console.log(this.lastKey2 + "   :lastkey:");
+                if(item.price != null) {
+                  this.pricesArray.push(item); //unshift?**************
+                }
               }
             }
 
-            if(x == 0) {
-              this.startAtKey2 = item.$key;
-            }
+            
 
             x++;
           });          
@@ -300,7 +303,7 @@ export class FeedUser implements OnDestroy {
       })
 
       this.pricesArray.sort(function(a,b) {
-        return b.price.length - a.price.length;
+        return a.price.length - b.price.length;
       });
 
       //infiniteScroll.complete(); 
@@ -326,7 +329,7 @@ export class FeedUser implements OnDestroy {
       query: {
         orderByKey: true,
         endAt: this.startAtKey3,
-        limitToLast: 11
+        limitToLast: 50
       }});
 
       this.subscription13 = this.list5.subscribe(items => { 
@@ -383,7 +386,7 @@ export class FeedUser implements OnDestroy {
             
             if(this.startAtKey3 !== item.$key && this.lastKey3 !== item.$key) {
               console.log(this.startAtKey3 + "   :startAtKey3 being pushed       item key:     " + item.$key);
-              if(item.username != null) {
+              if(item.username != null && (item.rating.five + item.rating.four + item.rating.three + item.rating.two + item.rating.one) > 0) {
                 this.rating.push(item); //unshift?**************
               }
             }
@@ -443,7 +446,7 @@ export class FeedUser implements OnDestroy {
       query: {
         orderByChild: 'distance',
         startAt: this.startAtKey4,
-        limitToFirst: 11
+        limitToFirst: 51
       }});
 
       this.subscription14 = this.list6.subscribe(items => { 
@@ -497,7 +500,7 @@ export class FeedUser implements OnDestroy {
       this.appointments = this.af.list('/today', { query: {
         orderByKey: true,
         startAt: this.startAtKey5,
-        limitToFirst: 20
+        limitToFirst: 48
       }});
 
       this.subscription2 = this.appointments.subscribe(items => { 
@@ -876,7 +879,7 @@ export class FeedUser implements OnDestroy {
           //setTimeout(() => {
             this.distancelist = this.af.list('/distances/' + this.username, { query: {
               orderByChild: 'distance',
-              limitToFirst: 10
+              limitToFirst: 50
             }});
       
             let x = 0;
@@ -1042,31 +1045,40 @@ export class FeedUser implements OnDestroy {
       this.prices = this.af.list('/profiles/stylists', {
         query: {
           orderByChild: 'price',
-          limitToLast: 10
+          limitToFirst: 50
         }
       });
       this.subscription5 = this.prices.subscribe(items => { 
         
-        this.startAtKey2 = items[0].$key;
+        this.startAtKey2 = items[items.length - 1].$key;
         this.lastKey2 = this.startAtKey2;
 
+        let x = 0;
         items.forEach(item => {
         //mapped = items.map((item) => {
           //return new Promise(resolve => {
-            if(item.price == null) {
+
+            if(x == 0) { 
               //
             }
             else {
-              console.log(JSON.stringify(item));
-              if(!item.picURL) {
-                item.picURL = 'assets/blankprof.png';
+              if(item.price == null) {
+                //
               }
-              if(item.price !== undefined) {
-                this.pricesArray.push(item); //unshift?**************
-              }
-              //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+              else {
+                console.log(JSON.stringify(item));
+                if(!item.picURL) {
+                  item.picURL = 'assets/blankprof.png';
+                }
+                if(item.price !== undefined) {
+                  this.pricesArray.push(item); //unshift?**************
+                }
+                //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
 
+              }
             }
+
+            x++;
           //})  
         //})
         
@@ -1095,7 +1107,7 @@ export class FeedUser implements OnDestroy {
 
         this.ratingslist = this.af.list('/profiles/stylists', { query: {
           orderByKey: true,
-          limitToLast: 10
+          limitToLast: 50
         }});
         this.subscription7 = this.ratingslist.subscribe(items => {
 
@@ -1116,8 +1128,9 @@ export class FeedUser implements OnDestroy {
                   console.log(z + "this is the rating string");
                 }
 
+
                 console.log(JSON.stringify(item) + "stringifyied item &&^^&%^%^%^$$%%$");
-                if(item.type == "stylist") {
+                if((item.rating.five + item.rating.four + item.rating.three + item.rating.two + item.rating.one) > 0) {
                   console.log("getting pushed &&%$$##@#@#@#@#@#");
                   array.push(item);
                 }
@@ -1573,7 +1586,7 @@ export class FeedUser implements OnDestroy {
     //return new Promise((resolve, reject) => {
       this.appointments = this.af.list('/today', { query: {
         orderByKey: true,
-        limitToFirst: 10
+        limitToFirst: 48
       }});
 
       this.subscription2 = this.appointments.subscribe(items => { this.startAtKey5 = items[items.length - 1].$key; items.forEach(item => {
