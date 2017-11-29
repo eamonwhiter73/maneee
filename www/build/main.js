@@ -1157,20 +1157,19 @@ UserBooking = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserViewProfile; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__feeduser_feeduser__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__booking_booking__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__postpage_postpage__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__settings_settings__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_cameraservice__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_img_viewer__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_storage__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_geolocation__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_http__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__booking_booking__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postpage_postpage__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__settings_settings__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_cameraservice__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_firebase__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ionic_img_viewer__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_storage__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_native_geocoder__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_http__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1180,7 +1179,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -1262,6 +1260,9 @@ var UserViewProfile = (function () {
     };
     UserViewProfile.prototype.setLocation = function () {
         var _this = this;
+        this.bool = true;
+        var loading = this.loadingController.create({ content: "Loading..." });
+        loading.present();
         this.geolocation.getCurrentPosition().then(function (resp) {
             var location = resp;
             _this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude)
@@ -1284,13 +1285,16 @@ var UserViewProfile = (function () {
                 _this.http.get('https://us-central1-mane-4152c.cloudfunctions.net/sortDistance?text=' + resp.coords.latitude + ':' + resp.coords.longitude + ':' + _this.username)
                     .subscribe(function (res) {
                     console.log(res + "response from firesbase functions");
+                    loading.dismiss();
                 }, function (err) {
                     console.log(JSON.stringify(err));
+                    loading.dismiss();
                 });
             }).catch(function (e) {
                 console.log(e.message + " caught this error");
+                loading.dismiss();
             });
-            _this.bool = true;
+            loading.dismiss();
         });
     };
     UserViewProfile.prototype.ionViewDidLoad = function () {
@@ -1463,7 +1467,7 @@ var UserViewProfile = (function () {
                         var itemArrayTwo = _this.profComponents.toArray();
                         _this.cameraService.getMedia(_this.optionsGetCamera, _this.square).then(function () {
                             return new Promise(function (resolve, reject) {
-                                var storageRef = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.storage().ref().child('/profile/' + _this.username + '/profile_' + _this.username + '_' + _this.square + '.png');
+                                var storageRef = __WEBPACK_IMPORTED_MODULE_8_firebase___default.a.storage().ref().child('/profile/' + _this.username + '/profile_' + _this.username + '_' + _this.square + '.png');
                                 var loading = _this.loadingController.create({ content: "Loading..." });
                                 loading.present();
                                 setTimeout(function () {
@@ -1486,7 +1490,7 @@ var UserViewProfile = (function () {
                         var itemArrayTwo = _this.profComponents.toArray();
                         _this.cameraService.getMedia(_this.optionsGetMedia, _this.square).then(function () {
                             return new Promise(function (resolve, reject) {
-                                var storageRef = __WEBPACK_IMPORTED_MODULE_9_firebase___default.a.storage().ref().child('/profile/' + _this.username + '/profile_' + _this.username + '_' + _this.square + '.png');
+                                var storageRef = __WEBPACK_IMPORTED_MODULE_8_firebase___default.a.storage().ref().child('/profile/' + _this.username + '/profile_' + _this.username + '_' + _this.square + '.png');
                                 var loading = _this.loadingController.create({ content: "Loading..." });
                                 loading.present();
                                 setTimeout(function () {
@@ -1523,17 +1527,17 @@ var UserViewProfile = (function () {
         //this.navCtrl.push(SignUpPage);
     };
     UserViewProfile.prototype.tappedPost = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__postpage_postpage__["a" /* PostpagePage */]);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__postpage_postpage__["a" /* PostpagePage */]);
     };
     UserViewProfile.prototype.tappedEmergency = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__booking_booking__["a" /* BookingPage */]);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__booking_booking__["a" /* BookingPage */]);
     };
     UserViewProfile.prototype.goToSettings = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__settings_settings__["a" /* SettingsPage */]);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__settings_settings__["a" /* SettingsPage */]);
     };
     UserViewProfile.prototype.backToCal = function () {
         //if(this.navParams.get('param1') == 'user') {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__booking_booking__["a" /* BookingPage */], {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__booking_booking__["a" /* BookingPage */], {}, { animate: true, animation: 'transition', duration: 100, direction: 'forward' });
         //this.navCtrl.push(BookingPage);
         //}
         //else {
@@ -1568,12 +1572,13 @@ var UserViewProfile = (function () {
         this.backToCal();
     };
     UserViewProfile.prototype.swipeRight = function () {
-        if (this.bool) {
-            this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__feeduser_feeduser__["a" /* FeedUser */], null, { animate: true, animation: 'transition', duration: 100, direction: 'back' });
+        /*if(this.bool) {
+          console.log("in set rooooooooooooot");
+          this.navCtrl.push(FeedUser, { param: 'fromprofile' }, {animate:true,animation:'transition',duration:100,direction:'back'});
         }
-        else {
-            this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 100, direction: 'back' });
-        }
+        else {*/
+        this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 100, direction: 'back' });
+        //}
     };
     UserViewProfile.prototype.downloadImages = function () {
         var self = this;
@@ -1601,15 +1606,15 @@ var UserViewProfile = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('pluscontain'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _a || Object)
 ], UserViewProfile.prototype, "components", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('profsquare'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
+    __metadata("design:type", typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _b || Object)
 ], UserViewProfile.prototype, "profComponents", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChildren"])('xclass'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"])
+    __metadata("design:type", typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["QueryList"]) === "function" && _c || Object)
 ], UserViewProfile.prototype, "xclass", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('locationlisted'),
@@ -1630,9 +1635,10 @@ UserViewProfile = __decorate([
             ]),
         ]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_14__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */], __WEBPACK_IMPORTED_MODULE_13__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], __WEBPACK_IMPORTED_MODULE_11__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_10_ionic_img_viewer__["a" /* ImageViewerController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */], __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */], __WEBPACK_IMPORTED_MODULE_6__services_cameraservice__["a" /* CameraService */]])
+    __metadata("design:paramtypes", [typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_13__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__angular_http__["b" /* Http */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_11__ionic_native_native_geocoder__["a" /* NativeGeocoder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__ionic_native_native_geocoder__["a" /* NativeGeocoder */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_10__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_10__ionic_storage__["b" /* Storage */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_9_ionic_img_viewer__["a" /* ImageViewerController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9_ionic_img_viewer__["a" /* ImageViewerController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_camera__["a" /* Camera */]) === "function" && _p || Object, typeof (_q = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _q || Object, typeof (_r = typeof __WEBPACK_IMPORTED_MODULE_5__services_cameraservice__["a" /* CameraService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_cameraservice__["a" /* CameraService */]) === "function" && _r || Object])
 ], UserViewProfile);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
 //# sourceMappingURL=userviewprofile.js.map
 
 /***/ }),
@@ -5340,7 +5346,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var limit = new __WEBPACK_IMPORTED_MODULE_14_rxjs_BehaviorSubject__["BehaviorSubject"](2); // import 'rxjs/BehaviorSubject';
 var FeedUser = (function () {
-    function FeedUser(elRef, cache, diagnostic, nativeGeocoder, geolocation, zone, modalCtrl, af, storage, afAuth, renderer, loadingController, navCtrl) {
+    function FeedUser(navParams, elRef, cache, diagnostic, nativeGeocoder, geolocation, zone, modalCtrl, af, storage, afAuth, renderer, loadingController, navCtrl) {
+        this.navParams = navParams;
         this.elRef = elRef;
         this.cache = cache;
         this.diagnostic = diagnostic;
@@ -5616,17 +5623,17 @@ var FeedUser = (function () {
                         storageRef.getDownloadURL().then(function (url) {
                             console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
                             item.picURL = url;
+                            _this.distances.push(item);
                         }).catch(function (e) {
                             console.log("in caught url !!!!!!!$$$$$$$!!");
                             item.picURL = 'assets/blankprof.png';
+                            _this.distances.push(item);
                         });
-                        _this.distances.push(item);
-                        if (x == items.length - 1) {
-                            console.log("inside items.length - 1    " + item.distance);
-                            _this.startAtKey4 = item.distance;
-                        }
                         console.log(_this.startAtKey4 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
                         //console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
+                    }
+                    if (x == items.length - 1) {
+                        _this.startAtKey4 = item.distance;
                     }
                     x++;
                 });
@@ -5805,7 +5812,7 @@ var FeedUser = (function () {
             var store = [];
             console.log("in get addddssss ******");
             _this.objj = _this.af.object('/adcounter/count');
-            _this.subscription6 = _this.objj.subscribe(function (item) {
+            _this.subscription8 = _this.objj.subscribe(function (item) {
                 console.log(JSON.stringify(item) + "in adddd subscribe()()()()()()");
                 console.log(typeof item);
                 _this.totalAdCount = item.$value;
@@ -5912,6 +5919,12 @@ var FeedUser = (function () {
         }
         if (this.subscription12 != null) {
             this.subscription12.unsubscribe();
+        }
+        if (this.subscription13 != null) {
+            this.subscription13.unsubscribe();
+        }
+        if (this.subscription14 != null) {
+            this.subscription14.unsubscribe();
         }
     };
     FeedUser.prototype.pushPage = function () {
@@ -6029,7 +6042,6 @@ var FeedUser = (function () {
                          resolve(arr);
                        }
                        //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-
                        resolve();
                      }).catch(e => {
                        console.log(e.message + " caught this error");
@@ -6049,16 +6061,12 @@ var FeedUser = (function () {
           arr.sort(function(a,b) {
             return a.distance - b.distance;
           });
-
           this.distances = arr.slice();
-
           console.log(JSON.stringify(this.distances) + " ^^^^&&&&&&&********88889999000000000");
-
           resolve();
           //return this.cache.saveItem(cacheKey, this.distances);
         })
       });
-
     })*/
         /*}).then(data => {
           this.distances = data
@@ -6195,8 +6203,16 @@ var FeedUser = (function () {
     FeedUser.prototype.ionViewDidEnter = function () {
         //this.distances = [];
         //this.loadDistances();
-        if (this.distances == null) {
+        if (this.distances != []) {
+            //this.distances = [];
+        }
+        else {
             this.loadDistances();
+        }
+    };
+    FeedUser.prototype.ionViewDidLeave = function () {
+        if (this.fromprofile == 'fromprofile') {
+            this.navCtrl.pop();
         }
     };
     FeedUser.prototype.ionViewDidLoad = function () {
@@ -6204,6 +6220,7 @@ var FeedUser = (function () {
         this.storage.get('username').then(function (val) {
             _this.username = val;
         });
+        this.fromprofile = this.navParams.get('param');
         this.loadAvailabilities();
         setTimeout(function () {
             _this.renderer.setElementStyle(_this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '6%');
@@ -6458,6 +6475,10 @@ var FeedUser = (function () {
         }
     };
     FeedUser.prototype.dropDownD = function () {
+        console.log("UNSUBSCRIBED");
+        if (this.subscription6 != null) {
+            this.subscription6.unsubscribe();
+        }
         this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '8%');
         this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
         this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
@@ -6764,10 +6785,10 @@ FeedUser = __decorate([
             ]),
         ]
     }),
-    __metadata("design:paramtypes", [typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_18_ionic_cache__["b" /* CacheService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_18_ionic_cache__["b" /* CacheService */]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */]) === "function" && _p || Object, typeof (_q = typeof __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */]) === "function" && _q || Object, typeof (_r = typeof __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _r || Object, typeof (_s = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _s || Object, typeof (_t = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */]) === "function" && _t || Object, typeof (_u = typeof __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _u || Object, typeof (_v = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]) === "function" && _v || Object, typeof (_w = typeof __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _w || Object, typeof (_x = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === "function" && _x || Object, typeof (_y = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */]) === "function" && _y || Object, typeof (_z = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _z || Object])
+    __metadata("design:paramtypes", [typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["r" /* NavParams */]) === "function" && _m || Object, typeof (_o = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _o || Object, typeof (_p = typeof __WEBPACK_IMPORTED_MODULE_18_ionic_cache__["b" /* CacheService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_18_ionic_cache__["b" /* CacheService */]) === "function" && _p || Object, typeof (_q = typeof __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13__ionic_native_diagnostic__["a" /* Diagnostic */]) === "function" && _q || Object, typeof (_r = typeof __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__ionic_native_native_geocoder__["a" /* NativeGeocoder */]) === "function" && _r || Object, typeof (_s = typeof __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _s || Object, typeof (_t = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _t || Object, typeof (_u = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["p" /* ModalController */]) === "function" && _u || Object, typeof (_v = typeof __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _v || Object, typeof (_w = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]) === "function" && _w || Object, typeof (_x = typeof __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _x || Object, typeof (_y = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"]) === "function" && _y || Object, typeof (_z = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* LoadingController */]) === "function" && _z || Object, typeof (_0 = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */]) === "function" && _0 || Object])
 ], FeedUser);
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0;
 //# sourceMappingURL=feeduser.js.map
 
 /***/ }),

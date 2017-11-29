@@ -1,5 +1,5 @@
 import { NgZone, Component, trigger, state, style, transition, animate, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { LoadingController, Content } from 'ionic-angular';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { FeedStylist } from '../feedstylist/feedstylist';
@@ -118,6 +118,7 @@ export class FeedUser implements OnDestroy {
   stars;
   starsArray = [];
   rrr;
+  fromprofile;
 
 
   private subscription: ISubscription;
@@ -177,7 +178,7 @@ export class FeedUser implements OnDestroy {
   startAtKey5;
   lastKey5;
 
-  constructor(public elRef: ElementRef, private cache: CacheService, private diagnostic: Diagnostic, private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public zone: NgZone, public modalCtrl: ModalController, public af: AngularFireDatabase, public storage: Storage, private afAuth: AngularFireAuth, public renderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
+  constructor(public navParams: NavParams, public elRef: ElementRef, private cache: CacheService, private diagnostic: Diagnostic, private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public zone: NgZone, public modalCtrl: ModalController, public af: AngularFireDatabase, public storage: Storage, private afAuth: AngularFireAuth, public renderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
      
   }
 
@@ -440,7 +441,6 @@ export class FeedUser implements OnDestroy {
         this.show = true;
 
       }*/
-
       console.log(this.startAtKey4 + "     before startatkey4 start at 67767676765676765757");
       this.list6 = this.af.list('/distances/'+this.username, {
       query: {
@@ -466,20 +466,21 @@ export class FeedUser implements OnDestroy {
               storageRef.getDownloadURL().then(url => {
                 console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
                 item.picURL = url;
+                this.distances.push(item);
               }).catch((e) => {
                 console.log("in caught url !!!!!!!$$$$$$$!!");
                 item.picURL = 'assets/blankprof.png';
+                this.distances.push(item);
               });
 
-              this.distances.push(item);
-
-              if(x == items.length - 1) {
-                console.log("inside items.length - 1    " + item.distance);
-                this.startAtKey4 = item.distance;
-              }
+              
 
               console.log(this.startAtKey4 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
               //console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
+            }
+
+            if(x == items.length - 1) {
+               this.startAtKey4 = item.distance;
             }
 
             x++;
@@ -677,7 +678,7 @@ export class FeedUser implements OnDestroy {
         console.log("in get addddssss ******");
         this.objj = this.af.object('/adcounter/count')
 
-        this.subscription6 = this.objj.subscribe(item => { 
+        this.subscription8 = this.objj.subscribe(item => { 
           console.log(JSON.stringify(item) + "in adddd subscribe()()()()()()");
           console.log(typeof item);
           this.totalAdCount = item.$value;
@@ -803,6 +804,12 @@ export class FeedUser implements OnDestroy {
     if(this.subscription12 != null) {
       this.subscription12.unsubscribe();
     }
+    if(this.subscription13 != null) {
+      this.subscription13.unsubscribe();
+    }
+    if(this.subscription14 != null) {
+      this.subscription14.unsubscribe();
+    }
   } 
 
   pushPage(){
@@ -866,7 +873,6 @@ export class FeedUser implements OnDestroy {
       let arr = [];
       let mapped;
       //this.cache.removeItem(cacheKey);
-
       console.log("IN LOADDISTANCES #$$$$$$$$$$$$$$$$$$$$$");
 
       //this.geolocation.getCurrentPosition().then((resp) => {            
@@ -936,7 +942,6 @@ export class FeedUser implements OnDestroy {
                             resolve(arr);
                           }
                           //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-
                           resolve();
                         }).catch(e => {
                           console.log(e.message + " caught this error");
@@ -953,7 +958,6 @@ export class FeedUser implements OnDestroy {
 
                 })
               //})
-
               /*let results = Promise.all(mapped);
               results.then(() => {
                 console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
@@ -961,16 +965,12 @@ export class FeedUser implements OnDestroy {
                 arr.sort(function(a,b) {
                   return a.distance - b.distance;
                 });
-
                 this.distances = arr.slice();
-
                 console.log(JSON.stringify(this.distances) + " ^^^^&&&&&&&********88889999000000000");
-
                 resolve();
                 //return this.cache.saveItem(cacheKey, this.distances);
               })
             });
-
           })*/  
               
             /*}).then(data => {
@@ -1159,8 +1159,18 @@ export class FeedUser implements OnDestroy {
   ionViewDidEnter() {
     //this.distances = [];
     //this.loadDistances();
-    if(this.distances == null) {
-      this.loadDistances();
+   if(this.distances != []) {
+    //this.distances = [];
+   }
+   else {
+    this.loadDistances();
+   }
+    
+  }
+
+  ionViewDidLeave() {
+    if(this.fromprofile == 'fromprofile') {
+      this.navCtrl.pop();
     }
   }
      
@@ -1169,6 +1179,8 @@ export class FeedUser implements OnDestroy {
     this.storage.get('username').then((val) => {
       this.username = val;
     })
+
+    this.fromprofile = this.navParams.get('param');
 
     this.loadAvailabilities();
 
@@ -1239,6 +1251,7 @@ export class FeedUser implements OnDestroy {
             }
             else if(this.distancey.nativeElement.style.display != 'none') {
               this.doInfiniteD();
+
             }
             else if(this.availability.nativeElement.style.display != 'none') {
               this.doInfiniteA();
@@ -1497,6 +1510,10 @@ export class FeedUser implements OnDestroy {
   }
 
   dropDownD() {
+    console.log("UNSUBSCRIBED");
+    if(this.subscription6 != null) {
+      this.subscription6.unsubscribe();
+    }
     this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '8%');
     this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
     this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');

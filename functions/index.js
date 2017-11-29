@@ -106,10 +106,12 @@ exports.updateAvailabilities = functions.database.ref('/appointments/{username}/
 			  }
 			  else {
 				  var b = false;
+				  var promises = [];
 				  var snapper = snapshot.val();
 				  snapshot.forEach(function(entry) {
-				  	
-				  	for(var a of obj[day].reserved.appointment) {
+				   promises.push(new Promise(function(resolve, reject) {
+				   	let x = 0;
+				   	for(var a of obj[day].reserved.appointment) {
 				  		
 			  			for(var snap in snapper) {
 			  				if(snapper[snap].salon == event.params.username && snapper[snap].time == z.time) {
@@ -117,13 +119,21 @@ exports.updateAvailabilities = functions.database.ref('/appointments/{username}/
 			  					snapper[snap].selected = a.selected;
 			  				}
 			  			}
-			  			b = true;
+			  			
+			  			if(x == obj[day].reserved.appointment.length - 1) {
+			  				resolve();
+			  			}
 			  			console.log("    snapshot val    "+JSON.stringify(snapshot.val()));
-				  		
+				  		x++;
 				  	}
+				   }))
+				  	
 				  })
 
-				  return ref.update(snapper)
+				  Promise.all(promises).then(() => {
+				  	return ref.update(snapper);
+				  })
+				  
 			  }
 
 			}, function (errorObject) {

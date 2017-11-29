@@ -22,10 +22,12 @@ import { ImageViewerController } from 'ionic-img-viewer';
 import { Storage } from '@ionic/storage';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Http } from '@angular/http';
 //import { IonicApp, IonicModule } from 'ionic-angular';
 //import { MyApp } from './app/app.component';
 var UserViewProfile = /** @class */ (function () {
-    function UserViewProfile(nativeGeocoder, geolocation, elRef, storage, imageViewerCtrl, loadingController, /*public firebase: FirebaseApp, */ myrenderer, af, actionSheetCtrl, camera, navCtrl, cameraService) {
+    function UserViewProfile(http, nativeGeocoder, geolocation, elRef, storage, imageViewerCtrl, loadingController, /*public firebase: FirebaseApp, */ myrenderer, af, actionSheetCtrl, camera, navCtrl, cameraService) {
+        this.http = http;
         this.nativeGeocoder = nativeGeocoder;
         this.geolocation = geolocation;
         this.elRef = elRef;
@@ -45,6 +47,7 @@ var UserViewProfile = /** @class */ (function () {
         this.picURLS = [];
         this.square = 0;
         this.datesToSelect = [];
+        this.bool = false;
         this.optionsGetMedia = {
             //allowEdit: false,
             quality: 10,
@@ -85,6 +88,9 @@ var UserViewProfile = /** @class */ (function () {
     };
     UserViewProfile.prototype.setLocation = function () {
         var _this = this;
+        this.bool = true;
+        var loading = this.loadingController.create({ content: "Loading..." });
+        loading.present();
         this.geolocation.getCurrentPosition().then(function (resp) {
             var location = resp;
             _this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude)
@@ -92,6 +98,7 @@ var UserViewProfile = /** @class */ (function () {
                 console.log("I AM IN THE GEOCODING ***&&*&*&*&*");
                 //console.log(JSON.stringify(address.street + "      " + address.city + "    add street city9999"));
                 var newResult = JSON.parse(JSON.stringify(result));
+                _this.af.object('/distances/' + _this.username).remove();
                 _this.thoroughfare = newResult.thoroughfare;
                 _this.locality = newResult.locality;
                 _this.storage.set('locality', _this.locality);
@@ -103,9 +110,19 @@ var UserViewProfile = /** @class */ (function () {
                     alert("Your location has been updated");
                     _this.storage.set('location', false);
                 }).catch(function (e) { alert("Something went wrong with setting your location, please try again."); });
+                _this.http.get('https://us-central1-mane-4152c.cloudfunctions.net/sortDistance?text=' + resp.coords.latitude + ':' + resp.coords.longitude + ':' + _this.username)
+                    .subscribe(function (res) {
+                    console.log(res + "response from firesbase functions");
+                    loading.dismiss();
+                }, function (err) {
+                    console.log(JSON.stringify(err));
+                    loading.dismiss();
+                });
             }).catch(function (e) {
                 console.log(e.message + " caught this error");
+                loading.dismiss();
             });
+            loading.dismiss();
         });
     };
     UserViewProfile.prototype.ionViewDidLoad = function () {
@@ -383,7 +400,13 @@ var UserViewProfile = /** @class */ (function () {
         this.backToCal();
     };
     UserViewProfile.prototype.swipeRight = function () {
+        /*if(this.bool) {
+          console.log("in set rooooooooooooot");
+          this.navCtrl.push(FeedUser, { param: 'fromprofile' }, {animate:true,animation:'transition',duration:100,direction:'back'});
+        }
+        else {*/
         this.navCtrl.popToRoot({ animate: true, animation: 'transition', duration: 100, direction: 'back' });
+        //}
     };
     UserViewProfile.prototype.downloadImages = function () {
         var self = this;
@@ -439,7 +462,7 @@ var UserViewProfile = /** @class */ (function () {
                 ]),
             ]
         }),
-        __metadata("design:paramtypes", [NativeGeocoder, Geolocation, ElementRef, Storage, ImageViewerController, LoadingController, Renderer, AngularFireDatabase, ActionSheetController, Camera, NavController, CameraService])
+        __metadata("design:paramtypes", [Http, NativeGeocoder, Geolocation, ElementRef, Storage, ImageViewerController, LoadingController, Renderer, AngularFireDatabase, ActionSheetController, Camera, NavController, CameraService])
     ], UserViewProfile);
     return UserViewProfile;
 }());

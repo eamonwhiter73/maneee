@@ -134,6 +134,10 @@ export class UserViewProfile implements OnDestroy {
   }
 
   setLocation() {
+    this.bool = true;
+
+    let loading = this.loadingController.create({content : "Loading..."});
+    loading.present();
 
     this.geolocation.getCurrentPosition().then((resp) => {
       let location = resp;
@@ -167,17 +171,19 @@ export class UserViewProfile implements OnDestroy {
             this.http.get('https://us-central1-mane-4152c.cloudfunctions.net/sortDistance?text='+resp.coords.latitude+':'+resp.coords.longitude+':'+this.username)  
              .subscribe(res => {
                console.log(res + "response from firesbase functions");
-               
+               loading.dismiss();
              }, err => {
                console.log(JSON.stringify(err))
+               loading.dismiss();
              });
 
           }).catch(e => {
             console.log(e.message + " caught this error");
-
+            loading.dismiss();
           })
 
-          this.bool = true;
+          
+          loading.dismiss();
     })
   }
 
@@ -505,12 +511,13 @@ export class UserViewProfile implements OnDestroy {
   }
 
   swipeRight() {
-    if(this.bool) {
-      this.navCtrl.setRoot(FeedUser, null, {animate:true,animation:'transition',duration:100,direction:'back'});
+    /*if(this.bool) {
+      console.log("in set rooooooooooooot");
+      this.navCtrl.push(FeedUser, { param: 'fromprofile' }, {animate:true,animation:'transition',duration:100,direction:'back'});
     }
-    else {
+    else {*/
       this.navCtrl.popToRoot({animate:true,animation:'transition',duration:100,direction:'back'});
-    }
+    //}
   }
 
   downloadImages() {

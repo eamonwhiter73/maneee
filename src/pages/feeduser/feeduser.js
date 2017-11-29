@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { NgZone, Component, trigger, state, style, transition, animate, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { LoadingController, Content } from 'ionic-angular';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { FeedStylist } from '../feedstylist/feedstylist';
@@ -29,7 +29,8 @@ import { FullfeedPage } from '../fullfeed/fullfeed';
 import { CacheService } from 'ionic-cache';
 var limit = new BehaviorSubject(2); // import 'rxjs/BehaviorSubject';
 var FeedUser = /** @class */ (function () {
-    function FeedUser(elRef, cache, diagnostic, nativeGeocoder, geolocation, zone, modalCtrl, af, storage, afAuth, renderer, loadingController, navCtrl) {
+    function FeedUser(navParams, elRef, cache, diagnostic, nativeGeocoder, geolocation, zone, modalCtrl, af, storage, afAuth, renderer, loadingController, navCtrl) {
+        this.navParams = navParams;
         this.elRef = elRef;
         this.cache = cache;
         this.diagnostic = diagnostic;
@@ -131,40 +132,42 @@ var FeedUser = /** @class */ (function () {
             console.log(_this.startAtKey2 + "     before %%^&^&^% start at");
             _this.list4 = _this.af.list('/profiles/stylists', {
                 query: {
-                    orderByKey: true,
-                    endAt: _this.startAtKey2,
-                    limitToLast: 11
+                    orderByKey: 'price',
+                    startAt: _this.startAtKey2,
+                    limitToFirst: 51
                 }
             });
             _this.subscription12 = _this.list4.subscribe(function (items) {
                 var x = 0;
                 console.log(JSON.stringify(items[0]) + "     items 00000000000000");
                 _this.lastKey2 = _this.startAtKey2;
+                _this.startAtKey2 = items[items.length - 1].$key;
                 items.forEach(function (item) {
-                    var storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
-                    storageRef.getDownloadURL().then(function (url) {
-                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                        item.picURL = url;
-                    }).catch(function (e) {
-                        console.log("in caught url !!!!!!!$$$$$$$!!");
-                        item.picURL = 'assets/blankprof.png';
-                    });
-                    if (_this.startAtKey2 !== item.$key && _this.lastKey2 !== item.$key) {
-                        console.log(_this.startAtKey2 + "   :startAtKey2:");
-                        console.log(item.$key + "   :itemkey:");
-                        console.log(_this.lastKey2 + "   :lastkey:");
-                        if (item.price != null) {
-                            _this.pricesArray.push(item); //unshift?**************
-                        }
-                    }
                     if (x == 0) {
-                        _this.startAtKey2 = item.$key;
+                    }
+                    else {
+                        var storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                        storageRef.getDownloadURL().then(function (url) {
+                            console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                            item.picURL = url;
+                        }).catch(function (e) {
+                            console.log("in caught url !!!!!!!$$$$$$$!!");
+                            item.picURL = 'assets/blankprof.png';
+                        });
+                        if (_this.startAtKey2 !== item.$key && _this.lastKey2 !== item.$key) {
+                            console.log(_this.startAtKey2 + "   :startAtKey2:");
+                            console.log(item.$key + "   :itemkey:");
+                            console.log(_this.lastKey2 + "   :lastkey:");
+                            if (item.price != null) {
+                                _this.pricesArray.push(item); //unshift?**************
+                            }
+                        }
                     }
                     x++;
                 });
             });
             _this.pricesArray.sort(function (a, b) {
-                return b.price.length - a.price.length;
+                return a.price.length - b.price.length;
             });
             //infiniteScroll.complete(); 
         }, 500);
@@ -187,7 +190,7 @@ var FeedUser = /** @class */ (function () {
                 query: {
                     orderByKey: true,
                     endAt: _this.startAtKey3,
-                    limitToLast: 11
+                    limitToLast: 50
                 }
             });
             _this.subscription13 = _this.list5.subscribe(function (items) {
@@ -234,7 +237,7 @@ var FeedUser = /** @class */ (function () {
                     //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
                     if (_this.startAtKey3 !== item.$key && _this.lastKey3 !== item.$key) {
                         console.log(_this.startAtKey3 + "   :startAtKey3 being pushed       item key:     " + item.$key);
-                        if (item.username != null) {
+                        if (item.username != null && (item.rating.five + item.rating.four + item.rating.three + item.rating.two + item.rating.one) > 0) {
                             _this.rating.push(item); //unshift?**************
                         }
                     }
@@ -265,6 +268,222 @@ var FeedUser = /** @class */ (function () {
                 }
             });
             //infiniteScroll.complete(); 
+        }, 500);
+    };
+    FeedUser.prototype.doInfiniteD = function () {
+        var _this = this;
+        console.log("in doinfinite distance");
+        setTimeout(function () {
+            console.log('Begin async operation');
+            /*console.log(this.content.directionY + "        upupupupupupu********");
+            if(this.content.directionY == 'up') {
+              this.show = false
+            }
+            else {
+              this.show = true;
+      
+            }*/
+            console.log(_this.startAtKey4 + "     before startatkey4 start at 67767676765676765757");
+            _this.list6 = _this.af.list('/distances/' + _this.username, {
+                query: {
+                    orderByChild: 'distance',
+                    startAt: _this.startAtKey4,
+                    limitToFirst: 51
+                }
+            });
+            _this.subscription14 = _this.list6.subscribe(function (items) {
+                var x = 0;
+                console.log(JSON.stringify(items[0]) + "     items 00000000000000");
+                _this.lastKey4 = _this.startAtKey4;
+                console.log(_this.lastKey4 + " lastkey3333333333333asdfasdasdfasdfweew32323223fasdfasdf beginning");
+                items.forEach(function (item) {
+                    var arr;
+                    if (x == 0) {
+                        //
+                    }
+                    else {
+                        var storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                        storageRef.getDownloadURL().then(function (url) {
+                            console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                            item.picURL = url;
+                        }).catch(function (e) {
+                            console.log("in caught url !!!!!!!$$$$$$$!!");
+                            item.picURL = 'assets/blankprof.png';
+                            _this.distances.push(item);
+                        });
+                        console.log(_this.startAtKey4 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
+                        //console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
+                    }
+                    if (x == items.length - 1) {
+                        _this.startAtKey4 = items[x].distance;
+                    }
+                    x++;
+                });
+            });
+            //})      
+        }, 500);
+    };
+    FeedUser.prototype.doInfiniteA = function () {
+        var _this = this;
+        console.log("in doinfinite promotionsssssss");
+        setTimeout(function () {
+            console.log('Begin async operation');
+            _this.appointments = _this.af.list('/today', { query: {
+                    orderByKey: true,
+                    startAt: _this.startAtKey5,
+                    limitToFirst: 48
+                } });
+            _this.subscription2 = _this.appointments.subscribe(function (items) {
+                var x = 0;
+                _this.startAtKey5 = items[items.length - 1].$key;
+                new Promise(function (resolve, reject) {
+                    items.forEach(function (item) {
+                        if (x == 0) {
+                            //
+                        }
+                        else {
+                            var storageRef = firebase.storage().ref().child('/settings/' + item.salon + '/profilepicture.png');
+                            storageRef.getDownloadURL().then(function (url) {
+                                console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                                item.pic = url;
+                                _this.availabilities.push(item);
+                            }).catch(function (e) {
+                                console.log("in caught url !!!!!!!$$$$$$$!!");
+                                item.pic = 'assets/blankprof.png';
+                                _this.availabilities.push(item);
+                            });
+                        }
+                        if (x == items.length - 1) {
+                            resolve();
+                        }
+                        x++;
+                    });
+                }).then(function () {
+                    setTimeout(function () {
+                        console.log("in load availabilities ......... ");
+                        console.log(JSON.stringify(_this.availabilities));
+                        _this.availabilities.sort(function (a, b) {
+                            return Date.parse('01/01/2013 ' + a.time) - Date.parse('01/01/2013 ' + b.time);
+                        });
+                        console.log('*****previous******');
+                        console.log(JSON.stringify(_this.availabilities));
+                        console.log('*****sorted********');
+                        for (var _i = 0, _a = _this.availabilities; _i < _a.length; _i++) {
+                            var i = _a[_i];
+                            console.log(i.time + "          this is itime");
+                            var date = new Date('01/01/2013 ' + i.time);
+                            console.log(date + "          this is date in idate");
+                            var str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
+                            console.log(str);
+                            i.time = str;
+                        }
+                    }, 500);
+                });
+            });
+            /*let promises = [];
+            let i2 = 0;
+      
+            if(i2 == 0) {
+              // skip
+            }
+            else {
+            
+              this.subscription2 = this.appointments.subscribe(items => {
+                
+                items.forEach(item => {
+                promises.push(new Promise((resolve, reject) => {
+                  console.log(item);
+                  let userName = item.$key;
+                  let i1 = 0;
+                  for(let month in item) {
+      
+                    this.appointmentsMonth = this.af.list('/appointments/' + userName + '/' + month);
+                    this.subscription3 = this.appointmentsMonth.subscribe(items => items.forEach(item => {
+                      promises.push(new Promise((resolve, reject) => {
+                        this.startAtKeyAvail = item.$key;
+                        //console.log(JSON.stringify(item) + "           item");
+                        let date = new Date(item.date.day * 1000);
+                        let today = new Date();
+                        console.log(date.getMonth() + "==" + today.getMonth()  + "&&" + date.getDate() + "==" + today.getDate());
+                        console.log("IN LOAD AVAILABILITIES *(*((**(*(*(*(*(*(*&^^^^%^%556565656565");
+                        if(date.getMonth() == today.getMonth() && date.getDate() == today.getDate()) {
+                          console.log("            inside the if that checks if its today");
+                          console.log(item.reserved.appointment + "                *************appointment");
+                          //let counter = 0;
+                          //mapped = item.reserved.appointment.map((r) => {
+                          //item.reserved.appointment.forEach((r, index) => {
+                            for(let r of item.reserved.appointment) {
+                              promises.push(new Promise((resolve, reject) => {
+                                if(r.selected == true) {
+                                  //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+      
+                                  let storageRef = firebase.storage().ref().child('/settings/' + userName + '/profilepicture.png');
+                                   
+                                  let obj = {'pic':"", 'salon': userName, 'time': r.time};
+      
+                                  storageRef.getDownloadURL().then(url => {
+                                    console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                                    obj.pic = url;
+                                    this.availabilities.push(obj);
+                                    console.log(JSON.stringify(this.availabilities));
+                                    resolve();
+                                  }).catch((e) => {
+                                    console.log("in caught url !!!!!!!$$$$$$$!!");
+                                    obj.pic = 'assets/blankprof.png';
+                                    this.availabilities.push(obj);
+                                    console.log(JSON.stringify(this.availabilities));
+                                    resolve();
+                                  });
+                                }
+                              }))
+                              
+                          }
+      
+                        }
+      
+                       }))
+                      if(i1 == items.length - 1) {
+                        resolve()
+                      }
+                      
+      
+                      i1++;
+                      }))
+                     }
+                     if(i2 == items.length - 1) {
+                        this.startAtKey5 = item.$key;
+                        resolve();
+                     }
+      
+                      
+      
+                     i2++;
+                  }))
+                  })
+                });
+      
+                Promise.all(promises).then(() => {
+                  console.log("in load availabilities ......... ")
+                  console.log(JSON.stringify(this.availabilities));
+      
+                  this.availabilities.sort(function(a,b) {
+                    return Date.parse('01/01/2013 '+a.time) - Date.parse('01/01/2013 '+b.time);
+                  });
+      
+                  console.log('*****previous******');
+                  console.log(JSON.stringify(this.availabilities));
+                  console.log('*****sorted********');
+                  
+                  for(let i of this.availabilities) {
+                    console.log(i.time + "          this is itime");
+                    let date = new Date('01/01/2013 ' + i.time);
+                    console.log(date + "          this is date in idate");
+                    let str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
+                    console.log(str);
+                    i.time = str;
+                  }
+                });
+              }*/
         }, 500);
     };
     FeedUser.prototype.getAds = function () {
@@ -438,86 +657,110 @@ var FeedUser = /** @class */ (function () {
     ;
     FeedUser.prototype.loadDistances = function () {
         var _this = this;
-        return new Promise(function (resolve, reject) {
-            var cacheKey = "distances";
-            var rrr;
-            var arr = [];
-            var mapped;
-            //this.cache.removeItem(cacheKey);
-            console.log("IN LOADDISTANCES #$$$$$$$$$$$$$$$$$$$$$");
-            _this.geolocation.getCurrentPosition().then(function (resp) {
-                // resp.coords.latitude
-                console.log("IN geo get position #$$$$$$$5354554354$$$$$$$");
-                rrr = resp;
-                console.log(rrr + "              rrrrrrrrrrrrrrrrrrrrrrrrrr");
-                //this.cache.getItem(cacheKey).catch(() => {
-                //setTimeout(() => {
-                _this.distancelist = _this.af.list('/profiles/stylists');
-                var x = 0;
-                _this.subscription6 = _this.distancelist.subscribe(function (items) {
-                    mapped = items.map(function (item) {
-                        return new Promise(function (resolve) {
-                            var rr;
-                            //console.log(JSON.stringify(item) + "               *((*&*&*&*&^&*&*&*(&*(&*&*(&(&(&*(              :::" + x);
-                            if (item.address == "") {
-                                resolve();
-                            }
-                            else {
-                                console.log(item.address + " is the address empty??????");
-                                _this.nativeGeocoder.forwardGeocode(item.address)
-                                    .then(function (coordinates) {
-                                    console.log("I AM IN THE GEOCODING ***&&*&*&*&*");
-                                    rr = _this.round(_this.distance(coordinates.latitude, coordinates.longitude, rrr.coords.latitude, rrr.coords.longitude, "M"), 1);
-                                    if (!item.picURL) {
-                                        item.picURL = 'assets/blankprof.png';
-                                    }
-                                    arr.push({ 'pic': item.picURL, 'salon': item.username, 'distance': rr });
-                                    console.log("push to the array of results");
-                                    //x++;
-                                    /*console.log(items.length + "         length   /    x:        " + x);
-                                    if(items.length - x == 1) {
-                                      console.log("getting resolved in geocoder ^&^&^&&^^&^&^&");
-                                      resolve(arr);
-                                    }*/
-                                    //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-                                    resolve();
-                                }).catch(function (e) {
-                                    console.log(e.message + " caught this error");
-                                    /*x++;
-                                    if(items.length - x == 1) {
-                                      resolve(arr);
-                                    }*/
-                                    resolve();
-                                });
-                                //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-                            }
-                        });
-                    });
-                    var results = Promise.all(mapped);
-                    results.then(function () {
-                        console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
-                        arr.sort(function (a, b) {
-                            return a.distance - b.distance;
-                        });
-                        _this.distances = arr.slice();
-                        console.log(JSON.stringify(_this.distances) + " ^^^^&&&&&&&********88889999000000000");
-                        resolve();
-                        //return this.cache.saveItem(cacheKey, this.distances);
-                    });
+        //return new Promise((resolve, reject) => {
+        var cacheKey = "distances";
+        var arr = [];
+        var mapped;
+        //this.cache.removeItem(cacheKey);
+        console.log("IN LOADDISTANCES #$$$$$$$$$$$$$$$$$$$$$");
+        //this.geolocation.getCurrentPosition().then((resp) => {            
+        // resp.coords.latitude
+        console.log("IN geo get position #$$$$$$$5354554354$$$$$$$");
+        //this.rrr = resp;
+        //console.log(this.rrr + "              this.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrrr");
+        //this.cache.getItem(cacheKey).catch(() => {
+        //setTimeout(() => {
+        this.distancelist = this.af.list('/distances/' + this.username, { query: {
+                orderByChild: 'distance',
+                limitToFirst: 50
+            } });
+        var x = 0;
+        this.subscription6 = this.distancelist.subscribe(function (items) {
+            console.log(JSON.stringify(items) + "      length - 1 load");
+            console.log("BEGGINNING STARTATKEY4 WITH DISTANCE:    " + _this.startAtKey4);
+            items.forEach(function (item) {
+                var storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                storageRef.getDownloadURL().then(function (url) {
+                    console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                    item.picURL = url;
+                }).catch(function (e) {
+                    console.log("in caught url !!!!!!!$$$$$$$!!");
+                    item.picURL = 'assets/blankprof.png';
                 });
+                _this.distances.push(item);
+                if (x == items.length - 1) {
+                    _this.startAtKey4 = items[x].distance;
+                }
+                x++;
             });
-            /*}).then(data => {
-              this.distances = data
-            })*/
-            //}, 1500)
-            /*}).catch((error) => {
-              this.diagnostic.switchToLocationSettings();
-              console.log('Error getting location', error.message);
-              resolve();
-            });*/
-        }).catch(function (error) {
-            console.log('Error getting location', error);
+            /*mapped = items.map((item) => {
+             return new Promise(resolve => {
+               let rr;
+               //console.log(JSON.stringify(item) + "               *((*&*&*&*&^&*&*&*(&*(&*&*(&(&(&*(              :::" + x);
+               //if(item.address == "") {
+                 //resolve();
+               //}
+               else {
+                 console.log(item.address + " is the address empty??????");
+                 this.nativeGeocoder.forwardGeocode(item.address)
+                   .then((coordinates: NativeGeocoderForwardResult) => {
+                     console.log("I AM IN THE GEOCODING ***&&*&*&*&*");
+                       rr = this.round(this.distance(coordinates.latitude, coordinates.longitude, this.rrr.coords.latitude, this.rrr.coords.longitude, "M"), 1);
+                       if(!item.picURL) {
+                         item.picURL = 'assets/blankprof.png';
+                       }
+                       arr.push({'pic':item.picURL, 'salon':item.username, 'distance':rr});
+                       console.log("push to the array of results");
+                       //x++;
+                       /*console.log(items.length + "         length   /    x:        " + x);
+                       if(items.length - x == 1) {
+                         console.log("getting resolved in geocoder ^&^&^&&^^&^&^&");
+                         resolve(arr);
+                       }
+                       //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+
+                       resolve();
+                     }).catch(e => {
+                       console.log(e.message + " caught this error");
+                       /*x++;
+                       if(items.length - x == 1) {
+                         resolve(arr);
+                       }
+                       resolve();
+                     })*/
+            //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
         });
+        //})
+        /*let results = Promise.all(mapped);
+        results.then(() => {
+          console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
+          
+          arr.sort(function(a,b) {
+            return a.distance - b.distance;
+          });
+
+          this.distances = arr.slice();
+
+          console.log(JSON.stringify(this.distances) + " ^^^^&&&&&&&********88889999000000000");
+
+          resolve();
+          //return this.cache.saveItem(cacheKey, this.distances);
+        })
+      });
+
+    })*/
+        /*}).then(data => {
+          this.distances = data
+        })*/
+        //}, 1500)
+        /*}).catch((error) => {
+          this.diagnostic.switchToLocationSettings();
+          console.log('Error getting location', error.message);
+          resolve();
+        });*/
+        /*}).catch((error) => {
+          console.log('Error getting location', error);
+        });*/
     };
     FeedUser.prototype.loadPromotions = function () {
         var _this = this;
@@ -554,28 +797,35 @@ var FeedUser = /** @class */ (function () {
         this.prices = this.af.list('/profiles/stylists', {
             query: {
                 orderByChild: 'price',
-                limitToLast: 10
+                limitToFirst: 50
             }
         });
         this.subscription5 = this.prices.subscribe(function (items) {
-            _this.startAtKey2 = items[0].$key;
+            _this.startAtKey2 = items[items.length - 1].$key;
             _this.lastKey2 = _this.startAtKey2;
+            var x = 0;
             items.forEach(function (item) {
                 //mapped = items.map((item) => {
                 //return new Promise(resolve => {
-                if (item.price == null) {
+                if (x == 0) {
                     //
                 }
                 else {
-                    console.log(JSON.stringify(item));
-                    if (!item.picURL) {
-                        item.picURL = 'assets/blankprof.png';
+                    if (item.price == null) {
+                        //
                     }
-                    if (item.price !== undefined) {
-                        _this.pricesArray.push(item); //unshift?**************
+                    else {
+                        console.log(JSON.stringify(item));
+                        if (!item.picURL) {
+                            item.picURL = 'assets/blankprof.png';
+                        }
+                        if (item.price !== undefined) {
+                            _this.pricesArray.push(item); //unshift?**************
+                        }
+                        //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
                     }
-                    //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
                 }
+                x++;
                 //})  
                 //})
             });
@@ -583,7 +833,7 @@ var FeedUser = /** @class */ (function () {
         //results2 = Promise.all(mapped);
         //results2.then(() => {  
         //this.pricesArray = array;
-        //console.log(this.pricesArray + "     pricesarrrraaayyy ITEM (((((()()()()()() loadprices")   
+        //console.log(this.pricesArray + "     pricesathis.rrrraaayyy ITEM (((((()()()()()() loadprices")   
         //return this.cache.saveItem(cacheKey, this.pricesArray);
         //})    
         /*}).then(data => {
@@ -600,7 +850,7 @@ var FeedUser = /** @class */ (function () {
             //this.cache.getItem(cacheKey).catch(() => {
             _this.ratingslist = _this.af.list('/profiles/stylists', { query: {
                     orderByKey: true,
-                    limitToLast: 10
+                    limitToLast: 50
                 } });
             _this.subscription7 = _this.ratingslist.subscribe(function (items) {
                 _this.startAtKey3 = items[0].$key;
@@ -616,7 +866,7 @@ var FeedUser = /** @class */ (function () {
                             console.log(z + "this is the rating string");
                         }
                         console.log(JSON.stringify(item) + "stringifyied item &&^^&%^%^%^$$%%$");
-                        if (item.type == "stylist") {
+                        if ((item.rating.five + item.rating.four + item.rating.three + item.rating.two + item.rating.one) > 0) {
                             console.log("getting pushed &&%$$##@#@#@#@#@#");
                             array.push(item);
                         }
@@ -631,11 +881,31 @@ var FeedUser = /** @class */ (function () {
             });
         });
     };
+    FeedUser.prototype.ionViewDidEnter = function () {
+        //this.distances = [];
+        //this.loadDistances();
+        if (this.distances != []) {
+            //this.distances = [];
+        }
+        else {
+            this.loadDistances();
+        }
+    };
+    FeedUser.prototype.ionViewDidLeave = function () {
+        if (this.fromprofile == 'fromprofile') {
+            this.navCtrl.pop();
+        }
+    };
     FeedUser.prototype.ionViewDidLoad = function () {
         var _this = this;
+        this.storage.get('username').then(function (val) {
+            _this.username = val;
+        });
+        this.fromprofile = this.navParams.get('param');
+        this.loadAvailabilities();
         setTimeout(function () {
-            _this.renderer.setElementStyle(_this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '43%');
-        }, 500);
+            _this.renderer.setElementStyle(_this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '6%');
+        }, 750);
         var element = this.elRef.nativeElement.querySelector('.scroll-content');
         element.addEventListener('scroll', function (event) {
             var element = event.target;
@@ -644,14 +914,6 @@ var FeedUser = /** @class */ (function () {
                 if (_this.weekly.nativeElement.style.display != 'none') {
                     console.log("in doinfinite promotionsssssss");
                     setTimeout(function () {
-                        /*console.log('Begin async operation');
-                        console.log(this.content.directionY + "        upupupupupupu********");
-                        if(this.content.directionY == 'up') {
-                          this.show = false
-                        }
-                        else {
-                          this.show = true;
-                        }*/
                         console.log(_this.startAtKey1 + "     before %%^&^&^% start at");
                         _this.list2 = _this.af.list('/promotions', {
                             query: {
@@ -693,13 +955,19 @@ var FeedUser = /** @class */ (function () {
                 else if (_this.ratingbox.nativeElement.style.display != 'none') {
                     _this.doInfiniteR();
                 }
+                else if (_this.distancey.nativeElement.style.display != 'none') {
+                    _this.doInfiniteD();
+                }
+                else if (_this.availability.nativeElement.style.display != 'none') {
+                    _this.doInfiniteA();
+                }
             }
         });
+        this.loadPromotions();
+        this.getAds();
         //setTimeout(() => {
         //div.style.marginTop = "-47%";
         //}, 1000);
-        this.loadAvailabilities().then(function () {
-        });
         var ratings;
         var totalPotential;
         this.loadRatings().then(function (array) {
@@ -736,7 +1004,7 @@ var FeedUser = /** @class */ (function () {
                 //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
                 r++;
             }
-            console.log("THIS IS THE SORTED ARRAY TO BE SORRRED        " + JSON.stringify(_this.rating));
+            console.log("THIS IS THE SORTED ARRAY TO BE SOthis.rrrED        " + JSON.stringify(_this.rating));
             _this.rating.sort(function (a, b) {
                 if (a.stars !== "No ratings" && b.stars !== "No ratings") {
                     if (a.stars === b.stars) {
@@ -755,7 +1023,11 @@ var FeedUser = /** @class */ (function () {
                     }
                 }
             });
-            _this.loadDistances().then(function () {
+            //this.loadDistances().then(() => {
+            _this.loadDistances();
+            _this.loadPrices();
+            //});
+            setTimeout(function () {
                 console.log("in load availabilities ......... ");
                 console.log(JSON.stringify(_this.availabilities));
                 _this.availabilities.sort(function (a, b) {
@@ -773,10 +1045,7 @@ var FeedUser = /** @class */ (function () {
                     console.log(str);
                     i.time = str;
                 }
-                _this.loadPromotions(); /////////// START NEW GIT ////45//54/54555555''''''''''''''''''''
-                _this.getAds();
-                _this.loadPrices();
-            });
+            }, 1500);
         });
         ////this.renderer.setElementStyle(this.promos.nativeElement, 'color', '#e6c926');
         this.renderer.setElementStyle(this.weekly.nativeElement, 'display', 'block');
@@ -887,6 +1156,7 @@ var FeedUser = /** @class */ (function () {
         }
     };
     FeedUser.prototype.dropDownD = function () {
+        this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '8%');
         this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
         this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
         //this.renderer.setElementStyle(this.promos.nativeElement, 'color', 'gray');
@@ -951,55 +1221,127 @@ var FeedUser = /** @class */ (function () {
     };
     FeedUser.prototype.loadAvailabilities = function () {
         var _this = this;
-        return new Promise(function (resolve, reject) {
-            _this.appointments = _this.af.list('/appointments');
-            _this.subscription2 = _this.appointments.subscribe(function (items) { return items.forEach(function (item) {
-                console.log(item);
-                var userName = item.$key;
-                _this.availabilities = [];
-                for (var x in item) {
-                    var month = x;
-                    console.log(x + "      month");
-                    _this.appointmentsMonth = _this.af.list('/appointments/' + userName + '/' + month);
-                    _this.subscription3 = _this.appointmentsMonth.subscribe(function (items) { return items.forEach(function (item) {
-                        _this.startAtKeyAvail = item.$key;
-                        //console.log(JSON.stringify(item) + "           item");
-                        var date = new Date(item.date.day * 1000);
-                        var today = new Date();
-                        console.log(date.getMonth() + "==" + today.getMonth() + "&&" + date.getDate() + "==" + today.getDate());
-                        console.log("IN LOAD AVAILABILITIES *(*((**(*(*(*(*(*(*&^^^^%^%556565656565");
-                        if (date.getMonth() == today.getMonth() && date.getDate() == today.getDate()) {
-                            console.log("            inside the if that checks if its today");
-                            console.log(item.reserved.appointment + "                *************appointment");
-                            //let counter = 0;
-                            item.reserved.appointment.forEach(function (r, index) {
-                                if (r.selected == true) {
-                                    //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-                                    var storageRef = firebase.storage().ref().child('/settings/' + userName + '/profilepicture.png');
-                                    var obj_1 = { 'pic': "", 'salon': userName, 'time': r.time };
-                                    storageRef.getDownloadURL().then(function (url) {
-                                        console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                                        obj_1.pic = url;
-                                        _this.availabilities.push(obj_1);
-                                    }).catch(function (e) {
-                                        console.log("in caught url !!!!!!!$$$$$$$!!");
-                                        obj_1.pic = 'assets/blankprof.png';
-                                        _this.availabilities.push(obj_1);
-                                    });
-                                    console.log(index + "         this is index !@@@@@!!");
-                                    console.log(JSON.stringify(_this.availabilities));
-                                }
-                                if (index == 23) {
-                                    console.log("IN RESOLVE *(**(*(#*(*(#*(#*(#*(#))))))))");
-                                    console.log(JSON.stringify(_this.availabilities));
-                                    resolve();
-                                }
-                            });
-                        }
-                    }); });
-                }
-            }); });
+        //return new Promise((resolve, reject) => {
+        this.appointments = this.af.list('/today', { query: {
+                orderByKey: true,
+                limitToFirst: 48
+            } });
+        this.subscription2 = this.appointments.subscribe(function (items) {
+            _this.startAtKey5 = items[items.length - 1].$key;
+            items.forEach(function (item) {
+                console.log(item + "    item item item");
+                var storageRef = firebase.storage().ref().child('/settings/' + item.salon + '/profilepicture.png');
+                storageRef.getDownloadURL().then(function (url) {
+                    console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                    item.pic = url;
+                    _this.availabilities.push(item);
+                }).catch(function (e) {
+                    console.log("in caught url !!!!!!!$$$$$$$!!");
+                    item.pic = 'assets/blankprof.png';
+                    _this.availabilities.push(item);
+                });
+            });
         });
+        /*let promises = [];
+        let i2 = 0;
+        
+        this.subscription2 = this.appointments.subscribe(items => {
+          this.startAtKey5 = items[items.length - 1].$key;
+          this.lastKey5 = this.startAtKey5;
+          items.forEach(item => {
+          promises.push(new Promise((resolve, reject) => {
+            console.log(item);
+            let userName = item.$key;
+            let i1 = 0;
+            for(let month in item) {
+  
+              this.appointmentsMonth = this.af.list('/appointments/' + userName + '/' + month);
+              this.subscription3 = this.appointmentsMonth.subscribe(items => items.forEach(item => {
+                promises.push(new Promise((resolve, reject) => {
+                  this.startAtKeyAvail = item.$key;
+                  //console.log(JSON.stringify(item) + "           item");
+                  let date = new Date(item.date.day * 1000);
+                  let today = new Date();
+                  console.log(date.getMonth() + "==" + today.getMonth()  + "&&" + date.getDate() + "==" + today.getDate());
+                  console.log("IN LOAD AVAILABILITIES *(*((**(*(*(*(*(*(*&^^^^%^%556565656565");
+                  if(date.getMonth() == today.getMonth() && date.getDate() == today.getDate()) {
+                    console.log("            inside the if that checks if its today");
+                    console.log(item.reserved.appointment + "                *************appointment");
+                    //let counter = 0;
+                    //mapped = item.reserved.appointment.map((r) => {
+                    //item.reserved.appointment.forEach((r, index) => {
+                      let count = 0;
+                      for(let r of item.reserved.appointment) {
+                        promises.push(new Promise((resolve, reject) => {
+                          if(r.selected == true) {
+                            //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
+  
+                            let storageRef = firebase.storage().ref().child('/settings/' + userName + '/profilepicture.png');
+                             
+                            let obj = {'pic':"", 'salon': userName, 'time': r.time};
+  
+                            storageRef.getDownloadURL().then(url => {
+                              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                              obj.pic = url;
+                              this.availabilities.push(obj);
+                              console.log(JSON.stringify(this.availabilities));
+                              resolve();
+                            }).catch((e) => {
+                              console.log("in caught url !!!!!!!$$$$$$$!!");
+                              obj.pic = 'assets/blankprof.png';
+                              this.availabilities.push(obj);
+                              console.log(JSON.stringify(this.availabilities));
+                              resolve();
+                            });
+                          }
+                        }))
+                        count++;
+                    }
+  
+                  }
+  
+                 }))
+                if(i1 == items.length - 1) {
+                  resolve()
+                }
+                
+  
+                i1++;
+                }))
+               }
+               if(i2 == items.length - 1) {
+                  resolve()
+               }
+                
+  
+               i2++;
+            }))
+            })
+          });
+  
+          Promise.all(promises).then(() => {
+            console.log("in load availabilities ......... ")
+            console.log(JSON.stringify(this.availabilities));
+  
+            this.availabilities.sort(function(a,b) {
+              return Date.parse('01/01/2013 '+a.time) - Date.parse('01/01/2013 '+b.time);
+            });
+  
+            console.log('*****previous******');
+            console.log(JSON.stringify(this.availabilities));
+            console.log('*****sorted********');
+            
+            for(let i of this.availabilities) {
+              console.log(i.time + "          this is itime");
+              let date = new Date('01/01/2013 ' + i.time);
+              console.log(date + "          this is date in idate");
+              let str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
+              console.log(str);
+              i.time = str;
+            }
+          });*/
+        //}))
+        //})
     };
     FeedUser.prototype.setDateTime = function (time) {
         var date = new Date();
@@ -1018,17 +1360,6 @@ var FeedUser = /** @class */ (function () {
         date.setHours(hours);
         date.setMinutes(minutes);
         return date;
-    };
-    FeedUser.prototype.getInitialImages = function () {
-        /*.then(array => {
-        setTimeout(() => {
-          console.log(JSON.stringify(array) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
-          //
-            
-          //}, 1000)
-          
-        }, 2000);*/
-        //})
     };
     __decorate([
         ViewChild('changeText'),
@@ -1094,10 +1425,10 @@ var FeedUser = /** @class */ (function () {
                 ]),
                 trigger('moveList', [
                     state('down', style({
-                        top: 200 + "px",
+                        'margin-top': "270px",
                     })),
                     state('up', style({
-                        top: 0 + "px",
+                        'margin-top': "112px",
                     })),
                     transition('* => *', animate('400ms ease-in')),
                 ]),
@@ -1130,7 +1461,7 @@ var FeedUser = /** @class */ (function () {
                 ]),
             ]
         }),
-        __metadata("design:paramtypes", [ElementRef, CacheService, Diagnostic, NativeGeocoder, Geolocation, NgZone, ModalController, AngularFireDatabase, Storage, AngularFireAuth, Renderer, LoadingController, NavController])
+        __metadata("design:paramtypes", [NavParams, ElementRef, CacheService, Diagnostic, NativeGeocoder, Geolocation, NgZone, ModalController, AngularFireDatabase, Storage, AngularFireAuth, Renderer, LoadingController, NavController])
     ], FeedUser);
     return FeedUser;
 }());

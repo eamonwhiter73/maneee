@@ -228,6 +228,13 @@ var FeedStylist = /** @class */ (function () {
     FeedStylist.prototype.ionViewWillUnload = function () {
         //this.navCtrl.pop();
     };
+    FeedStylist.prototype.getID = function () {
+        // Math.random should be unique because of its seeding algorithm.
+        // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+        // after the decimal.
+        return '_' + Math.random().toString(36).substr(2, 9);
+    };
+    ;
     FeedStylist.prototype.modelChanged = function (newObj) {
         var _this = this;
         console.log(typeof newObj + "  nnnnnneeeeeewwww     jo boboobbooooooob");
@@ -239,9 +246,43 @@ var FeedStylist = /** @class */ (function () {
             console.log(JSON.stringify(item) + "    got the month");
             if (item != null) {
                 var bo = false;
+                var time_1;
+                var boool = false;
+                var skip = false;
                 var _loop_1 = function (objj) {
                     if (objj == "$value") {
-                        bo = true;
+                        console.log(objj);
+                        var forHold = void 0;
+                        var minUnder = "";
+                        var ampm = void 0;
+                        //console.log(<number>date.getUTCHours() + "<number>date.getUTCHours()");
+                        if (date.getUTCHours() > 12) {
+                            forHold = date.getUTCHours() - 12;
+                            ampm = "PM";
+                        }
+                        else {
+                            forHold = date.getUTCHours();
+                            ampm = "AM";
+                        }
+                        if (date.getMinutes() < 10) {
+                            minUnder = "0" + date.getMinutes();
+                        }
+                        else {
+                            minUnder = date.getMinutes().toString();
+                        }
+                        time_1 = forHold + ":" + minUnder + " " + ampm;
+                        var array = [{ "selected": false, "time": "8:00AM" }, { "selected": true, "time": "8:30 AM" }, { "selected": true, "time": "9:00 AM" }, { "selected": false, "time": "9:30 AM" }, { "selected": true, "time": "10:00 AM" }, { "selected": true, "time": "10:30 AM" }, { "selected": false, "time": "11:00 AM" }, { "selected": true, "time": "11:30 AM" }, { "selected": true, "time": "12:00 PM" }, { "selected": false, "time": "12:30 PM" }, { "selected": true, "time": "1:00 PM" }, { "selected": true, "time": "1:30 PM" }, { "selected": false, "time": "2:00 PM" }, { "selected": true, "time": "2:30 PM" }, { "selected": true, "time": "3:00 PM" }, { "selected": false, "time": "3:30 PM" }, { "selected": true, "time": "4:00 PM" }, { "selected": true, "time": "4:30 PM" }, { "selected": false, "time": "5:00 PM" }, { "selected": true, "time": "5:30 PM" }, { "selected": true, "time": "6:00 PM" }, { "selected": false, "time": "6:30 PM" }, { "selected": true, "time": "7:00 PM" }, { "selected": true, "time": "7:30 PM" }];
+                        for (var _i = 0, array_1 = array; _i < array_1.length; _i++) {
+                            var z = array_1[_i];
+                            if (z.time == time_1) {
+                                z.selected = true;
+                                boool = true;
+                                skip = true;
+                            }
+                        }
+                        var u = _this.getID();
+                        console.log("looping here above");
+                        _this.month.update((_a = {}, _a[u] = { 'date': { 'day': date.getTime() / 1000 }, 'reserved': { 'appointment': array } }, _a));
                     }
                     else {
                         console.log(JSON.stringify(objj));
@@ -251,11 +292,9 @@ var FeedStylist = /** @class */ (function () {
                         //console.log(date.getDate() + "   date : getdate    " + holderDate.getDate());
                         //console.log(date.getMonth() + "   date : getmonth    " + holderDate.getMonth());
                         //console.log(date.getFullYear() + "   date : getyear    " + holderDate.getFullYear());
-                        var boool = false;
-                        var time_1;
                         if (date.getDate() == holderDate.getDate() && date.getMonth() == holderDate.getMonth() && date.getFullYear() == holderDate.getFullYear()) {
-                            for (var _i = 0, _a = item[objj].reserved.appointment; _i < _a.length; _i++) {
-                                var x_1 = _a[_i];
+                            for (var _b = 0, _c = item[objj].reserved.appointment; _b < _c.length; _b++) {
+                                var x_1 = _c[_b];
                                 var forHold = void 0;
                                 var minUnder = "";
                                 var ampm = void 0;
@@ -279,7 +318,7 @@ var FeedStylist = /** @class */ (function () {
                                 if (x_1.time == time_1 && x_1.selected == false) {
                                     x_1.selected = true;
                                     boool = true;
-                                    bo = true;
+                                    //bo = true;
                                 }
                                 //console.log(x.time + "     x.time");
                                 //console.log(time + "     time");
@@ -288,11 +327,43 @@ var FeedStylist = /** @class */ (function () {
                             }
                         }
                         else {
-                            alert("You do not have any entries for this month, please go to your booking page and fill in your availabilities first.");
+                            var forHold = void 0;
+                            var minUnder = "";
+                            var ampm = void 0;
+                            //console.log(<number>date.getUTCHours() + "<number>date.getUTCHours()");
+                            if (date.getUTCHours() > 12) {
+                                forHold = date.getUTCHours() - 12;
+                                ampm = "PM";
+                            }
+                            else {
+                                forHold = date.getUTCHours();
+                                ampm = "AM";
+                            }
+                            if (date.getMinutes() < 10) {
+                                minUnder = "0" + date.getMinutes();
+                            }
+                            else {
+                                minUnder = date.getMinutes().toString();
+                            }
+                            time_1 = forHold + ":" + minUnder + " " + ampm;
+                            var array = [{ "selected": false, "time": "8:00AM" }, { "selected": true, "time": "8:30 AM" }, { "selected": true, "time": "9:00 AM" }, { "selected": false, "time": "9:30 AM" }, { "selected": true, "time": "10:00 AM" }, { "selected": true, "time": "10:30 AM" }, { "selected": false, "time": "11:00 AM" }, { "selected": true, "time": "11:30 AM" }, { "selected": true, "time": "12:00 PM" }, { "selected": false, "time": "12:30 PM" }, { "selected": true, "time": "1:00 PM" }, { "selected": true, "time": "1:30 PM" }, { "selected": false, "time": "2:00 PM" }, { "selected": true, "time": "2:30 PM" }, { "selected": true, "time": "3:00 PM" }, { "selected": false, "time": "3:30 PM" }, { "selected": true, "time": "4:00 PM" }, { "selected": true, "time": "4:30 PM" }, { "selected": false, "time": "5:00 PM" }, { "selected": true, "time": "5:30 PM" }, { "selected": true, "time": "6:00 PM" }, { "selected": false, "time": "6:30 PM" }, { "selected": true, "time": "7:00 PM" }, { "selected": true, "time": "7:30 PM" }];
+                            for (var _d = 0, array_2 = array; _d < array_2.length; _d++) {
+                                var z = array_2[_d];
+                                if (z.time == time_1) {
+                                    z.selected = true;
+                                    boool = true;
+                                    skip = true;
+                                }
+                            }
+                            var u = _this.getID();
+                            console.log("looping here below");
+                            _this.month.update((_e = {}, _e[u] = { 'date': { 'day': date.getTime() / 1000 }, 'reserved': { 'appointment': array } }, _e));
                         }
                         if (boool == true) {
                             var r = item[objj];
-                            _this.month.update((_b = {}, _b[objj] = { 'date': { 'day': item[objj].date.day }, 'reserved': { 'appointment': item[objj].reserved.appointment } }, _b));
+                            if (!skip) {
+                                _this.month.update((_f = {}, _f[objj] = { 'date': { 'day': item[objj].date.day }, 'reserved': { 'appointment': item[objj].reserved.appointment } }, _f));
+                            }
                             var string1_1 = '';
                             var promises_array = [];
                             _this.storage.get('username').then(function (val) {
@@ -317,11 +388,10 @@ var FeedStylist = /** @class */ (function () {
                                             .catch(function (e) { console.log(JSON.stringify(e)); });
                                     });
                                 });
-                                //boool = false;
                             });
                         }
                     }
-                    var _b;
+                    var _a, _e, _f;
                 };
                 for (var objj in item) {
                     _loop_1(objj);
@@ -330,9 +400,6 @@ var FeedStylist = /** @class */ (function () {
                     alert("This spot is already available, or it is in the past.");
                 }
                 x++;
-            }
-            else {
-                alert("You do not have any entries for this month, or this date is in the past");
             }
         });
     };
