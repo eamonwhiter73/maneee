@@ -7,7 +7,7 @@
 
 <ion-content (swipeLeft)="swipeLeft()" no-padding>
 	<ion-list class="marginstatus" no-padding>      
-	   <ion-item *ngFor="let i of items" (tap)="gotoProfile()" no-padding no-lines>
+	   <ion-item *ngFor="let i of items" (tap)="gotoProfile(i)" no-padding no-lines>
 	    <div class="feedtoptextcontainer">
 	      <div class="imageparent">
 	        <img class="postprofilepic" src="{{i.picURL}}">

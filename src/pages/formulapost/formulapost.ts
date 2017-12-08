@@ -1,6 +1,5 @@
 import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { DatePicker } from '@ionic-native/date-picker';
 import { FeedStylist } from '../feedstylist/feedstylist';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
 
@@ -38,7 +37,7 @@ export class FormulapostPage implements OnDestroy {
   private subscription2: ISubscription;
   private subscription3: ISubscription;
 
-  constructor(public af: AngularFireDatabase, public viewCtrl: ViewController, public storage: Storage, public keyboard: Keyboard, private datePicker: DatePicker, public myrenderer: Renderer, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public af: AngularFireDatabase, public viewCtrl: ViewController, public storage: Storage, public keyboard: Keyboard, public myrenderer: Renderer, public navCtrl: NavController, public navParams: NavParams) {
 
   }
 

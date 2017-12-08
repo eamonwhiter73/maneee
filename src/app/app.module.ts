@@ -65,7 +65,7 @@ import { BuyAd } from '../modals/buyad/buyad';
 
 import { Rate } from '../modals/rate/rate';
 import { IonicImageLoader } from 'ionic-image-loader';
-import { DatePicker } from '@ionic-native/date-picker';
+//import { DatePicker } from '@ionic-native/date-picker';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Diagnostic } from '@ionic-native/diagnostic';
@@ -206,7 +206,7 @@ firebase.initializeApp(firebaseConfig);
     ImageViewerController,
     Facebook,
     GooglePlus,
-    DatePicker,
+    //DatePicker,
     NativeGeocoder,
     Geolocation,
     Diagnostic,

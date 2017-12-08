@@ -11,8 +11,6 @@ import { BuyAd } from '../../modals/buyad/buyad';
 
 import { FollowersPage } from '../followers/followers';
 import { Storage } from '@ionic/storage';
-import { DatePicker } from '@ionic-native/date-picker';
-
 
 
 import { BookingPage } from '../booking/booking';
@@ -182,7 +180,7 @@ export class FeedStylist implements OnDestroy {
   private swipeTime?: number;
   private nav:NavController;
 
-  constructor(public modalCtrl: ModalController, public sms: SMS, private cache: CacheService, public datePicker: DatePicker, public storage: Storage, public platform: Platform, public af: AngularFireDatabase, public element: ElementRef, public camera: Camera, private app:App, public cameraServicePost: CameraServicePost, public actionSheetCtrl: ActionSheetController, public myrenderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
+  constructor(public modalCtrl: ModalController, public sms: SMS, private cache: CacheService, public storage: Storage, public platform: Platform, public af: AngularFireDatabase, public element: ElementRef, public camera: Camera, private app:App, public cameraServicePost: CameraServicePost, public actionSheetCtrl: ActionSheetController, public myrenderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
     this.nav = this.app.getActiveNav();
   }
 
@@ -668,18 +666,6 @@ export class FeedStylist implements OnDestroy {
 
   tappedPost() {
     this.navCtrl.push(PostpagePage);
-  }
-
-  tappedEmergency() {
-    //this.navCtrl.push(BookingPage);
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-    }).then(
-      date => { console.log(date + " this is the date &&&&&&&"); this.dateofme = date},
-      err => console.log('Error occurred while getting date: ', err)
-    );
   }
 
   indexChange() {

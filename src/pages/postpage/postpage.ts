@@ -1,6 +1,5 @@
 import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { DatePicker } from '@ionic-native/date-picker';
 import { FeedStylist } from '../feedstylist/feedstylist';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
@@ -43,7 +42,7 @@ export class PostpagePage implements OnDestroy {
   private subscription: ISubscription;
   private subscription2: ISubscription;
 
-  constructor(public cameraServicePost: CameraServicePost, public actionSheetCtrl: ActionSheetController, public camera: Camera, public af: AngularFireDatabase, public viewCtrl: ViewController, public storage: Storage, public keyboard: Keyboard, private datePicker: DatePicker, public myrenderer: Renderer, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public cameraServicePost: CameraServicePost, public actionSheetCtrl: ActionSheetController, public camera: Camera, public af: AngularFireDatabase, public viewCtrl: ViewController, public storage: Storage, public keyboard: Keyboard, public myrenderer: Renderer, public navCtrl: NavController, public navParams: NavParams) {
 
   }
 
@@ -201,17 +200,6 @@ export class PostpagePage implements OnDestroy {
 
   goToFeed() {
     this.navCtrl.pop();
-  }
-
-  showDatePicker() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-    }).then(
-      date => { console.log(date + " this is the date &&&&&&&"); this.item.date = date},
-      err => console.log('Error occurred while getting date: ', err)
-    );
   }
 
   formatDate(date) {

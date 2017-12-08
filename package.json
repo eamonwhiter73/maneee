@@ -63,7 +63,6 @@
     "cordova-plugin-camera": "^2.4.1",
     "cordova-plugin-compat": "^1.1.0",
     "cordova-plugin-crop": "^0.4.0",
-    "cordova-plugin-datepicker": "^0.9.3",
     "cordova-plugin-device": "1.1.4",
     "cordova-plugin-facebook4": "^1.9.1",
     "cordova-plugin-file": "^4.3.3",
@@ -160,7 +159,6 @@
         "APP_ID": "1395258797190658",
         "APP_NAME": "ManeEmergency"
       },
-      "cordova-plugin-datepicker": {},
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": " "
       },

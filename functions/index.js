@@ -30,7 +30,7 @@ exports.sortDistance = functions.https.onRequest((req, res) => {
 	var ref = db.ref("profiles/stylists");
 	var promises = [];
 	// Attach an asynchronous callback to read the data at our posts reference
-	ref.on("value", function(snapshot) {
+	ref.once("value", function(snapshot) {
 	  //console.log(snapshot.val());
 	  var snap = snapshot.val();
 	  for(const user in snap) {
@@ -46,20 +46,21 @@ exports.sortDistance = functions.https.onRequest((req, res) => {
 						  
 
 						  console.log("  +++   " + response.json.results[0].geometry.location.lat + ' ' + response.json.results[0].geometry.location.lng + ' ' + array[0] + ' ' + array[1]);
+						  let dis = distance(response.json.results[0].geometry.location.lat, response.json.results[0].geometry.location.lng, array[0], array[1])
+						  return dis;
+						}).then(distance => {
+							  var distanceBetween = distance;
+							  console.log(distanceBetween + "      distance between spots");
+							  var refList = db.ref("distances/"+array[2]);
+							  console.log(snap[user].username + "    snap username");
+							  refList.push({ 
+							  	username: snap[user].username,
+							  	distance: Math.round(distanceBetween * 100) / 100
+							  })
 
-						  
-						  var distanceBetween = distance(response.json.results[0].geometry.location.lat, response.json.results[0].geometry.location.lng, array[0], array[1]);
-						  console.log(distanceBetween + "      distance between spots");
-						  var refList = db.ref("distances/"+array[2]);
-						  console.log(snap[user].username + "    snap username");
-						  refList.push({ 
-						  	username: snap[user].username,
-						  	distance: Math.round(distanceBetween * 100) / 100
-						  })
-
-						  resolve();
+							  resolve()
 						})
-						.catch(err => { console.log(err); reject(err);})
+						.catch(err => { console.log(err); resolve();})
 			}
 			else {
 				resolve();
@@ -71,6 +72,8 @@ exports.sortDistance = functions.https.onRequest((req, res) => {
 
 	  var p = Promise.all(promises);
 	  console.log(JSON.stringify(p) +     "     promises logged");
+
+	  res.status(200).end();
 
 	}, function (errorObject) {
 	  console.log("The read failed: " + errorObject.code);
@@ -88,14 +91,13 @@ exports.updateAvailabilities = functions.database.ref('/appointments/{username}/
       // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
       console.log(JSON.stringify(event.data.val()) + "     event event event eeeeeee");
       var obj = event.data.val();
-      var x = 0;
    	  console.log(typeof obj + "     type of of of type of of of");
       for(var day in obj) {
       	console.log("dat:     " + JSON.stringify(day));
       	var r = new Date(obj[day].date.day * 1000);
       	console.log(r.getUTCDate() + "    rrrrrr" + "      :  dateinner  " + dateInner.getUTCDate());
       	if(r.getUTCDate() == dateInner.getUTCDate()) {
-      		ref.orderByChild("salon").equalTo(event.params.username).on("value", function(snapshot) {
+      		ref.orderByChild("salon").equalTo(event.params.username).once("value", function(snapshot) {
 			  if(snapshot.val() == null) {
 			  	for(var z = 0; z<obj[day].reserved.appointment.length; z++) {
 			  		if(obj[day].reserved.appointment[z].selected == true) {
@@ -141,7 +143,6 @@ exports.updateAvailabilities = functions.database.ref('/appointments/{username}/
 			});
       	}
 
-      	x++;
       }
 
 	  

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>myApp.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>1E2F319BF7B061C665DFEC7A2350523EFBEE0F15</string>
+				<key>dateExpires</key>
+				<string>3/26/18</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>6U9867H5L6.com.ionicframework.maneApp</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>6U9867H5L6</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>myApp.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>2af21b02-a886-4eea-9cfb-7fe9a2083182</string>
+				<key>name</key>
+				<string>AdHocME</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>6U9867H5L6</string>
+				<key>name</key>
+				<string>Eamon White</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

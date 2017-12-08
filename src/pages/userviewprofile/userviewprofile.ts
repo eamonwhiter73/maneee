@@ -64,6 +64,7 @@ export class UserViewProfile implements OnDestroy {
   subscription3: ISubscription;
   subscription4: ISubscription;
   subscription5: ISubscription;
+  subscription6: ISubscription;
   subscription9: ISubscription;
   username;
   picURLS = [];
@@ -164,27 +165,29 @@ export class UserViewProfile implements OnDestroy {
             this.item1.update({'location': {'latitude' : resp.coords.latitude, 'longitude' : resp.coords.longitude }}).then(() => {
               alert("Your location has been updated");
               this.storage.set('location', false);
-            }).catch((e) => {alert("Something went wrong with setting your location, please try again.")});
+            }).catch((e) => { loading.dismiss(); alert("Something went wrong with setting your location, please try again.")});
 
 
 
-            this.http.get('https://us-central1-mane-4152c.cloudfunctions.net/sortDistance?text='+resp.coords.latitude+':'+resp.coords.longitude+':'+this.username)  
-             .subscribe(res => {
+            let a = this.http.get('https://us-central1-mane-4152c.cloudfunctions.net/sortDistance?text='+resp.coords.latitude+':'+resp.coords.longitude+':'+this.username);  
+            this.subscription6 = a.subscribe(res => {
                console.log(res + "response from firesbase functions");
                loading.dismiss();
              }, err => {
                console.log(JSON.stringify(err))
                loading.dismiss();
-             });
+             })
 
           }).catch(e => {
             console.log(e.message + " caught this error");
             loading.dismiss();
           })
-
-          
-          loading.dismiss();
+    }).catch(e => {
+      console.log(e.message + " caught this error");
+      loading.dismiss();
     })
+
+    loading.dismiss();
   }
 
   ionViewDidLoad() {
@@ -334,6 +337,9 @@ export class UserViewProfile implements OnDestroy {
     }
     if(this.subscription5 != null) {
       this.subscription5.unsubscribe();
+    }
+    if(this.subscription6 != null) {
+      this.subscription6.unsubscribe();
     }
     if(this.subscription9 != null) {
       this.subscription9.unsubscribe();

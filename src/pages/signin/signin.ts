@@ -181,7 +181,7 @@ export class SignInPage implements OnDestroy {
             this.navCtrl.setRoot(FeedUser); 
           }
         }
-      }).catch((e) => {alert("The username or password is incorrect")});
+      }).catch((e) => {alert(e)});
     }
   }
 

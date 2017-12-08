@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
-import { StylistProfile } from '../stylistprofile/stylistprofile';
+import { UserProfile } from '../userprofile/userprofile';
 import { FeedUser } from '../feeduser/feeduser';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { ISubscription } from "rxjs/Subscription";
@@ -97,8 +97,8 @@ export class FullfeedPage {
       })
   }
 
-  gotoProfile() {
-    this.navCtrl.push(StylistProfile);
+  gotoProfile(i) {
+    this.navCtrl.push(UserProfile, { username: i.username});
   }
 
   doInfinite(infiniteScroll) {

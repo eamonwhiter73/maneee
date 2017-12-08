@@ -119,6 +119,7 @@ export class FeedUser implements OnDestroy {
   starsArray = [];
   rrr;
   fromprofile;
+  itemsRef;
 
 
   private subscription: ISubscription;
@@ -259,12 +260,13 @@ export class FeedUser implements OnDestroy {
       console.log(this.startAtKey2 + "     before %%^&^&^% start at");
       this.list4 = this.af.list('/profiles/stylists', {
       query: {
-        orderByKey: 'price',
+        orderByChild: 'price',
         startAt: this.startAtKey2,
         limitToFirst: 51
       }});
 
-      this.subscription12 = this.list4.subscribe(items => { 
+      this.subscription12 = this.list4.subscribe(items => {
+        if(items.length > 0) {
           let x = 0;
           console.log(JSON.stringify(items[0]) + "     items 00000000000000");
           this.lastKey2 = this.startAtKey2;
@@ -300,12 +302,13 @@ export class FeedUser implements OnDestroy {
 
             x++;
           });          
-          
+        }  
       })
 
       this.pricesArray.sort(function(a,b) {
         return a.price.length - b.price.length;
       });
+
 
       //infiniteScroll.complete(); 
         
@@ -446,7 +449,7 @@ export class FeedUser implements OnDestroy {
       query: {
         orderByChild: 'distance',
         startAt: this.startAtKey4,
-        limitToFirst: 51
+        limitToFirst: 20
       }});
 
       this.subscription14 = this.list6.subscribe(items => { 
@@ -825,8 +828,6 @@ export class FeedUser implements OnDestroy {
         console.log("logged in");
       }*/
     })
-
-
   }
 
 
@@ -872,126 +873,79 @@ export class FeedUser implements OnDestroy {
       let cacheKey = "distances"
       let arr = [];
       let mapped;
-      //this.cache.removeItem(cacheKey);
       console.log("IN LOADDISTANCES #$$$$$$$$$$$$$$$$$$$$$");
 
-      //this.geolocation.getCurrentPosition().then((resp) => {            
-          // resp.coords.latitude
-          console.log("IN geo get position #$$$$$$$5354554354$$$$$$$");
 
-          //this.rrr = resp;
-          //console.log(this.rrr + "              this.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrthis.rrrrr");
-          //this.cache.getItem(cacheKey).catch(() => {
-          //setTimeout(() => {
-            this.distancelist = this.af.list('/distances/' + this.username, { query: {
-              orderByChild: 'distance',
-              limitToFirst: 50
-            }});
-      
-            let x = 0;
-            this.subscription6 = this.distancelist.subscribe(items => {
+      console.log("IN geo get position #$$$$$$$5354554354$$$$$$$");
 
-               
-               console.log(JSON.stringify(items) + "      length - 1 load");
-               
-               console.log("BEGGINNING STARTATKEY4 WITH DISTANCE:    " + this.startAtKey4);
-               
+      /*let ref = firebase.database().ref('distances/' + this.username).orderByChild('distance').limitToFirst(10);
+      ref.on('value', (items) => {
+        let x = 0;
+           
+           console.log(JSON.stringify(items) + "      length - 1 load");
+           
+           
 
-               items.forEach(item => {
-                 let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
-                             
-                  storageRef.getDownloadURL().then(url => {
-                    console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                    item.picURL = url;
-                  }).catch((e) => {
-                    console.log("in caught url !!!!!!!$$$$$$$!!");
-                    item.picURL = 'assets/blankprof.png';
-                  });
+           items.forEach(item => {
+             let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                         
+              storageRef.getDownloadURL().then(url => {
+                console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                item.picURL = url;
+              }).catch((e) => {
+                console.log("in caught url !!!!!!!$$$$$$$!!");
+                item.picURL = 'assets/blankprof.png';
+              });
 
-                 this.distances.push(item);
+             this.distances.push(item);
 
-                 if(x == items.length - 1) {
-                   this.startAtKey4 = items[x].distance;
-                 }
+             if(x == items.length - 1) {
+               this.startAtKey4 = items[x].distance;
+             }
 
-                 x++;
-               })
-               
-               /*mapped = items.map((item) => {
-                return new Promise(resolve => {
-                  let rr;
-                  //console.log(JSON.stringify(item) + "               *((*&*&*&*&^&*&*&*(&*(&*&*(&(&(&*(              :::" + x);
-                  //if(item.address == "") {
-                    //resolve();
-                  //}
-                  else {
-                    console.log(item.address + " is the address empty??????");
-                    this.nativeGeocoder.forwardGeocode(item.address)
-                      .then((coordinates: NativeGeocoderForwardResult) => {
-                        console.log("I AM IN THE GEOCODING ***&&*&*&*&*");
-                          rr = this.round(this.distance(coordinates.latitude, coordinates.longitude, this.rrr.coords.latitude, this.rrr.coords.longitude, "M"), 1);
-                          if(!item.picURL) {
-                            item.picURL = 'assets/blankprof.png';
-                          }
-                          arr.push({'pic':item.picURL, 'salon':item.username, 'distance':rr});
-                          console.log("push to the array of results");
-                          //x++;
-                          /*console.log(items.length + "         length   /    x:        " + x);
-                          if(items.length - x == 1) {
-                            console.log("getting resolved in geocoder ^&^&^&&^^&^&^&");
-                            resolve(arr);
-                          }
-                          //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-                          resolve();
-                        }).catch(e => {
-                          console.log(e.message + " caught this error");
-                          /*x++;
-                          if(items.length - x == 1) {
-                            resolve(arr);
-                          }
-                          resolve();
-                        })*/
+             x++;
+           })
+      })*/
 
-                    
-                      //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-                    
+      //this.items = this.af.list('distances/' + this.username).valueChanges();
 
-                })
-              //})
-              /*let results = Promise.all(mapped);
-              results.then(() => {
-                console.log(JSON.stringify(arr) + " :FOSIEJO:SFJ::EFIJSEFIJS:EFJS:IO THIS IODIOSJ:FDSIJ :DIS");
-                
-                arr.sort(function(a,b) {
-                  return a.distance - b.distance;
-                });
-                this.distances = arr.slice();
-                console.log(JSON.stringify(this.distances) + " ^^^^&&&&&&&********88889999000000000");
-                resolve();
-                //return this.cache.saveItem(cacheKey, this.distances);
-              })
-            });
-          })*/  
-              
-            /*}).then(data => {
-              this.distances = data
-            })*/
-          //}, 1500)
- 
 
-          
+        /*this.distancelist = this.af.list('distances/' + this.username, { query: {
+          orderByChild: 'distance',
+          limitToFirst: 10
+        }});
+  
+        
+        this.subscription6 = this.distancelist.subscribe(items => {
+           let x = 0;
+           
+           console.log(JSON.stringify(items) + "      length - 1 load");
+           
+           
 
-      /*}).catch((error) => {
-        this.diagnostic.switchToLocationSettings();
-        console.log('Error getting location', error.message);
-        resolve();
-      });*/
+           items.forEach(item => {
+             let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+                         
+              storageRef.getDownloadURL().then(url => {
+                console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
+                item.picURL = url;
+              }).catch((e) => {
+                console.log("in caught url !!!!!!!$$$$$$$!!");
+                item.picURL = 'assets/blankprof.png';
+              });
 
-    /*}).catch((error) => {
-      console.log('Error getting location', error);
-    });*/
+             this.distances.push(item);
 
-    
+             if(x == items.length - 1) {
+               this.startAtKey4 = items[x].distance;
+             }
+
+             x++;
+           })
+
+           //this.subscription6.unsubscribe();
+      })*/
+
   }
 
   loadPromotions() {
@@ -1157,21 +1111,13 @@ export class FeedUser implements OnDestroy {
   }
 
   ionViewDidEnter() {
-    //this.distances = [];
-    //this.loadDistances();
-   if(this.distances != []) {
-    //this.distances = [];
-   }
-   else {
+    this.startAtKey4 = null;
+    this.distances = [];
     this.loadDistances();
-   }
-    
   }
 
   ionViewDidLeave() {
-    if(this.fromprofile == 'fromprofile') {
-      this.navCtrl.pop();
-    }
+    
   }
      
 
@@ -1194,10 +1140,11 @@ export class FeedUser implements OnDestroy {
         var element = event.target;
         if (element.scrollHeight - element.scrollTop === element.clientHeight)
         {
+          setTimeout(() => {
             console.log('scrolled');
             if(this.weekly.nativeElement.style.display != 'none') {
               console.log("in doinfinite promotionsssssss");
-              setTimeout(() => {
+              
 
                 console.log(this.startAtKey1 + "     before %%^&^&^% start at");
                 this.list2 = this.af.list('/promotions', {
@@ -1241,7 +1188,7 @@ export class FeedUser implements OnDestroy {
 
                 //infiniteScroll.complete(); 
                   
-              }, 500);
+              
             }
             else if(this.price.nativeElement.style.display != 'none') {
               this.doInfiniteP();
@@ -1251,11 +1198,13 @@ export class FeedUser implements OnDestroy {
             }
             else if(this.distancey.nativeElement.style.display != 'none') {
               this.doInfiniteD();
-
+              //element.removeEventListener('scroll', '.scroll-content');
             }
             else if(this.availability.nativeElement.style.display != 'none') {
               this.doInfiniteA();
             }
+
+          }, 500);
         }
     });
 
@@ -1341,7 +1290,7 @@ export class FeedUser implements OnDestroy {
           //this.loadDistances().then(() => {
            
 
-          this.loadDistances();
+          
           this.loadPrices();
        //});
 
@@ -1365,12 +1314,18 @@ export class FeedUser implements OnDestroy {
               console.log(str);
               i.time = str;
             }
+
+            /*console.log("UNSUBSCRIBED");
+            if(this.subscription6 != null) {
+              this.subscription6.unsubscribe();
+            }*/
           }, 1500);
           
+          this.loadDistances(); 
        });   
 
       
-              
+             
 
 
 
@@ -1510,10 +1465,6 @@ export class FeedUser implements OnDestroy {
   }
 
   dropDownD() {
-    console.log("UNSUBSCRIBED");
-    if(this.subscription6 != null) {
-      this.subscription6.unsubscribe();
-    }
     this.renderer.setElementStyle(this.elRef.nativeElement.querySelector('.scroll-content'), 'margin-top', '8%');
     this.renderer.setElementStyle(this.changeText.nativeElement, 'color', '#e6c926');
     this.renderer.setElementStyle(this.weeklyyellow.nativeElement, 'color', 'gray');
