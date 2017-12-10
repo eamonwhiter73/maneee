@@ -14,7 +14,7 @@ import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 /**
  * Generated class for the PostpagePage page.
  *

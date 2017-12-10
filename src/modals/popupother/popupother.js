@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { App, NavParams, ViewController, NavController } from 'ionic-angular';
 import { Component, Renderer } from '@angular/core';
 import { UserProfile } from '../../pages/userprofile/userprofile';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
 var PopUpOther = /** @class */ (function () {

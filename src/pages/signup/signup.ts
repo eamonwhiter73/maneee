@@ -6,7 +6,7 @@ import { FeedStylist } from '../feedstylist/feedstylist';
 import { SettingsPage } from '../settings/settings';
 
 import { Keyboard } from '@ionic-native/keyboard';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User1 } from '../../models/user';
 import { Storage } from '@ionic/storage';

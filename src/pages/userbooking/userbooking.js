@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, Renderer, QueryList, ViewChild, ElementRef, ViewChildren } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FeedUser } from '../../pages/feeduser/feeduser';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { Storage } from '@ionic/storage';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { LoadingController } from 'ionic-angular';

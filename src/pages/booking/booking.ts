@@ -2,7 +2,7 @@ import { Component, Renderer, QueryList, ElementRef, ViewChildren } from '@angul
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //import { Appointment } from '../../models/appointment';
 import { FeedStylist } from '../../pages/feedstylist/feedstylist';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { Storage } from '@ionic/storage';
 import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { LoadingController } from 'ionic-angular';

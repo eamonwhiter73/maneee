@@ -15,7 +15,7 @@ import { File } from '@ionic-native/file';
 import { Http } from '@angular/http';
 import { Transfer } from '@ionic-native/transfer';
 import firebase from 'firebase';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 //import { Ng2ImgMaxService } from 'ng2-img-max';
 //import { Ng2ImgToolsModule } from 'ng2-img-tools'; // <-- import the module
 import { Storage } from '@ionic/storage';

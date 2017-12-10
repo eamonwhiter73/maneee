@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { Storage } from "@ionic/storage";
 import { ISubscription } from "rxjs/Subscription";
 import { FormulaPage } from '../formula/formula';

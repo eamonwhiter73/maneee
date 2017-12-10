@@ -1,7 +1,6 @@
-<ion-header> <!--[@slideDown]="downState"-->
+<ion-header>
   <div (swiperight)="swipeRight()" (swipeleft)="swipeLeft()">
-    <ion-toolbar #clickme class="itemadspace" [@slideDown]="downState" no-padding> <!--[@slideDown]="downState"-->
-      <!--<ion-item class="ad" no-padding no-lines>-->
+    <ion-toolbar #clickme class="itemadspace" [@slideDown]="downState" no-padding>
       <div class="stylistview">
         <button class="stylistviewbutton" (tap)='switchView()' ion-button color="secondary">User View</button>
       </div>
@@ -13,13 +12,12 @@
       </swiper>
     </ion-toolbar>
         
-    <!--</ion-item>-->
     <div class='pluscontainer' [@plusSlide]="downState" (tap)='buyAd()'>
       <p>BUY</p><br><p>AD</p>
     </div>
 
     <div (tap)="toolClicked($event)">
-      <ion-navbar  color="black" [@toolSlide]="toolbarState" id="iontoolbar"> <!--[@toolSlide]="toolbarState"-->
+      <ion-navbar  color="black" [@toolSlide]="toolbarState" id="iontoolbar">
         <ion-icon class='custom-icon' name="play"></ion-icon>
         <button class="all toolbarstyle" #allF ion-button color="black" (tap)="all()">All</button>
         <button class="toolbarstyle" #classesFeed ion-button color="black" (tap)="classes()">Classes</button>
@@ -30,12 +28,9 @@
   </div>
 </ion-header>
 
-<ion-content [@moveList]='moveState' no-padding> <!--[@moveList]='moveState'-->
+<ion-content [@moveList]='moveState' no-padding> 
 
 <div class="swipecont" (swiperight)="swipeRight()" (swipeleft)="swipeLeft()">
-  <!--<ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>-->
 
   <div class ='contentone' [@moveList]='moveState' #contentone>
    <ion-list no-padding>
@@ -52,13 +47,13 @@
           <div class='description'>${{j.price}}</div>
         </div>
       </div>
-      <div class="feedtoptextcontainer" #feedtop (tap)="goSeeProfile(j)"> <!-- (tap)='contractItem(i)'-->
+      <div class="feedtoptextcontainer" #feedtop (tap)="goSeeProfile(j)"> 
         <div class="imageparent">
           <img class="postprofilepic" src="{{j.profilepic}}">
         </div>
         <div class="usernamecontainer">
           <h4 class="postusername">@{{j.username}}</h4><br>
-          <!--<h4 class="poststudio">Ed's Studio</h4>-->
+          
         </div>
       </div>
       <div class="feedtoptextcontainertwo" #feedtoptwo (tap)='contractItem(i)'>
@@ -100,13 +95,12 @@
           <div class='link'>{{j.date}}</div>
         </div>
       </div>
-      <div class="feedtoptextcontainer" #feedtop2 (tap)="goSeeProfile(j)"> <!-- (tap)='contractItem(i)'-->
+      <div class="feedtoptextcontainer" #feedtop2 (tap)="goSeeProfile(j)">
         <div class="imageparent">
           <img class="postprofilepic" src="{{j.profilepic}}">
         </div>
         <div class="usernamecontainer">
           <h4 class="postusername">@{{j.username}}</h4><br>
-          <!--<h4 class="poststudio">Ed's Studio</h4>-->
         </div>
       </div>
       <div class="feedtoptextcontainertwo" #feedtop2two (tap)='contractItem2(i)'>
@@ -143,13 +137,12 @@
           <div class='description'>${{j.price}}</div>
         </div>
       </div>
-      <div class="feedtoptextcontainer" #feedtop3 (tap)="goSeeProfile(j)"> <!-- (tap)='contractItem(i)'-->
+      <div class="feedtoptextcontainer" #feedtop3 (tap)="goSeeProfile(j)"> 
         <div class="imageparent">
           <img class="postprofilepic" src="{{j.profilepic}}">
         </div>
         <div class="usernamecontainer">
           <h4 class="postusername">@{{j.username}}</h4><br>
-          <!--<h4 class="poststudio">Ed's Studio</h4>-->
         </div>
       </div>
       <div class="feedtoptextcontainertwo" #feedtop3two (tap)='contractItem3(i)'>
@@ -188,13 +181,12 @@
           <div class='description'>${{j.price}}</div>
         </div>
       </div>
-      <div class="feedtoptextcontainer" #feedtop4 (tap)="goSeeProfile(j)"> <!-- (tap)='contractItem(i)'-->
+      <div class="feedtoptextcontainer" #feedtop4 (tap)="goSeeProfile(j)"> 
         <div class="imageparent">
           <img class="postprofilepic" src="{{j.profilepic}}">
         </div>
         <div class="usernamecontainer">
           <h4 class="postusername">@{{j.username}}</h4><br>
-          <!--<h4 class="poststudio">Ed's Studio</h4>-->
         </div>
       </div>
       <div class="feedtoptextcontainertwo" #feedtop4two (tap)='contractItem4(i)'>

@@ -3,7 +3,7 @@ import { Component, Renderer, OnDestroy } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { UserProfile } from '../../pages/userprofile/userprofile';
 import { FormulasPage } from '../../pages/formulas/formulas';
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { ISubscription } from "rxjs/Subscription";
 import firebase from 'firebase';
 import dropin from 'braintree-web-drop-in';
@@ -87,10 +87,10 @@ export class DepositPage implements OnDestroy {
              this.dismiss();
            }, err => {
              alert("Something went wrong.");
-      });
+          });
 
-     
-   }
+         
+       }
           return true;
       });
   });

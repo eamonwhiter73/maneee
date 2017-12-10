@@ -3,7 +3,7 @@ import { Component, Renderer, OnDestroy } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { UserProfile } from '../../pages/userprofile/userprofile';
 import { FormulasPage } from '../../pages/formulas/formulas';
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { ISubscription } from "rxjs/Subscription";
 import firebase from 'firebase';
 import dropin from 'braintree-web-drop-in';
@@ -166,7 +166,7 @@ export class FormulaBuy implements OnDestroy {
            .subscribe(res => {
              console.log(res + "response from formula buy");
              console.log(JSON.stringify(this.data) + "     data dat d dat add  dat");
-             this.list.push(this.data).catch(e => { console.log(e) + "this is conosle e" });
+             this.list.push(this.data);
 
              alert("You bought a formula! Check the settings page to view it.");
              this.dismiss();

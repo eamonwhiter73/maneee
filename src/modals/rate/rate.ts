@@ -1,6 +1,6 @@
 import { NavParams, ViewController, NavController } from 'ionic-angular';
 import { Component, ViewChild, ElementRef, Renderer, OnDestroy } from '@angular/core';
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { ISubscription } from "rxjs/Subscription";
 
 
@@ -23,7 +23,7 @@ export class Rate implements OnDestroy{
   @ViewChild('star5full') starfull5: ElementRef;
   selected = 0;
   items: FirebaseListObservable<any>;
-    item: FirebaseObjectObservable<any>;
+  item: FirebaseObjectObservable<any>;
 
   username: string;
   subscription: ISubscription;

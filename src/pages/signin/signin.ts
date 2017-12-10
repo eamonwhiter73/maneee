@@ -5,7 +5,8 @@ import { FeedUser } from '../feeduser/feeduser';
 import { FeedStylist } from '../feedstylist/feedstylist';
 import { Keyboard } from '@ionic-native/keyboard';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database'
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { User1 } from '../../models/user';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
@@ -96,7 +97,7 @@ export class SignInPage implements OnDestroy {
     }
   }
 
-  async login(userx: User1){
+  login(userx: User1){
     // push another page on to the navigation stack
     // causing the nav controller to transition to the new page
     // optional data can also be passed to the pushed page.

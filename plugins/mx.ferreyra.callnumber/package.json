@@ -1,36 +1,19 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "call-number@0.0.2",
-        "scope": null,
-        "escapedName": "call-number",
-        "name": "call-number",
-        "rawSpec": "0.0.2",
-        "spec": "0.0.2",
-        "type": "version"
-      },
-      "/Users/eamonwhite/ionicmane/myApp"
-    ]
-  ],
   "_from": "call-number@0.0.2",
   "_id": "call-number@0.0.2",
-  "_inCache": true,
+  "_inBundle": false,
+  "_integrity": "sha1-GWnh1XQt42na7Q9EM4wawhKDcP8=",
   "_location": "/call-number",
-  "_npmUser": {
-    "name": "nishilshah17",
-    "email": "nishil.shah17@gmail.com"
-  },
-  "_npmVersion": "1.4.21",
   "_phantomChildren": {},
   "_requested": {
+    "type": "version",
+    "registry": true,
     "raw": "call-number@0.0.2",
-    "scope": null,
-    "escapedName": "call-number",
     "name": "call-number",
+    "escapedName": "call-number",
     "rawSpec": "0.0.2",
-    "spec": "0.0.2",
-    "type": "version"
+    "saveSpec": null,
+    "fetchSpec": "0.0.2"
   },
   "_requiredBy": [
     "#USER",
@@ -38,13 +21,13 @@
   ],
   "_resolved": "https://registry.npmjs.org/call-number/-/call-number-0.0.2.tgz",
   "_shasum": "1969e1d5742de369daed0f44338c1ac2128370ff",
-  "_shrinkwrap": null,
   "_spec": "call-number@0.0.2",
   "_where": "/Users/eamonwhite/ionicmane/myApp",
   "author": "",
   "bugs": {
     "url": "https://github.com/Rohfosho/CordovaCallNumberPlugin/issues"
   },
+  "bundleDependencies": false,
   "cordova": {
     "id": "mx.ferreyra.callnumber",
     "platforms": [
@@ -52,15 +35,8 @@
       "android"
     ]
   },
-  "dependencies": {},
+  "deprecated": false,
   "description": "Call Number from Cordova Application",
-  "devDependencies": {},
-  "directories": {},
-  "dist": {
-    "shasum": "1969e1d5742de369daed0f44338c1ac2128370ff",
-    "tarball": "https://registry.npmjs.org/call-number/-/call-number-0.0.2.tgz"
-  },
-  "gitHead": "3dad50b5dfc292f0a20088b6d5a5dfa9b0b795ee",
   "homepage": "https://github.com/Rohfosho/CordovaCallNumberPlugin#readme",
   "keywords": [
     "cordova",
@@ -72,19 +48,10 @@
     "cordova-android"
   ],
   "license": "Apache 2.0",
-  "maintainers": [
-    {
-      "name": "nishilshah17",
-      "email": "nishil.shah17@gmail.com"
-    }
-  ],
   "name": "call-number",
-  "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Rohfosho/CordovaCallNumberPlugin.git"
   },
-  "scripts": {},
   "version": "0.0.2"
 }

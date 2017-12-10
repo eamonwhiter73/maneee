@@ -4,7 +4,7 @@ import { FeedStylist } from '../feedstylist/feedstylist';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { OnDestroy } from "@angular/core";
 import { ISubscription } from "rxjs/Subscription";
 import { CameraServicePost } from '../../services/cameraservicepost';

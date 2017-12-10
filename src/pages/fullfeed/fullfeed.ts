@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { UserProfile } from '../userprofile/userprofile';
 import { FeedUser } from '../feeduser/feeduser';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { ISubscription } from "rxjs/Subscription";
 import firebase from 'firebase';
 import { CacheService } from 'ionic-cache';

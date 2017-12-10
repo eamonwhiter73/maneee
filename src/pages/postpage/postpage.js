@@ -13,7 +13,7 @@ import { DatePicker } from '@ionic-native/date-picker';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { CameraServicePost } from '../../services/cameraservicepost';
 import { Camera } from '@ionic-native/camera';
 import { ActionSheetController } from 'ionic-angular';

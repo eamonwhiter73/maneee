@@ -6,7 +6,8 @@ import { FeedStylist } from '../feedstylist/feedstylist';
 
 import { UserBooking } from '../userbooking/userbooking';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated'; 
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
 import { Storage } from '@ionic/storage';
 import { PopUp } from '../../modals/popup/popup';
 import { PopUpOther } from '../../modals/popupother/popupother';
@@ -16,20 +17,17 @@ import * as firebase from 'firebase';
 import { Geolocation } from '@ionic-native/geolocation';
 import { NativeGeocoder, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 import { Diagnostic } from '@ionic-native/diagnostic';
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { UserViewProfile } from '../userviewprofile/userviewprofile';
 import { UserProfile } from '../userprofile/userprofile';
 import { FullfeedPage } from '../fullfeed/fullfeed';
 import { CacheService } from 'ionic-cache';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
-
+import { Observable } from 'rxjs/Observable'
 
 
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
-
-const limit:BehaviorSubject<number> = new BehaviorSubject<number>(2); // import 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'page-feed-user',
@@ -144,11 +142,11 @@ export class FeedUser implements OnDestroy {
   toolbarClicks = 0;
 
   list: FirebaseListObservable<any>;
-  list2: FirebaseListObservable<any>;
+  list2: AngularFireList<any>;
   list4: FirebaseListObservable<any>;
   list5: FirebaseListObservable<any>;
   list6: FirebaseListObservable<any>;
-  objj: FirebaseObjectObservable<any>;
+  objj: Observable<any>;
   availabilities = [];
   items = [];
   rating = [];
@@ -179,6 +177,8 @@ export class FeedUser implements OnDestroy {
   startAtKey5;
   lastKey5;
 
+  distanceList: Observable<Array<any>>;
+
   constructor(public navParams: NavParams, public elRef: ElementRef, private cache: CacheService, private diagnostic: Diagnostic, private nativeGeocoder: NativeGeocoder, private geolocation: Geolocation, public zone: NgZone, public modalCtrl: ModalController, public af: AngularFireDatabase, public storage: Storage, private afAuth: AngularFireAuth, public renderer: Renderer, public loadingController: LoadingController, public navCtrl: NavController) {
      
   }
@@ -201,44 +201,43 @@ export class FeedUser implements OnDestroy {
       }*/
 
       console.log(this.startAtKey1 + "     before %%^&^&^% start at");
-      this.list2 = this.af.list('/promotions', {
-      query: {
-        orderByKey: true,
-        endAt: this.startAtKey1,
-        limitToLast: 11
-      }});
-
-      this.subscription11 = this.list2.subscribe(items => { 
+        this.af.list('/promotions', ref => ref.orderByKey().endAt(this.startAtKey1).limitToLast(11)).snapshotChanges().map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => {
           let x = 0;
           this.lastKey1 = this.startAtKey1;
-          items.forEach(item => {
 
+          return items.map(item => {
 
-            let storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+            let storageRef = firebase.storage().ref().child('/settings/' + item.data.customMetadata.username + '/profilepicture.png');
                        
             storageRef.getDownloadURL().then(url => {
               console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-              item.customMetadata.picURL = url;
+              item.data.customMetadata.picURL = url;
             }).catch((e) => {
               console.log("in caught url !!!!!!!$$$$$$$!!");
-              item.customMetadata.picURL = 'assets/blankprof.png';
+              item.data.customMetadata.picURL = 'assets/blankprof.png';
             });
             
-            if(this.startAtKey1 !== item.$key && this.lastKey1 !== item.$key) {
-              console.log(this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
-              if(item.customMetadata.username != null) {
-                this.promotions.push(item.customMetadata); //unshift?**************
+            if(this.startAtKey1 !== item.key && this.lastKey1 !== item.key) {
+              console.log(this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.key);
+              if(item.data.customMetadata.username != null) {
+                this.promotions.push(item.data.customMetadata); //unshift?**************
               }
             }
 
             if(x == 0) {
-              this.startAtKey1 = item.$key;
+              this.startAtKey1 = item.key;
             }
 
-            x++;
-          });          
-          
-      })
+            x++
+          });
+        });
+      //);
+
+      //queryObservable.subscribe(items => {
+                 
+      //});
 
       infiniteScroll.complete(); 
         
@@ -257,43 +256,37 @@ export class FeedUser implements OnDestroy {
         this.show = true;
       }*/
 
-      console.log(this.startAtKey2 + "     before %%^&^&^% start at");
-      this.list4 = this.af.list('/profiles/stylists', {
-      query: {
-        orderByChild: 'price',
-        startAt: this.startAtKey2,
-        limitToFirst: 51
-      }});
-
-      this.subscription12 = this.list4.subscribe(items => {
+      this.af.list('/products', ref => ref.orderByKey().startAt(this.startAtKey2).limitToLast(11)).snapshotChanges().map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => {
         if(items.length > 0) {
           let x = 0;
           console.log(JSON.stringify(items[0]) + "     items 00000000000000");
           this.lastKey2 = this.startAtKey2;
-          this.startAtKey2 = items[items.length - 1].$key;
-          items.forEach(item => {
+          this.startAtKey2 = items[items.length - 1].key;
+          return items.map(item => {
 
             if(x == 0) {
 
             }
             else {
-              let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+              let storageRef = firebase.storage().ref().child('/settings/' + item.data.username + '/profilepicture.png');
                        
               storageRef.getDownloadURL().then(url => {
                 console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                item.picURL = url;
+                item.data.picURL = url;
               }).catch((e) => {
                 console.log("in caught url !!!!!!!$$$$$$$!!");
-                item.picURL = 'assets/blankprof.png';
+                item.data.picURL = 'assets/blankprof.png';
               });
               
 
-              if(this.startAtKey2 !== item.$key && this.lastKey2 !== item.$key) {
+              if(this.startAtKey2 !== item.key && this.lastKey2 !== item.key) {
                 console.log(this.startAtKey2 + "   :startAtKey2:");
-                console.log(item.$key + "   :itemkey:");
+                console.log(item.key + "   :itemkey:");
                 console.log(this.lastKey2 + "   :lastkey:");
-                if(item.price != null) {
-                  this.pricesArray.push(item); //unshift?**************
+                if(item.data.price != null) {
+                  this.pricesArray.push(item.data); //unshift?**************
                 }
               }
             }
@@ -328,15 +321,10 @@ export class FeedUser implements OnDestroy {
 
       }*/
 
-      console.log(this.startAtKey3 + "     before startatkey3 start at 67767676765676765757");
-      this.list5 = this.af.list('/profiles/stylists', {
-      query: {
-        orderByKey: true,
-        endAt: this.startAtKey3,
-        limitToLast: 50
-      }});
+      this.af.list('/ratings', ref => ref.orderByKey().endAt(this.startAtKey3).limitToLast(11)).snapshotChanges().map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => {
 
-      this.subscription13 = this.list5.subscribe(items => { 
           let x = 0;
           console.log(JSON.stringify(items[0]) + "     items 00000000000000");
           this.lastKey3 = this.startAtKey3;
@@ -344,17 +332,17 @@ export class FeedUser implements OnDestroy {
           items.forEach(item => {
 
 
-            let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+            let storageRef = firebase.storage().ref().child('/settings/' + item.data.username + '/profilepicture.png');
                        
             storageRef.getDownloadURL().then(url => {
               console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-              item.picURL = url;
+              item.data.picURL = url;
             }).catch((e) => {
               console.log("in caught url !!!!!!!$$$$$$$!!");
-              item.picURL = 'assets/blankprof.png';
+              item.data.picURL = 'assets/blankprof.png';
             });
 
-            if(item.rating.one == 0 && item.rating.two == 0 && item.rating.three == 0 && item.rating.four == 0 && item.rating.five == 0) {
+            if(item.data.rating.one == 0 && item.data.rating.two == 0 && item.data.rating.three == 0 && item.data.rating.four == 0 && item.data.rating.five == 0) {
               this.stars = "No ratings";
             }
             else {
@@ -362,8 +350,8 @@ export class FeedUser implements OnDestroy {
               console.log("making the stars");
               let totalPotential;
               let ratings;
-              totalPotential = item.rating.one * 5 + item.rating.two * 5 + item.rating.three * 5 + item.rating.four * 5 + item.rating.five * 5;
-              ratings = item.rating.one + item.rating.two * 2 + item.rating.three * 3 + item.rating.four * 4 + item.rating.five *5;
+              totalPotential = item.data.rating.one * 5 + item.data.rating.two * 5 + item.data.rating.three * 5 + item.data.rating.four * 5 + item.data.rating.five * 5;
+              ratings = item.data.rating.one + item.data.rating.two * 2 + item.data.rating.three * 3 + item.data.rating.four * 4 + item.data.rating.five *5;
               
 
               let i = (ratings / totalPotential) * 100;
@@ -384,23 +372,23 @@ export class FeedUser implements OnDestroy {
               }
             }
 
-            item.stars = this.stars;
+            item.data.stars = this.stars;
             
             //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
             
-            if(this.startAtKey3 !== item.$key && this.lastKey3 !== item.$key) {
-              console.log(this.startAtKey3 + "   :startAtKey3 being pushed       item key:     " + item.$key);
-              if(item.username != null && (item.rating.five + item.rating.four + item.rating.three + item.rating.two + item.rating.one) > 0) {
-                this.rating.push(item); //unshift?**************
+            if(this.startAtKey3 !== item.key && this.lastKey3 !== item.key) {
+              console.log(this.startAtKey3 + "   :startAtKey3 being pushed       item key:     " + item.key);
+              if(item.data.username != null && (item.data.rating.five + item.data.rating.four + item.data.rating.three + item.data.rating.two + item.data.rating.one) > 0) {
+                this.rating.push(item.data); //unshift?**************
               }
             }
 
             if(x == 0) {
-              this.startAtKey3 = item.$key;
+              this.startAtKey3 = item.key;
             }
 
             console.log(this.startAtKey3 + " startatkeyyyyyyyy33333dddddddd33333333asdfasdfasdfasdf end");
-            console.log(item.$key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
+            console.log(item.key + " item.$key       33dddddddd33333333asdfasdfasdfasdf end");
 
             x++;
           });          
@@ -444,15 +432,10 @@ export class FeedUser implements OnDestroy {
         this.show = true;
 
       }*/
-      console.log(this.startAtKey4 + "     before startatkey4 start at 67767676765676765757");
-      this.list6 = this.af.list('/distances/'+this.username, {
-      query: {
-        orderByChild: 'distance',
-        startAt: this.startAtKey4,
-        limitToFirst: 20
-      }});
+      this.af.list('/distances/' + this.username, ref => ref.orderByChild('distance').startAt(this.startAtKey4).limitToLast(11)).snapshotChanges().map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => {
 
-      this.subscription14 = this.list6.subscribe(items => { 
           let x = 0;
           console.log(JSON.stringify(items[0]) + "     items 00000000000000");
           this.lastKey4 = this.startAtKey4;
@@ -464,16 +447,16 @@ export class FeedUser implements OnDestroy {
             }
             else {
 
-              let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
+              let storageRef = firebase.storage().ref().child('/settings/' + item.data.username + '/profilepicture.png');
                              
               storageRef.getDownloadURL().then(url => {
                 console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                item.picURL = url;
+                item.data.picURL = url;
                 this.distances.push(item);
               }).catch((e) => {
                 console.log("in caught url !!!!!!!$$$$$$$!!");
-                item.picURL = 'assets/blankprof.png';
-                this.distances.push(item);
+                item.data.picURL = 'assets/blankprof.png';
+                this.distances.push(item.data);
               });
 
               
@@ -483,7 +466,7 @@ export class FeedUser implements OnDestroy {
             }
 
             if(x == items.length - 1) {
-               this.startAtKey4 = item.distance;
+               this.startAtKey4 = item.data.distance;
             }
 
             x++;
@@ -501,15 +484,11 @@ export class FeedUser implements OnDestroy {
     setTimeout(() => {
       console.log('Begin async operation');
       
-      this.appointments = this.af.list('/today', { query: {
-        orderByKey: true,
-        startAt: this.startAtKey5,
-        limitToFirst: 48
-      }});
-
-      this.subscription2 = this.appointments.subscribe(items => { 
+      this.af.list('/availabilities', ref => ref.orderByKey().startAt(this.startAtKey5).limitToLast(11)).snapshotChanges().map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => {
         var x = 0; 
-        this.startAtKey5 = items[items.length - 1].$key; 
+        this.startAtKey5 = items[items.length - 1].key; 
         new Promise((resolve, reject) => {
           items.forEach(item => {
         
@@ -519,16 +498,16 @@ export class FeedUser implements OnDestroy {
             }
             else {
 
-              var storageRef = firebase.storage().ref().child('/settings/' + item.salon + '/profilepicture.png');
+              var storageRef = firebase.storage().ref().child('/settings/' + item.data.salon + '/profilepicture.png');
                                        
               storageRef.getDownloadURL().then(url => {
                 console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                item.pic = url;
+                item.data.pic = url;
                 this.availabilities.push(item);
               }).catch((e) => {
                 console.log("in caught url !!!!!!!$$$$$$$!!");
-                item.pic = 'assets/blankprof.png';
-                this.availabilities.push(item);
+                item.data.pic = 'assets/blankprof.png';
+                this.availabilities.push(item.data);
               });
             }
 
@@ -564,110 +543,7 @@ export class FeedUser implements OnDestroy {
         }); 
       });
 
-      /*let promises = [];
-      let i2 = 0;
-
-      if(i2 == 0) {
-        // skip
-      }
-      else {
       
-        this.subscription2 = this.appointments.subscribe(items => {
-          
-          items.forEach(item => {
-          promises.push(new Promise((resolve, reject) => {
-            console.log(item);
-            let userName = item.$key;
-            let i1 = 0;
-            for(let month in item) {
-
-              this.appointmentsMonth = this.af.list('/appointments/' + userName + '/' + month);
-              this.subscription3 = this.appointmentsMonth.subscribe(items => items.forEach(item => {
-                promises.push(new Promise((resolve, reject) => {
-                  this.startAtKeyAvail = item.$key;
-                  //console.log(JSON.stringify(item) + "           item");
-                  let date = new Date(item.date.day * 1000);
-                  let today = new Date();
-                  console.log(date.getMonth() + "==" + today.getMonth()  + "&&" + date.getDate() + "==" + today.getDate());
-                  console.log("IN LOAD AVAILABILITIES *(*((**(*(*(*(*(*(*&^^^^%^%556565656565");
-                  if(date.getMonth() == today.getMonth() && date.getDate() == today.getDate()) {
-                    console.log("            inside the if that checks if its today");
-                    console.log(item.reserved.appointment + "                *************appointment");
-                    //let counter = 0;
-                    //mapped = item.reserved.appointment.map((r) => {
-                    //item.reserved.appointment.forEach((r, index) => {
-                      for(let r of item.reserved.appointment) {
-                        promises.push(new Promise((resolve, reject) => {
-                          if(r.selected == true) {
-                            //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-
-                            let storageRef = firebase.storage().ref().child('/settings/' + userName + '/profilepicture.png');
-                             
-                            let obj = {'pic':"", 'salon': userName, 'time': r.time};
-
-                            storageRef.getDownloadURL().then(url => {
-                              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                              obj.pic = url;
-                              this.availabilities.push(obj);
-                              console.log(JSON.stringify(this.availabilities));
-                              resolve();
-                            }).catch((e) => {
-                              console.log("in caught url !!!!!!!$$$$$$$!!");
-                              obj.pic = 'assets/blankprof.png';
-                              this.availabilities.push(obj);
-                              console.log(JSON.stringify(this.availabilities));
-                              resolve();
-                            });
-                          }
-                        }))
-                        
-                    }
-
-                  }
-
-                 }))
-                if(i1 == items.length - 1) {
-                  resolve()
-                }
-                
-
-                i1++;
-                }))
-               }
-               if(i2 == items.length - 1) {
-                  this.startAtKey5 = item.$key;
-                  resolve();
-               }
-
-                
-
-               i2++;
-            }))
-            })
-          });
-
-          Promise.all(promises).then(() => {
-            console.log("in load availabilities ......... ")
-            console.log(JSON.stringify(this.availabilities));
-
-            this.availabilities.sort(function(a,b) {
-              return Date.parse('01/01/2013 '+a.time) - Date.parse('01/01/2013 '+b.time);
-            });
-
-            console.log('*****previous******');
-            console.log(JSON.stringify(this.availabilities));
-            console.log('*****sorted********');
-            
-            for(let i of this.availabilities) {
-              console.log(i.time + "          this is itime");
-              let date = new Date('01/01/2013 ' + i.time);
-              console.log(date + "          this is date in idate");
-              let str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
-              console.log(str);
-              i.time = str;
-            }
-          });
-        }*/
     }, 500);
   }
 
@@ -679,7 +555,7 @@ export class FeedUser implements OnDestroy {
       this.cache.getItem(cacheKey).catch(() => {
         let store = [];
         console.log("in get addddssss ******");
-        this.objj = this.af.object('/adcounter/count')
+        this.objj = this.af.object('/adcounter/count').valueChanges()
 
         this.subscription8 = this.objj.subscribe(item => { 
           console.log(JSON.stringify(item) + "in adddd subscribe()()()()()()");
@@ -874,19 +750,15 @@ export class FeedUser implements OnDestroy {
       let arr = [];
       let mapped;
       console.log("IN LOADDISTANCES #$$$$$$$$$$$$$$$$$$$$$");
+      let x = 0;
 
+      this.distanceList = this.af.list('/distances/' + this.username, ref => ref.orderByChild("distance").limitToFirst(50)).valueChanges();//.map(e => { console.log(e+"eeeeeeeeeeee")});
 
-      console.log("IN geo get position #$$$$$$$5354554354$$$$$$$");
-
-      /*let ref = firebase.database().ref('distances/' + this.username).orderByChild('distance').limitToFirst(10);
-      ref.on('value', (items) => {
-        let x = 0;
-           
-           console.log(JSON.stringify(items) + "      length - 1 load");
+      /*this.distanceList = this.distanceList.map(items => (item => {
+        console.log(JSON.stringify(item) + "      length - 1 load");
            
            
-
-           items.forEach(item => {
+           //items.forEach(item => {
              let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
                          
               storageRef.getDownloadURL().then(url => {
@@ -896,78 +768,43 @@ export class FeedUser implements OnDestroy {
                 console.log("in caught url !!!!!!!$$$$$$$!!");
                 item.picURL = 'assets/blankprof.png';
               });
-
-             this.distances.push(item);
-
+             //this.distances.push(item);
              if(x == items.length - 1) {
-               this.startAtKey4 = items[x].distance;
+               this.startAtKey4 = item.distance;
              }
-
              x++;
-           })
-      })*/
+           //})
+      }))*/
+      /*.map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => { */
+           
+           
+           
+           //this.subscription6.unsubscribe();
+      //})
 
       //this.items = this.af.list('distances/' + this.username).valueChanges();
-
-
-        /*this.distancelist = this.af.list('distances/' + this.username, { query: {
-          orderByChild: 'distance',
-          limitToFirst: 10
-        }});
-  
-        
-        this.subscription6 = this.distancelist.subscribe(items => {
-           let x = 0;
-           
-           console.log(JSON.stringify(items) + "      length - 1 load");
-           
-           
-
-           items.forEach(item => {
-             let storageRef = firebase.storage().ref().child('/settings/' + item.username + '/profilepicture.png');
-                         
-              storageRef.getDownloadURL().then(url => {
-                console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                item.picURL = url;
-              }).catch((e) => {
-                console.log("in caught url !!!!!!!$$$$$$$!!");
-                item.picURL = 'assets/blankprof.png';
-              });
-
-             this.distances.push(item);
-
-             if(x == items.length - 1) {
-               this.startAtKey4 = items[x].distance;
-             }
-
-             x++;
-           })
-
-           //this.subscription6.unsubscribe();
-      })*/
+     
 
   }
 
   loadPromotions() {
     console.log("In loadPromotions fdskkfdskldfkfdslkfds");
     
-    this.prom = this.af.list('/promotions', { query: {
-      limitToLast: 14
-    }});
+    this.af.list('/promotions', ref => ref.limitToLast(14)).snapshotChanges().map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => { 
 
-    this.promotions = [];
-
-    this.subscription10 = this.prom.subscribe(items => { 
-
-      this.startAtKey1 = items[0].$key;
+      this.startAtKey1 = items[0].key;
       this.lastKey1 = this.startAtKey1;
 
       items.forEach(item => {
       //mapped = items.map((item) => {
         //return new Promise(resolve => {
 
-            this.promotions.push(item.customMetadata);
-            console.log("pushing ITEM (((((()()()()()() promotions" + JSON.stringify(item.customMetadata));
+            this.promotions.push(item.data.customMetadata);
+            console.log("pushing ITEM (((((()()()()()() promotions" + JSON.stringify(item.data.customMetadata));
             //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
 
             
@@ -996,15 +833,11 @@ export class FeedUser implements OnDestroy {
 
       //let array = [];
 
-      this.prices = this.af.list('/profiles/stylists', {
-        query: {
-          orderByChild: 'price',
-          limitToFirst: 50
-        }
-      });
-      this.subscription5 = this.prices.subscribe(items => { 
+      this.af.list('/profiles/stylists', ref => ref.orderByChild('price').limitToFirst(50)).snapshotChanges().map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => {
         
-        this.startAtKey2 = items[items.length - 1].$key;
+        this.startAtKey2 = items[items.length - 1].key;
         this.lastKey2 = this.startAtKey2;
 
         let x = 0;
@@ -1016,16 +849,16 @@ export class FeedUser implements OnDestroy {
               //
             }
             else {
-              if(item.price == null) {
+              if(item.data.price == null) {
                 //
               }
               else {
                 console.log(JSON.stringify(item));
-                if(!item.picURL) {
-                  item.picURL = 'assets/blankprof.png';
+                if(!item.data.picURL) {
+                  item.data.picURL = 'assets/blankprof.png';
                 }
-                if(item.price !== undefined) {
-                  this.pricesArray.push(item); //unshift?**************
+                if(item.data.price !== undefined) {
+                  this.pricesArray.push(item.data); //unshift?**************
                 }
                 //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
 
@@ -1059,13 +892,11 @@ export class FeedUser implements OnDestroy {
 
       //this.cache.getItem(cacheKey).catch(() => {
 
-        this.ratingslist = this.af.list('/profiles/stylists', { query: {
-          orderByKey: true,
-          limitToLast: 50
-        }});
-        this.subscription7 = this.ratingslist.subscribe(items => {
+        this.af.list('/profiles/stylists', ref => ref.orderByKey().limitToLast(50)).snapshotChanges().map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => {
 
-            this.startAtKey3 = items[0].$key;
+            this.startAtKey3 = items[0].key;
             this.lastKey3 = this.startAtKey3;
 
             console.log(this.startAtKey3 + " startatkey3333333333333 beginning");
@@ -1074,19 +905,19 @@ export class FeedUser implements OnDestroy {
 
             mapped = items.map((item) => {
               return new Promise(resolve => {
-                if(!item.picURL) {
-                  item.picURL = 'assets/blankprof.png';
+                if(!item.data.picURL) {
+                  item.data.picURL = 'assets/blankprof.png';
                 }
 
-                for(let z in item.rating) {
+                for(let z in item.data.rating) {
                   console.log(z + "this is the rating string");
                 }
 
 
                 console.log(JSON.stringify(item) + "stringifyied item &&^^&%^%^%^$$%%$");
-                if((item.rating.five + item.rating.four + item.rating.three + item.rating.two + item.rating.one) > 0) {
+                if((item.data.rating.five + item.data.rating.four + item.data.rating.three + item.data.rating.two + item.data.rating.one) > 0) {
                   console.log("getting pushed &&%$$##@#@#@#@#@#");
-                  array.push(item);
+                  array.push(item.data);
                 }
 
                 resolve();
@@ -1147,38 +978,33 @@ export class FeedUser implements OnDestroy {
               
 
                 console.log(this.startAtKey1 + "     before %%^&^&^% start at");
-                this.list2 = this.af.list('/promotions', {
-                query: {
-                  orderByKey: true,
-                  endAt: this.startAtKey1,
-                  limitToLast: 11
-                }});
-
-                this.subscription11 = this.list2.subscribe(items => { 
+                this.af.list('/promotions', ref => ref.orderByKey().endAt(this.startAtKey1).limitToLast(11)).snapshotChanges().map(actions => {
+                  return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+                }).subscribe(items => {
                     let x = 0;
                     this.lastKey1 = this.startAtKey1;
                     items.forEach(item => {
 
 
-                      let storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
+                      let storageRef = firebase.storage().ref().child('/settings/' + item.data.customMetadata.username + '/profilepicture.png');
                                  
                       storageRef.getDownloadURL().then(url => {
                         console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                        item.customMetadata.picURL = url;
+                        item.data.customMetadata.picURL = url;
                       }).catch((e) => {
                         console.log("in caught url !!!!!!!$$$$$$$!!");
-                        item.customMetadata.picURL = 'assets/blankprof.png';
+                        item.data.customMetadata.picURL = 'assets/blankprof.png';
                       });
                       
-                      if(this.startAtKey1 !== item.$key && this.lastKey1 !== item.$key) {
-                        console.log(this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.$key);
-                        if(item.customMetadata.username != null) {
-                          this.promotions.push(item.customMetadata); //unshift?**************
+                      if(this.startAtKey1 !== item.key && this.lastKey1 !== item.key) {
+                        console.log(this.startAtKey1 + "   :startAtKey1 before 4444444        item key:     " + item.key);
+                        if(item.data.customMetadata.username != null) {
+                          this.promotions.push(item.data.customMetadata); //unshift?**************
                         }
                       }
 
                       if(x == 0) {
-                        this.startAtKey1 = item.$key;
+                        this.startAtKey1 = item.key;
                       }
 
                       x++;
@@ -1552,132 +1378,27 @@ export class FeedUser implements OnDestroy {
   loadAvailabilities() {
 
     //return new Promise((resolve, reject) => {
-      this.appointments = this.af.list('/today', { query: {
-        orderByKey: true,
-        limitToFirst: 48
-      }});
+      this.af.list('/today', ref => ref.orderByKey().limitToFirst(48)).snapshotChanges().map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => {
 
-      this.subscription2 = this.appointments.subscribe(items => { this.startAtKey5 = items[items.length - 1].$key; items.forEach(item => {
+           this.startAtKey5 = items[items.length - 1].key; items.forEach(item => {
         
         console.log(item + "    item item item");
-        let storageRef = firebase.storage().ref().child('/settings/' + item.salon + '/profilepicture.png');
+        let storageRef = firebase.storage().ref().child('/settings/' + item.data.salon + '/profilepicture.png');
                                  
         storageRef.getDownloadURL().then(url => {
           console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-          item.pic = url;
-          this.availabilities.push(item);
+          item.data.pic = url;
+          this.availabilities.push(item.data);
         }).catch((e) => {
           console.log("in caught url !!!!!!!$$$$$$$!!");
-          item.pic = 'assets/blankprof.png';
-          this.availabilities.push(item);
+          item.data.pic = 'assets/blankprof.png';
+          this.availabilities.push(item.data);
         });
 
 
       })});
-        
-      /*let promises = [];
-      let i2 = 0;
-      
-      this.subscription2 = this.appointments.subscribe(items => {
-        this.startAtKey5 = items[items.length - 1].$key;
-        this.lastKey5 = this.startAtKey5;
-        items.forEach(item => {
-        promises.push(new Promise((resolve, reject) => {
-          console.log(item);
-          let userName = item.$key;
-          let i1 = 0;
-          for(let month in item) {
-
-            this.appointmentsMonth = this.af.list('/appointments/' + userName + '/' + month);
-            this.subscription3 = this.appointmentsMonth.subscribe(items => items.forEach(item => {
-              promises.push(new Promise((resolve, reject) => {
-                this.startAtKeyAvail = item.$key;
-                //console.log(JSON.stringify(item) + "           item");
-                let date = new Date(item.date.day * 1000);
-                let today = new Date();
-                console.log(date.getMonth() + "==" + today.getMonth()  + "&&" + date.getDate() + "==" + today.getDate());
-                console.log("IN LOAD AVAILABILITIES *(*((**(*(*(*(*(*(*&^^^^%^%556565656565");
-                if(date.getMonth() == today.getMonth() && date.getDate() == today.getDate()) {
-                  console.log("            inside the if that checks if its today");
-                  console.log(item.reserved.appointment + "                *************appointment");
-                  //let counter = 0;
-                  //mapped = item.reserved.appointment.map((r) => {
-                  //item.reserved.appointment.forEach((r, index) => {
-                    let count = 0;
-                    for(let r of item.reserved.appointment) {
-                      promises.push(new Promise((resolve, reject) => {
-                        if(r.selected == true) {
-                          //this.renderer.setElementStyle(this.noavail.nativeElement, 'display', 'none');
-
-                          let storageRef = firebase.storage().ref().child('/settings/' + userName + '/profilepicture.png');
-                           
-                          let obj = {'pic':"", 'salon': userName, 'time': r.time};
-
-                          storageRef.getDownloadURL().then(url => {
-                            console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-                            obj.pic = url;
-                            this.availabilities.push(obj);
-                            console.log(JSON.stringify(this.availabilities));
-                            resolve();
-                          }).catch((e) => {
-                            console.log("in caught url !!!!!!!$$$$$$$!!");
-                            obj.pic = 'assets/blankprof.png';
-                            this.availabilities.push(obj);
-                            console.log(JSON.stringify(this.availabilities));
-                            resolve();
-                          });
-                        }
-                      }))
-                      count++;
-                  }
-
-                }
-
-               }))
-              if(i1 == items.length - 1) {
-                resolve()
-              }
-              
-
-              i1++;
-              }))
-             }
-             if(i2 == items.length - 1) {
-                resolve()
-             }
-              
-
-             i2++;
-          }))
-          })
-        });
-
-        Promise.all(promises).then(() => {
-          console.log("in load availabilities ......... ")
-          console.log(JSON.stringify(this.availabilities));
-
-          this.availabilities.sort(function(a,b) {
-            return Date.parse('01/01/2013 '+a.time) - Date.parse('01/01/2013 '+b.time);
-          });
-
-          console.log('*****previous******');
-          console.log(JSON.stringify(this.availabilities));
-          console.log('*****sorted********');
-          
-          for(let i of this.availabilities) {
-            console.log(i.time + "          this is itime");
-            let date = new Date('01/01/2013 ' + i.time);
-            console.log(date + "          this is date in idate");
-            let str = date.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true, minute: 'numeric' });
-            console.log(str);
-            i.time = str;
-          }
-        });*/
-      //}))
-
-      
-        
-    //})
     
   }
 
@@ -1711,64 +1432,5 @@ export class FeedUser implements OnDestroy {
 
 
 
-
-  /*doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-    console.log(this.content.directionY + "        upupupupupupu********");
-    if(this.content.directionY == 'up') {
-      this.show = false
-    }
-    else {
-      this.show = true;
-    }
-
-
-    //return new Promise((resolve, reject) => {
-    setTimeout(() => {
-
-
-      console.log(this.startAtKey + "     before %%^&^&^% start at");
-      this.list = this.af.list('/promos', {
-      query: {
-        orderByKey: true,
-        endAt: this.startAtKey,
-        limitToLast: 11
-      }});
-
-      this.list.subscribe(items => { 
-          let x = 0;
-          this.lastKey = this.startAtKey;
-          items.forEach(item => {
-
-
-            let storageRef = firebase.storage().ref().child('/settings/' + item.customMetadata.username + '/profilepicture.png');
-                       
-            storageRef.getDownloadURL().then(url => {
-              console.log(url + "in download url !!!!!!!!!!!!!!!!!!!!!!!!");
-              item.customMetadata.picURL = url;
-            }).catch((e) => {
-              console.log("in caught url !!!!!!!$$$$$$$!!");
-              item.customMetadata.picURL = 'assets/blankprof.png';
-            });
-            
-            if(this.startAtKey !== item.$key && this.lastKey !== item.$key) {
-              console.log(this.startAtKey + "   :startatkey before 4444444        item key:     " + item.$key);
-              this.items.push(item.customMetadata);
-            }
-
-            if(x == 0) {
-              this.startAtKey = item.$key;
-            }
-
-            x++;
-          });          
-          
-      })
-
-      infiniteScroll.complete(); 
-        
-      }, 500);
-
-  }*/
 
 }

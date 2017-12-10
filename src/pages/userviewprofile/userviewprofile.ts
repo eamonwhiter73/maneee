@@ -11,7 +11,8 @@ import { ISubscription } from "rxjs/Subscription";
 import { CameraService } from '../../services/cameraservice';
 import { Camera } from '@ionic-native/camera';
 import { ActionSheetController } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
+//\import { /*AngularFireDatabase,*/ FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import firebase from 'firebase';
 import { LoadingController } from 'ionic-angular';
 import { ImageViewerController } from 'ionic-img-viewer';
@@ -53,13 +54,8 @@ export class UserViewProfile implements OnDestroy {
   viewTitle: string;
   calendar = {'mode': 'month', 'currentDate': this.viewDate}
   moveState: String = 'up';
-  item1: FirebaseObjectObservable<any>;
-  item2: FirebaseObjectObservable<any>;
-  item9: FirebaseObjectObservable<any>;
-  items: FirebaseListObservable<any>;
-  items4: FirebaseListObservable<any>;
-  items3: FirebaseListObservable<any>;
-  items2: FirebaseListObservable<any>;
+  item1: AngularFireObject<any>;
+  items2: AngularFireList<any>;
   subscription2: ISubscription;
   subscription3: ISubscription;
   subscription4: ISubscription;
@@ -283,12 +279,14 @@ export class UserViewProfile implements OnDestroy {
       setTimeout(()=>{
         this.selectedDate = this.viewDate;
         console.log(this.username + "this.username");
-        this.items2 = this.af.list('appointments/' + this.username + '/' + this.selectedDate.getMonth());
-        this.subscription2 = this.items2.subscribe(items => items.forEach(item => {
+        //this.items2 = this.af.list();
+        this.af.list('appointments/' + this.username + '/' + this.selectedDate.getMonth(), ref => ref ).snapshotChanges().map(actions => {
+          return actions.map(action => ({ key: action.key, data: action.payload.val() }));
+        }).subscribe(items => items.forEach(item => {
 
-          console.log(item);
+          console.log(item.data);
 
-          let da = new Date(item.date.day * 1000);
+          let da = new Date(item.data.date.day * 1000);
           this.datesToSelect.push(da.getDate());
 
 
@@ -297,9 +295,9 @@ export class UserViewProfile implements OnDestroy {
           console.log(this.selectedDate.getDate());
           if(this.selectedDate.getDate() == da.getDate() && this.selectedDate.getMonth() == da.getMonth()) {
             console.log("selected = item");
-            console.log(JSON.stringify(item.reserved) + "         item resesrved above");
+            console.log(JSON.stringify(item.data.reserved) + "         item resesrved above");
 
-              this.times = item.reserved.appointment.slice(0);
+              this.times = item.data.reserved.appointment.slice(0);
               console.log('hit appointment');
 
           }

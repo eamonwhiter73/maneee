@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { App, NavParams, ViewController, NavController } from 'ionic-angular';
 import { Component, Renderer } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import firebase from 'firebase';
 import { Storage } from '@ionic/storage';
 var FormulaBuy = /** @class */ (function () {

@@ -49,7 +49,7 @@ import { FeedUser } from '../feeduser/feeduser';
 import { FeedStylist } from '../feedstylist/feedstylist';
 import { Keyboard } from '@ionic-native/keyboard';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { Storage } from '@ionic/storage';
 import firebase from 'firebase';
 var SignInPage = /** @class */ (function () {

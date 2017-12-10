@@ -6,35 +6,20 @@ import { PostpagePage } from '../postpage/postpage';
 import { FeedUser } from '../feeduser/feeduser';
 import { UserProfile } from '../userprofile/userprofile';
 import { DropinPage } from '../dropin/dropin';
-
 import { BuyAd } from '../../modals/buyad/buyad';
-
 import { FollowersPage } from '../followers/followers';
 import { Storage } from '@ionic/storage';
-
-
 import { BookingPage } from '../booking/booking';
-
 import { CameraServicePost } from '../../services/cameraservicepost';
 import { Camera } from '@ionic-native/camera';
 import { OnDestroy } from "@angular/core";
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { ISubscription } from "rxjs/Subscription";
 import firebase from 'firebase';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { CacheService } from "ionic-cache";
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { SMS } from '@ionic-native/sms';
-
-
-import 'rxjs/add/operator/share';
-
-
-
-
-
-
-
 
 @Component({
   selector: 'page-feed-stylist',
@@ -615,7 +600,7 @@ export class FeedStylist implements OnDestroy {
       this.cache.getItem(cacheKey).catch(() => {
         let store = [];
         console.log("in get addddssss ******");
-        this.objj = this.af.object('/adcounter/count')
+        this.objj = this.af.object('/adcounter/count');
 
         this.subscription6 = this.objj.subscribe(item => { 
           console.log(JSON.stringify(item) + "in adddd subscribe()()()()()()");
@@ -623,7 +608,7 @@ export class FeedStylist implements OnDestroy {
           this.totalAdCount = item.$value;
           
             for(let x = 1; x < item.$value + 1; x++) {
-              console.log("in promise gafdfsfads")
+              console.log("in promise gafdfsfads");
               promises_array.push(new Promise((resolve,reject) => {
 
                 let storageRef = firebase.storage().ref().child('/ads/ad' + x + '.png');
@@ -631,7 +616,7 @@ export class FeedStylist implements OnDestroy {
                   console.log(url);
                   store.push(url);
                   console.log("reigh before resolve");
-                  resolve()
+                  resolve();
                   
                 }).catch(e => {
                   resolve();
@@ -1393,7 +1378,7 @@ export class FeedStylist implements OnDestroy {
   }*/
 
   listAll() {
-    console.log("in listall")
+    console.log("in listall");
     this.items.push.apply(this.items, this.formulaListArray);
     this.items.push.apply(this.items, this.productListArray);
     this.items.push.apply(this.items, this.classesListArray);

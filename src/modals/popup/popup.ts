@@ -1,7 +1,7 @@
 import { App, NavParams, ViewController, NavController } from 'ionic-angular';
 import { Component, Renderer, OnDestroy } from '@angular/core';
 import { UserProfile } from '../../pages/userprofile/userprofile';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { ISubscription } from "rxjs/Subscription";
 import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';

@@ -6,7 +6,7 @@ import { File } from '@ionic-native/file';
 import { Http } from '@angular/http';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import firebase from 'firebase';
-import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
 //import { Ng2ImgMaxService } from 'ng2-img-max';
 //import { Ng2ImgToolsModule } from 'ng2-img-tools'; // <-- import the module
 import { Storage } from '@ionic/storage';
@@ -16,7 +16,7 @@ export class CameraService {
   username: string;
   items: FirebaseListObservable<any>;
   
-  constructor(public storage: Storage, public transfer: Transfer, public http: Http, public platform: Platform, public camera: Camera, public crop: Crop, public file: File, af: AngularFireDatabaseModule) {
+  constructor(public storage: Storage, public transfer: Transfer, public http: Http, public platform: Platform, public camera: Camera, public crop: Crop, public file: File) {
     this.http = http;
     this.storage.get('username').then((val) => {this.username = val; console.log(val + "        getting username")});
     //console.log(JSON.stringify(compress));

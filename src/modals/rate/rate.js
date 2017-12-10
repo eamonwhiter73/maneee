@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { NavParams, ViewController, NavController } from 'ionic-angular';
 import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 var Rate = /** @class */ (function () {
     function Rate(af, navCtrl, params, viewCtrl, renderer) {
         this.af = af;

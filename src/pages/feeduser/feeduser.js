@@ -14,7 +14,7 @@ import { StylistProfile } from '../stylistprofile/stylistprofile';
 import { FeedStylist } from '../feedstylist/feedstylist';
 import { UserBooking } from '../userbooking/userbooking';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { Storage } from '@ionic/storage';
 import { PopUp } from '../../modals/popup/popup';
 import { PopUpOther } from '../../modals/popupother/popupother';

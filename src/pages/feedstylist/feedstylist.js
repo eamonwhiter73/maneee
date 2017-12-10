@@ -21,7 +21,7 @@ import { Storage } from '@ionic/storage';
 import { DatePicker } from '@ionic-native/date-picker';
 import { CameraServicePost } from '../../services/cameraservicepost';
 import { Camera } from '@ionic-native/camera';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import firebase from 'firebase';
 import { CacheService } from "ionic-cache";
 import { SMS } from '@ionic-native/sms';

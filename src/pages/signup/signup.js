@@ -49,7 +49,7 @@ import { FeedUser } from '../feeduser/feeduser';
 import { FeedStylist } from '../feedstylist/feedstylist';
 import { SettingsPage } from '../settings/settings';
 import { Keyboard } from '@ionic-native/keyboard';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Storage } from '@ionic/storage';
 import { Facebook } from '@ionic-native/facebook';
